@@ -1,0 +1,569 @@
+{
+  "script_version": "1.1.0",
+  "python": "3.12.3",
+  "numpy": "2.4.4",
+  "config": {
+    "years": 1050,
+    "ticks_per_year": 12,
+    "n": 12600,
+    "sigma": 1.0,
+    "amplitude": 6.0,
+    "seeds": 12,
+    "calib_seeds": 40,
+    "target_false_alarm": 0.05
+  },
+  "thresholds": {
+    "leaky_l0.9": 14.96810028097126,
+    "leaky_l0.99": 96.17430229498919,
+    "leaky_l0.999": 841.9759084448369,
+    "raw_fixed": 10128.223535534438,
+    "raw_sqrt": 3.2250880880592083,
+    "cusum1_v0.5": 9.968272764854344,
+    "cusum1_v0.1": 42.08752793399201,
+    "cusum1_v0.02": 121.58180033011368,
+    "cusum2_v0.1": 46.3620012016859,
+    "refbank": 1.9280281498947942,
+    "crosschannel": 0.2509667929879361
+  },
+  "results": {
+    "leaky_l0.9": {
+      "null": {
+        "fire_rate": 0.08333333333333333,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 26.75,
+        "detected_before_end": 0.9166666666666666
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 26.75,
+        "detected_before_end": 0.9166666666666666
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 26.75,
+        "detected_before_end": 0.9166666666666666,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 1.0,
+        "still_alarming_after_return": 0.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 0.08333333333333333,
+        "detected_before_end": 0.9166666666666666
+      },
+      "confound": {
+        "fire_rate": 0.08333333333333333,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      }
+    },
+    "leaky_l0.99": {
+      "null": {
+        "fire_rate": 0.16666666666666666,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 22.416666666666668,
+        "detected_before_end": 0.9166666666666666
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 22.416666666666668,
+        "detected_before_end": 0.9166666666666666
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 22.416666666666668,
+        "detected_before_end": 0.9166666666666666,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 0.9166666666666666,
+        "still_alarming_after_return": 0.08333333333333333
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 0.16666666666666666,
+        "detected_before_end": 0.9166666666666666
+      },
+      "confound": {
+        "fire_rate": 0.16666666666666666,
+        "median_delay_years": 341.1666666666667,
+        "detected_before_end": 0.08333333333333333
+      }
+    },
+    "leaky_l0.999": {
+      "null": {
+        "fire_rate": 0.08333333333333333,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 28.166666666666668,
+        "detected_before_end": 1.0
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 28.166666666666668,
+        "detected_before_end": 1.0
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 28.166666666666668,
+        "detected_before_end": 1.0,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 0.0,
+        "still_alarming_after_return": 1.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 0.6666666666666666,
+        "detected_before_end": 1.0
+      },
+      "confound": {
+        "fire_rate": 0.08333333333333333,
+        "median_delay_years": 519.9166666666666,
+        "detected_before_end": 0.08333333333333333
+      }
+    },
+    "raw_fixed": {
+      "null": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 146.91666666666669,
+        "detected_before_end": 1.0
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 146.91666666666669,
+        "detected_before_end": 1.0
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 146.91666666666669,
+        "detected_before_end": 1.0,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 0.0,
+        "still_alarming_after_return": 1.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 74.08333333333333,
+        "detected_before_end": 1.0
+      },
+      "confound": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      }
+    },
+    "raw_sqrt": {
+      "null": {
+        "fire_rate": 0.16666666666666666,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 31.75,
+        "detected_before_end": 0.8333333333333334
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 31.75,
+        "detected_before_end": 0.8333333333333334
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 31.75,
+        "detected_before_end": 0.8333333333333334,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 0.0,
+        "still_alarming_after_return": 1.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 3.083333333333333,
+        "detected_before_end": 0.8333333333333334
+      },
+      "confound": {
+        "fire_rate": 0.16666666666666666,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      }
+    },
+    "cusum1_v0.5": {
+      "null": {
+        "fire_rate": 0.08333333333333333,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 15.541666666666666,
+        "detected_before_end": 1.0
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 15.541666666666666,
+        "detected_before_end": 1.0
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 15.541666666666666,
+        "detected_before_end": 1.0,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 0.0,
+        "still_alarming_after_return": 1.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 0.08333333333333333,
+        "detected_before_end": 1.0
+      },
+      "confound": {
+        "fire_rate": 0.08333333333333333,
+        "median_delay_years": 310.25,
+        "detected_before_end": 0.08333333333333333
+      }
+    },
+    "cusum1_v0.1": {
+      "null": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 13.5,
+        "detected_before_end": 1.0
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 13.5,
+        "detected_before_end": 1.0
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 13.5,
+        "detected_before_end": 1.0,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 0.0,
+        "still_alarming_after_return": 1.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 0.5,
+        "detected_before_end": 1.0
+      },
+      "confound": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      }
+    },
+    "cusum1_v0.02": {
+      "null": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 20.166666666666664,
+        "detected_before_end": 1.0
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 20.166666666666664,
+        "detected_before_end": 1.0
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 20.166666666666664,
+        "detected_before_end": 1.0,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 0.0,
+        "still_alarming_after_return": 1.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 1.4166666666666667,
+        "detected_before_end": 1.0
+      },
+      "confound": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      }
+    },
+    "cusum2_v0.1": {
+      "null": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 14.166666666666666,
+        "detected_before_end": 1.0
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 14.166666666666666,
+        "detected_before_end": 1.0
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 14.166666666666666,
+        "detected_before_end": 1.0,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 0.0,
+        "still_alarming_after_return": 1.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 0.5833333333333334,
+        "detected_before_end": 1.0
+      },
+      "confound": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      }
+    },
+    "refbank": {
+      "null": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 1.0,
+        "median_delay_years": 67.70833333333334,
+        "detected_before_end": 1.0
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 67.70833333333334,
+        "detected_before_end": 1.0
+      },
+      "greensky": {
+        "fire_rate": 1.0,
+        "median_delay_years": 67.70833333333334,
+        "detected_before_end": 1.0,
+        "latched_fraction_of_green": 1.0,
+        "cleared_after_return": 1.0,
+        "still_alarming_after_return": 0.0
+      },
+      "shock": {
+        "fire_rate": 1.0,
+        "median_delay_years": 7.625,
+        "detected_before_end": 1.0
+      },
+      "confound": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      }
+    },
+    "crosschannel": {
+      "null": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "creep": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "instrument": {
+        "fire_rate": 1.0,
+        "median_delay_years": 16.583333333333336,
+        "detected_before_end": 1.0
+      },
+      "greensky": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0,
+        "latched_fraction_of_green": 0.0,
+        "cleared_after_return": 1.0,
+        "still_alarming_after_return": 0.0
+      },
+      "shock": {
+        "fire_rate": 0.0,
+        "median_delay_years": null,
+        "detected_before_end": 0.0
+      },
+      "confound": {
+        "fire_rate": 1.0,
+        "median_delay_years": 26.75,
+        "detected_before_end": 1.0
+      }
+    }
+  },
+  "min_detectable_rate": {
+    "leaky_l0.9": 0.0005407766379891925,
+    "leaky_l0.99": 0.0003103084717942177,
+    "leaky_l0.999": 0.0002763410164165391,
+    "raw_fixed": 0.00020555371902077483,
+    "raw_sqrt": 4.0820289776328874e-05,
+    "cusum1_v0.5": 0.00017625402745497304,
+    "cusum1_v0.1": 7.901288610495277e-05,
+    "cusum1_v0.02": 3.8519739887098524e-05,
+    "cusum2_v0.1": 9.019214673976699e-05,
+    "refbank": 0.0018369535192600307,
+    "crosschannel": null
+  },
+  "horizon_robustness": {
+    "leaky_l0.9": {
+      "x1": 0.0,
+      "x4": 0.0,
+      "x16": 0.5
+    },
+    "leaky_l0.99": {
+      "x1": 0.16666666666666666,
+      "x4": 0.8333333333333334,
+      "x16": 0.8333333333333334
+    },
+    "leaky_l0.999": {
+      "x1": 0.0,
+      "x4": 0.0,
+      "x16": 0.8333333333333334
+    },
+    "raw_fixed": {
+      "x1": 0.0,
+      "x4": 1.0,
+      "x16": 1.0
+    },
+    "raw_sqrt": {
+      "x1": 0.0,
+      "x4": 0.0,
+      "x16": 0.0
+    },
+    "cusum1_v0.5": {
+      "x1": 0.6666666666666666,
+      "x4": 0.8333333333333334,
+      "x16": 1.0
+    },
+    "cusum1_v0.1": {
+      "x1": 0.16666666666666666,
+      "x4": 0.16666666666666666,
+      "x16": 0.6666666666666666
+    },
+    "cusum1_v0.02": {
+      "x1": 0.0,
+      "x4": 0.16666666666666666,
+      "x16": 0.8333333333333334
+    },
+    "cusum2_v0.1": {
+      "x1": 0.16666666666666666,
+      "x4": 0.3333333333333333,
+      "x16": 0.5
+    },
+    "refbank": {
+      "x1": 0.0,
+      "x4": 0.0,
+      "x16": 0.0
+    },
+    "crosschannel": {
+      "x1": 0.0,
+      "x4": 0.0,
+      "x16": 0.8333333333333334
+    }
+  },
+  "predictions": [
+    {
+      "id": "P1",
+      "kind": "analytic",
+      "statement": "Leaky detectors have a minimum-detectable-rate at least 3x worse than raw_sqrt, and it does NOT improve as lambda->1 fast enough to close the gap."
+    },
+    {
+      "id": "P2",
+      "kind": "empirical",
+      "statement": "Every detector fires on the SHOCK condition. Fast shocks are not the problem."
+    },
+    {
+      "id": "P3",
+      "kind": "analytic",
+      "statement": "raw_fixed cannot be calibrated: it either alarms on the null or never alarms at all. It measures elapsed time, not departure."
+    },
+    {
+      "id": "P4",
+      "kind": "empirical",
+      "statement": "CUSUM with nu=0.5 is blind to the Green Sky drift rate (fire_rate < 0.5 on 'creep'). CUSUM does not automatically fix slow drift; nu is a floor."
+    },
+    {
+      "id": "P5",
+      "kind": "empirical",
+      "statement": "raw_sqrt has the lowest minimum-detectable-rate of all single-channel detectors tested."
+    },
+    {
+      "id": "P6",
+      "kind": "empirical",
+      "statement": "With a FIXED reference, at least one detector stays latched for >50% of the green plateau -- i.e. it spends 150 years reporting that a genuinely green sky is anomalous."
+    },
+    {
+      "id": "P7",
+      "kind": "analytic",
+      "statement": "Conditions 'creep' and 'instrument' produce identical channel-1 streams, so every single-channel detector gives identical results on both. Integral tracking alone cannot solve the instrument problem."
+    },
+    {
+      "id": "P8",
+      "kind": "empirical",
+      "statement": "The cross-channel detector fires on 'instrument' and NOT on 'creep', separating world change from instrument change."
+    }
+  ],
+  "prediction_checks": [
+    {
+      "id": "P1",
+      "verdict": "PASS",
+      "evidence": "best leaky MDR=0.00028, raw_sqrt MDR=0.00004, ratio=6.77x"
+    },
+    {
+      "id": "P2",
+      "verdict": "PASS",
+      "evidence": "fire rates on shock: {'leaky_l0.9': 1.0, 'leaky_l0.99': 1.0, 'leaky_l0.999': 1.0, 'raw_fixed': 1.0, 'raw_sqrt': 1.0, 'cusum1_v0.5': 1.0, 'cusum1_v0.1': 1.0, 'cusum1_v0.02': 1.0, 'cusum2_v0.1': 1.0, 'refbank': 1.0, 'crosschannel': 0.0}"
+    },
+    {
+      "id": "P3",
+      "verdict": "FAIL",
+      "evidence": "raw_fixed null fire=0.0, creep fire=1.0"
+    },
+    {
+      "id": "P4",
+      "verdict": "FAIL",
+      "evidence": "cusum1 nu=0.5 fire_rate on creep = 1.0"
+    },
+    {
+      "id": "P5",
+      "verdict": "FAIL",
+      "evidence": "lowest MDR is 'cusum1_v0.02' at 0.00004; raw_sqrt=0.00004"
+    },
+    {
+      "id": "P6",
+      "verdict": "PASS",
+      "evidence": "max latched fraction of green plateau = 1.0; per-detector: {'leaky_l0.9': 1.0, 'leaky_l0.99': 1.0, 'leaky_l0.999': 1.0, 'raw_fixed': 1.0, 'raw_sqrt': 1.0, 'cusum1_v0.5': 1.0, 'cusum1_v0.1': 1.0, 'cusum1_v0.02': 1.0, 'cusum2_v0.1': 1.0, 'refbank': 1.0, 'crosschannel': 0.0}"
+    },
+    {
+      "id": "P7",
+      "verdict": "PASS",
+      "evidence": "single-channel results identical on creep vs instrument"
+    },
+    {
+      "id": "P8",
+      "verdict": "PASS",
+      "evidence": "crosschannel fire rates: instrument=1.0, creep=0.0"
+    }
+  ]
+}
