@@ -1,0 +1,933 @@
+{
+  "script_version": "2.0.0-merged-audited",
+  "script_sha256": "178f5bd650c832ac94172f3009a5189f1b40292f901bd97b4ec32e779a7492be",
+  "python": "3.12.12",
+  "numpy": "2.2.5",
+  "config": {
+    "years": 1050,
+    "ticks_per_year": 12,
+    "n": 12600,
+    "sigma": 1.0,
+    "amplitude": 6.0,
+    "seeds": 40,
+    "calib_seeds": 200,
+    "mdr_seeds": 32,
+    "horizon_seeds": 40,
+    "horizon_factors": [
+      1,
+      4,
+      16
+    ],
+    "target_false_alarm": 0.05,
+    "eprocess_rho": 100.0
+  },
+  "self_tests": [
+    "PASS creep and instrument channel-1 streams are bit-identical",
+    "PASS creep and instrument channel-2 streams differ",
+    "PASS Green Sky returns exactly to original baseline",
+    "PASS Green Sky reaches configured amplitude",
+    "PASS green plateau is flat for 150 years",
+    "PASS vectorized one-sided CUSUM matches sequential recurrence",
+    "PASS vectorized two-sided CUSUM matches sequential recurrence",
+    "PASS Gaussian-mixture e-process formula sanity check"
+  ],
+  "calibration": {
+    "leaky_l0.9": {
+      "threshold": 15.282149107602258,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "leaky_l0.99": {
+      "threshold": 97.0384302646012,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "leaky_l0.999": {
+      "threshold": 839.3920222570254,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "raw_fixed": {
+      "threshold": 10148.474303710118,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "raw_sqrt": {
+      "threshold": 3.2250880880591795,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "cusum1_v0.5": {
+      "threshold": 10.232036851617524,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "cusum1_v0.1": {
+      "threshold": 42.73106604974203,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "cusum1_v0.02": {
+      "threshold": 121.65711012921821,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "cusum2_v0.1": {
+      "threshold": 45.386568710486024,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "ref_blue": {
+      "threshold": 1.750673630699304,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "ref_blue_green_known": {
+      "threshold": 1.750673630699304,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "crosschannel": {
+      "threshold": 0.2551375513695727,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "normal_mixture_e": {
+      "threshold": 2.995732273553991,
+      "threshold_mode": "analytic_anytime",
+      "calibration_null_fa": 0.045
+    }
+  },
+  "results": {
+    "leaky_l0.9": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.833333333333336
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.833333333333336
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.833333333333336,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 1.0,
+        "alarm_after_return_rate": 0.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.08333333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 0.025,
+        "median_post_onset_delay_years": 105.66666666666667
+      }
+    },
+    "leaky_l0.99": {
+      "null": {
+        "any_alarm_rate": 0.125,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 23.125
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 23.125
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 23.125,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.9,
+        "alarm_after_return_rate": 0.1
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.25
+      },
+      "confound": {
+        "any_alarm_rate": 0.125,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.075,
+        "median_post_onset_delay_years": 402.5833333333333
+      }
+    },
+    "leaky_l0.999": {
+      "null": {
+        "any_alarm_rate": 0.125,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.333333333333336
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.333333333333336
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.333333333333336,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.6666666666666666
+      },
+      "confound": {
+        "any_alarm_rate": 0.125,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.125,
+        "median_post_onset_delay_years": 277.9166666666667
+      }
+    },
+    "raw_fixed": {
+      "null": {
+        "any_alarm_rate": 0.1,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 147.08333333333334
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 147.08333333333334
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 147.08333333333334,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 74.33333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.1,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.1,
+        "median_post_onset_delay_years": 546.5833333333333
+      }
+    },
+    "raw_sqrt": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 33.04166666666667
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 33.04166666666667
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 33.04166666666667,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 3.4166666666666665
+      },
+      "confound": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      }
+    },
+    "cusum1_v0.5": {
+      "null": {
+        "any_alarm_rate": 0.075,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 17.0
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 17.0
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 17.0,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.08333333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.075,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 0.05,
+        "median_post_onset_delay_years": 379.33333333333337
+      }
+    },
+    "cusum1_v0.1": {
+      "null": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 14.666666666666666
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 14.666666666666666
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 14.666666666666666,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.5
+      },
+      "confound": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.025,
+        "median_post_onset_delay_years": 70.91666666666667
+      }
+    },
+    "cusum1_v0.02": {
+      "null": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 20.75
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 20.75
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 20.75,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 1.4166666666666667
+      },
+      "confound": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.025,
+        "median_post_onset_delay_years": 127.41666666666667
+      }
+    },
+    "cusum2_v0.1": {
+      "null": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 15.333333333333334
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 15.333333333333334
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 15.333333333333334,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.5833333333333334
+      },
+      "confound": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.025,
+        "median_post_onset_delay_years": 71.08333333333333
+      }
+    },
+    "ref_blue": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 1.0,
+        "alarm_after_return_rate": 0.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 6.833333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      }
+    },
+    "ref_blue_green_known": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664,
+        "plateau_alarm_fraction": 0.0,
+        "quiet_after_return_rate": 1.0,
+        "alarm_after_return_rate": 0.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 6.833333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      }
+    },
+    "crosschannel": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 18.5
+      },
+      "greensky": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null,
+        "plateau_alarm_fraction": 0.0,
+        "quiet_after_return_rate": 1.0,
+        "alarm_after_return_rate": 0.0
+      },
+      "shock": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      },
+      "confound": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 26.166666666666668
+      }
+    },
+    "normal_mixture_e": {
+      "null": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 32.95833333333333
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 32.95833333333333
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 32.95833333333333,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 3.3333333333333335
+      },
+      "confound": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      }
+    }
+  },
+  "finite_horizon_mdr50": {
+    "leaky_l0.9": 0.0006238769788532624,
+    "leaky_l0.99": 0.00033280423358937546,
+    "leaky_l0.999": 0.000233154516742146,
+    "raw_fixed": 0.00019016567432523856,
+    "raw_sqrt": 5.7608291233894105e-05,
+    "cusum1_v0.5": 0.0001718599164445299,
+    "cusum1_v0.1": 8.690898573083333e-05,
+    "cusum1_v0.02": 3.312349219004849e-05,
+    "cusum2_v0.1": 9.152843094565433e-05,
+    "ref_blue": 0.0016678656124105807,
+    "ref_blue_green_known": 0.0016678656124105807,
+    "crosschannel": null,
+    "normal_mixture_e": 5.893869615568823e-05
+  },
+  "horizon_robustness": {
+    "leaky_l0.9": {
+      "x1": 0.025,
+      "x4": 0.175,
+      "x16": 0.425
+    },
+    "leaky_l0.99": {
+      "x1": 0.05,
+      "x4": 0.35,
+      "x16": 0.725
+    },
+    "leaky_l0.999": {
+      "x1": 0.05,
+      "x4": 0.2,
+      "x16": 0.95
+    },
+    "raw_fixed": {
+      "x1": 0.075,
+      "x4": 1.0,
+      "x16": 1.0
+    },
+    "raw_sqrt": {
+      "x1": 0.025,
+      "x4": 0.025,
+      "x16": 0.025
+    },
+    "cusum1_v0.5": {
+      "x1": 0.1,
+      "x4": 0.425,
+      "x16": 0.775
+    },
+    "cusum1_v0.1": {
+      "x1": 0.025,
+      "x4": 0.1,
+      "x16": 0.425
+    },
+    "cusum1_v0.02": {
+      "x1": 0.025,
+      "x4": 0.275,
+      "x16": 0.85
+    },
+    "cusum2_v0.1": {
+      "x1": 0.025,
+      "x4": 0.125,
+      "x16": 0.475
+    },
+    "ref_blue": {
+      "x1": 0.1,
+      "x4": 0.1,
+      "x16": 0.1
+    },
+    "ref_blue_green_known": {
+      "x1": 0.1,
+      "x4": 0.1,
+      "x16": 0.1
+    },
+    "crosschannel": {
+      "x1": 0.0,
+      "x4": 0.225,
+      "x16": 0.625
+    },
+    "normal_mixture_e": {
+      "x1": 0.025,
+      "x4": 0.025,
+      "x16": 0.025
+    }
+  },
+  "leaky_fixed_point_control": [
+    {
+      "lambda": 0.9,
+      "theta": 1.0,
+      "crossing_floor_severity": 0.09999999999999998,
+      "below_severity": 0.04999999999999999,
+      "below_q_infinity": 0.5,
+      "above_severity": 0.14999999999999997,
+      "above_q_infinity": 1.5
+    },
+    {
+      "lambda": 0.99,
+      "theta": 1.0,
+      "crossing_floor_severity": 0.010000000000000009,
+      "below_severity": 0.0050000000000000044,
+      "below_q_infinity": 0.5,
+      "above_severity": 0.015000000000000013,
+      "above_q_infinity": 1.5
+    },
+    {
+      "lambda": 0.999,
+      "theta": 1.0,
+      "crossing_floor_severity": 0.0010000000000000009,
+      "below_severity": 0.0005000000000000004,
+      "below_q_infinity": 0.5,
+      "above_severity": 0.0015000000000000013,
+      "above_q_infinity": 1.5
+    }
+  ],
+  "leaky_effective_memory_control": [
+    {
+      "lambda": 0.9,
+      "tau_1_over_1_minus_lambda": 10.000000000000002,
+      "effective_sample_size": 19.000000000000004,
+      "stationary_sd": 0.22941573387056174
+    },
+    {
+      "lambda": 0.99,
+      "tau_1_over_1_minus_lambda": 99.99999999999991,
+      "effective_sample_size": 198.99999999999983,
+      "stationary_sd": 0.07088812050083362
+    },
+    {
+      "lambda": 0.999,
+      "tau_1_over_1_minus_lambda": 999.9999999999991,
+      "effective_sample_size": 1998.9999999999984,
+      "stationary_sd": 0.02236627204212923
+    }
+  ],
+  "legacy_predictions": [
+    {
+      "id": "P1",
+      "kind": "analytic",
+      "statement": "Leaky detectors have a minimum-detectable-rate at least 3x worse than raw_sqrt, and it does NOT improve as lambda->1 fast enough to close the gap.",
+      "historical_v1_1_verdict": "PASS"
+    },
+    {
+      "id": "P2",
+      "kind": "empirical",
+      "statement": "Every detector fires on the SHOCK condition. Fast shocks are not the problem.",
+      "historical_v1_1_verdict": "PASS"
+    },
+    {
+      "id": "P3",
+      "kind": "analytic",
+      "statement": "raw_fixed cannot be calibrated: it either alarms on the null or never alarms at all. It measures elapsed time, not departure.",
+      "historical_v1_1_verdict": "FAIL"
+    },
+    {
+      "id": "P4",
+      "kind": "empirical",
+      "statement": "CUSUM with nu=0.5 is blind to the Green Sky drift rate (fire_rate < 0.5 on 'creep'). CUSUM does not automatically fix slow drift; nu is a floor.",
+      "historical_v1_1_verdict": "FAIL"
+    },
+    {
+      "id": "P5",
+      "kind": "empirical",
+      "statement": "raw_sqrt has the lowest minimum-detectable-rate of all single-channel detectors tested.",
+      "historical_v1_1_verdict": "FAIL"
+    },
+    {
+      "id": "P6",
+      "kind": "empirical",
+      "statement": "With a FIXED reference, at least one detector stays latched for >50% of the green plateau -- i.e. it spends 150 years reporting that a genuinely green sky is anomalous.",
+      "historical_v1_1_verdict": "PASS"
+    },
+    {
+      "id": "P7",
+      "kind": "analytic",
+      "statement": "Conditions 'creep' and 'instrument' produce identical channel-1 streams, so every single-channel detector gives identical results on both. Integral tracking alone cannot solve the instrument problem.",
+      "historical_v1_1_verdict": "PASS"
+    },
+    {
+      "id": "P8",
+      "kind": "empirical",
+      "statement": "The cross-channel detector fires on 'instrument' and NOT on 'creep', separating world change from instrument change.",
+      "historical_v1_1_verdict": "PASS"
+    }
+  ],
+  "legacy_prediction_checks": [
+    {
+      "id": "P1",
+      "verdict": "PASS",
+      "evidence": "best leaky MDR=0.00023315452; raw_sqrt=5.7608291e-05; ratio=4.05x"
+    },
+    {
+      "id": "P2",
+      "verdict": "PASS",
+      "evidence": "post-onset shock detection: {'leaky_l0.9': 1.0, 'leaky_l0.99': 1.0, 'leaky_l0.999': 1.0, 'raw_fixed': 1.0, 'raw_sqrt': 1.0, 'cusum1_v0.5': 1.0, 'cusum1_v0.1': 1.0, 'cusum1_v0.02': 1.0, 'cusum2_v0.1': 1.0, 'ref_blue': 1.0, 'ref_blue_green_known': 1.0, 'normal_mixture_e': 1.0}"
+    },
+    {
+      "id": "P3",
+      "verdict": "FAIL",
+      "evidence": "raw_fixed null any-alarm=0.1; creep post-onset detection=1.0"
+    },
+    {
+      "id": "P4",
+      "verdict": "FAIL",
+      "evidence": "CUSUM nu=0.5 creep post-onset detection=1.0"
+    },
+    {
+      "id": "P5",
+      "verdict": "FAIL",
+      "evidence": "lowest finite-horizon MDR is cusum1_v0.02=3.312349219004849e-05; raw_sqrt=5.7608291233894105e-05"
+    },
+    {
+      "id": "P6",
+      "verdict": "PASS",
+      "evidence": "max green-plateau alarm fraction=1.0; {'leaky_l0.9': 1.0, 'leaky_l0.99': 1.0, 'leaky_l0.999': 1.0, 'raw_fixed': 1.0, 'raw_sqrt': 1.0, 'cusum1_v0.5': 1.0, 'cusum1_v0.1': 1.0, 'cusum1_v0.02': 1.0, 'cusum2_v0.1': 1.0, 'ref_blue': 1.0, 'normal_mixture_e': 1.0}"
+    },
+    {
+      "id": "P7",
+      "verdict": "PASS",
+      "evidence": "single-channel result dictionaries identical"
+    },
+    {
+      "id": "P8",
+      "verdict": "PASS",
+      "evidence": "crosschannel instrument=1.0; creep=0.0"
+    }
+  ],
+  "post_pilot_targets": [
+    {
+      "id": "R1",
+      "kind": "post-pilot replication",
+      "statement": "raw_fixed loses fixed-horizon calibration badly by x4 (null FA >= 0.50)."
+    },
+    {
+      "id": "R2",
+      "kind": "post-pilot replication",
+      "statement": "CUSUM nu=0.5 detects the configured 6-sigma creep excursion (post-onset detection >= 0.90)."
+    },
+    {
+      "id": "R3",
+      "kind": "post-pilot replication",
+      "statement": "raw_sqrt and CUSUM nu=0.02 have finite-horizon MDR50 values within a factor of 2."
+    },
+    {
+      "id": "R4",
+      "kind": "new control",
+      "statement": "The Gaussian-mixture e-process remains <=10% empirical null FA at every tested horizon x1/x4/x16."
+    },
+    {
+      "id": "R5",
+      "kind": "post-pilot replication",
+      "statement": "Cross-channel disagreement is low on common-mode creep (<=0.10) and high on instrument drift and confound (>=0.90 each)."
+    },
+    {
+      "id": "R6",
+      "kind": "reference semantics",
+      "statement": "The blue-only reference alarms for most of the green plateau, while the pre-known blue+green bank alarms for substantially less of that plateau."
+    }
+  ],
+  "post_pilot_target_checks": [
+    {
+      "id": "R1",
+      "verdict": "PASS",
+      "evidence": "raw_fixed x4 null FA=1.0"
+    },
+    {
+      "id": "R2",
+      "verdict": "PASS",
+      "evidence": "CUSUM nu=0.5 creep detection=1.0"
+    },
+    {
+      "id": "R3",
+      "verdict": "PASS",
+      "evidence": "raw_sqrt=5.7608291e-05; CUSUM.02=3.3123492e-05; ratio=1.74"
+    },
+    {
+      "id": "R4",
+      "verdict": "PASS",
+      "evidence": "Gaussian-mixture e-process horizon FA={'x1': 0.025, 'x4': 0.025, 'x16': 0.025}"
+    },
+    {
+      "id": "R5",
+      "verdict": "PASS",
+      "evidence": "crosschannel creep=0.0, instrument=1.0, confound=1.0"
+    },
+    {
+      "id": "R6",
+      "verdict": "PASS",
+      "evidence": "blue-only plateau alarm=1.000; known blue+green=0.000"
+    }
+  ],
+  "scope": {
+    "research_not_canon": true,
+    "tests_complete_thde": false,
+    "tests_all_nexus_barriers": false,
+    "ramp_mdr_is_asymptotic_proof": false,
+    "raw_sqrt_is_anytime_valid": false,
+    "eprocess_anytime_valid_under_modeled_gaussian_null": true,
+    "known_epoch_bank_implements_reference_migration": false,
+    "crosschannel_proves_truth": false
+  }
+}

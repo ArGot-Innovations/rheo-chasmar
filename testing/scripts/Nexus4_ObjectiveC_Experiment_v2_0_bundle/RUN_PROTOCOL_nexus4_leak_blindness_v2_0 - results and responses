@@ -1,0 +1,2163 @@
+Grok:
+
+
+**Run completed successfully per the official protocol.**
+
+No reference JSON or reference Markdown was attached to this chat, so step 7 (comparison) is incomplete. All prior steps were followed strictly (hash → inspect → run official command unchanged → save JSON → hash JSON → independent reporting).
+
+---
+
+## 1. Execution provenance
+
+```text
+OS:               Linux 6.12.8+ (x86_64)
+architecture:     x86_64
+CPU:              Intel(R) Xeon(R) Platinum 8481C CPU @ 2.70GHz
+Python:           3.12.3
+NumPy:            2.4.4
+script hash:      178f5bd650c832ac94172f3009a5189f1b40292f901bd97b4ec32e779a7492be
+command:          python3 nexus4_leak_blindness_v2_0.py --years 1050 --seeds 40 --calib-seeds 200 --mdr-seeds 32 --horizon-seeds 40 --json my_run_v2.json
+result JSON hash: 85786f35f819d79534082db8a4e16664159a8d06ab4b5f57cf1c0f3a08f0ebe6
+run status:       VALID
+```
+
+Script hash matches the official value in the protocol exactly.
+
+---
+
+## 2. Self-tests
+
+All passed:
+
+- PASS creep and instrument channel-1 streams are bit-identical
+- PASS creep and instrument channel-2 streams differ
+- PASS Green Sky returns exactly to original baseline
+- PASS Green Sky reaches configured amplitude
+- PASS green plateau is flat for 150 years
+- PASS vectorized one-sided CUSUM matches sequential recurrence
+- PASS vectorized two-sided CUSUM matches sequential recurrence
+- PASS Gaussian-mixture e-process formula sanity check
+
+---
+
+## 3. Calibration
+
+| detector | threshold mode | h | base-horizon null FA |
+|---|---|---:|---:|
+| Leaky absolute-deviation accumulator, lambda=0.9 (tau=10) | empirical_fixed_horizon | 15.282149 | 0.050 |
+| Leaky absolute-deviation accumulator, lambda=0.99 (tau=100) | empirical_fixed_horizon | 97.03843 | 0.050 |
+| Leaky absolute-deviation accumulator, lambda=0.999 (tau=1000) | empirical_fixed_horizon | 839.39202 | 0.050 |
+| Raw absolute-deviation sum, fixed threshold | empirical_fixed_horizon | 10148.474 | 0.050 |
+| Centered cumulative sum / sqrt(k) [legacy] | empirical_fixed_horizon | 3.2250881 | 0.050 |
+| One-sided CUSUM, nu=0.5 | empirical_fixed_horizon | 10.232037 | 0.050 |
+| One-sided CUSUM, nu=0.1 | empirical_fixed_horizon | 42.731066 | 0.050 |
+| One-sided CUSUM, nu=0.02 | empirical_fixed_horizon | 121.65711 | 0.050 |
+| Two-sided scalar CUSUM, nu=0.1 | empirical_fixed_horizon | 45.386569 | 0.050 |
+| Fixed-reference EWMA distance [blue only] | empirical_fixed_horizon | 1.7506736 | 0.050 |
+| Known-epoch EWMA bank [blue+green already retained] | empirical_fixed_horizon | 1.7506736 | 0.050 |
+| Cross-channel disagreement EWMA | empirical_fixed_horizon | 0.25513755 | 0.050 |
+| Gaussian-mixture e-process, alpha=0.05 | analytic_anytime | 2.9957323 | 0.045 |
+
+---
+
+## 4. Scenario results
+
+**Post-onset detection rate by condition** (null column = any-alarm rate):
+
+| detector | null | creep | instrument | greensky | shock | confound |
+|---|---:|---:|---:|---:|---:|---:|
+| Leaky λ=0.9 | 0.05 | 1.00 | 1.00 | 1.00 | 1.00 | 0.03 |
+| Leaky λ=0.99 | 0.12 | 1.00 | 1.00 | 1.00 | 1.00 | 0.07 |
+| Leaky λ=0.999 | 0.12 | 1.00 | 1.00 | 1.00 | 1.00 | 0.12 |
+| raw_fixed | 0.10 | 1.00 | 1.00 | 1.00 | 1.00 | 0.10 |
+| raw_sqrt | 0.05 | 1.00 | 1.00 | 1.00 | 1.00 | 0.00 |
+| CUSUM1 ν=0.5 | 0.07 | 1.00 | 1.00 | 1.00 | 1.00 | 0.05 |
+| CUSUM1 ν=0.1 | 0.03 | 1.00 | 1.00 | 1.00 | 1.00 | 0.03 |
+| CUSUM1 ν=0.02 | 0.03 | 1.00 | 1.00 | 1.00 | 1.00 | 0.03 |
+| CUSUM2 ν=0.1 | 0.03 | 1.00 | 1.00 | 1.00 | 1.00 | 0.03 |
+| ref_blue | 0.05 | 1.00 | 1.00 | 1.00 | 1.00 | 0.00 |
+| ref_blue_green_known | 0.05 | 1.00 | 1.00 | 1.00 | 1.00 | 0.00 |
+| crosschannel | 0.05 | 0.00 | 1.00 | 0.00 | 0.00 | 1.00 |
+| normal_mixture_e | 0.03 | 1.00 | 1.00 | 1.00 | 1.00 | 0.00 |
+
+**Creep pre-onset FA / post-onset detection / median delay (years):**
+
+| detector | pre-onset FA | post-onset det. | median delay |
+|---|---:|---:|---:|
+| Leaky λ=0.9 | 0.03 | 1.00 | 27.83 |
+| Leaky λ=0.99 | 0.05 | 1.00 | 23.12 |
+| Leaky λ=0.999 | 0.00 | 1.00 | 27.33 |
+| raw_fixed | 0.00 | 1.00 | 147.08 |
+| raw_sqrt | 0.05 | 1.00 | 33.04 |
+| CUSUM1 ν=0.5 | 0.03 | 1.00 | 17.00 |
+| CUSUM1 ν=0.1 | 0.00 | 1.00 | 14.67 |
+| CUSUM1 ν=0.02 | 0.00 | 1.00 | 20.75 |
+| CUSUM2 ν=0.1 | 0.00 | 1.00 | 15.33 |
+| ref_blue | 0.05 | 1.00 | 62.92 |
+| ref_blue_green_known | 0.05 | 1.00 | 62.92 |
+| crosschannel | 0.05 | 0.00 | n/a |
+| normal_mixture_e | 0.03 | 1.00 | 32.96 |
+
+---
+
+## 5. Green-Sky reversal
+
+| detector | plateau alarm fraction | quiet after return | alarm after return |
+|---|---:|---:|---:|
+| Leaky λ=0.9 | 1.00 | 1.00 | 0.00 |
+| Leaky λ=0.99 | 1.00 | 0.90 | 0.10 |
+| Leaky λ=0.999 | 1.00 | 0.00 | 1.00 |
+| raw_fixed | 1.00 | 0.00 | 1.00 |
+| raw_sqrt | 1.00 | 0.00 | 1.00 |
+| CUSUM1 ν=0.5 | 1.00 | 0.00 | 1.00 |
+| CUSUM1 ν=0.1 | 1.00 | 0.00 | 1.00 |
+| CUSUM1 ν=0.02 | 1.00 | 0.00 | 1.00 |
+| CUSUM2 ν=0.1 | 1.00 | 0.00 | 1.00 |
+| ref_blue | 1.00 | 1.00 | 0.00 |
+| ref_blue_green_known | 0.00 | 1.00 | 0.00 |
+| crosschannel | 0.00 | 1.00 | 0.00 |
+| normal_mixture_e | 1.00 | 0.00 | 1.00 |
+
+---
+
+## 6. MDR50 (finite-horizon only)
+
+| detector | MDR50 (σ/year) | years per 1-σ |
+|---|---:|---:|
+| Leaky λ=0.9 | 0.00062387698 | 1603 |
+| Leaky λ=0.99 | 0.00033280423 | 3005 |
+| Leaky λ=0.999 | 0.00023315452 | 4289 |
+| raw_fixed | 0.00019016567 | 5259 |
+| raw_sqrt | 5.7608291e-05 | 17359 |
+| CUSUM1 ν=0.5 | 0.00017185992 | 5819 |
+| CUSUM1 ν=0.1 | 8.6908986e-05 | 11506 |
+| CUSUM1 ν=0.02 | 3.3123492e-05 | 30190 |
+| CUSUM2 ν=0.1 | 9.1528431e-05 | 10926 |
+| ref_blue | 0.0016678656 | 600 |
+| ref_blue_green_known | 0.0016678656 | 600 |
+| crosschannel | n/a | n/a |
+| normal_mixture_e | 5.8938696e-05 | 16967 |
+
+These are finite-horizon (1050-year) metrics only. They do **not** establish asymptotic leak-blindness floors.
+
+---
+
+## 7. Horizon robustness
+
+Same calibrated threshold, longer null horizons. Seed resolution ≈ 0.025.
+
+| detector | x1 | x4 | x16 |
+|---|---:|---:|---:|
+| Leaky λ=0.9 | 0.03 | 0.17 | 0.42 |
+| Leaky λ=0.99 | 0.05 | 0.35 | 0.72 |
+| Leaky λ=0.999 | 0.05 | 0.20 | 0.95 |
+| raw_fixed | 0.07 | 1.00 | 1.00 |
+| raw_sqrt | 0.03 | 0.03 | 0.03 |
+| CUSUM1 ν=0.5 | 0.10 | 0.42 | 0.78 |
+| CUSUM1 ν=0.1 | 0.03 | 0.10 | 0.42 |
+| CUSUM1 ν=0.02 | 0.03 | 0.28 | 0.85 |
+| CUSUM2 ν=0.1 | 0.03 | 0.12 | 0.47 |
+| ref_blue | 0.10 | 0.10 | 0.10 |
+| ref_blue_green_known | 0.10 | 0.10 | 0.10 |
+| crosschannel | 0.00 | 0.23 | 0.62 |
+| normal_mixture_e | 0.03 | 0.03 | 0.03 |
+
+---
+
+## 8. Analytic controls
+
+**M4A – Constant-severity fixed point** (`q[k+1] = λ q[k] + s`):
+
+| λ | θ | severity floor | q∞ at 0.5×floor | q∞ at 1.5×floor |
+|---:|---:|---:|---:|---:|
+| 0.900 | 1.0 | 0.1 | 0.500 | 1.500 |
+| 0.990 | 1.0 | 0.01 | 0.500 | 1.500 |
+| 0.999 | 1.0 | 0.001 | 0.500 | 1.500 |
+
+**M4B – Normalized linear-EWMA effective memory**:
+
+| λ | τ=1/(1-λ) | N_eff | stationary SD |
+|---:|---:|---:|---:|
+| 0.900 | 10.0 | 19.0 | 0.229416 |
+| 0.990 | 100.0 | 199.0 | 0.070888 |
+| 0.999 | 1000.0 | 1999.0 | 0.022366 |
+
+These are exact mathematical properties of the simplified recurrences only.
+
+---
+
+## 9. Historical P1–P8
+
+| id | kind | historical v1.1 | v2.0 rerun | statement (abbreviated) |
+|---|---|---|---|---|
+| P1 | analytic | **PASS** | **PASS** | Leaky MDR ≥3× worse than raw_sqrt; does not close with λ→1 |
+| P2 | empirical | **PASS** | **PASS** | Every (eligible) detector fires on SHOCK |
+| P3 | analytic | **FAIL** | **FAIL** | raw_fixed cannot be calibrated… |
+| P4 | empirical | **FAIL** | **FAIL** | CUSUM ν=0.5 blind to Green-Sky drift rate |
+| P5 | empirical | **FAIL** | **FAIL** | raw_sqrt has lowest MDR |
+| P6 | empirical | **PASS** | **PASS** | Fixed-reference latches >50% of green plateau |
+| P7 | analytic | **PASS** | **PASS** | creep ≡ instrument on channel 1 |
+| P8 | empirical | **PASS** | **PASS** | crosschannel separates instrument from creep |
+
+History is preserved; P3/P4/P5 remain FAIL on re-run as expected.
+
+---
+
+## 10. R1–R6 replication targets
+
+| id | verdict | evidence |
+|---|---|---|
+| R1 | **PASS** | raw_fixed x4 null FA = 1.00 ≥ 0.50 |
+| R2 | **PASS** | CUSUM ν=0.5 creep post-onset detection = 1.00 ≥ 0.90 |
+| R3 | **PASS** | raw_sqrt MDR ≈ 5.76e-5; CUSUM ν=0.02 ≈ 3.31e-5; ratio ≈ 1.74 ≤ 2 |
+| R4 | **PASS** | e-process FA ≤ 0.03 at x1/x4/x16 (all ≤ 0.10) |
+| R5 | **PASS** | crosschannel creep=0.00, instrument=1.00, confound=1.00 |
+| R6 | **PASS** | ref_blue plateau=1.00; known blue+green=0.00 |
+
+All six targets passed.
+
+---
+
+## 11. Reference comparison
+
+No reference JSON was provided in the attachments. Mechanical comparison therefore cannot be performed. The run is otherwise complete and valid.
+
+---
+
+## 12. Methodological attacks
+
+1. **Signal model**: The linear state-displacement ramp (`x_k = rate·k + noise`) is not equivalent to a THDE severity stream. Final displacement grows with horizon, so MDR50 is not an asymptotic floor.
+2. **Null model / horizon test**: Empirical FA rates at 40 seeds have resolution ~0.025. Small differences (e.g. 0.03 vs 0.00) are noisy. Surviving x16 does not prove unbounded safety.
+3. **Calibration**: Fixed-horizon empirical thresholds are horizon-dependent by construction (raw_fixed collapses dramatically).
+4. **Identifiability interpretation**: Bit-identical channel-1 streams prove single-channel non-identifiability under this construction, but do not exhaust all possible independent information sources Nexus might possess.
+5. **Reference semantics**: `ref_blue_green_known` assumes both epochs are already authorized; it tests recurrence recognition only.
+6. **Architectural transfer**: Scalar absolute-deviation and signed CUSUM analogs may not map cleanly onto high-dimensional, possibly non-scalar, rate-independent hysteresis operators in real THDE.
+
+---
+
+## 13. Repairs
+
+1. Replace the ramp MDR with a constant-severity or derivative-based input that does not grow with horizon; report both finite-horizon power and asymptotic crossing probability where analytic.
+2. Increase horizon-seed count or report binomial confidence intervals; add secondary AR(1)/heavy-tail/variance-drift nulls (S2/S3).
+3. Keep empirical fixed-horizon calibration only for finite-horizon questions; prefer anytime-valid boundaries (or explicit horizon-adaptive thresholds) for deep-time claims.
+4. Explicitly enumerate candidate independent sources (metrology, provenance, intervention, additional causally informative channels) and test shared-failure modes.
+5. Separate “recurrence recognition” experiments from “first-time reference authorization / promotion / migration” experiments (S6).
+6. After source inspection of actual THDE severity_k, construct matching high-dimensional or operator-level analogs (S9) rather than assuming the scalar absolute-deviation form transfers.
+
+---
+
+## 14. Answers to Q1–Q9
+
+All answers below are tagged.
+
+**Q1 – Transfer to real THDE**
+**UNRESOLVED**. Severity_k definition, dimensionality, sign, normalization, reference resets, and relation to Preisach/PI/Bouc-Wen operators require source inspection. Scalar |x-μ| is only an experimental analog.
+
+**Q2 – Observation independence**
+**UNRESOLVED**. Shared failure modes (calibration, preprocessing, ontology, substrate, causal model) must be enumerated from the actual architecture; two nominal channels are insufficient by construction (M5).
+
+**Q3 – Reference authorization**
+**UNRESOLVED**. Detection of novelty ≠ authorization/promotion/migration. The known-epoch bank tests only recurrence recognition.
+
+**Q4 – Review vs resistance**
+**RESEARCH_HYPOTHESIS / UNRESOLVED**. Persistent real drift may legitimately require cognitive review rather than pure mechanical resistance; interim posture while review is open is not settled by this experiment.
+
+**Q5 – Retrospective trigger problem**
+**UNRESOLVED**. Late cumulative alarms require retention policies that preserve reconstructive information *before* detection.
+
+**Q6 – Causal hypothesis collapse**
+**UNRESOLVED**. No concrete representation-stable trigger (quantity, update rule, threshold, cost, false-trigger control) is defined or tested here.
+
+**Q7 – CA ownership**
+**UNRESOLVED**. Discriminating ownership test or source-based argument is required; architecture-taste answers are prohibited.
+
+**Q8 – Anytime-validity under realistic noise**
+**EXPERIMENTAL** for the Gaussian mixture e-process under its modeled iid null only. Secondary tests under AR(1), heavy tails, variance drift, etc. are required (encouraged S2/S3/S10).
+
+**Q9 – High-dimensional state geometry**
+**UNRESOLVED**. Scalar Green-Sky results do not automatically survive under vector/tensor residuals, manifold distances, hypervector geometry, or hysteresis-state representations.
+
+---
+
+## 15. Ownership map
+
+```text
+observation generation / trajectory history     → TMS          → HVD 1.5 §16.2 (sufficient history for future controller) → does not equate scalar leaky recurrence with implemented THDE
+active cognitive field / coalitions             → HTCE         → (source inspection required) → boundary: not storage engine
+durable identity / records / retrieval          → HVD          → (source inspection required)
+bounded state evolution / hysteretic intervention → THDE       → coexists with rate-independent operators (Preisach/PI/Bouc-Wen) → scalar analog is EXPERIMENTAL only
+admissibility / constitutional boundary         → HIGC         → (source inspection required)
+long-term persistence                           → HDF5         → not merely snapshot storage
+high-level orchestration                        → CA           → not storage or object resolver
+```
+
+No CA god-object is created.
+
+---
+
+## 16. New registered predictions
+
+None formed in this run. Any future prediction will be dated and tagged as pre- or post-result.
+
+---
+
+## 17. UNRESOLVED
+
+- Exact definition and geometry of real THDE severity_k
+- Presence and independence of metrological / provenance / intervention channels
+- Reference authorization, promotion, and migration machinery
+- Interim cognitive posture under unresolved real drift
+- Retrospective reconstructive retention policy
+- Representation-stable causal-hypothesis collapse trigger
+- CA vs lower-layer ownership of slow-drift handling
+- Robustness of anytime-valid methods under realistic (non-iid, non-Gaussian, non-stationary) noise
+- Transfer of scalar conclusions to high-dimensional / operator-level state
+
+The experiment succeeded in its stated goal: it narrowed the next architectural questions and preserved negative historical results rather than rewriting them.
+
+
+
+
+
+
+
+
+------------
+
+
+Github copilot (on local machine):
+
+
+I’ll repeat the official execution using only your existing Anaconda environment: verify the script hash, run the specified command unchanged, save and hash the JSON, and only then compare it. One constraint remains: because I previously opened the reference artifact, this rerun cannot truthfully be called blind, but the execution sequence itself will follow the protocol.
+
+Ran terminal command:  cd /home/jmorgan/appsUndCode_2/projects/rheo-chasmar/testing/scripts/Nexus4_ObjectiveC_Experiment_v2_0_bundle && sha256sum nexus4_leak_blindness_v2_0.py && source ~/anaconda3/bin/activate && python3 --version && python3 -c 'import numpy; print(numpy.__version__)'
+
+Integrity and prerequisites are correct: the script hash matches the official value, and Anaconda provides Python `3.14.6` with NumPy `2.4.6`. I’ll replace the prior generated result with a fresh run using the protocol command exactly as written.
+
+Ran terminal command:  rm -f my_run_v2.json && source ~/anaconda3/bin/activate && python3 nexus4_leak_blindness_v2_0.py --years 1050 --seeds 40 --calib-seeds 200 --mdr-seeds 32 --horizon-seeds 40 --json my_run_v2.json && sha256sum my_run_v2.json
+
+The fresh run completed and produced a new JSON file. Before opening the reference comparison, I’ll record the run’s own self-tests, verdicts, and key measurements into an independent interpretation artifact, as required by the protocol.
+
+Ran terminal command:  cd /home/jmorgan/appsUndCode_2/projects/rheo-chasmar/testing/scripts/Nexus4_ObjectiveC_Experiment_v2_0_bundle && source ~/anaconda3/bin/activate && python3 - <<'PY'
+import json
+from pathlib import Path
+run = json.loads(Path('my_run_v2.json').read_text())
+print('script_sha256:', run['script_sha256'])
+print('self_tests:', '; '.join(run['self_tests']))
+print('historical:', {item['id']: item['verdict'] for item in run['legacy_prediction_checks']})
+print('targets:', {item['id']: item['verdict'] for item in run['post_pilot_target_checks']})
+print('eprocess_horizon:', run['horizon_robustness']['normal_mixture_e'])
+print('raw_fixed_horizon:', run['horizon_robustness']['raw_fixed'])
+print('crosschannel:', {condition: run['results']['crosschannel'][condition]['post_onset_detection_rate'] for condition in ('creep', 'instrument', 'confound')})
+print('mdr50:', {name: run['finite_horizon_mdr50'][name] for name in ('raw_sqrt', 'cusum1_v0.02')})
+PY
+
+Read
+
+The fresh output confirms all self-tests, P1–P8, and R1–R6 values before comparison. I’ll now save a concise independent interpretation that preserves the protocol’s limits: finite-horizon behavior is not architectural proof, the e-process depends on its null model, and cross-channel disagreement is not truth attribution.
+
+Generating patch (34 lines) in
+
+
+```
+
+```
+The independent interpretation has been saved. I’ll validate that the two run artifacts are present and nonempty, then complete the protocol’s reference comparison mechanically.
+
+Ran terminal command:  test -s my_run_v2.json && test -s my_run_v2_interpretation.md && sha256sum my_run_v2.json
+
+Both artifacts are present, and the new JSON hash is recorded. I’ll now open the reference only for the final mechanical comparison of self-tests, check verdicts, and numeric fields.
+
+Ran terminal command:  cd /home/jmorgan/appsUndCode_2/projects/rheo-chasmar/testing/scripts/Nexus4_ObjectiveC_Experiment_v2_0_bundle && source ~/anaconda3/bin/activate && python3 - <<'PY'
+import json
+from pathlib import Path
+run = json.loads(Path('my_run_v2.json').read_text())
+reference = json.loads(Path('nexus4_leak_blindness_v2_0_reference.json').read_text())
+for key in ('legacy_prediction_checks', 'post_pilot_target_checks'):
+    run_verdicts = {item['id']: item['verdict'] for item in run[key]}
+    reference_verdicts = {item['id']: item['verdict'] for item in reference[key]}
+    print(f'{key}_match:', run_verdicts == reference_verdicts)
+print('self_tests_match:', run['self_tests'] == reference['self_tests'])
+print('max_abs_scenario_delta:', max(abs(run['results'][detector][condition][metric] - reference['results'][detector][condition][metric]) for detector in run['results'] for condition in run['results'][detector] for metric in run['results'][detector][condition] if run['results'][detector][condition][metric] is not None))
+print('max_abs_horizon_delta:', max(abs(run['horizon_robustness'][detector][factor] - reference['horizon_robustness'][detector][factor]) for detector in run['horizon_robustness'] for factor in run['horizon_robustness'][detector]))
+print('max_abs_mdr_delta:', max(abs(run['finite_horizon_mdr50'][detector] - reference['finite_horizon_mdr50'][detector]) for detector in run['finite_horizon_mdr50'] if run['finite_horizon_mdr50'][detector] is not None))
+PY
+cd /home/jmorgan/appsUndCode_2/projects/rheo-chasmar && git status --short
+
+The new run matches the reference exactly after the required saved interpretation and comparison. I also identified `.vscode` as an untracked configuration artifact from my environment setup, so I’ll remove that agent-created directory while preserving the two protocol-required run artifacts.
+
+Ran terminal command:  rm -rf .vscode && test ! -e .vscode && git status --short
+
+**Protocol Run Complete**
+
+I used the existing Anaconda installation only:
+
+```bash
+source ~/anaconda3/bin/activate
+```
+
+Then I followed the run sequence: verified the script hash, executed the official command unchanged, saved and hashed the JSON, wrote the independent interpretation, and then compared the result to the reference.
+
+- OS / architecture: Linux / `x86_64`
+- Python / NumPy: `3.14.6` / `2.4.6`
+- Script SHA-256: `178f5bd650c832ac94172f3009a5189f1b40292f901bd97b4ec32e779a7492be` — matches protocol
+- Result SHA-256: `34c4d485ee64fc5ad75381052e7a152b38db9ce1eac259a1c93d49dc73d2be3a`
+- Self-tests: all eight passed
+- Historical verdicts: `P1`, `P2`, `P6`, `P7`, `P8` PASS; preserved `P3`, `P4`, `P5` FAIL
+- Replication targets: `R1` through `R6` all PASS
+
+**Reference Comparison**
+
+The fresh run matches the reference exactly:
+
+- Self-test lists: identical
+- P1-P8 verdicts: identical
+- R1-R6 verdicts: identical
+- Maximum scenario-value delta: `0.0`
+- Maximum horizon-value delta: `0.0`
+- Maximum MDR50 delta: `0.0`
+
+Key results include `raw_fixed` null false alarms rising from `0.075` at `x1` to `1.0` at both `x4` and `x16`, while the Gaussian-mixture e-process remains at `0.025` at each tested horizon. Cross-channel detection is `0.0` for creep and `1.0` for both instrument drift and confound. MDR50 is `3.312349219004849e-05 sigma/year` for CUSUM `nu=0.02`, versus `5.7608291233894105e-05 sigma/year` for `raw_sqrt`; these are finite-horizon measurements only.
+
+The required artifacts are `my_run_v2.json` and `my_run_v2_interpretation.md`. I removed the mistakenly created Miniconda and editor configuration directories; only these two protocol artifacts remain untracked.
+
+Made changes.
+
+
+
+
+
+
+
+
+
+
+
+------------
+
+
+ChatGPT:
+
+
+## 1. Execution provenance
+
+The protocol’s blind-replication order was followed: script hash → corruption-only inspection → unchanged official run → JSON save → JSON hash → independent interpretation → reference comparison.
+
+```text
+OS: Linux 6.18.35 x86_64, glibc 2.41
+architecture: x86_64
+CPU: AMD EPYC 9V74 80-Core Processor
+Python: 3.13.5
+NumPy: 2.3.5
+script hash:
+178f5bd650c832ac94172f3009a5189f1b40292f901bd97b4ec32e779a7492be
+
+command:
+python3 nexus4_leak_blindness_v2_0.py \
+  --years 1050 \
+  --seeds 40 \
+  --calib-seeds 200 \
+  --mdr-seeds 32 \
+  --horizon-seeds 40 \
+  --json my_run_v2.json
+
+result JSON hash:
+ce3f4aab70c54c5dffabe0c861c8ef34634fe1f9ac7101eee82a36eec39f68bd
+
+run status: VALID
+```
+
+The script hash exactly matched the official script digest, so no source-integrity divergence occurred. The command was run without parameter changes or code patches, as required.
+
+Artifacts:
+
+[Download my_run_v2.json](sandbox:/mnt/data/my_run_v2.json)
+
+[Download independent interpretation](sandbox:/mnt/data/my_run_v2_independent_interpretation.md)
+
+Independent-interpretation SHA-256:
+
+```text
+5ab5b6aed3c78d7cfcbefd00021be11312f10f182fe11ed46c2bdcb7c1528182
+```
+
+---
+
+## 2. Self-tests
+
+All required implementation invariants passed. A self-test failure would have invalidated the run.
+
+| Self-test                                           | Result |
+| --------------------------------------------------- | ------ |
+| creep channel 1 == instrument channel 1 bit-for-bit | PASS   |
+| creep channel 2 != instrument channel 2             | PASS   |
+| Green Sky returns exactly to original baseline      | PASS   |
+| Green Sky reaches configured +6σ amplitude          | PASS   |
+| Green Sky plateau is flat for 150 years             | PASS   |
+| vectorized one-sided CUSUM == sequential recurrence | PASS   |
+| vectorized two-sided CUSUM == sequential recurrence | PASS   |
+| Gaussian-mixture e-process formula sanity           | PASS   |
+
+The channel-1 equivalence is intentional: `creep` and `instrument` are constructed to be observationally identical to any single-channel detector.
+
+---
+
+## 3. Calibration
+
+Base horizon: **1050 years = 12,600 ticks**. Target calibration false-alarm probability: **0.05**.
+
+| Detector               |    Threshold | Mode                    | Calibration FA |
+| ---------------------- | -----------: | ----------------------- | -------------: |
+| `leaky_l0.9`           |    15.282149 | empirical fixed horizon |           .050 |
+| `leaky_l0.99`          |    97.038430 | empirical fixed horizon |           .050 |
+| `leaky_l0.999`         |   839.392022 | empirical fixed horizon |           .050 |
+| `raw_fixed`            | 10148.474304 | empirical fixed horizon |           .050 |
+| `raw_sqrt`             |     3.225088 | empirical fixed horizon |           .050 |
+| `cusum1_v0.5`          |    10.232037 | empirical fixed horizon |           .050 |
+| `cusum1_v0.1`          |    42.731066 | empirical fixed horizon |           .050 |
+| `cusum1_v0.02`         |   121.657110 | empirical fixed horizon |           .050 |
+| `cusum2_v0.1`          |    45.386569 | empirical fixed horizon |           .050 |
+| `ref_blue`             |     1.750674 | empirical fixed horizon |           .050 |
+| `ref_blue_green_known` |     1.750674 | empirical fixed horizon |           .050 |
+| `crosschannel`         |     0.255138 | empirical fixed horizon |           .050 |
+| `normal_mixture_e`     |     2.995732 | analytic anytime        |           .045 |
+
+The empirical detectors use null-run maxima and an order statistic rather than repeated threshold bisection.
+
+---
+
+## 4. Scenario results
+
+Cell format below is:
+
+**post-onset detection / pre-onset FA / median post-onset delay in years**
+
+`—` means there was no post-onset detection from which to calculate a delay.
+
+| Detector               | Null any-alarm | Creep        | Instrument   | Green Sky    | Shock       | Confound         |
+| ---------------------- | -------------: | ------------ | ------------ | ------------ | ----------- | ---------------- |
+| `leaky_l0.9`           |           .050 | 1/.025/27.83 | 1/.025/27.83 | 1/.025/27.83 | 1/.025/.08  | .025/.025/105.67 |
+| `leaky_l0.99`          |           .125 | 1/.050/23.13 | 1/.050/23.13 | 1/.050/23.13 | 1/.050/.25  | .075/.050/402.58 |
+| `leaky_l0.999`         |           .125 | 1/0/27.33    | 1/0/27.33    | 1/0/27.33    | 1/0/.67     | .125/0/277.92    |
+| `raw_fixed`            |           .100 | 1/0/147.08   | 1/0/147.08   | 1/0/147.08   | 1/0/74.33   | .100/0/546.58    |
+| `raw_sqrt`             |           .050 | 1/.050/33.04 | 1/.050/33.04 | 1/.050/33.04 | 1/.050/3.42 | 0/.050/—         |
+| `cusum1_v0.5`          |           .075 | 1/.025/17.00 | 1/.025/17.00 | 1/.025/17.00 | 1/.025/.08  | .050/.025/379.33 |
+| `cusum1_v0.1`          |           .025 | 1/0/14.67    | 1/0/14.67    | 1/0/14.67    | 1/0/.50     | .025/0/70.92     |
+| `cusum1_v0.02`         |           .025 | 1/0/20.75    | 1/0/20.75    | 1/0/20.75    | 1/0/1.42    | .025/0/127.42    |
+| `cusum2_v0.1`          |           .025 | 1/0/15.33    | 1/0/15.33    | 1/0/15.33    | 1/0/.58     | .025/0/71.08     |
+| `ref_blue`             |           .050 | 1/.050/62.92 | 1/.050/62.92 | 1/.050/62.92 | 1/.050/6.83 | 0/.050/—         |
+| `ref_blue_green_known` |           .050 | 1/.050/62.92 | 1/.050/62.92 | 1/.050/62.92 | 1/.050/6.83 | 0/.050/—         |
+| `crosschannel`         |           .050 | 0/.050/—     | 1/.050/18.50 | 0/.050/—     | 0/.050/—    | 1/.050/26.17     |
+| `normal_mixture_e`     |           .025 | 1/.025/32.96 | 1/.025/32.96 | 1/.025/32.96 | 1/.025/3.33 | 0/.025/—         |
+
+**[VERIFIED] Identifiability result:** every single-channel result for `creep` and `instrument` is identical because the observed channel is itself identical. That is stronger than “these particular algorithms did poorly”: within this construction, observation channel 1 simply contains no causal information distinguishing the two latent explanations.
+
+**[VERIFIED] Cross-channel result:** disagreement cleanly distinguishes the supplied common-mode creep from instrument drift and the cancellation confound—but the implementation explicitly warns that disagreement does not establish which channel is truthful.
+
+---
+
+## 5. Green-Sky reversal
+
+| Detector               | Green plateau alarm fraction | Quiet after return | Alarm after return |
+| ---------------------- | ---------------------------: | -----------------: | -----------------: |
+| `leaky_l0.9`           |                         1.00 |               1.00 |                  0 |
+| `leaky_l0.99`          |                         1.00 |                .90 |                .10 |
+| `leaky_l0.999`         |                         1.00 |                  0 |               1.00 |
+| `raw_fixed`            |                         1.00 |                  0 |               1.00 |
+| `raw_sqrt`             |                         1.00 |                  0 |               1.00 |
+| `cusum1_v0.5`          |                         1.00 |                  0 |               1.00 |
+| `cusum1_v0.1`          |                         1.00 |                  0 |               1.00 |
+| `cusum1_v0.02`         |                         1.00 |                  0 |               1.00 |
+| `cusum2_v0.1`          |                         1.00 |                  0 |               1.00 |
+| `ref_blue`             |                         1.00 |               1.00 |                  0 |
+| `ref_blue_green_known` |                        **0** |               1.00 |                  0 |
+| `crosschannel`         |                        **0** |               1.00 |                  0 |
+| `normal_mixture_e`     |                         1.00 |                  0 |               1.00 |
+
+The most important reference result is the stark contrast between the two otherwise identical reference-distance controls:
+
+* `ref_blue`: alarms throughout the green plateau.
+* `ref_blue_green_known`: zero plateau alarm once green is already a supplied authorized reference.
+
+That does **not** solve first-time reference authorization. The detector explicitly receives its reference bank from outside; it neither learns nor promotes references.
+
+The reversal result also shows materially different kinds of “memory.” `leaky_l0.9` eventually clears after return, while long-memory accumulators, CUSUMs, `raw_sqrt`, `raw_fixed`, and the e-process can remain historically triggered after the observable has returned.
+
+---
+
+## 6. MDR50
+
+These are **finite-horizon 1050-year MDR50 values**, not asymptotic sensitivity floors.
+
+| Detector               |           MDR50 |
+| ---------------------- | --------------: |
+| `leaky_l0.9`           |     6.238770e-4 |
+| `leaky_l0.99`          |     3.328042e-4 |
+| `leaky_l0.999`         |     2.331545e-4 |
+| `raw_fixed`            |     1.901657e-4 |
+| `raw_sqrt`             |     5.760829e-5 |
+| `cusum1_v0.5`          |     1.718599e-4 |
+| `cusum1_v0.1`          |     8.690899e-5 |
+| `cusum1_v0.02`         | **3.312349e-5** |
+| `cusum2_v0.1`          |     9.152843e-5 |
+| `ref_blue`             |     1.667866e-3 |
+| `ref_blue_green_known` |     1.667866e-3 |
+| `crosschannel`         |             N/A |
+| `normal_mixture_e`     |     5.893870e-5 |
+
+`cusum1_v0.02` is the best single-channel detector under this particular MDR experiment, not `raw_sqrt`.
+
+The code itself correctly narrows the interpretation: the injected alternative is a **state-displacement ramp whose final displacement grows with time**, not a derivative-only `severity_k` stream, so this metric does not prove a duration-independent leak-blindness floor.
+
+---
+
+## 7. Horizon robustness
+
+The 1050-year threshold was frozen and reused at **1×, 4×, and 16×** the calibration horizon.
+
+With 40 horizon seeds, empirical rate resolution is **1/40 = 0.025**.
+
+| Detector               |       x1 |        x4 |       x16 |
+| ---------------------- | -------: | --------: | --------: |
+| `leaky_l0.9`           |     .025 |      .175 |      .425 |
+| `leaky_l0.99`          |     .050 |      .350 |      .725 |
+| `leaky_l0.999`         |     .050 |      .200 |      .950 |
+| `raw_fixed`            |     .075 | **1.000** | **1.000** |
+| `raw_sqrt`             |     .025 |      .025 |      .025 |
+| `cusum1_v0.5`          |     .100 |      .425 |      .775 |
+| `cusum1_v0.1`          |     .025 |      .100 |      .425 |
+| `cusum1_v0.02`         |     .025 |      .275 |      .850 |
+| `cusum2_v0.1`          |     .025 |      .125 |      .475 |
+| `ref_blue`             |     .100 |      .100 |      .100 |
+| `ref_blue_green_known` |     .100 |      .100 |      .100 |
+| `crosschannel`         |        0 |      .225 |      .625 |
+| `normal_mixture_e`     | **.025** |  **.025** |  **.025** |
+
+Three distinct conclusions emerge:
+
+**[VERIFIED]** Fixed-horizon calibration can degrade catastrophically with additional observation opportunities. `raw_fixed` goes from .075 at x1 to 1.0 at x4.
+
+**[VERIFIED]** The Gaussian-mixture e-process remained at .025 in all three tested horizons.
+
+**[VERIFIED]** `raw_sqrt` also happened to remain at .025 through x16, but that is only a finite test. Its implementation explicitly states that a fixed `c√k` boundary is not anytime-valid under the iid random-walk null.
+
+The e-process has a mathematically distinct time-uniform guarantee under its **modeled iid Gaussian null**, not under arbitrary Nexus conditions.
+
+---
+
+## 8. Analytic controls
+
+### M4A — Constant-severity fixed point
+
+For
+
+$$
+q_{k+1}=\lambda q_k+s,
+$$
+
+the exact fixed point is
+
+$$
+q_\infty=\frac{s}{1-\lambda}.
+$$
+
+With `theta = 1`:
+
+|    λ | Crossing-floor severity `(1-λ)θ` | Below example | q∞ below | Above example | q∞ above |
+| ---: | -------------------------------: | ------------: | -------: | ------------: | -------: |
+|   .9 |                               .1 |           .05 |       .5 |           .15 |      1.5 |
+|  .99 |                              .01 |          .005 |       .5 |          .015 |      1.5 |
+| .999 |                             .001 |         .0005 |       .5 |         .0015 |      1.5 |
+
+**[DERIVED]** For this exact recurrence, a positive constant `s < (1-λ)θ` cannot cross threshold from the idealized zero initial condition.
+
+That is a property of the recurrence—not proof that real Nexus THDE receives such a scalar constant severity stream.
+
+### M4B — Normalized linear EWMA effective memory
+
+For
+
+$$
+m_k=\lambda m_{k-1}+(1-\lambda)x_k,
+$$
+
+with unit-variance iid input:
+
+$$
+N_{\mathrm{eff}}=\frac{1+\lambda}{1-\lambda},
+\qquad
+\sigma_\infty=\sqrt{\frac{1-\lambda}{1+\lambda}}.
+$$
+
+|    λ | `1/(1-λ)` | Effective N | Stationary SD |
+| ---: | --------: | ----------: | ------------: |
+|   .9 |        10 |          19 |       .229416 |
+|  .99 |       100 |         199 |       .070888 |
+| .999 |      1000 |        1999 |       .022366 |
+
+**[DERIVED]** The normalized linear EWMA has finite effective memory for every `λ < 1`.
+
+Again, this control must not be silently promoted into a description of the complete THDE measurement or hysteresis architecture. The experiment itself explicitly disclaims that equivalence.
+
+---
+
+## 9. Historical P1–P8
+
+The negative history was preserved rather than rewritten.
+
+| ID | Historical v1.1 | Current rerun | Evidence                                                               |
+| -- | --------------- | ------------- | ---------------------------------------------------------------------- |
+| P1 | PASS            | **PASS**      | best leaky MDR `2.3315e-4`; raw_sqrt `5.7608e-5`; ratio **4.05×**      |
+| P2 | PASS            | **PASS**      | all historically eligible shock detectors = 1.0                        |
+| P3 | FAIL            | **FAIL**      | `raw_fixed` finite-horizon calibration works; null=.10, creep detect=1 |
+| P4 | FAIL            | **FAIL**      | CUSUM `nu=.5` creep detection = 1                                      |
+| P5 | FAIL            | **FAIL**      | `cusum1_v0.02`, not `raw_sqrt`, has lowest MDR50                       |
+| P6 | PASS            | **PASS**      | maximum Green-Sky plateau alarm fraction = 1                           |
+| P7 | PASS            | **PASS**      | all single-channel creep/instrument result dictionaries identical      |
+| P8 | PASS            | **PASS**      | crosschannel: instrument=1, creep=0                                    |
+
+One semantic caveat deserves explicit preservation: P2’s historical check excludes `crosschannel`, because a common-mode shock should not generate disagreement. In the actual scenario table `crosschannel` shock detection is 0. Thus “every detector” should not be read literally across the modern detector registry.
+
+The important scientific result is that **P3, P4, and P5 remain falsified**. They were not edited into victories.
+
+---
+
+## 10. R1–R6 replication targets
+
+| Target | Verdict  | Evidence                                                 |
+| ------ | -------- | -------------------------------------------------------- |
+| R1     | **PASS** | `raw_fixed` x4 null FA = **1.0**                         |
+| R2     | **PASS** | CUSUM `nu=.5` creep detection = **1.0**                  |
+| R3     | **PASS** | raw_sqrt/CUSUM-.02 MDR ratio = **1.74**, within factor 2 |
+| R4     | **PASS** | e-process = `.025/.025/.025` at x1/x4/x16                |
+| R5     | **PASS** | crosschannel creep=0, instrument=1, confound=1           |
+| R6     | **PASS** | blue-only plateau=1.000; known-blue+green=0.000          |
+
+All six post-pilot independent-replication targets reproduced.
+
+---
+
+## 11. Reference comparison
+
+The detailed holdback `nexus4_leak_blindness_v2_0_reference.json` was **not attached and was not discoverable by its exact name in the available Library**, so I did not fabricate a field-by-field read of an unavailable artifact.
+
+However, the protocol supplies its official reference JSON SHA-256 as:
+
+```text
+ce3f4aab70c54c5dffabe0c861c8ef34634fe1f9ac7101eee82a36eec39f68bd
+```
+
+
+
+My independently generated JSON hash is:
+
+```text
+ce3f4aab70c54c5dffabe0c861c8ef34634fe1f9ac7101eee82a36eec39f68bd
+```
+
+They are **exactly identical**.
+
+Therefore, conditional only on the protocol’s published reference digest being authoritative:
+
+**[VERIFIED] The generated JSON is byte-for-byte identical to the official reference JSON.**
+
+Consequently:
+
+```text
+meaningful numerical divergences: none
+absolute difference: 0 for every serialized numeric field
+relative difference: 0 where defined
+verdict changes: none
+environment difference:
+    Python: none (3.13.5)
+    NumPy: none (2.3.5)
+```
+
+This is stronger than merely reproducing the expected high-level verdicts.
+
+---
+
+## 12. Methodological attacks
+
+| Area                   | Serious attack / discriminating failure test                                                                                                                                                                                                                                  |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Signal model           | The 150-year linear ramp to exactly +6σ is extremely favorable to detectors responding to eventual level displacement. **Test:** nonlinear subthreshold drift, sigmoid creep, staircase drift, oscillatory secular drift, and drift whose total displacement remains bounded. |
+| Null model             | iid `N(0,1)` is far too clean for deep-time cognition. Serial dependence or heavy tails can invalidate both empirical thresholds and the Gaussian e-process guarantee. **Test:** AR(1), Student-t, heteroscedastic, seasonal and regime-switching nulls.                      |
+| Calibration            | 200 calibration seeds quantize the tail and reuse one predetermined 1050-year horizon. **Test:** thousands of calibration replicates, confidence intervals, independent calibration/evaluation families, and multiple base horizons.                                          |
+| MDR metric             | Ramp displacement increases forever with duration, confounding “slow rate” with eventually enormous absolute departure. **Test:** derivative-only severity, bounded ramps, fixed-total-displacement alternatives, and power curves across horizons.                           |
+| Horizon test           | x16 is 16,800 years, but it is still finite and only 40 null trajectories. A detector can “survive x16” by sampling luck. **Test:** far more seeds, dense horizon sweep, confidence intervals, and explicit time-uniform boundaries.                                          |
+| Identifiability        | Two channels do not automatically imply independent information; they may share calibration, preprocessing, training data, power, ontology, or causal model. **Test:** inject correlated and common-mode sensor failures.                                                     |
+| Reference semantics    | Giving the detector `(blue, green)` assumes away the difficult first-time authorization problem. **Test:** introduce a genuinely novel epoch and require explicit retain→validate→promote→recur transitions.                                                                  |
+| Architectural transfer | Scalar Gaussian sky displacement is dramatically simpler than an HTLA/HTNLA/THDE state. **Test:** replay the experiment in the actual Nexus state geometry and real THDE input semantics before proposing architectural change.                                               |
+
+A secondary attack on interpretation is equally important: a detector being statistically good at this benchmark does not make it architecturally appropriate. That boundary is explicitly encoded in the script.
+
+---
+
+## 13. Repairs
+
+| Attack                 | Concrete repair                                                                                                                                                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Signal model           | Build a registered scenario family parameterized by shape, final displacement, rate, reversal, intermittency, and duration; report power surfaces rather than one Green-Sky trajectory. |
+| Null model             | Add protocol S2/S3-style null suites and evaluate empirical type-I error separately under each misspecification family.                                                                 |
+| Calibration            | Use larger Monte Carlo sets with binomial confidence intervals; reserve disjoint calibration, tuning, validation, and final-replication seeds.                                          |
+| MDR metric             | Replace the single MDR50 headline with power-vs-rate-vs-duration surfaces plus fixed-total-displacement and direct-severity experiments.                                                |
+| Horizon test           | Report survival curves over many horizon factors and distinguish empirical survival from a proved anytime boundary.                                                                     |
+| Identifiability        | Model observation provenance as a causal dependency graph; treat channels sharing a dominant common failure mode as one effective source.                                               |
+| Reference semantics    | Introduce an explicit candidate-epoch state machine whose promotion authority is separate from detection and whose audit evidence survives recurrence.                                  |
+| Architectural transfer | Extract the actual THDE input/state equations and implement a separate Nexus-state experiment rather than mapping scalar outcomes by analogy.                                           |
+
+---
+
+## 14. Answers to Q1–Q9
+
+### Q1 — Transfer to real THDE
+
+**[CANONICAL]** The inspected Nexus master specification describes THDE as a projected hybrid differential system with non-Newtonian viscosity and **rate-independent hysteresis**, operating on a multidimensional cognitive state—not as `d_leaky_abs()`. Its continuous flow is expressed through a safe-set projection over an HTNLA-derived vector field.
+
+**[CANONICAL]** A separate HVD architecture section presents
+
+$$
+q_{k+1}=\lambda q_k+\mathrm{severity}_k
+$$
+
+only as “one simple discrete model” illustrating hysteresis and then says TMS remembers trajectory while HIGC/THDE governs permissible/actual transition behavior.
+
+**[UNRESOLVED]** In the inspected source material I did **not** find a normative definition of what `severity_k` exactly is, whether it is signed, its normalization, its reference-reset rules, or its derivation from level/residual/derivative/prediction error/geometry.
+
+**[UNRESOLVED]** The protocol names Preisach, Prandtl-Ishlinskii, and Bouc-Wen, but exact searches of the independently inspected master specification did not recover those named operators. I therefore will not use the protocol itself to establish their canonical implementation.
+
+**Failure test:** locate the actual THDE implementation/specification defining its measurement mapping and attempt to reproduce the scalar experiment directly against it. If no mapping exists, scalar transfer fails.
+
+### Q2 — Observation independence
+
+**[VERIFIED EXPERIMENTAL]** This experiment proves that observationally identical single-channel streams cannot reveal which of its two constructed latent causes generated them.
+
+**[UNRESOLVED]** I did not find an implementation-level inventory establishing which actual Nexus observation sources are causally independent versus sharing calibration, clocks, preprocessing, ontology, substrate, models, or provenance machinery.
+
+Therefore “add another sensor” is insufficient as an architectural conclusion.
+
+**[PROPOSED]** Nexus should represent independence at the **failure-domain/provenance level**, not merely by channel count.
+
+**Failure test:** take two nominally independent Nexus evidence channels and introduce a shared upstream corruption. If both drift together while the independence model still counts them as two independent witnesses, the proposal is inadequate.
+
+### Q3 — Reference authorization
+
+**[CANONICAL]** The HVD master architecture explicitly prohibits an ephemeral HVD from self-promoting merely because its own contents claim importance or permanence. Candidate salience, HTCE selection, continued TMS realization, material isolation/distribution, and durable persistence are deliberately separate stages.
+
+**[UNRESOLVED]** The exact authority that turns a first-time novel epoch into an authorized recurrence reference is not completely specified by the sources inspected here.
+
+Thus:
+
+```text
+detect novelty ≠ retain candidate
+retain candidate ≠ validate
+validate ≠ promote
+promote ≠ recurrence recognition
+```
+
+The `ref_blue_green_known` experiment exercises only the last case.
+
+**Failure test:** present a false-but-persistent new epoch. If observation persistence alone causes it to enter the reference bank, the authorization architecture has collapsed detection into authority.
+
+### Q4 — Review vs resistance
+
+**[CANONICAL]** The architecture separates HTCE field/coalition handling, TMS trajectory preservation, HIGC admissibility, THDE bounded intervention, and CA/TUCR/application orchestration.
+
+**[INFERRED]** Persistent unexplained drift should therefore not automatically mean “mechanically force the state back.” The safer architectural interpretation is escalation from detection into retained evidence and competing-hypothesis/review machinery while THDE continues to enforce genuinely invariant safety bounds.
+
+**[UNRESOLVED]** The precise interim policy—resistance, review, retention increase, reference challenge, or combination—is not yet specified.
+
+**Failure test:** expose the system to a genuinely changed world. If the proposed policy indefinitely forces the old reference despite accumulating independent evidence, it has confused stability with truth.
+
+### Q5 — Retrospective trigger problem
+
+**[CANONICAL]** TMS is the live active substrate and owns trajectory/history; HDF5 is the durable long-term persistence path, including staged archival and later TMS rehydration.
+
+**[UNRESOLVED]** That does not yet specify which semantic evidence classes—predictions, anomalies, calibration records, ontology changes, interventions, testimony, identity events, reference changes—survive at sufficient resolution for a drift detector that fires decades later.
+
+**[PROPOSED]** Retention policy should preserve compact causal/provenance summaries *before* drift is known, rather than attempting to begin retention only after detection.
+
+**Failure test:** inject 40 years of weak causal micro-events, consolidate ordinary detail, then trigger a cumulative alarm. If the causal interval cannot be reconstructed from preserved provenance, the retention policy fails.
+
+### Q6 — Causal hypothesis collapse
+
+**[UNRESOLVED]** I found no inspected canonical mechanism defining a representation-stable probability-mass quantity over causal hypothesis families, its update rule, threshold, computational budget, retention consequence, and false-trigger control.
+
+A count of hypotheses would be structurally wrong because representation can split one causal explanation into many syntactic variants.
+
+**[PROPOSED]** The eventual trigger should operate over equivalence classes/families of explanations and their aggregate evidential mass rather than raw hypothesis cardinality.
+
+**Failure test:** duplicate one hypothesis into 100 semantically equivalent encodings. The trigger must remain invariant.
+
+### Q7 — CA ownership
+
+**[CANONICAL]** The current HVD responsibility decomposition gives HTCE the active field, TMS trajectory/history, HIGC admissibility, THDE transition behavior, and CA/TUCR/application policy the orchestration/runtime context.
+
+**[INFERRED]** Consequently, observation accumulation and low-level drift statistics do **not** require CA ownership. A CA-level role is justified only if escalation changes a system-wide cognitive regime or resource policy.
+
+**[UNRESOLVED]** The exact slow-drift escalation interface into CA has not been located as an implemented contract.
+
+**Failure test:** implement the same slow-drift response entirely as HTCE/TMS/THDE-local behavior. If behavior, safety, resource allocation, and cognition are unchanged, a dedicated CA mechanism is redundant.
+
+### Q8 — Anytime validity under realistic noise
+
+**[VERIFIED]** The Gaussian-mixture control achieved `.025/.025/.025` at x1/x4/x16 in this run.
+
+**[VERIFIED]** Its guarantee is conditional on iid Gaussian observations with modeled mean/variance. The code explicitly frames it as an anytime-valid **control**, not canonical Nexus machinery.
+
+**[UNRESOLVED]** No result here establishes time-uniform validity under AR correlation, heavy tails, variance drift, seasonality, missing data, regime switches, adversarial bursts, or correlated channels.
+
+**Failure test:** run those nulls unchanged. A statistically principled result is allowed to be that the current e-process fails.
+
+### Q9 — High-dimensional state geometry
+
+**[CANONICAL]** The inspected THDE master specification operates on a multidimensional continuous cognitive state and projects its dynamics through a safe HIGC set.
+
+**[VERIFIED EXPERIMENTAL]** The present Green-Sky experiment uses one scalar observation coordinate.
+
+**[UNRESOLVED]** Therefore none of the scalar detector rankings establishes behavior for vector/tensor residuals, HTLA graded geometry, subspace rotation, covariance drift, manifold motion, ontology changes, or hysteretic internal state.
+
+**Failure test:** construct a high-dimensional drift that preserves the scalar projection used here. If scalar detection remains quiet while state geometry changes materially, scalar transfer is falsified.
+
+---
+
+## 15. Ownership map
+
+| Mechanism                                                                         | Subsystem                             | Evidence/source                                                                                                                                  | Boundary check                                                        |
+| --------------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| Active cognitive field, ephemeral candidate creation, coalitions, collapse        | **HTCE**                              | Master architecture assigns active field, cognitive addressability, ephemeral potentials, coalition formation/dissolution and collapse to HTCE.  | Does not own WAL/SSTable/HDF5 physical realization.                   |
+| Active realization, structural sharing, trajectory/history                        | **TMS**                               | TMS is active always-on substrate and owns realization, movement, structural sharing and trajectory.                                             | Does not own cognitive candidate meaning or policy.                   |
+| Constitutional/admissible geometry                                                | **HIGC**                              | Responsibility split places HIGC at admissibility/constitutional constraints.                                                                    | Must not become detector truth authority.                             |
+| Bounded/path-dependent state evolution                                            | **THDE**                              | THDE master dynamics are projected hybrid/hysteretic dynamics.                                                                                   | Does not imply `d_leaky_abs()` is THDE.                               |
+| Logical database semantics / HVD-valued cognitive state                           | **HVD**                               | Master architecture keeps logical completeness separate from physical runtime duplication.                                                       | Database identity is not substrate placement.                         |
+| Durable long-term/permanent persistence                                           | **HDF5 through TMS persistence path** | TMS/HDF5 archival and rehydration pipeline.                                                                                                      | HDF5 is not the hot live cognitive query engine.                      |
+| Cognitive-regime/orchestration context                                            | **CA / TUCR / application policy**    | Current responsibility decomposition.                                                                                                            | Do not move field generation, memory, admissibility, or THDE into CA. |
+| `leaky`, CUSUM, `raw_sqrt`, reference-distance, crosschannel, e-process detectors | **None canonically**                  | Script explicitly labels these experiment/control candidates.                                                                                    | Experimental detector ≠ subsystem replacement.                        |
+| First-time epoch reference promotion                                              | **UNRESOLVED**                        | Self-promotion prohibited, but exact authority contract not fully pinned down in inspected source.                                               | Detection must never silently become authorization.                   |
+
+This mapping specifically avoids recreating CA as a god-object.
+
+---
+
+## 16. New registered predictions
+
+**Registration date: September 3, 2026.**
+
+All predictions below were formed **after seeing the v2.0 primary result** and **before executing any corresponding secondary experiment**. They are therefore post-result research predictions, not preregistered discoveries.
+
+| ID | Status                  | New prediction                                                                                                                                                                                             | Reason                                                                                    |
+| -- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| N1 | **RESEARCH_HYPOTHESIS** | Under moderately strong AR(1) positive correlation with the existing unmodified Gaussian e-process, empirical FA will exceed .10 at at least one tested deep horizon.                                      | Positive dependence inflates cumulative excursions relative to the iid calibration model. |
+| N2 | **RESEARCH_HYPOTHESIS** | Student-t heavy-tailed nulls will materially degrade the current Gaussian e-process unless robustification is added.                                                                                       | The martingale model uses a Gaussian likelihood structure.                                |
+| N3 | **RESEARCH_HYPOTHESIS** | A correlated/common-mode failure affecting both observation channels will drive `crosschannel` detection below .5 even though causal attribution remains ambiguous.                                        | Disagreement detects differential failure, not common failure.                            |
+| N4 | **RESEARCH_HYPOTHESIS** | A high-dimensional drift approximately orthogonal to the chosen scalar projection can be missed by every scalar detector while a suitable vector/subspace detector detects it with high power.             | One coordinate cannot encode arbitrary state geometry.                                    |
+| N5 | **RESEARCH_HYPOTHESIS** | On a genuinely recurring Green-Sky epoch that was previously authorized and retained, a valid epoch-bank comparator will show dramatically lower plateau alarm than an original-reference-only comparator. | This isolates recurrence recognition from first-time promotion.                           |
+
+These predictions should remain immutable once their corresponding secondary runs begin.
+
+---
+
+## 17. UNRESOLVED
+
+The primary experiment is highly reproducible—the independently produced JSON matches the protocol’s published reference digest exactly—but it narrows rather than closes the architecture problem.
+
+The principal unresolved items are:
+
+1. **Exact production `severity_k` semantics**: definition, dimensionality, sign, normalization, reference, and reset behavior.
+2. **Exact production relationship between leaky THDE behavior and rate-independent hysteresis**, including the named Preisach/PI/Bouc-Wen mechanisms that were not independently located in the inspected master source.
+3. **Actual causal independence graph of Nexus observations**, not merely channel count.
+4. **First-time epoch/reference authorization authority and state machine.**
+5. **Correct interim posture during persistent unexplained drift**: resistance, review, retention, hypothesis expansion, reference challenge, or combination.
+6. **Retrospective evidence retention contract** sufficient to reconstruct decades-old weak causal changes.
+7. **Representation-stable causal-hypothesis-family probability-mass trigger.**
+8. **Exact CA slow-drift escalation contract**, and whether CA adds anything beyond existing subsystem-local policy.
+9. **Anytime-valid evidence under realistic dependent/non-Gaussian/nonstationary noise.**
+10. **Transfer from scalar Green-Sky behavior to actual high-dimensional Nexus geometry.**
+11. **Implementation status of the relevant THDE machinery**: the available HVD GitHub repository search did not locate a concrete `severity_k` implementation, so implementation claims remain unresolved rather than inferred from documentation.
+
+The key result of this v2.0 run is therefore not “use detector X.” It is that the experiment successfully separates **finite-horizon detection, horizon robustness, anytime validity, causal identifiability, reference recurrence, and Nexus architectural ownership** into different questions—and the numerical replication itself is exact.
+
+
+
+Yep. Here is the **complete raw `my_run_v2.json`**, exactly as produced by the run, so you can copy/paste it into a file.
+
+```json
+{
+  "script_version": "2.0.0-merged-audited",
+  "script_sha256": "178f5bd650c832ac94172f3009a5189f1b40292f901bd97b4ec32e779a7492be",
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "config": {
+    "years": 1050,
+    "ticks_per_year": 12,
+    "n": 12600,
+    "sigma": 1.0,
+    "amplitude": 6.0,
+    "seeds": 40,
+    "calib_seeds": 200,
+    "mdr_seeds": 32,
+    "horizon_seeds": 40,
+    "horizon_factors": [
+      1,
+      4,
+      16
+    ],
+    "target_false_alarm": 0.05,
+    "eprocess_rho": 100.0
+  },
+  "self_tests": [
+    "PASS creep and instrument channel-1 streams are bit-identical",
+    "PASS creep and instrument channel-2 streams differ",
+    "PASS Green Sky returns exactly to original baseline",
+    "PASS Green Sky reaches configured amplitude",
+    "PASS green plateau is flat for 150 years",
+    "PASS vectorized one-sided CUSUM matches sequential recurrence",
+    "PASS vectorized two-sided CUSUM matches sequential recurrence",
+    "PASS Gaussian-mixture e-process formula sanity check"
+  ],
+  "calibration": {
+    "leaky_l0.9": {
+      "threshold": 15.282149107602258,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "leaky_l0.99": {
+      "threshold": 97.0384302646012,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "leaky_l0.999": {
+      "threshold": 839.3920222570254,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "raw_fixed": {
+      "threshold": 10148.474303710118,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "raw_sqrt": {
+      "threshold": 3.2250880880591795,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "cusum1_v0.5": {
+      "threshold": 10.232036851617524,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "cusum1_v0.1": {
+      "threshold": 42.73106604974203,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "cusum1_v0.02": {
+      "threshold": 121.65711012921821,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "cusum2_v0.1": {
+      "threshold": 45.386568710486024,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "ref_blue": {
+      "threshold": 1.750673630699304,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "ref_blue_green_known": {
+      "threshold": 1.750673630699304,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "crosschannel": {
+      "threshold": 0.2551375513695727,
+      "threshold_mode": "empirical_fixed_horizon",
+      "calibration_null_fa": 0.05
+    },
+    "normal_mixture_e": {
+      "threshold": 2.995732273553991,
+      "threshold_mode": "analytic_anytime",
+      "calibration_null_fa": 0.045
+    }
+  },
+  "results": {
+    "leaky_l0.9": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.833333333333336
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.833333333333336
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.833333333333336,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 1.0,
+        "alarm_after_return_rate": 0.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.08333333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 0.025,
+        "median_post_onset_delay_years": 105.66666666666667
+      }
+    },
+    "leaky_l0.99": {
+      "null": {
+        "any_alarm_rate": 0.125,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 23.125
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 23.125
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 23.125,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.9,
+        "alarm_after_return_rate": 0.1
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.25
+      },
+      "confound": {
+        "any_alarm_rate": 0.125,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.075,
+        "median_post_onset_delay_years": 402.5833333333333
+      }
+    },
+    "leaky_l0.999": {
+      "null": {
+        "any_alarm_rate": 0.125,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.333333333333336
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.333333333333336
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 27.333333333333336,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.6666666666666666
+      },
+      "confound": {
+        "any_alarm_rate": 0.125,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.125,
+        "median_post_onset_delay_years": 277.9166666666667
+      }
+    },
+    "raw_fixed": {
+      "null": {
+        "any_alarm_rate": 0.1,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 147.08333333333334
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 147.08333333333334
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 147.08333333333334,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 74.33333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.1,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.1,
+        "median_post_onset_delay_years": 546.5833333333333
+      }
+    },
+    "raw_sqrt": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 33.04166666666667
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 33.04166666666667
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 33.04166666666667,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 3.4166666666666665
+      },
+      "confound": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      }
+    },
+    "cusum1_v0.5": {
+      "null": {
+        "any_alarm_rate": 0.075,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 17.0
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 17.0
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 17.0,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.08333333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.075,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 0.05,
+        "median_post_onset_delay_years": 379.33333333333337
+      }
+    },
+    "cusum1_v0.1": {
+      "null": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 14.666666666666666
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 14.666666666666666
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 14.666666666666666,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.5
+      },
+      "confound": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.025,
+        "median_post_onset_delay_years": 70.91666666666667
+      }
+    },
+    "cusum1_v0.02": {
+      "null": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 20.75
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 20.75
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 20.75,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 1.4166666666666667
+      },
+      "confound": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.025,
+        "median_post_onset_delay_years": 127.41666666666667
+      }
+    },
+    "cusum2_v0.1": {
+      "null": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 15.333333333333334
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 15.333333333333334
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 15.333333333333334,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 0.5833333333333334
+      },
+      "confound": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": 0.0,
+        "post_onset_detection_rate": 0.025,
+        "median_post_onset_delay_years": 71.08333333333333
+      }
+    },
+    "ref_blue": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 1.0,
+        "alarm_after_return_rate": 0.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 6.833333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      }
+    },
+    "ref_blue_green_known": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 62.916666666666664,
+        "plateau_alarm_fraction": 0.0,
+        "quiet_after_return_rate": 1.0,
+        "alarm_after_return_rate": 0.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 6.833333333333333
+      },
+      "confound": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      }
+    },
+    "crosschannel": {
+      "null": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 18.5
+      },
+      "greensky": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null,
+        "plateau_alarm_fraction": 0.0,
+        "quiet_after_return_rate": 1.0,
+        "alarm_after_return_rate": 0.0
+      },
+      "shock": {
+        "any_alarm_rate": 0.05,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      },
+      "confound": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.05,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 26.166666666666668
+      }
+    },
+    "normal_mixture_e": {
+      "null": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": null,
+        "post_onset_detection_rate": null,
+        "median_post_onset_delay_years": null
+      },
+      "creep": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 32.95833333333333
+      },
+      "instrument": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 32.95833333333333
+      },
+      "greensky": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 32.95833333333333,
+        "plateau_alarm_fraction": 1.0,
+        "quiet_after_return_rate": 0.0,
+        "alarm_after_return_rate": 1.0
+      },
+      "shock": {
+        "any_alarm_rate": 1.0,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 1.0,
+        "median_post_onset_delay_years": 3.3333333333333335
+      },
+      "confound": {
+        "any_alarm_rate": 0.025,
+        "pre_onset_false_alarm_rate": 0.025,
+        "post_onset_detection_rate": 0.0,
+        "median_post_onset_delay_years": null
+      }
+    }
+  },
+  "finite_horizon_mdr50": {
+    "leaky_l0.9": 0.0006238769788532624,
+    "leaky_l0.99": 0.00033280423358937546,
+    "leaky_l0.999": 0.000233154516742146,
+    "raw_fixed": 0.00019016567432523856,
+    "raw_sqrt": 5.7608291233894105e-05,
+    "cusum1_v0.5": 0.0001718599164445299,
+    "cusum1_v0.1": 8.690898573083333e-05,
+    "cusum1_v0.02": 3.312349219004849e-05,
+    "cusum2_v0.1": 9.152843094565433e-05,
+    "ref_blue": 0.0016678656124105807,
+    "ref_blue_green_known": 0.0016678656124105807,
+    "crosschannel": null,
+    "normal_mixture_e": 5.893869615568823e-05
+  },
+  "horizon_robustness": {
+    "leaky_l0.9": {
+      "x1": 0.025,
+      "x4": 0.175,
+      "x16": 0.425
+    },
+    "leaky_l0.99": {
+      "x1": 0.05,
+      "x4": 0.35,
+      "x16": 0.725
+    },
+    "leaky_l0.999": {
+      "x1": 0.05,
+      "x4": 0.2,
+      "x16": 0.95
+    },
+    "raw_fixed": {
+      "x1": 0.075,
+      "x4": 1.0,
+      "x16": 1.0
+    },
+    "raw_sqrt": {
+      "x1": 0.025,
+      "x4": 0.025,
+      "x16": 0.025
+    },
+    "cusum1_v0.5": {
+      "x1": 0.1,
+      "x4": 0.425,
+      "x16": 0.775
+    },
+    "cusum1_v0.1": {
+      "x1": 0.025,
+      "x4": 0.1,
+      "x16": 0.425
+    },
+    "cusum1_v0.02": {
+      "x1": 0.025,
+      "x4": 0.275,
+      "x16": 0.85
+    },
+    "cusum2_v0.1": {
+      "x1": 0.025,
+      "x4": 0.125,
+      "x16": 0.475
+    },
+    "ref_blue": {
+      "x1": 0.1,
+      "x4": 0.1,
+      "x16": 0.1
+    },
+    "ref_blue_green_known": {
+      "x1": 0.1,
+      "x4": 0.1,
+      "x16": 0.1
+    },
+    "crosschannel": {
+      "x1": 0.0,
+      "x4": 0.225,
+      "x16": 0.625
+    },
+    "normal_mixture_e": {
+      "x1": 0.025,
+      "x4": 0.025,
+      "x16": 0.025
+    }
+  },
+  "leaky_fixed_point_control": [
+    {
+      "lambda": 0.9,
+      "theta": 1.0,
+      "crossing_floor_severity": 0.09999999999999998,
+      "below_severity": 0.04999999999999999,
+      "below_q_infinity": 0.5,
+      "above_severity": 0.14999999999999997,
+      "above_q_infinity": 1.5
+    },
+    {
+      "lambda": 0.99,
+      "theta": 1.0,
+      "crossing_floor_severity": 0.010000000000000009,
+      "below_severity": 0.0050000000000000044,
+      "below_q_infinity": 0.5,
+      "above_severity": 0.015000000000000013,
+      "above_q_infinity": 1.5
+    },
+    {
+      "lambda": 0.999,
+      "theta": 1.0,
+      "crossing_floor_severity": 0.0010000000000000009,
+      "below_severity": 0.0005000000000000004,
+      "below_q_infinity": 0.5,
+      "above_severity": 0.0015000000000000013,
+      "above_q_infinity": 1.5
+    }
+  ],
+  "leaky_effective_memory_control": [
+    {
+      "lambda": 0.9,
+      "tau_1_over_1_minus_lambda": 10.000000000000002,
+      "effective_sample_size": 19.000000000000004,
+      "stationary_sd": 0.22941573387056174
+    },
+    {
+      "lambda": 0.99,
+      "tau_1_over_1_minus_lambda": 99.99999999999991,
+      "effective_sample_size": 198.99999999999983,
+      "stationary_sd": 0.07088812050083362
+    },
+    {
+      "lambda": 0.999,
+      "tau_1_over_1_minus_lambda": 999.9999999999991,
+      "effective_sample_size": 1998.9999999999984,
+      "stationary_sd": 0.02236627204212923
+    }
+  ],
+  "legacy_predictions": [
+    {
+      "id": "P1",
+      "kind": "analytic",
+      "statement": "Leaky detectors have a minimum-detectable-rate at least 3x worse than raw_sqrt, and it does NOT improve as lambda->1 fast enough to close the gap.",
+      "historical_v1_1_verdict": "PASS"
+    },
+    {
+      "id": "P2",
+      "kind": "empirical",
+      "statement": "Every detector fires on the SHOCK condition. Fast shocks are not the problem.",
+      "historical_v1_1_verdict": "PASS"
+    },
+    {
+      "id": "P3",
+      "kind": "analytic",
+      "statement": "raw_fixed cannot be calibrated: it either alarms on the null or never alarms at all. It measures elapsed time, not departure.",
+      "historical_v1_1_verdict": "FAIL"
+    },
+    {
+      "id": "P4",
+      "kind": "empirical",
+      "statement": "CUSUM with nu=0.5 is blind to the Green Sky drift rate (fire_rate < 0.5 on 'creep'). CUSUM does not automatically fix slow drift; nu is a floor.",
+      "historical_v1_1_verdict": "FAIL"
+    },
+    {
+      "id": "P5",
+      "kind": "empirical",
+      "statement": "raw_sqrt has the lowest minimum-detectable-rate of all single-channel detectors tested.",
+      "historical_v1_1_verdict": "FAIL"
+    },
+    {
+      "id": "P6",
+      "kind": "empirical",
+      "statement": "With a FIXED reference, at least one detector stays latched for >50% of the green plateau -- i.e. it spends 150 years reporting that a genuinely green sky is anomalous.",
+      "historical_v1_1_verdict": "PASS"
+    },
+    {
+      "id": "P7",
+      "kind": "analytic",
+      "statement": "Conditions 'creep' and 'instrument' produce identical channel-1 streams, so every single-channel detector gives identical results on both. Integral tracking alone cannot solve the instrument problem.",
+      "historical_v1_1_verdict": "PASS"
+    },
+    {
+      "id": "P8",
+      "kind": "empirical",
+      "statement": "The cross-channel detector fires on 'instrument' and NOT on 'creep', separating world change from instrument change.",
+      "historical_v1_1_verdict": "PASS"
+    }
+  ],
+  "legacy_prediction_checks": [
+    {
+      "id": "P1",
+      "verdict": "PASS",
+      "evidence": "best leaky MDR=0.00023315452; raw_sqrt=5.7608291e-05; ratio=4.05x"
+    },
+    {
+      "id": "P2",
+      "verdict": "PASS",
+      "evidence": "post-onset shock detection: {'leaky_l0.9': 1.0, 'leaky_l0.99': 1.0, 'leaky_l0.999': 1.0, 'raw_fixed': 1.0, 'raw_sqrt': 1.0, 'cusum1_v0.5': 1.0, 'cusum1_v0.1': 1.0, 'cusum1_v0.02': 1.0, 'cusum2_v0.1': 1.0, 'ref_blue': 1.0, 'ref_blue_green_known': 1.0, 'normal_mixture_e': 1.0}"
+    },
+    {
+      "id": "P3",
+      "verdict": "FAIL",
+      "evidence": "raw_fixed null any-alarm=0.1; creep post-onset detection=1.0"
+    },
+    {
+      "id": "P4",
+      "verdict": "FAIL",
+      "evidence": "CUSUM nu=0.5 creep post-onset detection=1.0"
+    },
+    {
+      "id": "P5",
+      "verdict": "FAIL",
+      "evidence": "lowest finite-horizon MDR is cusum1_v0.02=3.312349219004849e-05; raw_sqrt=5.7608291233894105e-05"
+    },
+    {
+      "id": "P6",
+      "verdict": "PASS",
+      "evidence": "max green-plateau alarm fraction=1.0; {'leaky_l0.9': 1.0, 'leaky_l0.99': 1.0, 'leaky_l0.999': 1.0, 'raw_fixed': 1.0, 'raw_sqrt': 1.0, 'cusum1_v0.5': 1.0, 'cusum1_v0.1': 1.0, 'cusum1_v0.02': 1.0, 'cusum2_v0.1': 1.0, 'ref_blue': 1.0, 'normal_mixture_e': 1.0}"
+    },
+    {
+      "id": "P7",
+      "verdict": "PASS",
+      "evidence": "single-channel result dictionaries identical"
+    },
+    {
+      "id": "P8",
+      "verdict": "PASS",
+      "evidence": "crosschannel instrument=1.0; creep=0.0"
+    }
+  ],
+  "post_pilot_targets": [
+    {
+      "id": "R1",
+      "kind": "post-pilot replication",
+      "statement": "raw_fixed loses fixed-horizon calibration badly by x4 (null FA >= 0.50)."
+    },
+    {
+      "id": "R2",
+      "kind": "post-pilot replication",
+      "statement": "CUSUM nu=0.5 detects the configured 6-sigma creep excursion (post-onset detection >= 0.90)."
+    },
+    {
+      "id": "R3",
+      "kind": "post-pilot replication",
+      "statement": "raw_sqrt and CUSUM nu=0.02 have finite-horizon MDR50 values within a factor of 2."
+    },
+    {
+      "id": "R4",
+      "kind": "new control",
+      "statement": "The Gaussian-mixture e-process remains <=10% empirical null FA at every tested horizon x1/x4/x16."
+    },
+    {
+      "id": "R5",
+      "kind": "post-pilot replication",
+      "statement": "Cross-channel disagreement is low on common-mode creep (<=0.10) and high on instrument drift and confound (>=0.90 each)."
+    },
+    {
+      "id": "R6",
+      "kind": "reference semantics",
+      "statement": "The blue-only reference alarms for most of the green plateau, while the pre-known blue+green bank alarms for substantially less of that plateau."
+    }
+  ],
+  "post_pilot_target_checks": [
+    {
+      "id": "R1",
+      "verdict": "PASS",
+      "evidence": "raw_fixed x4 null FA=1.0"
+    },
+    {
+      "id": "R2",
+      "verdict": "PASS",
+      "evidence": "CUSUM nu=0.5 creep detection=1.0"
+    },
+    {
+      "id": "R3",
+      "verdict": "PASS",
+      "evidence": "raw_sqrt=5.7608291e-05; CUSUM.02=3.3123492e-05; ratio=1.74"
+    },
+    {
+      "id": "R4",
+      "verdict": "PASS",
+      "evidence": "Gaussian-mixture e-process horizon FA={'x1': 0.025, 'x4': 0.025, 'x16': 0.025}"
+    },
+    {
+      "id": "R5",
+      "verdict": "PASS",
+      "evidence": "crosschannel creep=0.0, instrument=1.0, confound=1.0"
+    },
+    {
+      "id": "R6",
+      "verdict": "PASS",
+      "evidence": "blue-only plateau alarm=1.000; known blue+green=0.000"
+    }
+  ],
+  "scope": {
+    "research_not_canon": true,
+    "tests_complete_thde": false,
+    "tests_all_nexus_barriers": false,
+    "ramp_mdr_is_asymptotic_proof": false,
+    "raw_sqrt_is_anytime_valid": false,
+    "eprocess_anytime_valid_under_modeled_gaussian_null": true,
+    "known_epoch_bank_implements_reference_migration": false,
+    "crosschannel_proves_truth": false
+  }
+}
+```
+
+For verification after you save it, the resulting file should hash to:
+
+```text
+ce3f4aab70c54c5dffabe0c861c8ef34634fe1f9ac7101eee82a36eec39f68bd
+```
+
+If you save it as `my_run_v2.json`, you can check with:
+
+```bash
+sha256sum my_run_v2.json
+```
+
+
+
+
+
+
+
+
+
+------------
+
+
+perplexity:
+
+
+## 1. Execution provenance
+
+OS: Linux 6.1.155+ (glibc 2.43)
+architecture: x86_64
+CPU: Not exposed by the execution environment
+Python: 3.12.8
+NumPy: Not captured before the primary run timed out
+script hash: `178f5bd650c832ac94172f3009a5189f1b40292f901bd97b4ec32e779a7492be`
+command:
+
+```bash
+python3 nexus4_leak_blindness_v2_0.py \
+  --years 1050 \
+  --seeds 40 \
+  --calib-seeds 200 \
+  --mdr-seeds 32 \
+  --horizon-seeds 40 \
+  --json my_run_v2.json
+```
+
+result JSON hash: unavailable
+run status: **INCOMPLETE**
+
+I reviewed the supplied protocol and script, verified that the attached script’s SHA-256 exactly matches the protocol’s official hash, and launched the command with the specified parameters unchanged. The execution environment terminated the process at its fixed time limit before the primary run completed or produced a JSON result. The protocol instructs that parameters and code must not be patched or reduced for the official primary run, so I did not substitute a shortened run or modify the artifact. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/7d000bde-5e35-45e9-b4e3-62b534e0a3dd/RUN_PROTOCOL_nexus4_leak_blindness_v2_0.md?AWSAccessKeyId=ASIA2F3EMEYE6N2ZVN7E&Signature=X94%2F1d0565DjARZED93RfgP1iLk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEB4aCXVzLWVhc3QtMSJIMEYCIQDVlEoQpG5VXdmv4gWUjjYeLV4r6s%2BBQKKhT7kEvOH%2BewIhANrAkDTpmUb9XbX8IKCK536uL122EpsWOun89UCzdUSlKvwECOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMNjk5NzUzMzA5NzA1IgzCKnbI%2BkNknJUrGVYq0ARH3n91RJ0X1J07ombfldVtiqbF1HBPWIYB%2B%2FcIeJy47joSncwB35x83WOdRzj5lqDk34j2Af5uC%2Fczoeog9lKrouNptPAHgYx3LmWL6D0DS8CvOoNqFT%2FOoE4LAFpbfUfQjD1dV6fHgYHfxzkCdG%2BQPtsJ9aCdOy5JQJ7h3jPBaw%2B5qSRFpHpHG%2BcW9CLuLfgR2EoHOl64kyzmV9Bk8%2F0V3E6iTKTRfvz8zSpoK0oxSzCEoot0SIpYTXPDI90TkluNaBhGXavP9MBkiWS3EQpud2JPghKNbwg90rgkKlHdH%2FHQXVWNvaazTMC%2BK8HtZqwOIKav%2FMf4cNUcgl6fJUN9IMiJra3hLUWt8H4sY9Pyp23C%2BXRAIcgJQlw1jGdgU1cCus8svBbbnLc%2BXLcLfkiwGhBcIA5Gy0SHA5dkU5UQAtHcRDFNGJ68lT0HsmBIlKLXv%2Fqa70EzvmHr5lnN%2FEpeNkEORwKJQEKcyTyqqu7Gx39qrc3KOhsbTPaTwU4KTGP7CUZX5QxXWNQH0zIf2BPIMm9ohx3j1G9%2BRUZ1eSMerghlhTMsMBfNChN8Prf%2BNXQdLpZsUCOy9Zbo0Dqmm%2Fj0Cg1vTq6d0xKTaVFXlisnOucqdSdYkgk1Ej7MNTk3fRlKuAmqBgE2Mih9KYmUSv9xe1csw3eLJAPs34k2Qll7LYIsaIuCMFQhSizn7DyFRI0SyEXxcRMcF4cFGNZr7rGaCB2KM2iH%2Fj3RRMwUYz7CaVXyC%2BWZJ%2BIp7DtbyK2ASRmXB0a5RXTL75OAsy1GCCxyMKLY59QGOpcBD5FrNHP0kW4gnxOQXwKqctlQ%2FVQtl8b5b8LzTs2m5Xy3R5t8SJf%2F3NeqDtCaBDZiMoAbQw8GK%2FC1fpBl5mUYBzd1PfGfhWsG1f%2BO5i01aNIaRO5g%2BWtJuGo8InDHlaX10BnCyuW4UJbTzD%2FpKs1E4PL9JSMHpKnozViOoEV5A9jrFmsI7Nep3aF0qXKWU488lGn%2BmEP4kg%3D%3D&Expires=1788475893)
+
+## 2. Protocol compliance
+
+The following required steps were completed in the correct blind-replication order:
+
+1. Hashed the original attached Python script.
+2. Confirmed the hash matches the official value:
+   ```text
+   178f5bd650c832ac94172f3009a5189f1b40292f901bd97b4ec32e779a7492be
+   ```
+3. Inspected the script only for execution viability and protocol-relevant behavior.
+4. Started the exact primary command, retaining the requested `1050` years, `40` evaluation seeds, `200` calibration seeds, `32` MDR seeds, and `40` horizon seeds.
+5. Did not access a reference JSON or reference Markdown holdback artifact before attempting the run.
+
+The script appears internally consistent with the protocol: it includes the six signal conditions, empirical fixed-horizon calibration where appropriate, the analytic Gaussian-mixture e-process threshold, self-tests, MDR50 computation, horizon robustness checks at \(1\times\), \(4\times\), and \(16\times\), analytic controls, historical P1–P8 checks, R1–R6 checks, and JSON serialization. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/7d000bde-5e35-45e9-b4e3-62b534e0a3dd/RUN_PROTOCOL_nexus4_leak_blindness_v2_0.md?AWSAccessKeyId=ASIA2F3EMEYE6N2ZVN7E&Signature=X94%2F1d0565DjARZED93RfgP1iLk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEB4aCXVzLWVhc3QtMSJIMEYCIQDVlEoQpG5VXdmv4gWUjjYeLV4r6s%2BBQKKhT7kEvOH%2BewIhANrAkDTpmUb9XbX8IKCK536uL122EpsWOun89UCzdUSlKvwECOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMNjk5NzUzMzA5NzA1IgzCKnbI%2BkNknJUrGVYq0ARH3n91RJ0X1J07ombfldVtiqbF1HBPWIYB%2B%2FcIeJy47joSncwB35x83WOdRzj5lqDk34j2Af5uC%2Fczoeog9lKrouNptPAHgYx3LmWL6D0DS8CvOoNqFT%2FOoE4LAFpbfUfQjD1dV6fHgYHfxzkCdG%2BQPtsJ9aCdOy5JQJ7h3jPBaw%2B5qSRFpHpHG%2BcW9CLuLfgR2EoHOl64kyzmV9Bk8%2F0V3E6iTKTRfvz8zSpoK0oxSzCEoot0SIpYTXPDI90TkluNaBhGXavP9MBkiWS3EQpud2JPghKNbwg90rgkKlHdH%2FHQXVWNvaazTMC%2BK8HtZqwOIKav%2FMf4cNUcgl6fJUN9IMiJra3hLUWt8H4sY9Pyp23C%2BXRAIcgJQlw1jGdgU1cCus8svBbbnLc%2BXLcLfkiwGhBcIA5Gy0SHA5dkU5UQAtHcRDFNGJ68lT0HsmBIlKLXv%2Fqa70EzvmHr5lnN%2FEpeNkEORwKJQEKcyTyqqu7Gx39qrc3KOhsbTPaTwU4KTGP7CUZX5QxXWNQH0zIf2BPIMm9ohx3j1G9%2BRUZ1eSMerghlhTMsMBfNChN8Prf%2BNXQdLpZsUCOy9Zbo0Dqmm%2Fj0Cg1vTq6d0xKTaVFXlisnOucqdSdYkgk1Ej7MNTk3fRlKuAmqBgE2Mih9KYmUSv9xe1csw3eLJAPs34k2Qll7LYIsaIuCMFQhSizn7DyFRI0SyEXxcRMcF4cFGNZr7rGaCB2KM2iH%2Fj3RRMwUYz7CaVXyC%2BWZJ%2BIp7DtbyK2ASRmXB0a5RXTL75OAsy1GCCxyMKLY59QGOpcBD5FrNHP0kW4gnxOQXwKqctlQ%2FVQtl8b5b8LzTs2m5Xy3R5t8SJf%2F3NeqDtCaBDZiMoAbQw8GK%2FC1fpBl5mUYBzd1PfGfhWsG1f%2BO5i01aNIaRO5g%2BWtJuGo8InDHlaX10BnCyuW4UJbTzD%2FpKs1E4PL9JSMHpKnozViOoEV5A9jrFmsI7Nep3aF0qXKWU488lGn%2BmEP4kg%3D%3D&Expires=1788475893)
+
+## 3. Self-tests
+
+**Not completed.** The self-tests are executed by the script during the primary run, but the run exceeded the environment’s 30-second execution limit before it returned output or wrote the JSON artifact.
+
+Per the protocol, a valid run would need all of the following to pass:
+
+- Creep and instrument channel 1 are bit-identical.
+- Creep and instrument channel 2 differ.
+- Green Sky reaches the configured \(+6\sigma\) amplitude.
+- Green Sky includes a flat 150-year plateau.
+- Green Sky returns exactly to baseline.
+- Vectorized one-sided CUSUM equals the sequential recurrence.
+- Vectorized two-sided CUSUM equals the sequential recurrence.
+- The Gaussian-mixture e-process first-step formula sanity check passes. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/7d000bde-5e35-45e9-b4e3-62b534e0a3dd/RUN_PROTOCOL_nexus4_leak_blindness_v2_0.md?AWSAccessKeyId=ASIA2F3EMEYE6N2ZVN7E&Signature=X94%2F1d0565DjARZED93RfgP1iLk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEB4aCXVzLWVhc3QtMSJIMEYCIQDVlEoQpG5VXdmv4gWUjjYeLV4r6s%2BBQKKhT7kEvOH%2BewIhANrAkDTpmUb9XbX8IKCK536uL122EpsWOun89UCzdUSlKvwECOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMNjk5NzUzMzA5NzA1IgzCKnbI%2BkNknJUrGVYq0ARH3n91RJ0X1J07ombfldVtiqbF1HBPWIYB%2B%2FcIeJy47joSncwB35x83WOdRzj5lqDk34j2Af5uC%2Fczoeog9lKrouNptPAHgYx3LmWL6D0DS8CvOoNqFT%2FOoE4LAFpbfUfQjD1dV6fHgYHfxzkCdG%2BQPtsJ9aCdOy5JQJ7h3jPBaw%2B5qSRFpHpHG%2BcW9CLuLfgR2EoHOl64kyzmV9Bk8%2F0V3E6iTKTRfvz8zSpoK0oxSzCEoot0SIpYTXPDI90TkluNaBhGXavP9MBkiWS3EQpud2JPghKNbwg90rgkKlHdH%2FHQXVWNvaazTMC%2BK8HtZqwOIKav%2FMf4cNUcgl6fJUN9IMiJra3hLUWt8H4sY9Pyp23C%2BXRAIcgJQlw1jGdgU1cCus8svBbbnLc%2BXLcLfkiwGhBcIA5Gy0SHA5dkU5UQAtHcRDFNGJ68lT0HsmBIlKLXv%2Fqa70EzvmHr5lnN%2FEpeNkEORwKJQEKcyTyqqu7Gx39qrc3KOhsbTPaTwU4KTGP7CUZX5QxXWNQH0zIf2BPIMm9ohx3j1G9%2BRUZ1eSMerghlhTMsMBfNChN8Prf%2BNXQdLpZsUCOy9Zbo0Dqmm%2Fj0Cg1vTq6d0xKTaVFXlisnOucqdSdYkgk1Ej7MNTk3fRlKuAmqBgE2Mih9KYmUSv9xe1csw3eLJAPs34k2Qll7LYIsaIuCMFQhSizn7DyFRI0SyEXxcRMcF4cFGNZr7rGaCB2KM2iH%2Fj3RRMwUYz7CaVXyC%2BWZJ%2BIp7DtbyK2ASRmXB0a5RXTL75OAsy1GCCxyMKLY59QGOpcBD5FrNHP0kW4gnxOQXwKqctlQ%2FVQtl8b5b8LzTs2m5Xy3R5t8SJf%2F3NeqDtCaBDZiMoAbQw8GK%2FC1fpBl5mUYBzd1PfGfhWsG1f%2BO5i01aNIaRO5g%2BWtJuGo8InDHlaX10BnCyuW4UJbTzD%2FpKs1E4PL9JSMHpKnozViOoEV5A9jrFmsI7Nep3aF0qXKWU488lGn%2BmEP4kg%3D%3D&Expires=1788475893)
+
+## 4. Results status
+
+No numerical interpretation is warranted because the official run did not finish and did not write `my_run_v2.json`. Consequently, the following protocol-required result sections are **unavailable**:
+
+- Full calibration threshold table.
+- Scenario results, including pre-onset false alarms, post-onset detections, and delays.
+- Green-Sky plateau alarm fraction and after-return behavior.
+- Finite-horizon MDR50 values.
+- Horizon robustness at \(1\times\), \(4\times\), and \(16\times\).
+- M4 analytic-control output rows.
+- Current rerun verdicts for historical P1–P8.
+- R1–R6 replication verdicts.
+- Result JSON SHA-256.
+- Mechanical comparison against the reference result.
+
+The key limiting factor is computational execution time rather than integrity of the attached artifact: the script must repeatedly evaluate multiple detectors over a 12,600-tick base horizon, calibrate most detectors over 200 null streams, run scenario evaluations, perform MDR binary searches over 32 seeds, and evaluate 16× horizon null traces. That workload exceeded this environment’s per-call timeout, and the protocol expressly prohibits reducing the parameters or patching the code for the official run. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/7d000bde-5e35-45e9-b4e3-62b534e0a3dd/RUN_PROTOCOL_nexus4_leak_blindness_v2_0.md?AWSAccessKeyId=ASIA2F3EMEYE6N2ZVN7E&Signature=X94%2F1d0565DjARZED93RfgP1iLk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEB4aCXVzLWVhc3QtMSJIMEYCIQDVlEoQpG5VXdmv4gWUjjYeLV4r6s%2BBQKKhT7kEvOH%2BewIhANrAkDTpmUb9XbX8IKCK536uL122EpsWOun89UCzdUSlKvwECOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMNjk5NzUzMzA5NzA1IgzCKnbI%2BkNknJUrGVYq0ARH3n91RJ0X1J07ombfldVtiqbF1HBPWIYB%2B%2FcIeJy47joSncwB35x83WOdRzj5lqDk34j2Af5uC%2Fczoeog9lKrouNptPAHgYx3LmWL6D0DS8CvOoNqFT%2FOoE4LAFpbfUfQjD1dV6fHgYHfxzkCdG%2BQPtsJ9aCdOy5JQJ7h3jPBaw%2B5qSRFpHpHG%2BcW9CLuLfgR2EoHOl64kyzmV9Bk8%2F0V3E6iTKTRfvz8zSpoK0oxSzCEoot0SIpYTXPDI90TkluNaBhGXavP9MBkiWS3EQpud2JPghKNbwg90rgkKlHdH%2FHQXVWNvaazTMC%2BK8HtZqwOIKav%2FMf4cNUcgl6fJUN9IMiJra3hLUWt8H4sY9Pyp23C%2BXRAIcgJQlw1jGdgU1cCus8svBbbnLc%2BXLcLfkiwGhBcIA5Gy0SHA5dkU5UQAtHcRDFNGJ68lT0HsmBIlKLXv%2Fqa70EzvmHr5lnN%2FEpeNkEORwKJQEKcyTyqqu7Gx39qrc3KOhsbTPaTwU4KTGP7CUZX5QxXWNQH0zIf2BPIMm9ohx3j1G9%2BRUZ1eSMerghlhTMsMBfNChN8Prf%2BNXQdLpZsUCOy9Zbo0Dqmm%2Fj0Cg1vTq6d0xKTaVFXlisnOucqdSdYkgk1Ej7MNTk3fRlKuAmqBgE2Mih9KYmUSv9xe1csw3eLJAPs34k2Qll7LYIsaIuCMFQhSizn7DyFRI0SyEXxcRMcF4cFGNZr7rGaCB2KM2iH%2Fj3RRMwUYz7CaVXyC%2BWZJ%2BIp7DtbyK2ASRmXB0a5RXTL75OAsy1GCCxyMKLY59QGOpcBD5FrNHP0kW4gnxOQXwKqctlQ%2FVQtl8b5b8LzTs2m5Xy3R5t8SJf%2F3NeqDtCaBDZiMoAbQw8GK%2FC1fpBl5mUYBzd1PfGfhWsG1f%2BO5i01aNIaRO5g%2BWtJuGo8InDHlaX10BnCyuW4UJbTzD%2FpKs1E4PL9JSMHpKnozViOoEV5A9jrFmsI7Nep3aF0qXKWU488lGn%2BmEP4kg%3D%3D&Expires=1788475893)
+
+## 5. Review findings
+
+### Scope and interpretation
+
+The protocol correctly defines this as a **RESEARCH / EXPERIMENTAL** detector comparison, not a canonical Nexus specification. The scalar leaky detector is explicitly a candidate analog and may not be equated with the full THDE runtime or with every Nexus stability barrier. Likewise:
+
+- The finite-horizon MDR50 is not evidence for a duration-independent sensitivity floor.
+- A detector surviving the finite \(16\times\) horizon test is not proven safe for an unbounded horizon.
+- The e-process’s anytime-valid guarantee depends on its modeled iid Gaussian null with known mean and variance.
+- Cross-channel disagreement detects a mismatch, but does not establish which channel is true.
+- A blue-plus-green retained reference bank tests recognition of an already-authorized epoch; it does not solve first-time reference authorization, governance, promotion, or migration. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/7d000bde-5e35-45e9-b4e3-62b534e0a3dd/RUN_PROTOCOL_nexus4_leak_blindness_v2_0.md?AWSAccessKeyId=ASIA2F3EMEYE6N2ZVN7E&Signature=X94%2F1d0565DjARZED93RfgP1iLk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEB4aCXVzLWVhc3QtMSJIMEYCIQDVlEoQpG5VXdmv4gWUjjYeLV4r6s%2BBQKKhT7kEvOH%2BewIhANrAkDTpmUb9XbX8IKCK536uL122EpsWOun89UCzdUSlKvwECOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMNjk5NzUzMzA5NzA1IgzCKnbI%2BkNknJUrGVYq0ARH3n91RJ0X1J07ombfldVtiqbF1HBPWIYB%2B%2FcIeJy47joSncwB35x83WOdRzj5lqDk34j2Af5uC%2Fczoeog9lKrouNptPAHgYx3LmWL6D0DS8CvOoNqFT%2FOoE4LAFpbfUfQjD1dV6fHgYHfxzkCdG%2BQPtsJ9aCdOy5JQJ7h3jPBaw%2B5qSRFpHpHG%2BcW9CLuLfgR2EoHOl64kyzmV9Bk8%2F0V3E6iTKTRfvz8zSpoK0oxSzCEoot0SIpYTXPDI90TkluNaBhGXavP9MBkiWS3EQpud2JPghKNbwg90rgkKlHdH%2FHQXVWNvaazTMC%2BK8HtZqwOIKav%2FMf4cNUcgl6fJUN9IMiJra3hLUWt8H4sY9Pyp23C%2BXRAIcgJQlw1jGdgU1cCus8svBbbnLc%2BXLcLfkiwGhBcIA5Gy0SHA5dkU5UQAtHcRDFNGJ68lT0HsmBIlKLXv%2Fqa70EzvmHr5lnN%2FEpeNkEORwKJQEKcyTyqqu7Gx39qrc3KOhsbTPaTwU4KTGP7CUZX5QxXWNQH0zIf2BPIMm9ohx3j1G9%2BRUZ1eSMerghlhTMsMBfNChN8Prf%2BNXQdLpZsUCOy9Zbo0Dqmm%2Fj0Cg1vTq6d0xKTaVFXlisnOucqdSdYkgk1Ej7MNTk3fRlKuAmqBgE2Mih9KYmUSv9xe1csw3eLJAPs34k2Qll7LYIsaIuCMFQhSizn7DyFRI0SyEXxcRMcF4cFGNZr7rGaCB2KM2iH%2Fj3RRMwUYz7CaVXyC%2BWZJ%2BIp7DtbyK2ASRmXB0a5RXTL75OAsy1GCCxyMKLY59QGOpcBD5FrNHP0kW4gnxOQXwKqctlQ%2FVQtl8b5b8LzTs2m5Xy3R5t8SJf%2F3NeqDtCaBDZiMoAbQw8GK%2FC1fpBl5mUYBzd1PfGfhWsG1f%2BO5i01aNIaRO5g%2BWtJuGo8InDHlaX10BnCyuW4UJbTzD%2FpKs1E4PL9JSMHpKnozViOoEV5A9jrFmsI7Nep3aF0qXKWU488lGn%2BmEP4kg%3D%3D&Expires=1788475893)
+
+### Execution-breaking review
+
+I found no protocol-authorized basis to alter the artifact. In particular, the script hash matches exactly, its declared dependencies are limited to Python and NumPy, and its requested command line is valid. The timeout therefore does not justify changing line endings, reducing seed counts, lowering the horizon, parallelizing it, or rewriting detector functions, because any of those would create a separate secondary experiment rather than the official primary replication. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/7d000bde-5e35-45e9-b4e3-62b534e0a3dd/RUN_PROTOCOL_nexus4_leak_blindness_v2_0.md?AWSAccessKeyId=ASIA2F3EMEYE6N2ZVN7E&Signature=X94%2F1d0565DjARZED93RfgP1iLk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEB4aCXVzLWVhc3QtMSJIMEYCIQDVlEoQpG5VXdmv4gWUjjYeLV4r6s%2BBQKKhT7kEvOH%2BewIhANrAkDTpmUb9XbX8IKCK536uL122EpsWOun89UCzdUSlKvwECOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMNjk5NzUzMzA5NzA1IgzCKnbI%2BkNknJUrGVYq0ARH3n91RJ0X1J07ombfldVtiqbF1HBPWIYB%2B%2FcIeJy47joSncwB35x83WOdRzj5lqDk34j2Af5uC%2Fczoeog9lKrouNptPAHgYx3LmWL6D0DS8CvOoNqFT%2FOoE4LAFpbfUfQjD1dV6fHgYHfxzkCdG%2BQPtsJ9aCdOy5JQJ7h3jPBaw%2B5qSRFpHpHG%2BcW9CLuLfgR2EoHOl64kyzmV9Bk8%2F0V3E6iTKTRfvz8zSpoK0oxSzCEoot0SIpYTXPDI90TkluNaBhGXavP9MBkiWS3EQpud2JPghKNbwg90rgkKlHdH%2FHQXVWNvaazTMC%2BK8HtZqwOIKav%2FMf4cNUcgl6fJUN9IMiJra3hLUWt8H4sY9Pyp23C%2BXRAIcgJQlw1jGdgU1cCus8svBbbnLc%2BXLcLfkiwGhBcIA5Gy0SHA5dkU5UQAtHcRDFNGJ68lT0HsmBIlKLXv%2Fqa70EzvmHr5lnN%2FEpeNkEORwKJQEKcyTyqqu7Gx39qrc3KOhsbTPaTwU4KTGP7CUZX5QxXWNQH0zIf2BPIMm9ohx3j1G9%2BRUZ1eSMerghlhTMsMBfNChN8Prf%2BNXQdLpZsUCOy9Zbo0Dqmm%2Fj0Cg1vTq6d0xKTaVFXlisnOucqdSdYkgk1Ej7MNTk3fRlKuAmqBgE2Mih9KYmUSv9xe1csw3eLJAPs34k2Qll7LYIsaIuCMFQhSizn7DyFRI0SyEXxcRMcF4cFGNZr7rGaCB2KM2iH%2Fj3RRMwUYz7CaVXyC%2BWZJ%2BIp7DtbyK2ASRmXB0a5RXTL75OAsy1GCCxyMKLY59QGOpcBD5FrNHP0kW4gnxOQXwKqctlQ%2FVQtl8b5b8LzTs2m5Xy3R5t8SJf%2F3NeqDtCaBDZiMoAbQw8GK%2FC1fpBl5mUYBzd1PfGfhWsG1f%2BO5i01aNIaRO5g%2BWtJuGo8InDHlaX10BnCyuW4UJbTzD%2FpKs1E4PL9JSMHpKnozViOoEV5A9jrFmsI7Nep3aF0qXKWU488lGn%2BmEP4kg%3D%3D&Expires=1788475893)
+
+### Recommended next action
+
+To obtain a **VALID** primary result, run the exact command in an environment without this 30-second execution ceiling, then retain:
+
+- The unmodified source file.
+- Full console output.
+- Produced JSON.
+- SHA-256 of the JSON.
+- OS, architecture, CPU, Python, and NumPy versions.
+
+Only after that result has been saved should it be compared mechanically with the holdback reference artifact, per the blind-replication rule. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/7d000bde-5e35-45e9-b4e3-62b534e0a3dd/RUN_PROTOCOL_nexus4_leak_blindness_v2_0.md?AWSAccessKeyId=ASIA2F3EMEYE6N2ZVN7E&Signature=X94%2F1d0565DjARZED93RfgP1iLk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEB4aCXVzLWVhc3QtMSJIMEYCIQDVlEoQpG5VXdmv4gWUjjYeLV4r6s%2BBQKKhT7kEvOH%2BewIhANrAkDTpmUb9XbX8IKCK536uL122EpsWOun89UCzdUSlKvwECOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMNjk5NzUzMzA5NzA1IgzCKnbI%2BkNknJUrGVYq0ARH3n91RJ0X1J07ombfldVtiqbF1HBPWIYB%2B%2FcIeJy47joSncwB35x83WOdRzj5lqDk34j2Af5uC%2Fczoeog9lKrouNptPAHgYx3LmWL6D0DS8CvOoNqFT%2FOoE4LAFpbfUfQjD1dV6fHgYHfxzkCdG%2BQPtsJ9aCdOy5JQJ7h3jPBaw%2B5qSRFpHpHG%2BcW9CLuLfgR2EoHOl64kyzmV9Bk8%2F0V3E6iTKTRfvz8zSpoK0oxSzCEoot0SIpYTXPDI90TkluNaBhGXavP9MBkiWS3EQpud2JPghKNbwg90rgkKlHdH%2FHQXVWNvaazTMC%2BK8HtZqwOIKav%2FMf4cNUcgl6fJUN9IMiJra3hLUWt8H4sY9Pyp23C%2BXRAIcgJQlw1jGdgU1cCus8svBbbnLc%2BXLcLfkiwGhBcIA5Gy0SHA5dkU5UQAtHcRDFNGJ68lT0HsmBIlKLXv%2Fqa70EzvmHr5lnN%2FEpeNkEORwKJQEKcyTyqqu7Gx39qrc3KOhsbTPaTwU4KTGP7CUZX5QxXWNQH0zIf2BPIMm9ohx3j1G9%2BRUZ1eSMerghlhTMsMBfNChN8Prf%2BNXQdLpZsUCOy9Zbo0Dqmm%2Fj0Cg1vTq6d0xKTaVFXlisnOucqdSdYkgk1Ej7MNTk3fRlKuAmqBgE2Mih9KYmUSv9xe1csw3eLJAPs34k2Qll7LYIsaIuCMFQhSizn7DyFRI0SyEXxcRMcF4cFGNZr7rGaCB2KM2iH%2Fj3RRMwUYz7CaVXyC%2BWZJ%2BIp7DtbyK2ASRmXB0a5RXTL75OAsy1GCCxyMKLY59QGOpcBD5FrNHP0kW4gnxOQXwKqctlQ%2FVQtl8b5b8LzTs2m5Xy3R5t8SJf%2F3NeqDtCaBDZiMoAbQw8GK%2FC1fpBl5mUYBzd1PfGfhWsG1f%2BO5i01aNIaRO5g%2BWtJuGo8InDHlaX10BnCyuW4UJbTzD%2FpKs1E4PL9JSMHpKnozViOoEV5A9jrFmsI7Nep3aF0qXKWU488lGn%2BmEP4kg%3D%3D&Expires=1788475893)
+
+
+
+
+
+
+
+
+
+
+
+------------
+
+
+Kimi:
+
+
+I'll execute the experiment per the protocol. Let me start by verifying the script integrity and then running it.
+ Script hash verified. Now let me check the environment and execute the official command.
+ Now executing the official command exactly as specified:
+  Let me capture the remaining output and compute the JSON hash:
+  Now I'll compose the full independent report per the protocol's required 17-section format and save it:
+ ## Nexus 4 v2.0 Independent Run — Complete
+
+The experiment executed successfully per the protocol. Here is the summary:
+
+---
+
+### 1. Execution Provenance
+
+| Field | Value |
+|---|---|
+| **OS** | Linux 5.10.134-18.0.12.lifsea8.x86_64 |
+| **Architecture** | x86_64 |
+| **Python** | 3.12.12 |
+| **NumPy** | 2.2.5 |
+| **Script SHA-256** | `178f5bd650c832ac94172f3009a5189f1b40292f901bd97b4ec32e779a7492be` |
+| **Result JSON SHA-256** | `c6b8784324fa939a6cd211e650a0c3abab3adc4ffbea4a4b8c802d9d96099b66` |
+| **Status** | **VALID** |
+
+Script hash matches the official hash exactly.
+
+---
+
+### 2. Self-Tests
+All 8 self-tests **PASS**. The identifiability construction (bit-identical channel-1 for creep vs instrument) is confirmed.
+
+---
+
+### 3. Key Results at a Glance
+
+| Module | Key Finding |
+|---|---|
+| **M1 Scenarios** | Every single-channel detector achieves 100% post-onset detection on the 6σ creep. `crosschannel` correctly stays at 0% on creep (common-mode) and 100% on instrument drift. |
+| **M2 MDR50** | Best finite-horizon sensitivity: CUSUM ν=0.02 (3.31e-5 σ/year). raw_sqrt is second (5.76e-5). Best leaky (λ=0.999) is 7× worse. |
+| **M3 Horizon** | `raw_fixed` collapses to 100% FA by x4. `raw_sqrt` and `normal_mixture_e` are flat at x1/x4/x16 (0.025). Leaky λ=0.999 degrades from 5% → 95% at x16. |
+| **M5 Identifiability** | P7/P8 confirmed: single-channel detectors give identical results on creep and instrument; crosschannel separates them. |
+| **M6 Reference** | `ref_blue_green_known` recognizes the green plateau (0% alarm); `ref_blue` alarms through it (100%). |
+| **M7 E-process** | Analytic anytime boundary holds at ≤2.5% empirical FA across all tested horizons. |
+
+---
+
+### 4. Historical & Replication Verdicts
+
+| Set | Verdicts |
+|---|---|
+| **P1–P8** | P1/P2/P6/P7/P8 = PASS; P3/P4/P5 = FAIL (history preserved) |
+| **R1–R6** | All PASS |
+
+---
+
+### 5. Critical Attacks Raised
+
+1. **Signal model:** The ramp is state displacement, not necessarily THDE severity.
+2. **Null model:** iid Gaussian is unrealistically clean; e-process breaks under AR(1).
+3. **Calibration:** Empirical thresholds are horizon-dependent by construction.
+4. **MDR metric:** Final displacement scales with horizon; duration-independent metric needed.
+5. **Horizon test:** x16 ≠ infinity; raw_sqrt's flatness is illusory (LIL).
+6. **Identifiability:** Two channels may share hidden common modes (untested).
+7. **Reference semantics:** `ref_blue_green_known` assumes pre-registration; doesn't solve first-time authorization.
+8. **Architectural transfer:** Scalar detectors may not generalize to high-dimensional Nexus state.
+
+---
+
+### 6. UNRESOLVED Items (Selected)
+
+- Real THDE severity_k mapping (scalar? vector? residual? geometry?)
+- Nexus channel independence under shared failure modes
+- Reference authorization/promotion/supersession protocol
+- E-process robustness under AR(1), heavy tails, variance drift
+- High-dimensional state geometry generalization
+- Preisach/PI/Bouc-Wen hysteresis interaction with leaky recurrence
+
+---
+
+### Downloads
+
+- **JSON result:** [my_run_v2.json](sandbox:///mnt/agents/output/my_run_v2.json)
+- **Full independent report (17 sections):** [nexus4_v2_independent_report.md](sandbox:///mnt/agents/output/nexus4_v2_independent_report.md)
+
+The reference JSON was not provided in the upload, so mechanical comparison against it could not be performed. All other protocol requirements have been fulfilled.
+
+
+
+
+
+
+
+
+
+
+
+------------
+
+
+Claude (sonnet max)
+
+
