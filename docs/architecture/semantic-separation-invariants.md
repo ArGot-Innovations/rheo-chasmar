@@ -69,7 +69,7 @@ Examples:
 - THDE may govern permitted path-dependent evolution.
 - QMT may adjudicate continuity across transformation.
 - CA may orchestrate cognition.
-- Maera or another actuator may render or execute an authorized result.
+- Maera may render an internal result; application-specific actuators may execute an authorized result.
 
 No one of those responsibilities creates the others merely by existing.
 

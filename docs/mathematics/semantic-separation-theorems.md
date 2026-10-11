@@ -202,9 +202,10 @@ be a retention/consolidation function parameterized by context \(c\).
 
 ### Proof
 
-A bounded memory system necessarily permits histories containing information
-that is not retained in hot memory. Let \(h_1\) and \(h_2\) differ only in an
-event eliminated by retention policy \(c\). Then it is possible that:
+Rheo explicitly permits bounded and derived memory views (for example active
+working memory) that do not retain every historical detail. Let \(h_1\) and
+\(h_2\) differ only in an event eliminated by retention policy \(c\). Then it
+is possible that:
 
 \[
 R(h_1,c)=R(h_2,c)
@@ -212,7 +213,9 @@ R(h_1,c)=R(h_2,c)
 
 while \(h_1\ne h_2\).
 
-Therefore \(R\) is not necessarily injective.
+Therefore \(R\) is not necessarily injective. Even when a durable encoding is
+lossless, the encoding is a representation of the trajectory rather than the
+trajectory's semantic type itself.
 
 Further, memory may contain a derived summary \(m_d\) produced from many events;
 \(m_d\) is not itself one event in the original trajectory. Thus memory objects
