@@ -619,6 +619,80 @@ This responsibility separation is one of Rheo's most important architectural rul
 
 ---
 
+
+# 6A. Canonical Semantic Separation Law
+
+Rheo now treats the following as a **framework-wide architectural invariant**:
+
+> **Identity is not state.**  
+> **State is not history.**  
+> **History is not memory.**  
+> **Memory is not evidence.**  
+> **Evidence is not similarity.**  
+> **Similarity is not truth.**  
+> **Truth is not admissibility.**  
+> **Admissibility is not desirability.**  
+> **Desirability is not authority.**  
+> **Cognitive pressure is not action.**
+
+This is more than a vocabulary rule.
+
+It prevents one subsystem from silently acquiring another subsystem's
+authority.
+
+For example:
+
+~~~text
+HVD similarity
+    != evidence
+    != truth
+
+HIGC admissibility
+    != desirability
+
+Cyrae pressure
+    != authority
+    != action
+~~~
+
+The mathematical reason is that these concepts occupy different semantic
+domains and the mappings between them are generally partial, contextual, or
+lossy. A current state cannot uniquely reconstruct history; a retained memory
+need not be evidence; a high-similarity candidate can be false; a true condition
+can still describe a constitutionally prohibited action; an admissible state
+can be undesirable; and a highly desirable outcome can remain unauthorized.
+
+Therefore every cross-domain transition must be an **explicit named operation**
+with provenance, assumptions, uncertainty/failure semantics, and an owning
+subsystem. There are no implicit casts such as:
+
+~~~text
+similar -> true
+true -> admissible
+admissible -> desirable
+desirable -> authorized
+high pressure -> execute
+~~~
+
+For consequential action, cognitive pressure may influence what HTCE considers,
+but action still requires the applicable evidence, HIGC, authority, and actuator
+gates.
+
+The normative specification is:
+
+`docs/architecture/semantic-separation-invariants.md`
+
+The formal non-equivalence proofs, countermodels, non-compensation theorem,
+information-loss lemma, and executable proof obligations are:
+
+`docs/mathematics/semantic-separation-theorems.md`
+
+The decision record is:
+
+`docs/adr/0002-semantic-separation-canon.md`
+
+---
+
 # 7. CA — High-Level Cognitive Orchestration
 
 CA historically means **Consciousness Algorithm**.

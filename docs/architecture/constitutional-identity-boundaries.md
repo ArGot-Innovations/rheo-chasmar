@@ -65,6 +65,34 @@ overrides them.
 4. **Identity is optional; obligations are not, where assigned.** An organism
    without an identity-like self-concept still obeys its G₀ if one is assigned.
 
+
+## Canonical semantic-separation constraint
+
+Constitutional identity participates in the framework-wide semantic-separation
+law defined in
+`semantic-separation-invariants.md`.
+
+In particular:
+
+\[
+Identity \not\equiv State \not\equiv History \not\equiv Memory
+\]
+
+and:
+
+\[
+Truth \not\equiv Admissibility \not\equiv Desirability
+\not\equiv Authority.
+\]
+
+This means G₀/HIGC may constrain what states or actions are constitutionally
+permitted without becoming a truth oracle, preference function, or authority
+grant. Likewise, biography, TMS trajectory, and retained memory may inform
+identity-continuity adjudication without becoming identity themselves.
+
+The companion proofs and countermodels are in
+`../mathematics/semantic-separation-theorems.md`.
+
 ## Open questions (→ RHEO-010)
 
 - Formal definition of THDE's evolution authority and its interface to HIGC.

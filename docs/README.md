@@ -17,7 +17,7 @@ means the same continuing project.
 | `sources/original/` | Source documents imported from Google Drive, byte-identical to the Drive copies (original filenames preserved) |
 | `sources/provenance/` | Provenance ledger: Drive file IDs, timestamps, SHA-256 checksums, version/supersession notes |
 | `architecture/` | Architectural specifications (design-discussion intent + sourced material) |
-| `mathematics/` | Mathematical research scaffolds — proposals and open questions, **not** certified proofs |
+| `mathematics/` | Mathematical formalizations, proofs/countermodels, and research scaffolds; each document declares its own status |
 | `research/` | `RESEARCH_BACKLOG.md` (authoritative task index, RHEO-001…RHEO-017), open research questions, experiment protocols |
 | `adr/` | Architecture decision records |
 
@@ -41,6 +41,9 @@ means the same continuing project.
 
 ## Entry points
 
+- Canonical semantic-separation law: `architecture/semantic-separation-invariants.md`
+- Formal proof/countermodel support: `mathematics/semantic-separation-theorems.md`
+- Decision record: `adr/0002-semantic-separation-canon.md`
 - Start: `architecture/three-geometry-cognitive-architecture.md`
 - Sources: `sources/provenance/SOURCE_INVENTORY.md`
 - Open work: `research/RESEARCH_BACKLOG.md`
