@@ -57,5 +57,6 @@ A prior 666D HSL research transcript derives 666 coordinates from 36 primitive s
 - QMT/qbin Morphism Theory (Drive): https://drive.google.com/file/d/1WTJXTsdtINbHzXMJyHlpddL_kLsuke5K/view
 - Transdimensional Memory Substrate (Drive): https://drive.google.com/file/d/1orXBlWeTQlGZ0r5PC6uqui0uXk14gsvc/view
 - Identity Architecture Monograph (Drive): https://drive.google.com/file/d/16JxkJKRST5s-pWNt_00ZQ_dsJ8ZYN520/view
+- Divergent Hypothesis Dynamics (Drive): https://drive.google.com/file/d/181XP3e9Su5c-hbT-I5cL-5CZ4h7sQBFE/view
 
 **No canonical mathematical equivalence is asserted until documented and tested.**
