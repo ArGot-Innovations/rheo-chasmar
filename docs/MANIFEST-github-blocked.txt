@@ -1,0 +1,46 @@
+rheo-chasmar -- files that could NOT be pushed to GitHub (2026-10-10)
+
+These 18 files were retrieved from Google Drive for the rheo-chasmar
+documentation migration but cannot be written through the GitHub
+connector: binaries (PDF/DOCX) cannot pass its text-based file API,
+and text files over ~128KB exceed its per-call argument limit.
+They are recorded in docs/sources/provenance/SOURCE_INVENTORY.md
+(ArGot-Innovations/rheo-chasmar, main) with Drive IDs and SHA-256.
+Sort/push locally via real git.
+
+- 1024-D Quinary Nexus HSL Reference Geometry - deep research prompt - answers.txt  [213313 bytes, over connector size limit]
+  original Drive ID: 1JdTtRWdQZVbBFW3e4bj3URaIwcedE-gc  sha256: 8820c8ebd584eaa4a2006941ff5aed0a38ff4eecf7e57b02965aa91126e99fc6
+- Beyond LLMs_ The Radical Architecture of Machines That Never Forget Who They Are.pdf  [97466 bytes, binary]
+  original Drive ID: 16Xco3rYDts1QEAurcTThYYQ8vAyDjpFs  sha256: 6b220c6ead29d04d02d2dd13806b831f35cd07f2d9ff777586173eb6dc7bedf1
+- CA_TUCR_HTLA_First_Mapping_Protocol.pdf  [121703 bytes, binary]
+  original Drive ID: 148K2ubj02c6kWC2ZxPh_NV7QTHxfxDPx  sha256: 08dfa619b2d50170fd134081b493d25e818e1ee67ec11385c523c7e80b82ad89
+- Constitutional Amendment Unbounded Resonance and the Slow-Drift Blind Spot - deep research answers.txt  [259382 bytes, over connector size limit]
+  original Drive ID: 1duJyniSolyuQ1IqN0NKl_DoQhONF3bEX  sha256: 16e8b558e9df41309e97c1fe1a0465c24d8e3c50b248dcb26434d1ca829a84cb
+- Deep Research Report_ Divergent Hypothesis Dynamics (DHD) – Round 2.pdf  [83154 bytes, binary]
+  original Drive ID: 1jN8TFKlyuj2fn9HDiMe9_0mIzB0wvYcb  sha256: 4c147208beff33bb58ed522c139c818a0f7b50f83b4800bf773d71733dfeb19c
+- Divergent_Hypothesis_Dynamics_V1.0.docx  [388129 bytes, binary]
+  original Drive ID: 10bCFD7ygJKj51vFU3KzvD_dS2f4xBB-X  sha256: c9f1f67c1227167e9b935f479a58672d00ac218b83cc0492b55c24f7b2b77b38
+- Divergent_Hypothesis_Dynamics_V1.0.pdf  [573690 bytes, binary]
+  original Drive ID: 1q3jbXn7oC_ULXvfNffdvzF64MdPR7bF6  sha256: 3cfdbb36522e24a95ea46f4c9a2bc0c7494911f635bf8c78e38c1ba1d011ab37
+- Formal Specification & Implementation Plan for the Hypercontext Salient Lattice (HSL).pdf  [49353 bytes, binary]
+  original Drive ID: 1yYRKmmTx7nK89VhJd3nfIU3ILIdbXizw  sha256: 8b9bb5e39132dbdc259f6a653db223c85dfdc02da3e4afd5c88e72dbeafbeabd
+- HARMONIC_SELF-STABILIZING_TRANSDIMENSIONAL_TRAINING_HSTT_and_TUCR_FRAMEWORK.txt  [319164 bytes, over connector size limit]
+  original Drive ID: 103UH6NjkGOR9J57LybRmomW1vedCSyFE  sha256: 55c5ce07dc2a71cdbcc567a65e3db0aca842f76f127d6a54cbc9fb3a7e241202
+- HTLA_Tier2_Subsystem_Paper_Rewritten_2026-08-31.docx  [70169 bytes, binary]
+  original Drive ID: 1LWF8Bnk_HxDW3kchHOJjpuPqu2l5ur25  sha256: 136a9da2b6f19f116ffa1c20871bd5d05b30b118602bbb81f19fbc596799cd31
+- HVD 1.5 — Recursive Cognitive Runtime Foundation + TMS Persistence Hardening.pdf  [503822 bytes, binary]
+  original Drive ID: 1Gg_Q7_UUVdjYqi24YuOtAcl8d91OSNB3  sha256: 2b1cea2da963c13780e066853553686f64a5bb737dd139b2b03949d615ee6e99
+- HVD Recursive Cognitive Architecture.pdf  [409220 bytes, binary]
+  original Drive ID: 1fz-jIgMZsrgjQqWonPm2QSq4bCOtyM62  sha256: 6949a7ba9d5d4f0599b81cf4ad3953d99a2841a0e5bda7abd68b924911b0a0f4
+- PROJECT NEXUS — PEANUT GALLERY ARCHITECTURAL REVIEW MEMORANDUM.pdf  [879451 bytes, binary]
+  original Drive ID: 1ROO9uWJSbEbpEn4SN92WlesvI5H0q5Dn  sha256: 56201b2f4eeacf3f9271600f38d55f5ea3d1eaf8e9f79ca64c254d221c73f654
+- QMT_qbin_Morphism_Theory_Tier2_Subsystem_Paper_2026-08-31_REPRODUCED.docx  [77406 bytes, binary]
+  original Drive ID: 15jjoo3Ash5PiNWYkMlySjIHPDJds6BO8  sha256: d060717ced32c545487a9255c00d8402c10807e85029831be301f98d412d05f2
+- Rheo_Architecture_Primer.pdf  [19465237 bytes, binary]
+  original Drive ID: 1xW08xrnVxdE-qu_2rhPdyK1V5IF8jga6  sha256: c4fc291b96d30dc5e56fcda0c525ebb2cafa673897f4fff79928c1d220e5de69
+- Subsystems and Responsibilities of the Rheo-Chasmar Aeon Architecture - Table 1 - v1.pdf  [38833 bytes, binary]
+  original Drive ID: 13H6pc5xw--vzlan98GYekXoijegqc7aA  sha256: 553eed6846361a5555862e71f1a10cfe08e86458891224a5640ca7a2c0b86b45
+- Why 307_ Capacity, Sparsity, Collision, Recoverability, and Structural Vacuum in the 1,024-D Quinary.pdf  [431688 bytes, binary]
+  original Drive ID: 1j9QVOh3yiHL-J3FVj_gJFmzipgARKlV4  sha256: cd538d863bcf7e83b14b20c0c603972f796885fc48a11fe4aa01378fa5be9f72
+- idenity transfer - qmt - deep research responses - 8-31-2026.txt  [284928 bytes, over connector size limit]
+  original Drive ID: 1j5vOeOIU6TW1iMCNryLmk4HJZRDzZobb  sha256: 93684d2a0bef242b469a5bbf45979d5876fb0cf035360147b8f60ce62c8f9ba2
