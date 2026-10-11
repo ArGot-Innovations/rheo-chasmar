@@ -20,6 +20,7 @@ means the same continuing project.
 | `mathematics/` | Mathematical formalizations, proofs/countermodels, and research scaffolds; each document declares its own status |
 | `research/` | `RESEARCH_BACKLOG.md` (authoritative task index, RHEO-001…RHEO-017), open research questions, experiment protocols |
 | `adr/` | Architecture decision records |
+| top-level PDFs/DOCXs/txt | 18 source files that could not pass the GitHub connector (binaries + 4 oversized texts), sorted in via local git 2026-10-11 — see `MANIFEST-github-blocked.txt` |
 
 ## How to read this tree
 
