@@ -1,0 +1,1375 @@
+DEEP RESEARCH DIRECTIVE
+
+DIVERGENT HYPOTHESIS DYNAMICS (DHD)
+
+Research objective:
+Develop the mathematical and scientific foundations for a new framework called
+Divergent Hypothesis Dynamics (DHD), intended to operate as an independent
+cognitive framework that complements Psychotic Decision Calculus (PDC) inside
+the DogeOracle architecture.
+
+This is NOT a request to simply elaborate the equations supplied below.
+
+You are being asked to perform a genuine mathematical reconstruction and
+literature-grounded theory-design exercise.
+
+The supplied DHD concepts are provisional design hypotheses. Challenge them.
+Replace them where better mathematics exists. Preserve the intended function,
+not necessarily the preliminary equations.
+
+========================================================================
+0. CORE SCIENTIFIC INTENT
+========================================================================
+
+DHD exists to deliberately create an overcomplete, heterogeneous,
+contradictory, unstable population of possible explanations of an observed
+environment.
+
+Its purpose is exploratory cognition.
+
+DHD is NOT:
+
+- a trading engine;
+- an action-selection system;
+- a final forecasting system;
+- a utility maximizer;
+- a portfolio optimizer;
+- an execution engine;
+- a substitute for PDC;
+- an epistemic adjudicator;
+- a model of schizophrenia, bipolar disorder, mania, psychosis, or any other
+  psychiatric condition.
+
+The historical inspiration behind the broader project involved asking whether
+extremely divergent, erratic, associative internal cognition could expose
+hypotheses that conventional rational inference would never explore.
+
+That inspiration must NOT be converted into a clinical claim that psychiatric
+illness confers predictive ability.
+
+The scientifically defensible research question is instead:
+
+    Can deliberately increased internal hypothesis-space divergence improve
+    the probability of discovering useful explanatory models before a more
+    conventional inference system discovers them, provided a separate
+    evidence-based mechanism later adjudicates those hypotheses?
+
+DHD therefore separates:
+
+    exploratory cognition
+
+from:
+
+    epistemic belief.
+
+A hypothesis may be generated without being believed.
+
+A hypothesis may be interesting while having negligible posterior support.
+
+Contradiction among simultaneously represented hypotheses is permitted.
+
+Logical incoherence within an individual hypothesis need not be permitted.
+
+This distinction must be investigated rigorously.
+
+========================================================================
+1. PROVISIONAL DHD CONCEPT
+========================================================================
+
+At time t, DHD produces a structured hypothesis population
+
+    H_t = {h_t^(1), h_t^(2), ..., h_t^(N_t)}.
+
+A provisional hypothesis representation is
+
+    h_t^(i) = (z_i, theta_i, c_i, tau_i, q_i, p_i)
+
+where:
+
+    z_i      proposed latent regime
+    theta_i  model parameters
+    c_i      proposed causal structure
+    tau_i    temporal assumptions / horizon structure
+    q_i      predicted observable distribution or generative consequences
+    p_i      provenance and generation history
+
+This representation is NOT canonical.
+
+Research whether a hypothesis should instead be represented as:
+
+- a probabilistic program;
+- a structural causal model;
+- a state-space model;
+- a generative model;
+- a typed graph;
+- a model-plus-prediction object;
+- a particle in model space;
+- a member of a disjoint union of model families;
+- an element of a category/model manifold;
+- or another mathematically preferable object.
+
+DHD should reward useful diversity rather than immediate forecast accuracy.
+
+A provisional objective is
+
+    J_DHD
+      = alpha N_t
+      + beta D_t
+      + gamma U_t
+      + delta C_t
+      - eta R_t,
+
+where
+
+    D_t =
+        2/[N_t(N_t-1)]
+        sum_{i<j} d(h_i,h_j)
+
+is pairwise hypothesis diversity,
+
+    U_t = novelty,
+    C_t = explanatory/model-space coverage,
+    R_t = redundancy.
+
+Do NOT assume this is the correct objective.
+
+Determine whether scalarization is appropriate at all.
+
+Explicitly investigate alternatives including:
+
+    multi-objective/Pareto optimization,
+    quality-diversity optimization,
+    submodular set objectives,
+    entropy-maximizing populations,
+    determinantal point processes,
+    repulsive particle systems,
+    kernel discrepancy objectives,
+    optimal transport coverage,
+    novelty search,
+    MAP-Elites-style archives,
+    evolutionary population processes,
+    Bayesian nonparametric model populations,
+    interacting particle systems,
+    sequential Monte Carlo,
+    multiple-model adaptive estimation,
+    population-based probabilistic inference,
+    open-ended evolutionary search.
+
+========================================================================
+2. CENTRAL RESEARCH PROBLEM
+========================================================================
+
+The fundamental theoretical problem is:
+
+How can a computational system deliberately expand its hypothesis population
+away from conventional inference without degenerating into:
+
+    random noise,
+    combinatorial explosion,
+    duplicate hypotheses,
+    unfalsifiable narratives,
+    semantic nonsense,
+    impossible models,
+    uncontrolled compute consumption,
+    or hypotheses whose differences are merely syntactic?
+
+Develop a formal answer.
+
+The theory must distinguish at least:
+
+    diversity,
+    novelty,
+    coverage,
+    contradiction,
+    semantic distance,
+    causal difference,
+    parameter difference,
+    predictive difference,
+    regime difference,
+    temporal difference,
+    redundancy,
+    plausibility,
+    logical validity,
+    empirical support.
+
+These concepts must not be collapsed into a single vague "weirdness" measure.
+
+========================================================================
+3. HYPOTHESIS-SPACE MATHEMATICS
+========================================================================
+
+Construct a rigorous mathematical space in which heterogeneous hypotheses can
+coexist.
+
+Investigate whether the hypothesis space should be:
+
+    H = union_k H_k
+
+for heterogeneous model classes H_k,
+
+or a disjoint union
+
+    H = coproduct_k H_k,
+
+or another typed model space.
+
+Determine what structure H requires:
+
+    metric,
+    pseudometric,
+    kernel,
+    topology,
+    information geometry,
+    graph structure,
+    measurable structure,
+    probability measure,
+    optimal-transport geometry,
+    semantic embedding,
+    causal-model distance,
+    predictive-distribution distance.
+
+A major research requirement is to define or construct a defensible distance
+
+    d(h_i, h_j)
+
+between hypotheses containing mixed components such as:
+
+    categorical regimes,
+    continuous parameters,
+    causal graphs,
+    temporal structure,
+    predictive distributions,
+    provenance.
+
+Do not simply assign arbitrary weighted Euclidean distances.
+
+Research established distances or divergences including, where relevant:
+
+    KL / Jensen-Shannon divergence,
+    Wasserstein distance,
+    Fisher-Rao distance,
+    energy distance,
+    maximum mean discrepancy,
+    graph edit distances,
+    structural intervention distance,
+    causal-model distances,
+    kernelized model distances,
+    semantic representation distances,
+    topology-aware distances.
+
+Determine when each is meaningful and when it is not.
+
+Consider whether diversity should be measured in hypothesis representation
+space, predictive consequence space, intervention space, or several spaces
+simultaneously.
+
+========================================================================
+4. DIVERGENT GENERATION OPERATORS
+========================================================================
+
+DHD should not be a single undifferentiated generative model.
+
+The current provisional operator family is
+
+    G = {
+        G_counterfactual,
+        G_causal,
+        G_regime,
+        G_adversarial,
+        G_analogy,
+        G_recursive,
+        G_rare-event,
+        G_inversion
+    }.
+
+Research and formally define appropriate operators.
+
+Possible classes include:
+
+COUNTERFACTUAL GENERATION
+
+    Ask what model would explain the observations if the currently dominant
+    explanation were false.
+
+CAUSAL ALTERNATIVE GENERATION
+
+    Modify graph structure, confounding assumptions, latent variables,
+    intervention structure, or causal direction.
+
+CAUSAL INVERSION
+
+    Test alternatives such as
+
+        X -> Y
+
+    versus
+
+        Y -> X
+
+    without presuming either is correct.
+
+REGIME MUTATION
+
+    Introduce previously absent latent regimes or split/merge existing regimes.
+
+ADVERSARIAL GENERATION
+
+    Construct hypotheses designed to explain observations that defeat the
+    dominant model.
+
+ANALOGICAL TRANSFER
+
+    Import relational structures from historically or structurally analogous
+    systems while explicitly tracking the validity and limitations of the
+    analogy.
+
+RARE-EVENT EXPANSION
+
+    Deliberately explore hypotheses having small prior probability
+
+        P(h_i) << 1
+
+    when they remain logically and empirically possible.
+
+RECURSIVE / REFLEXIVE GENERATION
+
+    Construct hypotheses containing loops such as
+
+        market state
+            -> participant beliefs
+            -> participant actions
+            -> market state.
+
+INVERSION / NEGATION
+
+    Systematically negate or invert assumptions of currently dominant models.
+
+PARAMETER EXTREMIZATION
+
+    Probe low-density or boundary regions of parameter space.
+
+MODEL-CLASS MUTATION
+
+    Replace the entire model family rather than merely perturbing parameters.
+
+LATENT-CAUSE INTRODUCTION
+
+    Introduce previously absent explanatory variables.
+
+TIME-SCALE MUTATION
+
+    Reinterpret apparently identical evidence under different causal lags,
+    memory lengths, horizons, or temporal aggregation.
+
+Research whether additional operators are required.
+
+For every operator, specify:
+
+    domain,
+    codomain,
+    preconditions,
+    transformation rule,
+    provenance update,
+    computational cost,
+    expected type of diversity produced,
+    failure modes.
+
+========================================================================
+5. POPULATION DYNAMICS
+========================================================================
+
+DHD is called Divergent Hypothesis Dynamics because H_t should evolve.
+
+Develop candidate dynamical formulations.
+
+Investigate:
+
+    birth-death processes,
+    branching processes,
+    interacting particle systems,
+    replicator-mutator dynamics,
+    evolutionary algorithms,
+    stochastic population processes,
+    Markov jump processes,
+    sequential Monte Carlo,
+    particle mutation/rejuvenation,
+    population annealing,
+    open-ended search,
+    ecological niche models.
+
+A useful abstract form might be
+
+    H_t -> H_{t+1}
+
+through operations such as
+
+    birth,
+    mutation,
+    recombination,
+    branching,
+    dormancy,
+    pruning,
+    resurrection.
+
+But determine the mathematically appropriate formulation rather than assuming
+these operations.
+
+Important:
+
+DHD itself should not prune hypotheses simply because they currently predict
+poorly if doing so would destroy the exploratory purpose of the framework.
+
+Research the distinction between:
+
+    exploration-preserving pruning
+
+and
+
+    epistemic rejection.
+
+The latter belongs primarily to the later adjudication framework, not DHD.
+
+========================================================================
+6. CONTROLLED INSTABILITY
+========================================================================
+
+DHD must permit deliberate adjustment of how far cognition departs from
+conventional inference.
+
+The current provisional actuator is
+
+    rho_t^D in [0,1].
+
+Interpretation:
+
+    rho_t^D approximately 0
+
+means hypothesis generation remains close to conventional model neighborhoods.
+
+    rho_t^D approximately 1
+
+permits aggressive exploration of structurally distant hypotheses.
+
+This quantity is an ACTUATOR.
+
+It is not:
+
+    rationality,
+    irrationality,
+    truth,
+    uncertainty,
+    psychosis,
+    market regime,
+    model confidence.
+
+PDC may eventually control it through something like
+
+    rho_(t+1)^D = pi_PDC(S_t).
+
+Research whether a single scalar rho^D is mathematically adequate.
+
+Alternatives may include a control vector
+
+    rho_t =
+      (rho_causal,
+       rho_regime,
+       rho_temporal,
+       rho_parameter,
+       rho_analogy,
+       rho_counterfactual,
+       ...)
+
+or an operator-specific probability distribution
+
+    pi_G(g | S_t).
+
+Determine which structure is defensible.
+
+Research mechanisms for smoothly transitioning from local model perturbation
+to highly divergent model-class exploration.
+
+========================================================================
+7. THE EXPLORATION-EXPLOSION PROBLEM
+========================================================================
+
+A serious DHD theory must address combinatorial explosion.
+
+If each hypothesis generates k descendants per cycle,
+
+    N_(t+m) ~ N_t k^m
+
+is unacceptable.
+
+Develop mathematically principled population controls that preserve coverage
+without collapsing diversity.
+
+Investigate:
+
+    diversity-preserving sampling,
+    reservoir methods,
+    clustering,
+    coresets,
+    epsilon-nets,
+    DPP sampling,
+    submodular selection,
+    novelty archives,
+    Pareto archives,
+    sparse approximations,
+    adaptive compute allocation,
+    hypothesis compression,
+    model equivalence classes.
+
+Define when two hypotheses should be treated as effectively equivalent.
+
+For example, two structurally different models may produce observationally
+equivalent distributions.
+
+DHD must recognize the difference between:
+
+    representational diversity
+
+and
+
+    behaviorally meaningful diversity.
+
+========================================================================
+8. NOVELTY
+========================================================================
+
+Define novelty rigorously.
+
+A hypothesis should not count as novel merely because its text or parameter
+encoding differs.
+
+Possible definitions should investigate novelty relative to:
+
+    current population,
+    historical population,
+    conventional baseline,
+    model-family archive,
+    predictive consequence space,
+    causal/interventional consequence space.
+
+A candidate form might be
+
+    U(h_i)
+      = min_{h_j in Archive} d(h_i,h_j),
+
+but this is only provisional.
+
+Research novelty-search literature and quality-diversity methods.
+
+Determine how novelty should interact with semantic equivalence and
+observational equivalence.
+
+========================================================================
+9. COVERAGE
+========================================================================
+
+"Covers more possibilities" must become mathematically meaningful.
+
+Develop candidate coverage metrics.
+
+Possible approaches include:
+
+    occupied cells in a behavior space,
+    measure of covered model-space volume,
+    entropy,
+    kernel coverage,
+    Wasserstein discrepancy against a reference exploratory measure,
+    epsilon-covering numbers,
+    support coverage,
+    intervention-space coverage,
+    causal-structure coverage.
+
+Address a fundamental difficulty:
+
+There may be no known probability distribution over the space of all valid
+hypotheses.
+
+Therefore "coverage" cannot casually mean probability mass coverage unless a
+reference measure is explicitly defined.
+
+========================================================================
+10. REDUNDANCY
+========================================================================
+
+Define redundancy separately from low novelty.
+
+Examples:
+
+    duplicate models,
+    parameterizations describing the same model,
+    observational equivalence,
+    Markov-equivalent causal graphs,
+    predictions indistinguishable over the relevant horizon,
+    repeated derivations with different provenance.
+
+Research quotient spaces or equivalence classes where appropriate.
+
+Consider whether DHD should operate on
+
+    H / ~
+
+for a defined equivalence relation.
+
+========================================================================
+11. HARD VALIDITY VS SOFT PLAUSIBILITY
+========================================================================
+
+DHD must be capable of generating low-plausibility hypotheses.
+
+It should not generate meaningless objects.
+
+Develop a two-boundary framework:
+
+HARD VALIDITY CONSTRAINTS
+
+A generated hypothesis must be:
+
+    syntactically valid,
+    numerically executable where required,
+    causally/type consistent where applicable,
+    explicit about variables and assumptions,
+    capable of generating at least some observable implication,
+    provenance-traceable.
+
+SOFT PLAUSIBILITY
+
+A hypothesis may nevertheless have:
+
+    low prior probability,
+    weak current empirical support,
+    unusual causal structure,
+    unusual parameter values,
+    unusual temporal assumptions.
+
+Do not conflate plausibility with validity.
+
+Investigate whether falsifiability should be a hard admission criterion.
+
+If not, determine how non-falsifiable speculative objects should be handled.
+
+========================================================================
+12. PROVENANCE
+========================================================================
+
+Every hypothesis must retain its generation history.
+
+Formalize provenance p_i.
+
+At minimum it should record:
+
+    parent hypothesis or hypotheses,
+    generating operator,
+    operator parameters,
+    input evidence state,
+    generation timestamp,
+    DHD control state,
+    random seed where relevant,
+    transformations performed.
+
+Research whether provenance should be represented as a DAG.
+
+This may produce a hypothesis genealogy
+
+    G_H = (V_H, E_H)
+
+where nodes are hypotheses and edges are generative transformations.
+
+Investigate useful mathematics for genealogy:
+
+    branching processes,
+    ancestry graphs,
+    lineages,
+    mutation trees,
+    causal provenance,
+    data lineage.
+
+========================================================================
+13. DHD AND REFLEXIVE MARKETS
+========================================================================
+
+Markets are not passive environments.
+
+Predictions and actions can alter participant behavior and therefore future
+observations.
+
+Research how DHD should generate hypotheses about reflexive systems.
+
+Include literature on:
+
+    endogenous market dynamics,
+    reflexivity,
+    strategic interaction,
+    game-theoretic belief recursion,
+    higher-order beliefs,
+    adaptive agents,
+    market ecology,
+    performative prediction,
+    feedback from forecasts into outcomes.
+
+DHD must be able to represent hypotheses such as:
+
+    state
+      -> beliefs about state
+      -> actions based on beliefs
+      -> changed state
+      -> changed beliefs.
+
+But do not casually call this a "consciousness" phenomenon.
+
+Use established terminology where possible.
+
+========================================================================
+14. RELATIONSHIP WITH PDC
+========================================================================
+
+DHD and PDC must remain distinct.
+
+DHD owns:
+
+    hypothesis generation,
+    exploratory divergence,
+    mutation,
+    model-space expansion,
+    novelty production,
+    diversity maintenance.
+
+PDC owns:
+
+    cognitive/meta-control,
+    allocation of computation,
+    evidence-acquisition decisions,
+    decisions about whether cognition should expand, contract, continue,
+    redirect, or stop.
+
+A provisional interface is:
+
+    PDC -> DHD:
+        exploration budget,
+        divergence controls,
+        operator priorities,
+        compute budget,
+        requested hypothesis class.
+
+    DHD -> PDC:
+        hypothesis population,
+        diversity diagnostics,
+        novelty diagnostics,
+        coverage diagnostics,
+        population cost,
+        provenance.
+
+Do NOT give DHD trade direction, order size, TradeIntent, or execution
+responsibility.
+
+Do NOT import the old PDC lambda variable as a causal control parameter.
+
+Do NOT import old kappa machinery unless independently re-derived.
+
+========================================================================
+15. RELATIONSHIP WITH FUTURE EPISTEMIC ADJUDICATION
+========================================================================
+
+A separate framework will later evaluate generated hypotheses using evidence,
+calibration, provenance, predictive performance, falsification, and
+out-of-sample results.
+
+Therefore DHD should not be optimized directly into a conventional prediction
+engine.
+
+However, the research should identify what metadata DHD must expose so that a
+later adjudicator can evaluate each hypothesis.
+
+Potential outputs include:
+
+    generated predictions,
+    confidence claims,
+    causal implications,
+    falsifiable consequences,
+    required evidence,
+    provenance,
+    generation cost,
+    hypothesis family,
+    time horizon.
+
+Do not design the complete adjudication theory here.
+
+Only define the interface required by DHD.
+
+========================================================================
+16. SCIENTIFIC QUESTION: DOES DIVERGENCE HELP?
+========================================================================
+
+The framework must permit testing whether divergent cognition provides value.
+
+Define measurable internal divergence D_t and downstream predictive quality Q_t.
+
+A central experimental relationship is:
+
+    Q_t = f(D_t).
+
+Possible outcomes include:
+
+    df/dD > 0
+    over some region,
+
+followed by
+
+    df/dD < 0
+
+at excessive divergence.
+
+But do NOT assume an inverted-U relationship.
+
+Treat it as a falsifiable hypothesis.
+
+Research experimental designs capable of determining whether:
+
+    greater DHD exploration discovers useful hypotheses earlier;
+    benefits exist only in certain regimes;
+    excessive divergence degrades useful discovery;
+    apparent benefits vanish after controlling for compute;
+    benefits arise merely from larger population size rather than structural
+    diversity.
+
+A key confound is:
+
+    more hypotheses = more chances to get lucky.
+
+Experiments must distinguish the value of diversity from brute-force search.
+
+========================================================================
+17. LEAD-TIME DISCOVERY
+========================================================================
+
+One important outcome is whether DHD generates hypotheses before conventional
+models would generate them.
+
+Define a candidate discovery lead time
+
+    Delta t_i =
+        t_validation(i) - t_generation(i).
+
+But carefully distinguish:
+
+    early generation,
+    early empirical support,
+    accidental coincidence,
+    retrospective selection.
+
+Develop statistical controls against:
+
+    multiple-hypothesis testing,
+    look-ahead bias,
+    data snooping,
+    survivorship bias,
+    hindsight bias,
+    selective reporting.
+
+This section is essential.
+
+========================================================================
+18. RESEARCH DOMAINS TO INVESTIGATE
+========================================================================
+
+Perform a broad interdisciplinary literature search across at least:
+
+    Bayesian model uncertainty and model averaging
+    Bayesian nonparametrics
+    abductive inference
+    scientific hypothesis generation
+    causal discovery
+    structural causal models
+    counterfactual reasoning
+    multiple-hypothesis tracking
+    interacting multiple-model filters
+    sequential Monte Carlo
+    particle diversity and particle degeneracy
+    ensemble diversity
+    mixture-of-experts
+    probabilistic programming
+    program synthesis
+    automated scientific discovery
+    novelty search
+    quality-diversity optimization
+    MAP-Elites
+    open-ended evolution
+    evolutionary computation
+    repulsive particle methods
+    Stein variational methods
+    determinantal point processes
+    submodular optimization
+    optimal experimental design
+    active learning
+    exploration-exploitation
+    information theory
+    information geometry
+    optimal transport
+    model criticism
+    adversarial hypothesis generation
+    computational creativity
+    divergent thinking
+    cognitive search
+    analogical reasoning
+    conceptual blending
+    ensemble methods
+    reflexive / endogenous market modeling
+    performative prediction
+    strategic forecasting
+    adaptive market models.
+
+Search adjacent disciplines if they contain mathematics directly useful to
+DHD.
+
+========================================================================
+19. MATHEMATICAL HYGIENE REQUIREMENTS
+========================================================================
+
+The research must avoid the failure modes encountered in earlier DogeOracle
+mathematics.
+
+DO NOT:
+
+    invent critical exponents;
+    borrow universality classes because an analogy sounds interesting;
+    claim phase transitions without defining an order parameter and appropriate
+    limiting system;
+    label numerical behavior a theorem;
+    use undefined operators;
+    use contradictory parameter orientations;
+    claim divergence where the stated formula converges;
+    claim novelty merely because terminology is new;
+    write scalar objectives whose terms have incompatible units without
+    normalization;
+    call something Bayesian unless a coherent probability model exists;
+    treat semantic similarity as a mathematical metric without examining its
+    properties;
+    claim a causal model from correlation alone.
+
+Every formal statement must be classified as one of:
+
+    definition,
+    assumption,
+    lemma,
+    proposition,
+    theorem,
+    conjecture,
+    empirical hypothesis,
+    engineering heuristic.
+
+Theorems require actual derivations or proofs.
+
+Conjectures must be identified as conjectures.
+
+Empirical claims require evidence.
+
+========================================================================
+20. IDENTIFIABILITY
+========================================================================
+
+Investigate what DHD quantities are actually identifiable from observable data.
+
+For example:
+
+    diversity may be directly computable from the internal population;
+
+    "coverage of all plausible hypotheses" may not be observable;
+
+    useful novelty may only be measurable retrospectively.
+
+Explicitly distinguish:
+
+    internal computational observables,
+    externally estimable quantities,
+    latent constructs,
+    unverifiable concepts.
+
+========================================================================
+21. COMPUTATIONAL COMPLEXITY
+========================================================================
+
+Provide complexity analysis.
+
+At minimum study dependence on:
+
+    N_t,
+    number of generators,
+    model dimensionality,
+    graph size,
+    archive size,
+    pairwise distance computation,
+    mutation depth,
+    branching factor.
+
+Naive pairwise diversity costs
+
+    O(N_t^2)
+
+and may become prohibitive.
+
+Investigate approximations including:
+
+    kernels,
+    random features,
+    nearest-neighbor methods,
+    clustering,
+    sketching,
+    subsampling,
+    sparse graphs,
+    approximate optimal transport.
+
+========================================================================
+22. FAILURE MODES AND KILL CONDITIONS
+========================================================================
+
+Construct explicit failure conditions for DHD.
+
+Examples to investigate:
+
+    diversity collapses despite increased exploration control;
+    generated hypotheses are merely syntactic variants;
+    diversity increases only because models become nonsensical;
+    compute cost grows faster than useful hypothesis discovery;
+    downstream performance is no better than matched-compute random search;
+    useful discoveries disappear after multiple-testing correction;
+    one generator dominates all others;
+    provenance becomes insufficient to reproduce hypotheses;
+    hypotheses cannot generate testable implications;
+    operator mutation destroys semantic validity;
+    DHD merely rediscovers existing ensemble methods with new vocabulary.
+
+Specify what results would falsify the claim that DHD deserves to exist as an
+independent framework.
+
+========================================================================
+23. BASELINES
+========================================================================
+
+Design baselines that make it difficult for DHD to claim success trivially.
+
+Compare against, where applicable:
+
+    standard Bayesian model averaging,
+    random hypothesis sampling,
+    grid/random search,
+    ensembles,
+    bootstrap ensembles,
+    mixture models,
+    SMC,
+    interacting multiple-model filters,
+    evolutionary search,
+    novelty search,
+    quality-diversity search,
+    DPP-based selection,
+    LLM hypothesis generation without DHD,
+    causal-discovery baselines.
+
+Match computational budget whenever possible.
+
+========================================================================
+24. EXPERIMENTAL PROGRAM
+========================================================================
+
+Design a staged validation program.
+
+Begin with synthetic environments where ground-truth hypothesis families are
+known.
+
+Include environments with:
+
+    regime changes,
+    latent confounders,
+    causal reversals,
+    rare events,
+    nonstationarity,
+    delayed effects,
+    feedback,
+    adversarial contamination,
+    ambiguous evidence,
+    observationally equivalent models.
+
+Then move to controlled market simulations.
+
+Only later move to historical financial data.
+
+For each experiment, define:
+
+    hypothesis-generation recall,
+    true-model rank/coverage,
+    diversity,
+    novelty,
+    redundancy,
+    computational cost,
+    lead time,
+    downstream prediction improvement,
+    calibration after adjudication,
+    false-discovery burden.
+
+Use pre-registered evaluation rules where practical.
+
+========================================================================
+25. DHD-SPECIFIC ABLATIONS
+========================================================================
+
+Design ablations capable of determining what causes any observed benefit.
+
+Examples:
+
+    remove counterfactual generator;
+    remove causal inversion;
+    remove rare-event generation;
+    remove recursive generation;
+    set divergence actuator to zero;
+    maximize divergence;
+    remove provenance-aware deduplication;
+    hold N fixed while changing diversity;
+    hold diversity fixed while changing N;
+    matched-compute random generation.
+
+This is critical for determining whether DHD's architecture itself contributes
+value.
+
+========================================================================
+26. REQUIRED THEORETICAL RESULTS
+========================================================================
+
+Investigate whether rigorous results can be established for questions such as:
+
+    bounds on population growth;
+
+    conditions under which a diversity-preserving selection operator maintains
+    an epsilon-cover of a finite model space;
+
+    relationships between pairwise diversity and entropy;
+
+    guarantees for DPP/submodular selection;
+
+    conditions under which mutation dynamics are ergodic over a hypothesis
+    family;
+
+    diversity collapse conditions;
+
+    computational complexity;
+
+    equivalence-class compression;
+
+    exploration coverage under finite budget.
+
+Do not manufacture theorems.
+
+If the literature already contains the appropriate theorem, cite and adapt it.
+
+If a desired result cannot currently be proven, state that explicitly.
+
+========================================================================
+27. TERMINOLOGY AND NOVELTY AUDIT
+========================================================================
+
+Determine what is genuinely novel about DHD.
+
+It is likely that many constituent mechanisms already exist.
+
+Do not claim novelty for:
+
+    ensembles,
+    novelty search,
+    causal discovery,
+    counterfactual reasoning,
+    evolutionary mutation,
+    particle populations,
+    DPP diversity,
+    Bayesian model uncertainty.
+
+Potential novelty may instead lie in their architectural composition:
+
+    a deliberately divergence-controlled hypothesis population;
+    heterogeneous hypothesis operators;
+    explicit separation of generation from belief;
+    PDC-controlled cognitive expansion;
+    persistent provenance/genealogy;
+    later independent epistemic adjudication;
+    testing whether controlled internal divergence improves rational external
+    prediction.
+
+Evaluate that claim critically.
+
+If the proposed architecture has close predecessors, identify them.
+
+========================================================================
+28. SOURCE QUALITY
+========================================================================
+
+Use current literature through 2026.
+
+Prefer:
+
+    peer-reviewed primary research,
+    major textbooks/monographs,
+    high-quality review papers,
+    authoritative conference proceedings,
+    established mathematical literature.
+
+Use preprints for genuinely recent material when necessary and label them as
+preprints.
+
+Do not rely primarily on blogs, marketing material, unsourced web pages, or
+secondary summaries.
+
+Every major mathematical or empirical claim should have a source.
+
+Where disciplines disagree, describe the disagreement rather than selecting a
+convenient interpretation.
+
+========================================================================
+29. REQUIRED FINAL RESEARCH REPORT
+========================================================================
+
+Produce a comprehensive research report suitable for use in writing the later
+formal DHD paper.
+
+The report must contain:
+
+A. Executive conclusion
+
+State whether DHD appears scientifically defensible as an independent
+framework and where its strongest mathematical foundations lie.
+
+B. Literature synthesis
+
+Map DHD concepts to existing fields and identify the closest prior work.
+
+C. Formal hypothesis-space candidates
+
+Compare multiple possible mathematical representations and recommend one.
+
+D. Divergence and distance theory
+
+Determine how heterogeneous hypotheses should be compared.
+
+E. Population-dynamics theory
+
+Recommend a mathematically defensible evolution process for H_t.
+
+F. Generator theory
+
+Formalize the operator family and identify missing generators.
+
+G. Controlled-instability theory
+
+Determine whether rho^D should be scalar, vector-valued, operator-valued, or
+replaced entirely.
+
+H. Diversity / novelty / coverage / redundancy
+
+Give operational mathematical definitions and discuss their limitations.
+
+I. Validity constraints
+
+Define the minimum requirements for a generated hypothesis to enter H_t.
+
+J. Provenance and genealogy
+
+Formalize how hypothesis ancestry should be represented.
+
+K. Reflexivity
+
+Determine how DHD should generate hypotheses in endogenous environments.
+
+L. PDC interface
+
+Specify what PDC can control and what DHD returns.
+
+M. Future adjudication interface
+
+Specify what metadata downstream epistemic evaluation will require.
+
+N. Theoretical results
+
+Provide only defensible lemmas/propositions/theorems and clearly identified
+conjectures.
+
+O. Computational complexity
+
+Analyze scaling and approximation methods.
+
+P. Validation program
+
+Provide synthetic, simulation, and real-market experiments.
+
+Q. Ablation program
+
+Show how individual DHD components can be tested.
+
+R. Falsification / kill criteria
+
+State what evidence would invalidate major DHD claims.
+
+S. Novelty audit
+
+Identify what is new versus recombination of existing ideas.
+
+T. Recommended canonical DHD architecture
+
+End with a concrete mathematical architecture recommended for the first formal
+DHD paper.
+
+========================================================================
+30. REQUIRED CRITICAL STANCE
+========================================================================
+
+Do not protect the proposed theory.
+
+Attempt to break it.
+
+Specifically determine whether DHD is actually:
+
+    an ensemble method with unusual vocabulary;
+    novelty search applied to model space;
+    a particle population;
+    evolutionary model search;
+    a quality-diversity archive;
+    automated abductive reasoning;
+    or a genuinely distinct synthesis.
+
+If an existing framework already provides a better mathematical solution,
+say so.
+
+If components should be discarded, discard them.
+
+If the scalar J_DHD objective is poorly posed, replace it.
+
+If rho^D is insufficient, replace it.
+
+If some proposed generator is redundant or scientifically meaningless, remove
+it.
+
+The goal is not to defend the initial design.
+
+The goal is to discover the strongest mathematically rigorous theory that
+preserves the intended function:
+
+    deliberately broad, heterogeneous, contradictory exploratory cognition
+    whose products can later be subjected to ruthless evidence-based
+    adjudication.
+
+========================================================================
+31. FINAL DESIGN PRINCIPLE
+========================================================================
+
+The central distinction that must survive the research is:
+
+        GENERATING A HYPOTHESIS IS NOT BELIEVING A HYPOTHESIS.
+
+DHD should maximize the system's ability to encounter explanations it would
+otherwise fail to consider.
+
+A separate mechanism decides what deserves belief.
+
+PDC controls how much cognition should be spent exploring between those two
+extremes.
+
+The research must determine how to make that architecture mathematically
+coherent, computationally tractable, empirically falsifiable, and genuinely
+useful.
