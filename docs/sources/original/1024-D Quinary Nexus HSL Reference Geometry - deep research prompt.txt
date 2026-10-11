@@ -1,0 +1,952 @@
+# DEEP RESEARCH PROMPT
+
+# Why 307?
+# Capacity, Sparsity, Collision, Recoverability, and Structural Vacuum
+# in the 1,024-D Quinary Nexus HSL Reference Geometry
+
+## Mission
+
+Perform an actual source-driven mathematical, empirical, and implementation investigation into the origin and technical justification of the current Nexus 4 reference constraint:
+
+    D = 1024
+    K_wall = 307
+    active_fraction <= 307 / 1024 ~= 0.2998046875
+    structural_vacuum >= 0.7001953125
+
+The central question is:
+
+> Why is the current Nexus quinary HSL reference geometry limited to 307 active coordinates, and what — if anything — is mathematically, statistically, algorithmically, or empirically special about approximately 30% occupancy / 70% structural vacuum?
+
+Do NOT assume that 307 has a recoverability justification.
+
+Do NOT assume it is arbitrary.
+
+Do NOT invent a post-hoc explanation.
+
+Determine what the evidence actually supports.
+
+The final result must distinguish between:
+
+    historical design choice
+    implementation constant
+    deterministic invariant
+    empirical operating point
+    collision/capacity threshold
+    recoverability threshold
+    k-WTA policy
+    computational sparsity choice
+    HDC/VSA capacity consideration
+    unexplained legacy constant
+
+These are different possibilities.
+
+---
+
+# CRITICAL EXECUTION REQUIREMENT
+
+DO THE RESEARCH FIRST.
+
+This investigation requires BOTH:
+
+1. internal Nexus corpus archaeology; and
+2. external mathematical / HDC / VSA / sparse-distributed-representation research.
+
+Do not answer solely from the current HTLA draft.
+
+Do not assume statements in current Nexus documents are independently verified merely because they appear repeatedly.
+
+Where possible, trace the FIRST appearance of:
+
+    D = 1024
+    K = 307
+    70% structural vacuum
+    30% active occupancy
+
+and determine whether later documents merely copied the value.
+
+---
+
+# PART I — INTERNAL NEXUS PROVENANCE AUDIT
+
+Search the complete Nexus corpus, Google Drive, and relevant GitHub repositories for every occurrence or close variant of:
+
+    307
+    K_wall
+    K=307
+    k=307
+    70% sparsity
+    70% structural vacuum
+    30% active
+    0.3 * 1024
+    active_count
+    kWTA
+    winner count
+    structural vacuum
+    HSL sparsity
+    quinary occupancy
+
+For every occurrence, record:
+
+- document/file name;
+- date;
+- exact claim;
+- whether a rationale is given;
+- whether that rationale is mathematical, empirical, or rhetorical;
+- whether code implements it;
+- whether tests verify only enforcement or also justify the threshold;
+- whether later sources appear derivative of earlier sources.
+
+Construct a provenance timeline.
+
+Explicitly answer:
+
+1. Is 307 simply:
+       floor(0.30 * 1024)
+   or:
+       round(0.30 * 1024)
+   or derived by another calculation?
+
+2. Was 70% vacuum selected first and 307 derived from it?
+
+3. Was 307 selected experimentally and 70% inferred afterward?
+
+4. Does any historical source state a reason?
+
+5. Is there benchmark evidence associated with the choice?
+
+6. Is there code that computes 307 dynamically, or is it a hard-coded constant?
+
+7. Does the verification suite establish only:
+       active_count <= 307
+   or does it actually test failure behavior above 307?
+
+The distinction is crucial:
+
+    invariant enforcement
+        !=
+    invariant justification
+
+---
+
+# PART II — CURRENT IMPLEMENTATION AUDIT
+
+Inspect the current reference implementation.
+
+Determine exactly where and how K_wall is used.
+
+Possible roles to investigate include:
+
+- k-WTA output cardinality;
+- HSL constructor validation;
+- binding;
+- bundling;
+- partial unbinding;
+- similarity;
+- normalization;
+- HTNLA competition;
+- memory packing;
+- bit-plane encoding;
+- serialization;
+- recurrence;
+- HVD indexing;
+- ANN generation;
+- Cyrae/TUCR interfaces.
+
+Build a dependency graph:
+
+    K_wall
+       |
+       +--> subsystem A
+       +--> subsystem B
+       +--> subsystem C
+
+For every consumer determine whether K affects:
+
+    correctness
+    determinism
+    storage
+    runtime
+    collision probability
+    retrieval quality
+    unbinding quality
+    numerical stability
+    or merely policy.
+
+---
+
+# PART III — TEST THE CLAIM THAT OCCUPANCY AFFECTS PARTIAL-UNBIND RECOVERABILITY
+
+The current reference quinary binding has been described approximately as:
+
+    bind(q_i, r_i)
+        =
+        0
+            if q_i = 0 or r_i = 0
+
+        sign(q_i r_i) * min(|q_i|, |r_i|)
+            otherwise
+
+with:
+
+    q_i, r_i in {-2,-1,0,+1,+2}
+
+This rule appears coordinate-separable.
+
+Investigate carefully whether global vector occupancy K can affect the coordinate-level inverse relation.
+
+If binding is exactly coordinatewise and there is no later bundling/interference operation, then for a fixed coordinate:
+
+    Poss(c_i, r_i)
+
+should depend only upon:
+
+    c_i
+    r_i
+    the alphabet
+    the binding rule
+
+and not on:
+
+    number of active coordinates elsewhere in the vector.
+
+Prove or disprove this.
+
+Explicitly test the proposition:
+
+    For coordinate-separable binding,
+    partial-unbind ambiguity at coordinate i
+    is independent of global occupancy K.
+
+If true, state it clearly.
+
+If false, identify the mechanism introducing cross-coordinate dependence.
+
+Potential mechanisms might include:
+
+- bundling/superposition;
+- normalization;
+- global top-k projection;
+- collision resolution;
+- capacity-limited cleanup memory;
+- global coding constraints;
+- thresholding;
+- quantization;
+- ANN retrieval;
+- resonator reconstruction.
+
+Do not introduce such mechanisms unless they actually exist.
+
+---
+
+# PART IV — EXACT / AMBIGUOUS / UNKNOWN / IMPOSSIBLE
+
+Audit the current four epistemic states.
+
+Determine whether they arise from one mathematical object or several different reconstruction mechanisms.
+
+For deterministic coordinate-level partial unbinding, define where appropriate:
+
+    Poss(c,R)
+        =
+    {q in Q :
+        exists r in R
+        such that bind(q,r)=c}
+
+Then determine:
+
+    |Poss| = 0       -> ?
+    |Poss| = 1       -> ?
+    |Poss| > 1       -> ?
+
+Investigate where `UNKNOWN` actually comes from.
+
+If `UNKNOWN` cannot arise from this finite possibility-set construction, do NOT claim that all four states form one lattice without a larger formal construction.
+
+Research whether there is a rigorous structure that can include:
+
+    EXACT
+    AMBIGUOUS
+    UNKNOWN
+    IMPOSSIBLE
+
+together.
+
+Possibilities to investigate include:
+
+- information orders;
+- bilattices;
+- abstract interpretation;
+- Kleene / Belnap-style epistemic logics;
+- powerset domains plus bottom/top/error states;
+- partial-information lattices;
+- domain theory.
+
+Do not force a lattice if the semantics do not support one.
+
+---
+
+# PART V — EXTERNAL HDC/VSA CAPACITY RESEARCH
+
+Search primary literature on:
+
+- Hyperdimensional Computing;
+- Vector Symbolic Architectures;
+- sparse distributed representations;
+- Sparse Distributed Memory;
+- HRR;
+- Binary Spatter Codes;
+- MAP/BSC/VSA families;
+- sparse binary hypervectors;
+- ternary/quinary hypervectors where available;
+- associative-memory capacity;
+- binding and superposition capacity;
+- cleanup memory;
+- cross-talk noise;
+- sparse coding;
+- k-WTA representations.
+
+Investigate how capacity and interference depend on:
+
+    D
+    K
+    K/D
+    alphabet size
+    overlap
+    number of bundled items
+    number of bound pairs
+    noise model
+    retrieval threshold
+
+Specifically search for any known theoretically preferred occupancy fraction near:
+
+    0.30
+
+or vacuum fraction near:
+
+    0.70
+
+for high-dimensional symbolic representations.
+
+If no such universal threshold exists, say so.
+
+---
+
+# PART VI — SPARSE DISTRIBUTED MEMORY
+
+Investigate Kanerva-style sparse distributed memory and related sparse high-dimensional models.
+
+Determine whether any classical capacity result could plausibly motivate:
+
+    K ~= 0.3D
+
+or whether the optimal sparsity regimes in that literature are substantially different.
+
+Distinguish:
+
+    sparsity of address activation
+    sparsity of vector coordinates
+    sparsity of memory locations
+    sparse connectivity
+    sparsity of retrieved representation
+
+These must not be conflated.
+
+---
+
+# PART VII — COMBINATORIAL CAPACITY OF K-SPARSE QUINARY VECTORS
+
+Derive the raw state-space size.
+
+For exactly K active coordinates in D dimensions with four nonzero quinary values:
+
+    {-2,-1,+1,+2}
+
+the number of raw vectors is:
+
+    N(D,K) = C(D,K) * 4^K
+
+if exactly K coordinates are active.
+
+For occupancy up to K_wall:
+
+    N_<=K(D,K_wall)
+        =
+    sum_(k=0..K_wall)
+        C(D,k) 4^k
+
+Analyze the information content:
+
+    log2 N(D,K)
+
+as a function of K.
+
+Determine whether K=307 corresponds to any notable extremum or transition.
+
+For unrestricted quinary coordinates, total state count is:
+
+    5^D
+
+Compare the constrained state-space capacity.
+
+This analysis alone does NOT establish retrieval or recoverability capacity.
+
+State that explicitly.
+
+---
+
+# PART VIII — OVERLAP STATISTICS
+
+For independently drawn K-sparse vectors over D coordinates, derive or cite the expected active-support overlap:
+
+    E[|A ∩ B|]
+        =
+    K^2 / D
+
+under uniform support selection.
+
+At:
+
+    D = 1024
+    K = 307
+
+this is approximately:
+
+    307^2 / 1024
+
+Compute and interpret it.
+
+Also derive:
+
+- overlap distribution;
+- expected sign/magnitude agreement;
+- variance;
+- collision probability under relevant random models.
+
+Determine whether 30% occupancy is actually sparse enough to provide strong support separation.
+
+Compare with:
+
+    K = 32
+    K = 64
+    K = 128
+    K = 256
+    K = 307
+    K = 384
+    K = 512
+    K = 768
+    K = 1024
+
+Do not assume lower K is always superior: sparse capacity and robustness may trade off.
+
+---
+
+# PART IX — BINDING COLLISION ANALYSIS
+
+For the exact quinary binding rule, derive:
+
+    P(bind(q,r)=c)
+
+under explicitly stated input distributions.
+
+Investigate:
+
+- coordinate-level collisions;
+- vector-level collisions;
+- probability that two distinct input pairs produce the same composite;
+- collision entropy;
+- mutual information between:
+      q
+      r
+      bind(q,r)
+
+as occupancy varies.
+
+IMPORTANT:
+
+If the binding is coordinate-separable, distinguish:
+
+    per-active-coordinate information loss
+
+from:
+
+    whole-vector collision probability.
+
+Even if per-coordinate ambiguity is independent of K, whole-vector collision probability may vary with K because more coordinates participate.
+
+Determine whether such whole-vector behavior could justify an occupancy cap.
+
+---
+
+# PART X — INFORMATION-THEORETIC ANALYSIS
+
+Treat binding as a communication channel where appropriate.
+
+For random variables:
+
+    Q
+    R
+    C = bind(Q,R)
+
+calculate or estimate:
+
+    H(Q)
+    H(C)
+    H(Q | C,R)
+    I(Q ; C | R)
+
+under specified distributions.
+
+Repeat as the probability of zero/nonzero coordinates changes.
+
+Let:
+
+    p = K/D
+
+and evaluate conditional information retained as a function of p.
+
+Ask:
+
+> Is there a qualitative change near p=0.30?
+
+If no, state that 30% is not information-theoretically privileged under the investigated model.
+
+---
+
+# PART XI — BUNDLING / SUPERPOSITION CAPACITY
+
+If Nexus performs bundling, summation, majority voting, clipping, normalization, or other superposition after binding, analyze those operations separately.
+
+Search VSA literature for capacity curves of superposition.
+
+Determine whether a 30% active-support cap improves:
+
+- retrieval signal-to-noise;
+- cleanup accuracy;
+- bundle capacity;
+- collision resistance;
+- false-positive rate;
+- false-negative rate.
+
+If the existing Nexus architecture does not define such a bundling mechanism, do not use external bundling results as justification for K_wall.
+
+---
+
+# PART XII — k-WTA
+
+Determine whether 307 originates from k-WTA.
+
+If Nexus selects the top:
+
+    K = 307
+
+of:
+
+    D = 1024
+
+coordinates, investigate why the retention ratio was selected.
+
+Search literature on:
+
+- k-WTA networks;
+- sparse coding;
+- sparse autoencoders;
+- winner-take-all autoencoders;
+- locality-sensitive sparse representations;
+- competitive learning.
+
+Determine whether 30% is:
+
+    theoretically justified
+    empirically common
+    unusually dense
+    unusually sparse
+    or simply application-specific.
+
+Be careful:
+
+    k-WTA output sparsity
+        !=
+    computational sparsity
+
+unless computation avoids evaluating the discarded coordinates.
+
+Preserve the Nexus law:
+
+    sparse result != sparse computation
+
+---
+
+# PART XIII — ANN/HNSW INTERACTION
+
+Determine whether K_wall materially affects ANN behavior.
+
+Possible effects:
+
+- cosine similarity concentration;
+- Hamming-like support overlap;
+- angular separation;
+- hubness;
+- nearest-neighbor contrast;
+- index memory;
+- graph degree;
+- quantization.
+
+Benchmark or derive similarity distributions for different K values.
+
+Determine whether approximately 30% occupancy improves nearest-neighbor separability in the 1024-D quinary representation.
+
+Do NOT confuse better ANN recall with better semantic recoverability.
+
+---
+
+# PART XIV — PACKING / BIT-BUDGET HYPOTHESIS
+
+Claude proposed an explanation involving a "fixed per-coordinate bit budget."
+
+Audit this explicitly.
+
+The current quinary representation uses approximately:
+
+    sign
+    magnitude-1
+    magnitude-2
+
+bit planes.
+
+Ask:
+
+1. Does K change the number of bits per coordinate?
+2. Does K change total packed vector size?
+3. Does sparse storage use a different encoding whose size depends on K?
+4. Is 307 related to fitting within a fixed byte/page/cache-line/SIMD/storage boundary?
+5. Does any implementation allocate exactly enough metadata for 307 active coordinates?
+6. Is there a threshold where packed representation changes format?
+
+If not, reject "bit budget causes recoverability degradation" as unsupported.
+
+---
+
+# PART XV — EMPIRICAL SWEEP
+
+If executable Nexus code is available, run controlled experiments.
+
+Vary K over a meaningful range, for example:
+
+    K in {
+        16, 32, 64, 96, 128,
+        160, 192, 224, 256,
+        288, 307, 320, 352,
+        384, 448, 512, 640,
+        768, 896, 1024
+    }
+
+For each K measure:
+
+### Representation invariants
+    packed round-trip
+    sign-vacuum violations
+    magnitude-plane violations
+
+### Binding
+    collision rate
+    output occupancy
+    entropy
+
+### Partial unbinding
+    EXACT fraction
+    AMBIGUOUS fraction
+    UNKNOWN fraction
+    IMPOSSIBLE fraction
+
+### Whole-vector recovery
+    exact-vector recovery rate
+    coordinate recovery rate
+
+### Similarity
+    random-pair cosine distribution
+    same-class/different-class contrast if labels exist
+
+### ANN
+    exact-vs-HNSW Recall@k
+    hubness
+    query latency
+    index size
+
+### Runtime
+    binding time
+    k-WTA time
+    similarity time
+    storage footprint
+
+Plot each quantity against:
+
+    p = K/D
+
+Do not cherry-pick K=307.
+
+---
+
+# PART XVI — CHANGE-POINT / THRESHOLD ANALYSIS
+
+If degradation occurs as K increases, determine whether there is actually a statistically meaningful breakpoint.
+
+Use appropriate methods such as:
+
+- segmented regression;
+- change-point detection;
+- confidence intervals;
+- bootstrapping;
+- monotonic trend tests.
+
+Test whether:
+
+    K=307
+
+is distinguishable from:
+
+    300
+    306
+    308
+    320
+
+or whether it is merely one convenient point on a smooth curve.
+
+A smooth degradation curve does not justify language such as:
+
+    "past 307, recoverability fails"
+
+unless policy deliberately defines 307 as an accepted engineering limit.
+
+---
+
+# PART XVII — WHAT DOES "WALL" MEAN?
+
+The word:
+
+    wall
+
+suggests a discontinuity or hard boundary.
+
+Determine whether the evidence supports:
+
+    HARD MATHEMATICAL LIMIT
+    HARD REPRESENTATION LIMIT
+    VERIFIED SAFETY LIMIT
+    EMPIRICALLY CHOSEN OPERATING LIMIT
+    SOFT DESIGN TARGET
+    LEGACY CONSTANT
+
+If the evidence supports only a policy threshold, rename it accordingly, perhaps:
+
+    reference occupancy cap
+    reference active-coordinate limit
+    K_ref
+    K_max_reference
+
+Do not retain dramatic terminology that implies a theorem.
+
+---
+
+# PART XVIII — POSSIBLE JUSTIFICATIONS TO TEST
+
+Test each hypothesis separately.
+
+## H1 — Pure convention
+
+    K = round(0.30 D)
+
+chosen because 70% vacuum was aesthetically or heuristically preferred.
+
+## H2 — HDC/VSA capacity
+
+30% maximizes some binding/bundling/retrieval signal-to-noise property.
+
+## H3 — Partial-unbind recoverability
+
+EXACT/AMBIGUOUS discrimination worsens sharply near K=307.
+
+## H4 — Whole-vector collision rate
+
+The probability of two logical states becoming indistinguishable crosses an acceptable threshold near K=307.
+
+## H5 — ANN separability
+
+Nearest-neighbor contrast or HNSW recall changes materially near K=307.
+
+## H6 — k-WTA dynamics
+
+30% retention provides a stable competition regime.
+
+## H7 — storage / packing
+
+307 is connected to memory representation or hardware efficiency.
+
+## H8 — downstream homeostasis
+
+TUCR/Cyrae/HTCE dynamics behave poorly above the reference occupancy.
+
+## H9 — inherited historical constant
+
+307 originated elsewhere and was never independently justified.
+
+## H10 — multiple constraints
+
+307 is a compromise across several smooth trade-offs rather than one threshold.
+
+Rank these hypotheses according to evidence.
+
+---
+
+# PART XIX — THE 307 CLAIM LADDER
+
+At the end of the investigation, classify which of the following statements are defensible.
+
+### Claim A
+
+    Nexus reference HSL enforces K <= 307.
+
+### Claim B
+
+    307 corresponds to approximately 30% active coordinates.
+
+### Claim C
+
+    30% occupancy improves some measured property.
+
+### Claim D
+
+    307 is the empirically optimal occupancy.
+
+### Claim E
+
+    307 is a statistically identifiable degradation threshold.
+
+### Claim F
+
+    K > 307 causes EXACT/AMBIGUOUS discrimination to become unreliable.
+
+### Claim G
+
+    307 follows from a mathematical theorem.
+
+### Claim H
+
+    70% structural vacuum is universally desirable for HTLA/HSL.
+
+For every statement assign:
+
+    VERIFIED
+    SUPPORTED
+    PARTIALLY SUPPORTED
+    DESIGN CHOICE
+    UNESTABLISHED
+    FALSIFIED
+
+and cite the evidence.
+
+---
+
+# PART XX — REQUIRED OUTPUT
+
+Produce a substantial research report with:
+
+1. Executive conclusion:
+   **Why 307?**
+
+2. Corpus provenance timeline.
+
+3. Current implementation dependency map.
+
+4. Mathematical analysis of K-sparse quinary capacity.
+
+5. Support-overlap analysis.
+
+6. Binding collision analysis.
+
+7. Information-theoretic analysis.
+
+8. Partial-unbind analysis.
+
+9. External HDC/VSA comparison.
+
+10. k-WTA literature comparison.
+
+11. Packing/bit-budget audit.
+
+12. ANN/retrieval implications.
+
+13. Empirical K sweep if code is available.
+
+14. Statistical threshold analysis.
+
+15. Hypothesis ranking H1-H10.
+
+16. Claim-status audit.
+
+17. Recommendation for what the HTLA paper should say.
+
+---
+
+# REQUIRED ADVERSARIAL REVIEW
+
+Attack whichever conclusion the evidence initially suggests.
+
+If you conclude:
+
+    307 is arbitrary
+
+search aggressively for evidence that it is not.
+
+If you conclude:
+
+    307 is optimal
+
+search aggressively for evidence that nearby K values perform equally well.
+
+If you conclude:
+
+    occupancy affects unbinding
+
+try to prove independence under coordinate-separable binding.
+
+If you conclude:
+
+    occupancy does not affect unbinding
+
+search for global Nexus mechanisms that introduce cross-coordinate dependence.
+
+If you conclude:
+
+    70% vacuum is supported by HDC literature
+
+determine whether the literature's definition of sparsity actually matches Nexus's coordinate occupancy.
+
+---
+
+# EPISTEMIC RULE
+
+Do not manufacture a rationale because a constant exists.
+
+The following are all legitimate final conclusions:
+
+    "307 has a strong theoretical derivation."
+
+    "307 is a defensible empirically selected operating point."
+
+    "307 is a useful but non-optimal implementation constraint."
+
+    "307 was inherited historically and currently lacks justification."
+
+    "The original rationale cannot be recovered."
+
+The research determines which one is true.
+
+---
+
+# FINAL QUESTION
+
+The report must end by answering:
+
+> Given everything we can establish today, what exact sentence should the canonical HTLA paper use to describe K=307 without overstating the evidence?
+
+That sentence must be suitable for direct insertion into the Tier-2 HTLA paper.
