@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "8d7a7efc-7f26-47b5-8c71-b0c83b325afb",
+  "job_id": "eb0d6f56-1f5a-4812-8f58-dbdc8de2ae50",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Replacing_AI_sentience_with_cognitive_gearboxes.m4a",
+    "filename": "Replacing_AI_sentience_with_cognitive_gearboxes.m4a",
+    "duration": 101.9820625
+  },
+  "transcription": {
+    "started_at": "2026-09-01T23:03:37.973306",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 28.11,
+      "text": "This is the brief on the Consciousness Algorithm. By looking at recent cognitive science and a massive AI software rebuild called Project Nexus, we're going to see exactly why engineers are tearing down all that hype about AI sentience to build practical cognitive orchestrators. So first, we've got to look past the illusion of machine consciousness. You know, experts totally agree that today's algorithms just don't have the biological hardware for real awareness.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 28.11,
+      "end": 56.56,
+      "text": "What we're actually experiencing is semantic paradolea, which is really just humans projecting consciousness onto smooth chatbot answers. It's literally like seeing a face in a cloud. It's just a reflection of our own pattern recognition, not the cloud actually looking back at us. Second, this reality check is forcing a huge mathematical cleanup in the engineering world. Because AI isn't actually conscious, serious projects like the Nexus rewrite are aggressively purging pseudoscience from their code.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 56.56,
+      "end": 82.86,
+      "text": "They're ripping out fake biological neurotransmitters and flawed formulas that supposedly measured awareness. But wait, if they're stripping out all this mind-making math, what exactly is the algorithm actually doing? Well, finally, that brings us to cognitive orchestration. Instead of trying to code a soul, these algorithms act like a gearbox for thought. They smoothly shift the AI from rigid analytical logic right into a wide-open, creative daydream state.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 82.86,
+      "end": 101.98,
+      "text": "A great example is the green sky test, which proves the algorithm can isolate a hypothetical idea like a green sky to explore consequences without overriding its actual factual memory. Ultimately, the pursuit of a consciousness algorithm has evolved from chasing an artificial soul to engineering a highly efficient conductor for machine cognition.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Replacing_AI_sentience_with_cognitive_gearboxes.m4a",
+  "source_filename": "Replacing_AI_sentience_with_cognitive_gearboxes.m4a",
+  "source_duration": 101.9820625,
+  "transcription_timestamp": "2026-09-01T23:03:37.973306",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

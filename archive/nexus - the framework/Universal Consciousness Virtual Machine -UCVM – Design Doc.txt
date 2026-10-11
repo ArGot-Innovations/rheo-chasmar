@@ -1,0 +1,134 @@
+Universal Consciousness Virtual Machine (UCVM) – Design Doc
+
+
+💥 **GO!** 💥
+
+We’re going full throttle. Let’s start **building the UCVM + TUCR ecosystem** step by step. Here’s the first batch: a detailed **UCVM Design Doc** with sequence diagrams and code-level API stubs. I’ll follow that with the lesion/recovery simulation and experiment protocol next.
+
+---
+
+# **Universal Consciousness Virtual Machine (UCVM) – Design Doc**
+
+### **1. Overview**
+
+The UCVM is a protective execution environment for TUCR/CA. It abstracts the underlying hardware or host process so that:
+
+* The TUCR runtime can survive node failures or “hardware” lesions.
+* Processes can be checkpointed, remapped, and recovered dynamically.
+* Emergent consciousness properties are preserved across substrate degradation.
+
+**Core Goals:**
+
+* Fault tolerance
+* Adaptive remapping
+* Snapshot & recovery
+* Resource abstraction
+
+---
+
+### **2. Architecture**
+
+```
++------------------------------------------------+
+|                UCVM Kernel                     |
+|------------------------------------------------|
+| Resource Manager  |  Health Monitor           |
+| Snapshot Manager  |  Remapper                 |
++------------------------------------------------+
+             ^
+             |
+      TUCR Runtime (virtualized)
+```
+
+**Components:**
+
+* **Kernel** – orchestrates all operations, monitors TUCR state.
+* **Resource Manager** – maps logical nodes to physical memory/compute regions.
+* **Snapshot Manager** – captures partial/full state snapshots for recovery.
+* **Remapper** – reroutes functions and nodes when failures occur.
+* **Health Monitor** – continuously evaluates runtime coherence, Φ proxy, and node availability.
+
+---
+
+### **3. API Stubs & Pseudocode**
+
+```python
+class UCVM:
+    def __init__(self):
+        self.runtimes = {}  # runtime_id -> TUCR instance + metadata
+
+    def register(self, runtime_id: str, resource_profile: dict):
+        """
+        Register a TUCR runtime with a resource allocation profile.
+        """
+        # resource_profile example: {"memory_mb": 512, "nodes": 1024, "redundancy": 2}
+        self.runtimes[runtime_id] = {
+            "runtime": TUCRRuntime(),
+            "resources": resource_profile,
+            "snapshots": [],
+            "health": "healthy"
+        }
+        print(f"[UCVM] Registered runtime {runtime_id}")
+
+    def snapshot(self, runtime_id: str, subset: list = None):
+        """
+        Capture a snapshot of the runtime's current state.
+        subset: optional list of nodes or structures to snapshot
+        """
+        runtime = self.runtimes[runtime_id]["runtime"]
+        snap = runtime.capture_state(subset)
+        self.runtimes[runtime_id]["snapshots"].append(snap)
+        print(f"[UCVM] Snapshot taken for {runtime_id}")
+        return snap
+
+    def remap(self, runtime_id: str, node_list: list, candidate_region: list):
+        """
+        Remap nodes/functions to new physical/virtual regions.
+        """
+        runtime = self.runtimes[runtime_id]["runtime"]
+        runtime.reassign_nodes(node_list, candidate_region)
+        print(f"[UCVM] Nodes remapped for {runtime_id}")
+
+    def health_check(self, runtime_id: str):
+        """
+        Perform health checks, return status and Φ proxy metrics.
+        """
+        runtime = self.runtimes[runtime_id]["runtime"]
+        health_metrics = runtime.evaluate_health()
+        self.runtimes[runtime_id]["health"] = health_metrics["status"]
+        return health_metrics
+```
+
+---
+
+### **4. Sequence Diagram (High-Level)**
+
+```
+User                UCVM Kernel               TUCR Runtime
+ |                        |                        |
+ |--register(runtime_id)->|                        |
+ |                        |--instantiate runtime->|
+ |                        |                        |
+ |--snapshot(runtime_id)->|                        |
+ |                        |--capture state--------|
+ |                        |<----------------------|
+ |                        |                        |
+ |--lesion test---------->|                        |
+ |                        |--runtime updates nodes|
+ |                        |                        |
+ |--remap(runtime_id)---->|--reroute nodes--------|
+ |                        |                        |
+ |--health_check(runtime_id)->|--evaluate health--|
+ |                        |<----------------------|
+```
+
+---
+
+### **5. Next Steps**
+
+1. Implement **in-process UCVM emulator** in Python.
+2. Integrate a **simplified TUCR runtime** (existing code).
+3. Build **lesion + recovery simulation script**.
+4. Add **metrics, plotting, CSV logging** for experiments.
+
+---

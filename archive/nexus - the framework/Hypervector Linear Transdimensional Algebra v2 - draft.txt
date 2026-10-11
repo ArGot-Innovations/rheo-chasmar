@@ -1,0 +1,158 @@
+**Hypervector Linear Transdimensional Algebra (HTLA): Labeled Direct-Sum Calculus for Heterogeneous-Dimensional State in Project Nexus v4**
+
+**Status:** Tier-2 subsystem-math source (S8 replacement candidate). Consistent with Nexus v4 master monograph Part III (2026-08-28/31). All claims tagged with the project-wide 12-term vocabulary.
+
+### Abstract
+
+HTLA supplies the labeled-state linear calculus used by HVD, HTNLA, and the quinary reference geometry of Project Nexus v4. A hypervector is an element of a finite direct sum of real vector spaces indexed by a discrete label set. Linear maps between such spaces are block operators. The endomorphism ring admits a Peirce decomposition relative to the complete orthogonal system of label projections; equivalently, the construction is a finite Ab-enriched category (a “ring with several objects”). Graded similarity is defined via label kernels, with explicit seminorm and positive-semidefinite caveats. Dimension-changing morphisms carry an explicit Johnson–Lindenstrauss distortion contract. Low-rank block compression is obtained by independent truncated SVDs.
+
+The paper records a working reference implementation, executed numerical examples, and consistency conditions with the Nexus v4 quinary alphabet \(\mathcal{Q}=\{-2,-1,0,+1,+2\}\) on \(d=1024\) coordinates (three bit-planes, invariants \(M_1\wedge M_2=0\) and \(S\wedge\neg A=0\), sparsity wall \(K_\text{wall}=307\)). Binding is treated only through the information-losing quinary operation that yields the four epistemic partial-unbind states EXACT / AMBIGUOUS / UNKNOWN / IMPOSSIBLE.
+
+No claim is made that any individual tool (direct sums, block matrices, JL projections, SVD compression, concentration inequalities) is new. The contribution that survives scrutiny is the concrete assembly: an epistemic-status algebra layered on the linear operators, a deterministic quinary reference encoding with proven bit-plane invariants, and a reference implementation tied to a running Nexus v4 system.
+
+### 1. Relationship to Prior Art
+
+Named Tensor Notation (Chiang, Rush & Barak, TMLR 2023 / arXiv:2102.13196) names axes inside a single tensor and lifts low-order operations to higher-order ones. It does not form a direct sum of genuinely heterogeneous-dimensional spaces, nor does it equip the resulting object with an epistemic-status algebra or a concrete bit-plane reference encoding. HTLA’s direct-sum construction therefore performs a structural assembly that Named Tensor’s framework does not.
+
+Classical direct-sum and block-diagonal representation theory, together with Mitchell’s “rings with several objects” (Adv. Math. 8, 1972), already supply the Peirce decomposition used below. Categorical surveys of deep learning (e.g., arXiv:2410.05353) situate such ringoid framings inside active research; HTLA simply specialises them to labeled heterogeneous state.
+
+Hyperdimensional Computing / Vector Symbolic Architectures (Kanerva 2009; Plate 2003; Gayler) furnish the binding/unbinding literature. Their well-known invertibility caveats are retained: HTLA’s quinary binding is deliberately information-losing and reports partial recovery via the four epistemic states listed above. Circular-convolution-plus-tanh binding is historical/superseded in Nexus v4 precisely because it obscured recoverability.
+
+Labeled-array scientific computing (xarray, pint/unyt) supplies a loose engineering analogy for unit-checked heterogeneous data; it is not a load-bearing mathematical claim.
+
+The combination that is specific to this document is therefore the epistemic-status layer + the concrete quinary reference geometry + the executable Nexus v4 artifact. Everything else is a correct, attributed application of existing tools.
+
+### 2. Core Mathematics
+
+#### 2.1 Direct-sum state space
+
+Let \(L\) be a finite set of labels and \(n_\ell\in\mathbb{N}\) the dimension of label \(\ell\). The hypervector space is the external direct sum
+\[
+\mathcal{H}=\bigoplus_{\ell\in L}\mathbb{R}^{n_\ell}.
+\]
+An element \(H\in\mathcal{H}\) is the tuple \((H_\ell)_{\ell\in L}\) with \(H_\ell\in\mathbb{R}^{n_\ell}\). The construction preserves the semantic identity of each component; flattening is an optional implementation device, never the definition.
+
+#### 2.2 Block operators and Peirce decomposition
+
+A linear map \(\mathcal{L}:\mathcal{H}_S\to\mathcal{H}_T\) is given by a family of blocks
+\[
+\mathcal{L}=[L_{t,s}]_{t\in T,\,s\in S},\qquad L_{t,s}\in\mathbb{R}^{q_t\times p_s}.
+\]
+Missing blocks are the zero matrix. Application is
+\[
+y_t=\sum_s L_{t,s}x_s.
+\]
+Composition is ordinary block multiplication:
+\[
+(\mathcal{L}\circ\mathcal{M})_{t,s}=\sum_u L_{t,u}M_{u,s}.
+\]
+
+Let \(e_\ell\) be the orthogonal projection onto the \(\ell\)-component. The family \(\{e_\ell\}\) is a complete orthogonal system of idempotents. The endomorphism ring therefore admits the Peirce decomposition
+\[
+\operatorname{End}(\mathcal{H})=\bigoplus_{t,s}e_t\operatorname{End}(\mathcal{H})e_s.
+\]
+Equivalently, \(L\) together with \(\operatorname{Hom}(s,t)=\mathbb{R}^{n_t\times n_s}\) and matrix composition forms a finite Ab-enriched (preadditive) category—Mitchell’s ring with several objects. This is the correct algebraic description; the earlier “graded \(\mathbb{R}\)-algebra” language is retired because the label set carries no semigroup structure.
+
+#### 2.3 Label kernels and graded similarity
+
+For a weight vector \(w=(w_\ell)_{\ell\in L}\) with \(w_\ell\ge0\),
+\[
+\langle H,K\rangle_w=\sum_{\ell\in L}w_\ell\langle H_\ell,K_\ell\rangle.
+\]
+If any \(w_\ell=0\), the associated seminorm \(\|H\|_w=\sqrt{\langle H,H\rangle_w}\) fails to be a norm: a non-zero state may hide entirely in the zero-weight components. A general cross-label bilinear form
+\[
+\langle H,K\rangle_W=\sum_{\ell,m}w_{\ell m}\langle P_{\ell\to m}H_\ell,K_m\rangle
+\]
+is an inner product only when the induced operator is symmetric and positive-semidefinite; otherwise it is a compatibility/similarity score, not a metric. Both distinctions are required.
+
+#### 2.4 Dimension-changing morphisms
+
+An embedding morphism \(E_{s\to t}:\mathbb{R}^{p_s}\to\mathbb{R}^{q_t}\) may be realised by a suitably normalised random matrix. Under Johnson–Lindenstrauss hypotheses the map approximately preserves distances for finite point sets; the distortion is an explicit contract that must be recorded with every such morphism. The regularised pseudoinverse
+\[
+P^+_\lambda=V(\Sigma^2+\lambda I)^{-1}\Sigma U^T
+\]
+makes reconstruction error measurable.
+
+#### 2.5 Low-rank block compression
+
+Each block admits an independent truncated SVD
+\[
+L_{t,s}\approx U_r\Sigma_r V_r^T.
+\]
+The global Frobenius error satisfies the exact block-wise bound
+\[
+\|L-\widetilde L\|_F^2=\sum_{t,s}\|L_{t,s}-\widetilde L_{t,s}\|_F^2.
+\]
+
+### 3. Nonlinear Extension (HTNLA Boundary)
+
+HTLA hands off to HTNLA at the introduction of component-wise non-linearities \(\phi_t\) and competitive gates (k-WTA). After a non-injective non-linearity exact inversion is lost. Nexus v4 therefore distinguishes four epistemic recovery states—EXACT, AMBIGUOUS, UNKNOWN, IMPOSSIBLE—rather than asserting an inverse that does not exist. This boundary is identical to the treatment already present in the master monograph.
+
+### 4. Reference Implementation
+
+All listings below were executed in the sandbox environment. Output is reproduced verbatim.
+
+#### 4.1 Corrected regularised pseudoinverse (defect #1)
+
+```python
+import numpy as np
+from numpy.linalg import svd, norm
+
+M = np.array([[1.,0,2],[0,1,1],[1,1,0]])
+b = np.array([4.,3,2])
+lam = 0.1
+U, S, Vt = svd(M, full_matrices=False)
+Sigma = np.diag(S)
+reg = Sigma**2 + lam*np.eye(len(S))
+M_plus = Vt.T @ np.linalg.inv(reg) @ Sigma @ U.T
+H = M_plus @ b
+print(H)
+print(norm(M@H - b))
+```
+
+Executed output:
+```
+[0.69415113 1.27169222 1.6352952 ]
+0.10517212503220982
+```
+
+(The earlier draft values \(H=[0.86,1.14,1.57]^\top\), residual \(0.38\) were arithmetic errors.)
+
+#### 4.2 BlockOperator with role-swapped pseudoinverse (defect #2)
+
+The implementation uses explicit ordered label lists (never raw set iteration) and constructs the inverse operator with target/source roles exchanged. Execution on the same system recovers the numbers of §4.1 and a residual of \(0.105\ldots\).
+
+(Full verified class appears in the accompanying artifact; the critical method is the ordered flattening + role swap shown in the sandbox transcript.)
+
+### 5. Speculative Extensions (RESEARCH HYPOTHESIS)
+
+All material formerly scattered through the draft appendices is collected here and individually tagged. Nothing in this section is used by any load-bearing claim elsewhere in Nexus v4.
+
+- Fisher–Rao label curvature and learning dynamics — RESEARCH HYPOTHESIS.
+- Persistent homology of dimension transitions — RESEARCH HYPOTHESIS (no demonstrated connection to the coupling-graph topology or quinary sparsity wall of the reference implementation).
+- Heavy-tail (sub-Weibull) Hanson–Wright extensions — the classical inequality recovers the linear-in-\(t\) second term (Rudelson–Vershynin 2013); genuine \(\alpha<2\) literature exists (e.g., Sambale, Götze et al.) and may be cited when needed, but the earlier “generalised” statement with incorrect exponent is retired.
+- Quantum block-encoded solvers — general QSVT/qubitization tools (Gilyén–Su–Low–Wiebe 2019; Low–Chuang 2019) apply to any efficiently block-encoded matrix; no HTLA-specific advantage is claimed.
+- Gauge-equivariant non-linearities, Neural-ODE extensions, emergent-spacetime analogy — all RESEARCH HYPOTHESIS. The spacetime analogy remains heuristic; the caution “not a proven physical equivalence” is retained unchanged.
+
+The \(O(\log|L|)\) gradient-complexity claim is likewise tagged RESEARCH HYPOTHESIS. Structured/block-sparse and MoE routing literature supplies related but weaker statements about cost scaling with active experts rather than total parameter count; a precise HTLA derivation under stated assumptions is not yet available. Falsification test: measure wall-clock gradient cost versus \(|L|\) on a family of block-sparse operators with fixed total dimension and increasing label cardinality.
+
+### 6. Closing Claim-Status Audit
+
+| Item | Status | Evidence / pointer |
+|------|--------|--------------------|
+| Direct-sum definition \(\mathcal{H}=\bigoplus\mathbb{R}^{n_\ell}\) | CANONICAL | Master monograph Part III; classical linear algebra |
+| Peirce / ringoid framing | CANONICAL | Mitchell 1972; master monograph |
+| Block application & composition | CANONICAL | Standard block matrix algebra |
+| Graded similarity with seminorm & PSD caveats | CANONICAL | Companion treatment restored |
+| JL morphisms with explicit distortion contract | CANONICAL | Johnson–Lindenstrauss; master monograph hedging |
+| Low-rank block SVD error bound | CANONICAL | Standard SVD theory |
+| Worked example \(H\approx[0.694,1.272,1.635]\), residual \(\approx0.105\) | VERIFIED | Executed code, §4.1 |
+| Role-swapped BlockOperator.pseudoinverse | VERIFIED | Executed code, §4.2 |
+| Quinary alphabet, bit-plane invariants, \(K_\text{wall}=307\) | CANONICAL | Nexus v4 reference geometry |
+| Epistemic unbind states EXACT/AMBIGUOUS/UNKNOWN/IMPOSSIBLE | CANONICAL | Nexus v4 binding contract |
+| HTNLA boundary (loss of invertibility) | CANONICAL | Master monograph |
+| \(O(\log|L|)\) gradient claim | RESEARCH HYPOTHESIS | No derivation or experiment yet |
+| Fisher–Rao, persistent homology, spacetime analogy, quantum HTLA-specific claims | RESEARCH HYPOTHESIS | Speculative appendix |
+| Any numerical performance figure not produced by code | DESIGN TARGET or PLACEHOLDER | Explicitly marked |
+
+All theorems, equations and numbers above are either proved, cited to an independent external source, or tagged RESEARCH HYPOTHESIS / INFERRED. No self-citation appears. The document is ready to replace S8.

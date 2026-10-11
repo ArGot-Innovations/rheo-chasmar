@@ -1,0 +1,983 @@
+Multi‑Module Computational Node Architecture for Emergent Consensus Under 64‑bit Communication
+Architectural Specification
+Design intent, assumptions, and limits
+This specification targets a distributed swarm of nodes (baseline ) that must (i) reach emergent consensus using only local interactions, (ii) propagate “salience” (priority/importance) as a low‑bandwidth control signal, (iii) degrade gracefully under shock loss of 30% of nodes, and (iv) enforce strict communication and resource constraints: exactly one 64‑bit emission per node per local cycle and at most 8 packets processed per node per local cycle. The architectural inspiration is explicitly non‑biological and uses standard distributed systems and hyperdimensional / vector‑symbolic computation primitives. Gossip‑style local exchange is chosen because it is designed for limited communication and computation, and is robust to topology change and churn.
+The architecture below is simulation‑ready and intentionally “small‑math, large‑scale”: we only use fixed‑width integer ops, small fixed‑point scalars, and bitwise hypervector operations (XOR, Hamming distance, majority). These operations are standard in binary vector symbolic/hyperdimensional systems— binding via XOR and bundling via bitwise majority—because they are simple, reversible (for binding), and tolerant of noise.
+Node composition (five layers)
+Each node is a three‑module computational unit plus two infrastructural layers:
+Core‑A (Identity Core) Purpose: maintain a stable anchor (identity/role/continuity) and a mutable belief about the swarm’s shared state. State: binary anchor hypervector , belief hypervector , emission schedule, stability counters.
+Core‑B (Prediction Core) Purpose: predict expected incoming bundled content at the slice level; expose a prediction error used as salience and anomaly signals (lightweight predictive processing). State: predicted slice per slice (stored compactly), running error EMA .
+Core‑C (Regulation Core) Purpose: enforce local stability and recovery heuristics after lesions and under volatility; adjust gains and rewiring pressure. State: gains , instability proxy , recovery mode flags.
+NN= 10,000
+1
+2
+aihi
+u
+^
+ i,ssϵi
+(g,λ, θ)iiiVi
+Processing Layer Purpose: decode up to 8 received packets, validate checksum, bucket by slice, compute bundling/majority superposition, compute local consensus indicators.
+Interface Layer Purpose: neighbor management (fixed or geometric), local clock drift, packet emission, inbox enforcement, collision handling (drop/priority).
+Inter‑module coupling graph
+Couplings are deterministic and unidirectional where possible to reduce oscillations.
+Prediction Regulation: prediction error drives salience and stability control. Regulation Identity: gains and thresholds govern how aggressively is updated toward incoming bundles. Identity Interface: Identity selects what to transmit (belief slice vs. alert vs. recovery) and at what priority (via salience bits). InterfaceProcessing:deliverstheboundedinbox(≤8packets)foreachlocalcycle.Processing Prediction: bundled slice becomes the observation used for next‑step prediction.
+This mirrors canonical gossip/consensus loops (local exchange + update + repeat) while adding explicit local prediction and regulation loops.
+Deterministic micro‑cycle schedule (per node local cycle)
+Let node ’s local cycle counter be , and let global simulation “wall time” be . Each node has a local drifted clock rate . Asynchronous execution is implemented via a phase accumulator:
+One local cycle performs:
+Interface intake: pull up to 8 packets from inbox queue (drop remainder; strict limit). Processing decode: checksum validate; bucket by slice id; compute bundle (majority). Core‑B update: update prediction and compute prediction error. Core‑C update: compute instability proxy ; adjust gains; possibly trigger rewiring intent. Core‑A update: update belief slice toward bundled slice under regulation gains; optionally update identity anchor under very small learning rate. Emit exactly one packet (64‑bit) using packet rules. Interface maintenance: neighbor health bookkeeping and lazy rewiring if needed.
+State vector and per‑module memory budget (bytes)
+All variables below can be implemented in fixed‑width integers and small fixed‑point values.
+Global design parameters: - : local hypervector dimension in bits (default )
+→
+→hi
+→
+→
+→
+1
+it∈iN T
+r∈i[0.95, 1.05]
+ϕ←iϕ+ir, while ϕ≥ii1 : run one local cycle and set ϕ←iϕ−i1.
+1. 2. 3. 4.Vi5.
+6. 7.
+DD= 320
+- : payload bits transmitted per packet (default ) - : number of slices (default ) - : target neighbor degree (default )
+Per node , store:
+Core‑AIdentity(≈96bytes)- : anchor HV ( bytes for ) - : belief HV (40 bytes) - : 1 byte - identity_strength, emission_bias, mode_flags: 3 bytes - reserved (alignment): 12 bytes
+Core‑BPrediction(≈64bytes)- for each of slices: store as × 64‑bit words (8×8=64 bytes) if you keep a full 64‑bit lane; if you store only the lower bits, the remainder is unused padding.
+Core‑CRegulation(≈32bytes)- gains : 3×16‑bit fixed point (6 bytes) - salience : 8‑bit fixed point (1 byte) - EMA error : 16‑bit fixed point (2 bytes) - instability proxy : 16‑bit (2 bytes) - recovery timers / counters: 8 bytes - reserved: remaining
+ProcessingLayer(≈80bytes)- inbox buffer: up to 8 packets × 64 bits = 64 bytes −per‑cyclescratch:bitcountaccumulatorsand1bundledpayloadword(≤16bytes)
+InterfaceLayer(≈32–64bytes)- neighbor list: × 16‑bit node ids = 24 bytes (for ) - link health / last‑seen epoch: × 8‑bit = 12 bytes - drift rate and phase : 2×32‑bit fixed point = 8 bytes - optional 2D position (x,y) fixed point: 8 bytes
+Total target per node: ~ bytes.
+Limitations: this budget assumes a low‑level (C/Rust) representation. A Python simulator will use more memory; the simulator enforces the logical budget, not the interpreter’s object overhead.
+Mathematical Formulation
+Notation
+Nodes:
+bb= 40 S= D/bS= 8 RcR=c12
+i
+a ∈i{0, $1}D D/8 $= 40 D= 320 h ∈i{0, $1}D $
+tmodi64
+∈
+u
+^
+ i,s{0, $1}b S S $
+b
+g,λ, θiii
+siϵi
+Vi
+RcR=c12 Rc
+riϕi
+96 + 64 + 32 + 80 + 48 ≈320
+i∈{1,… $,N} $
+Active set after lesion: Neighbor set: where Hypervectors are binary: Slice operator: returns slice
+Binary VSA primitives used here: binding as XOR and bundling as bitwise majority are standard and explicitly described in VSA literature for Binary Spatter Codes.
+Core hypervector operators (simulation‑ready)
+Convert bits to when needed:
+Binding (reversible):
+This is the standard BSC binding operator.
+Bundling / superposition (majority with tie‑break): Given vectors ,
+A common tie break is “keep previous bit” or “pseudo‑random,” both of which appear in practice.
+Normalized Hamming distance (for disagreement/error):
+Local aggregation and consensus threshold
+At node and local cycle , consider the set of received, checksum‑valid packets with slice : , with . Let be their payloads.
+Local aggregation (bundling):
+Local consensus indicator:
+A(T) ⊆{1,… $,N} $
+N (T)i∣N∣≈iRc
+x ∈{0, $1}D $
+x ∈(s){0, $1}b s $∈{0,… ,S− 1}
+2
+{−1,+1}
+χ(x) =k2x−k1 ∈{−1,+1}.
+bind(x,k) = x⊕k, unbind(y,k) = y ⊕k.
+2
+{x } ⊆(m)m=1M{0, $1}b $
+bundle({x }) =(m)k⎩⎨
+⎧10
+tieBreak(k)
+if  x>M/2∑mk
+(m)
+if  x<M/2∑mk
+(m)
+if  x=M/2.∑mk
+(m)
+3
+d(x,y) =H1[x= b
+1
+k=1
+∑b
+k y].k
+itisP (t)i,si
+∣P(t)∣≤i,si8 p ∈j→i(s){0, $1}b $
+u (t) =i,sibundle({p (t)} ).j→i(s)
+ij∈Ni
+where is a protocol parameter (baseline sweep includes it).
+Node‑level consensus (across slices):
+Core‑B prediction and salience
+Prediction is intentionally minimal: for the currently processed slice , maintain and update it toward the latest observed bundle with a stochastic bit‑flip rule (cheap and stable under low compute):
+For each bit ,
+where is the predictor learning rate.
+Prediction error for that slice:
+Running error EMA:
+Salience update (with noise as required):
+where (baseline ) and is a salience smoothing/mixing coefficient.
+Rationale: prediction error as a driver for surprise/salience is a standard design pattern in predictive processing architectures; here it is implemented with fixed‑cost binary operations. (We avoid heavy models by design.)
+Core‑A identity/belief update
+Core‑A contains both a stable anchor and a belief . The belief is what the swarm tends to align.
+Belief slice update (regulated stochastic mixing): Let be the regulation‑controlled consensus gain. For each bit:
+c(t) =i,si1 dh (t), u (t) ≤θ,[ H(i(s)
+ii,si) c]θ∈c[0, 1]
+c(t) =iic(t), node is “in consensus” if c(t) ≥S
+1
+s=0
+∑S−1
+i,siiiΘ.node
+s
+u
+^
+ i,s
+k∈{1,… , $b} $
+(t+
+u
+^
+ i,s,ki1) = ⎩⎨⎧(t)
+u
+^
+ i,s,ki
+u(t)i,s,ki
+(t)
+u
+^
+ i,s,ki
+if  (t) = u(t)
+u
+^
+ i,s,kii,s,ki
+with prob. αpwith prob. 1 − αp
+α∈p(0, 1]
+ϵ(t) =i,sid(t), u (t) .H(
+u
+^
+ i,sii,si)
+ϵ(t+ii1) = (1 − β)ϵ(t) +ϵiiβϵ(t).ϵi,si
+σs
+s(t+ii1) = clip ((1 −[0,1] λ)s(t) +siiλϵ(t+sii1) + ξ(t)),ii
+ξ(t) ∼iiN (0,σ)s2 σ=s0.05 λ∈s[0, 1]
+aihi
+g(t) ∈ii[0, 1]
+Anchor update (very slow, optional): Anchor should be stable; update only when in a high‑confidence regime:
+with (e.g., ).
+Movement and topology update (optional but fully specified)
+If you embed the swarm in a 2D torus (for random geometric graphs), each node has position . A minimal salience‑seeking drift using only neighbor positions:
+with small and noise .
+Connectivity control for random geometric graphs uses the known scaling for connectivity thresholds: if exceeds a constant threshold, connectivity emerges w.h.p.
+For non‑spatial graphs (simpler), use a fixed‑degree random neighbor list and rewiring.
+Low‑Bandwidth 64‑bit Protocol
+Packet objective and rationale
+A single 64‑bit packet must carry: (i) a small hypervector slice for consensus/belief propagation, (ii) a salience value for priority routing and collision triage, and (iii) a few bits of control/meta to support asynchrony (slice id, epoch) and integrity (checksum). This is analogous to designing “gossip messages” under severe constraints: minimal structure, maximum robustness.
+Exact 64‑bit layout (bit‑accurate)
+We define a fixed layout for all packets:
+Bits(MSB→LSB)Name Width Semantics
+63..62 kind 2 00=STATE, 01=ALERT, 10=RECOVERY, 11=TOPOLOGY
+61..56 slice_id 6 slice index (supports up to slices)
+h(t+i,k(s)
+i1) = ⎩⎨⎧h(t)i,k
+(s)i
+u(t)i,k,si
+h(t)i,k(s)
+i
+if h(t) = u(t)i,k(s)
+ii,k,si
+with prob. g(t)ii
+otherwise.
+a (t+ii1) = {a (t)ii
+Mix (a (t), h (t))αaiiii
+if c(t) < Θiianchor
+otherwise
+α≪a1 0.01
+[0, 1)2 x (T)i
+v (T) =i(s− j∈Ni
+∑js) ,i∥x− x ∥+ εji2
+x − xji
+x (T+i1) = (x (T) +iηtanh(v (T)) +xin (T)) modi1,
+ηxni
+nπr/ log nn2 4
+1
+s∈[0, 63] 64
+Bits(MSB→LSB)Name Width Semantics
+55..50 epoch 6 sender local cycle modulo 64
+49..44 sal_q 6 salience quantized:
+43..4 payload 40 payload bits; interpretation depends on kind
+3..0 crc4 4 CRC‑4 checksum over bits 63..4
+Payload semantics by kind:
+STATE (00): payload is a hypervector slice representing a bound bundle of belief + (optional) identity tag. ALERT (01): top 8 bits = anomaly code, next 6 bits = slice target, remaining 26 bits = evidence hash. RECOVERY (10): control knobs (e.g., recommended and rewiring pressure). TOPOLOGY (11): compact neighbor offer / location bucket.
+CRC is included because under collisions/drops, silent corruption is otherwise hard to detect at this bandwidth.
+Binding, unbinding, majority‑vote superposition (packet‑level)
+We use public channel keys (shared constants) to multiplex content inside the 40‑bit payload:
+belief channel key identity tag key
+control key
+Each transmitted STATE payload is:
+Receiver can approximately retrieve:
+then treat these as noisy observations.
+This “bind + bundle” multiplexing is a standard VSA pattern; binding must be (approximately) invertible and bundling must preserve similarity to constituents.
+Encoding/decoding pseudocode (bit‑exact)
+CRC‑4 (polynomial , generator 0b0011) pseudocode
+function crc4_itu(bits63_to_4_u60):
+# Input: 60-bit integer (packet without crc4)
+s≈sal_q/63
+p ∈{0, 1}40
+g
+K ∈BEL{0, 1}40
+K ∈ID{0, 1}40
+K ∈CTL{0, 1}40
+p = bundle({bind(h ,K ), bind(a ,K $)}).i (s) $
+BEL i(s)
+ID
+≈h (s)unbind(p,K ), ≈BELa (s)unbind(p,K ),ID
+5
+x+4 x+1
+poly = 0b0011 # x^4 + x + 1, low 4 bits
+reg = 0b0000 # 4-bit shift register
+for i from 59 down to 0:
+bit = (bits63_to_4_u60 >> i) & 1
+top = (reg >> 3) & 1
+reg = ((reg << 1) & 0b1111) | bit
+if top == 1:
+reg = reg ^ poly
+return reg # 4-bit
+Packet encode
+function pack64(kind, slice_id, epoch, sal_q, payload40):
+x = 0
+x |= (kind & 0b11) << 62
+x |= (slice_id & 0b111111) << 56
+x |= (epoch & 0b111111) << 50
+x |= (sal_q & 0b111111) << 44
+x |= (payload40 & ((1<<40)-1)) << 4
+crc = crc4_itu(x >> 4) # crc over bits 63..4
+x |= crc
+return x # uint64
+Packet decode
+function unpack64(u64):
+crc = u64 & 0xF
+if crc4_itu(u64 >> 4) != crc:
+return INVALID
+kind = (u64 >> 62) & 0b11
+slice_id = (u64 >> 56) & 0b111111
+epoch = (u64 >> 50) & 0b111111
+sal_q = (u64 >> 44) & 0b111111
+payload = (u64 >> 4) & ((1<<40)-1)
+return (kind, slice_id, epoch, sal_q, payload)
+Majoritybundleofreceivedpayloads(≤8)
+function bundle_payloads(payloads[]):
+# payloads: list of up to 8 integers, each using low 40 bits
+ones_count[0..39] = 0
+M = len(payloads)
+for p in payloads:
+for k in 0..39:
+ones_count[k] += (p >> k) & 1
+out = 0
+for k in 0..39:
+if ones_count[k] > M/2: out |= (1<<k)
+else if ones_count[k] == M/2: out |= tie_break(k)
+return out
+Emission, reception, and collision rules
+Emission (hard rule): each node emits exactly one packet per local cycle. Reception (hard rule): each node decodes/processes at most 8 packets per local cycle; excess packets are dropped without buffering. Collision handling: if more than 8 packets arrive “during the same local cycle window,” retain the 8 with largest sal_q (priority drop).
+Rationale: priority‑based selection is a local analog of contention control; collision is unavoidable under shared medium assumptions. ALOHA‑style analyses illustrate that collision probability grows rapidly with offered load; throughput is maximized around a load of under a slotted Poisson model, emphasizing why strict receive caps and prioritization matter.
+Limitation: This is not a full MAC layer; it is a simulation‑level enforcement of “only 8 packets can be used per cycle.”
+Data Structures and Reference Simulator
+Allowed and forbidden operations (explicit)
+Allowed (per node per cycle): - Fixed‑width integer ops: AND, OR, XOR, shifts, add/sub, comparisons - Bit operations: popcount / Hamming distance, majority bundling on ≤8 payloads - A small number of fixed‑point scalar ops (salience EMA, gain updates) - One packet encode per cycle; up to eight decodes per cycle
+Forbidden (inside node logic): - Any global aggregation (no global consensus computation inside nodes) -Dynamic allocation proportional to (node cannot scan all nodes) - Matrix multiplication / FFT / sorting of unbounded lists - Floating heavy models (deep nets); anything exceeding per‑cycle budget
+The simulator enforces these by counting abstract ops (see implementation).
+Complexity targets
+Let , , receive cap . Per node per local cycle: - Decode: - Bundling: bit checks(≤320bitchecks)− Belief update: - Prediction update: Total: which is constant under caps.
+≈1 6
+N
+b= 40 R≈c12 C=rx8 O(C)rxO(C⋅rxb)
+O(b)O(b)O(C⋅rxb)
+Per global simulation step, total work is , and with drift bounded, this is cycles per global step.
+Reference implementation (single file, runnable Python)
+File: mmcn_sim.py
+#!/usr/bin/env python3
+"""
+Multi-Module Computational Node (MMCN) swarm simulator
+- N nodes (target 10k)
+- Each node has Core-A Identity, Core-B Prediction, Core-C Regulation,
+plus Processing and Interface layers.
+- Strict comms: 1x 64-bit packet emitted per node per local cycle;
+<=8 packets processed per node per local cycle.
+- Asynchronous local clocks with bounded drift ±5% implemented via phase
+accumulators.
+- Deterministic RNG optional; fixed update ordering optional.
+- Lesion injection: delete fraction of nodes at time t_L.
+- Parameter sweeps supported.
+No external deps required. Optional matplotlib for plotting in --plot mode.
+"""
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import List, Tuple, Optional, Dict
+import argparse
+import math
+import random
+import csv
+import sys
+# -----------------------------
+# Bit-level protocol constants
+# -----------------------------
+KIND_STATE = 0
+KIND_ALERT = 1
+KIND_RECOVERY = 2
+KIND_TOPO = 3
+PAYLOAD_BITS = 40
+PAYLOAD_MASK = (1 << PAYLOAD_BITS) - 1
+def crc4_itu_u60(x_u60: int) -> int:
+O(cycles executed by i)∑i
+O(N)
+"""
+CRC-4 (ITU-like) over a 60-bit integer, MSB-first.
+Generator poly: x^4 + x + 1 -> 0b0011 (low 4 bits).
+"""
+poly = 0b0011
+reg = 0
+for i in range(59, -1, -1):
+bit = (x_u60 >> i) & 1
+top = (reg >> 3) & 1
+reg = ((reg << 1) & 0b1111) | bit
+if top == 1:
+reg ^= poly
+return reg & 0xF
+def pack64(kind: int, slice_id: int, epoch: int, sal_q: int, payload: int) ->
+int:
+payload &= PAYLOAD_MASK
+x = 0
+x |= (kind & 0b11) << 62
+x |= (slice_id & 0b111111) << 56
+x |= (epoch & 0b111111) << 50
+x |= (sal_q & 0b111111) << 44
+x |= payload << 4
+crc = crc4_itu_u60(x >> 4)
+return (x | crc) & ((1 << 64) - 1)
+def unpack64(u64: int) -> Optional[Tuple[int, int, int, int, int]]:
+crc = u64 & 0xF
+if crc4_itu_u60(u64 >> 4) != crc:
+return None
+kind = (u64 >> 62) & 0b11
+slice_id = (u64 >> 56) & 0b111111
+epoch = (u64 >> 50) & 0b111111
+sal_q = (u64 >> 44) & 0b111111
+payload = (u64 >> 4) & PAYLOAD_MASK
+return kind, slice_id, epoch, sal_q, payload
+# -----------------------------
+# Hypervector helpers (binary)
+# -----------------------------
+def xorshift32(x: int) -> int:
+x &= 0xFFFFFFFF
+x ^= (x << 13) & 0xFFFFFFFF
+x ^= (x >> 17) & 0xFFFFFFFF
+x ^= (x << 5) & 0xFFFFFFFF
+return x & 0xFFFFFFFF
+def rand_bits_u64(seed32: int) -> Tuple[int, int]:
+"""
+Deterministic: returns (new_seed, 64 random bits as int).
+"""
+s = xorshift32(seed32)
+hi = xorshift32(s)
+lo = xorshift32(hi)
+out = ((hi << 32) | lo) & ((1 << 64) - 1)
+return lo, out
+def popcount(x: int) -> int:
+return x.bit_count()
+def hamming_dist_norm(a_payload: int, b_payload: int, bits: int = PAYLOAD_BITS)
+-> float:
+return popcount((a_payload ^ b_payload) & ((1 << bits) - 1)) / float(bits)
+def bundle_majority(payloads: List[int], tie_seed: int) -> Tuple[int, int]:
+"""
+Majority bundle over <=8 payloads (PAYLOAD_BITS bits).
+Tie-breaking uses deterministic pseudo-randomness from tie_seed.
+Returns (new_tie_seed, bundled_payload).
+"""
+m = len(payloads)
+if m == 0:
+return tie_seed, 0
+ones = [0] * PAYLOAD_BITS
+for p in payloads:
+for k in range(PAYLOAD_BITS):
+ones[k] += (p >> k) & 1
+out = 0
+half2 = m # compare 2*ones[k] vs m
+s = tie_seed
+for k in range(PAYLOAD_BITS):
+if 2 * ones[k] > half2:
+out |= (1 << k)
+elif 2 * ones[k] == half2:
+# deterministic tie-break bit
+s = xorshift32(s)
+out |= ((s >> 0) & 1) << k
+return s, out & PAYLOAD_MASK
+# -----------------------------
+# Op budget accounting
+# -----------------------------
+@dataclass
+class Budgets:
+int_ops_max: int = 3000
+fp_ops_max: int = 200
+hv_ops_max: int = 1200
+enc_max: int = 1
+dec_max: int = 8
+@dataclass
+class OpCounter:
+int_ops: int = 0
+fp_ops: int = 0
+hv_ops: int = 0
+enc: int = 0
+dec: int = 0
+def add_int(self, n: int) -> None:
+self.int_ops += n
+def add_fp(self, n: int) -> None:
+self.fp_ops += n
+def add_hv(self, n: int) -> None:
+self.hv_ops += n
+def add_enc(self, n: int) -> None:
+self.enc += n
+def add_dec(self, n: int) -> None:
+self.dec += n
+def enforce(self, b: Budgets) -> None:
+if self.int_ops > b.int_ops_max:
+raise RuntimeError(f"Int op budget exceeded: {self.int_ops}
+>{b.int_ops_max}")
+if self.fp_ops > b.fp_ops_max:
+raise RuntimeError(f"FP op budget exceeded: {self.fp_ops}
+>{b.fp_ops_max}")
+if self.hv_ops > b.hv_ops_max:
+raise RuntimeError(f"HV op budget exceeded: {self.hv_ops}
+>{b.hv_ops_max}")
+if self.enc > b.enc_max:
+raise RuntimeError(f"Encode budget exceeded: {self.enc}
+>{b.enc_max}")
+if self.dec > b.dec_max:
+raise RuntimeError(f"Decode budget exceeded: {self.dec}
+>{b.dec_max}")
+# -----------------------------
+# Node definition
+# -----------------------------
+@dataclass
+class NodeParams:
+slices: int = 8 # D/b
+alpha_pred: float = 0.35
+beta_err: float = 0.2
+sal_smooth: float = 0.3
+noise_sigma: float = 0.05
+theta_c: float = 0.20
+theta_node: float = 0.75
+g_init: float = 0.45
+g_min: float = 0.10
+g_max: float = 0.90
+rewired_per_cycle_cap: int = 1
+@dataclass
+class Node:
+node_id: int
+active: bool
+seed32: int
+drift: float
+phase: float
+neighbors: List[int]
+last_seen_epoch: List[int]
+# Core-A
+anchor_slices: List[int] # each stored as <=64 bits, low PAYLOAD_BITS used
+belief_slices: List[int]
+# Core-B
+pred_slices: List[int]
+err_ema: float
+# Core-C
+salience: float
+g_cons: float
+instability: float
+recovery_timer: int
+# Interface/Processing
+inbox: List[int] # raw u64 packets awaiting processing
+def _sal_q(self) -> int:
+return max(0, min(63, int(round(self.salience * 63.0))))
+def _epoch6(self, local_cycle: int) -> int:
+return local_cycle & 0b111111
+def step_one_cycle(
+self,
+local_cycle: int,
+budgets: Budgets,
+params: NodeParams,
+channel_keys: Dict[str, int],
+rng: random.Random,
+) -> int:
+"""
+Runs one local cycle and returns exactly one emitted packet (uint64).
+"""
+ops = OpCounter()
+# 1) Intake: process up to 8 packets
+rx = self.inbox[:8]
+self.inbox = self.inbox[8:] # drop buffering beyond 8 *processing
+capacity*
+if len(self.inbox) > 0:
+# hard rule: packets beyond processing window are dropped, not
+buffered
+self.inbox.clear()
+# 2) Decode + bucket by slice_id
+buckets: Dict[int, List[int]] = {}
+for u64 in rx:
+ops.add_dec(1)
+ops.add_int(40)
+dec = unpack64(u64)
+if dec is None:
+continue
+kind, slice_id, epoch, sal_q, payload = dec
+if kind != KIND_STATE:
+continue
+if slice_id >= params.slices:
+continue
+buckets.setdefault(slice_id, []).append(payload)
+# 3) Choose slice to update this cycle
+slice_id = local_cycle % params.slices
+payloads = buckets.get(slice_id, [])
+ops.add_hv(PAYLOAD_BITS * max(1, len(payloads)))
+# Majority bundle
+self.seed32, bundled = bundle_majority(payloads, self.seed32)
+# Unbind belief channel
+u_obs = (bundled ^ channel_keys["BEL"]) & PAYLOAD_MASK
+# 4) Prediction update + error
+pred = self.pred_slices[slice_id]
+err = hamming_dist_norm(pred, u_obs)
+ops.add_hv(3)
+# Stochastic bit flip predictor toward observation
+# (cheap approximation: flip each differing bit with prob alpha_pred)
+if payloads:
+new_pred = pred
+alpha = params.alpha_pred
+for k in range(PAYLOAD_BITS):
+bit_p = (pred >> k) & 1
+bit_u = (u_obs >> k) & 1
+if bit_p != bit_u and rng.random() < alpha:
+new_pred ^= (1 << k)
+self.pred_slices[slice_id] = new_pred & PAYLOAD_MASK
+ops.add_hv(PAYLOAD_BITS)
+# EMA error
+self.err_ema = (1 - params.beta_err) * self.err_ema + params.beta_err *
+err
+ops.add_fp(6)
+# 5) Salience update
+noise = rng.gauss(0.0, params.noise_sigma)
+self.salience = max(0.0, min(1.0, (1 - params.sal_smooth) *
+self.salience + params.sal_smooth * self.err_ema + noise))
+ops.add_fp(10)
+# 6) Regulation: instability proxy and gain adjustment
+# Instability: combine prediction error + local disagreement with own
+belief slice
+belief = self.belief_slices[slice_id]
+disagree = hamming_dist_norm(belief, u_obs)
+self.instability = 0.6 * self.err_ema + 0.4 * disagree
+ops.add_fp(8)
+# Gain control heuristic:
+# - If instability high, reduce gain (prevent oscillation).
+# - If instability low and not in recovery, increase gain (speed
+consensus).
+if self.recovery_timer > 0:
+self.g_cons = max(params.g_min, self.g_cons - 0.02)
+self.recovery_timer -= 1
+else:
+if self.instability > 0.30:
+self.g_cons = max(params.g_min, self.g_cons - 0.01)
+elif self.instability < 0.15:
+self.g_cons = min(params.g_max, self.g_cons + 0.01)
+ops.add_fp(8)
+# 7) Core-A belief update toward observation with stochastic bit flips
+under g_cons
+g = self.g_cons
+new_belief = belief
+for k in range(PAYLOAD_BITS):
+bit_b = (belief >> k) & 1
+bit_u = (u_obs >> k) & 1
+if bit_b != bit_u and rng.random() < g:
+new_belief ^= (1 << k)
+self.belief_slices[slice_id] = new_belief & PAYLOAD_MASK
+ops.add_hv(PAYLOAD_BITS)
+# 8) Emit exactly one packet (STATE by default; ALERT if anomaly
+flagged)
+# Simple anomaly flag: very high error
+if self.err_ema > 0.60:
+kind = KIND_ALERT
+payload = ((0xA5 & 0xFF) << 32) | ((slice_id & 0x3F) << 26) |
+(u_obs & ((1 << 26) - 1))
+payload &= PAYLOAD_MASK
+else:
+kind = KIND_STATE
+# Bind belief channel
+payload = (self.belief_slices[slice_id] ^ channel_keys["BEL"]) &
+PAYLOAD_MASK
+pkt = pack64(kind, slice_id, self._epoch6(local_cycle), self._sal_q(),
+payload)
+ops.add_enc(1)
+# Enforce budgets
+ops.enforce(budgets)
+return pkt
+# -----------------------------
+# Swarm simulator
+# -----------------------------
+@dataclass
+class SimParams:
+N: int = 10_000
+Rc: int = 12
+cycles: int = 500
+lesion_time: int = 200
+lesion_frac: float = 0.30
+seed: int = 123
+fixed_order: bool = True
+rx_cap: int = 8 # logical, enforced by node logic already
+def build_random_regular_neighbors(N: int, Rc: int, rng: random.Random) ->
+List[List[int]]:
+"""
+Simple approximate fixed-degree neighbor lists by random sampling without
+self.
+Not guaranteed symmetric; sufficient for gossip-style interaction.
+"""
+neigh = []
+for i in range(N):
+candidates = list(range(N))
+candidates[i] = candidates[-1]
+candidates.pop()
+rng.shuffle(candidates)
+neigh.append(candidates[:Rc])
+return neigh
+def connected_components_size(active: List[bool], neighbors: List[List[int]]) -
+> int:
+"""
+Returns size of largest component among active nodes (undirected approx
+based on neighbor lists).
+Cheap BFS that treats edges as undirected if either direction exists.
+"""
+N = len(active)
+# Build adjacency lists on the fly; for speed we approximate as directed
+edges only.
+visited = [False] * N
+best = 0
+for i in range(N):
+if not active[i] or visited[i]:
+continue
+q = [i]
+visited[i] = True
+size = 0
+while q:
+u = q.pop()
+size += 1
+for v in neighbors[u]:
+if v < 0 or v >= N:
+continue
+if active[v] and not visited[v]:
+visited[v] = True
+q.append(v)
+if size > best:
+best = size
+return best
+def run_sim(sp: SimParams, np_: NodeParams, budgets: Budgets) -> List[Dict[str,
+float]]:
+rng = random.Random(sp.seed)
+# Public channel key (payload-sized)
+# Deterministic derivation from seed:
+bel_key = rng.getrandbits(PAYLOAD_BITS) & PAYLOAD_MASK
+channel_keys = {"BEL": bel_key}
+neighbors = build_random_regular_neighbors(sp.N, sp.Rc, rng)
+nodes: List[Node] = []
+for i in range(sp.N):
+seed32 = rng.getrandbits(32)
+drift = 0.95 + 0.10 * rng.random()
+phase = rng.random()
+# Initialize slices
+anchor = [rng.getrandbits(PAYLOAD_BITS) & PAYLOAD_MASK for _ in
+range(np_.slices)]
+belief = [rng.getrandbits(PAYLOAD_BITS) & PAYLOAD_MASK for _ in
+range(np_.slices)]
+pred = [0 for _ in range(np_.slices)]
+nodes.append(Node(
+node_id=i,
+active=True,
+seed32=seed32,
+drift=drift,
+phase=phase,
+neighbors=neighbors[i],
+last_seen_epoch=[0]*len(neighbors[i]),
+anchor_slices=anchor,
+belief_slices=belief,
+pred_slices=pred,
+err_ema=0.0,
+salience=0.0,
+g_cons=np_.g_init,
+instability=0.0,
+recovery_timer=0,
+inbox=[]
+))
+logs: List[Dict[str, float]] = []
+# Global schedule: each "global step" advances phases and runs due cycles
+for T in range(sp.cycles):
+# Lesion injection
+if T == sp.lesion_time:
+kill = int(round(sp.lesion_frac * sp.N))
+victims = list(range(sp.N))
+rng.shuffle(victims)
+victims = victims[:kill]
+for vid in victims:
+nodes[vid].active = False
+nodes[vid].inbox.clear()
+# put neighbors into recovery timer
+for n in nodes:
+if n.active:
+n.recovery_timer = 50 # local recovery window
+# Determine update order
+idxs = list(range(sp.N))
+if not sp.fixed_order:
+rng.shuffle(idxs)
+# Collect outgoing packets for nodes that run a cycle this global step
+outgoing: List[Tuple[int, int]] = [] # (sender, pkt)
+cycles_executed = 0
+for i in idxs:
+n = nodes[i]
+if not n.active:
+continue
+n.phase += n.drift
+# bounded drift means at most 2 cycles per global step typically
+while n.phase >= 1.0:
+n.phase -= 1.0
+pkt = n.step_one_cycle(local_cycle=T, budgets=budgets,
+params=np_, channel_keys=channel_keys, rng=rng)
+outgoing.append((i, pkt))
+cycles_executed += 1
+# Deliver packets to neighbors (broadcast)
+for sender, pkt in outgoing:
+sn = nodes[sender]
+if not sn.active:
+continue
+for v in sn.neighbors:
+if v < 0 or v >= sp.N:
+continue
+if nodes[v].active:
+nodes[v].inbox.append(pkt)
+# Compute global metrics (for evaluation; allowed in simulator)
+active = [n.active for n in nodes]
+n_active = sum(1 for a in active if a)
+gc = connected_components_size(active, neighbors) if n_active > 0 else 0
+# Consensus fraction proxy using slice 0 majority
+# (Supervisor computes this; nodes do not.)
+if n_active > 0:
+ones = [0] * PAYLOAD_BITS
+for n in nodes:
+if not n.active:
+continue
+p0 = n.belief_slices[0]
+for k in range(PAYLOAD_BITS):
+ones[k] += (p0 >> k) & 1
+maj = 0
+for k in range(PAYLOAD_BITS):
+if ones[k] * 2 >= n_active:
+maj |= (1 << k)
+in_cons = 0
+for n in nodes:
+if not n.active:
+continue
+if hamming_dist_norm(n.belief_slices[0], maj) <= np_.theta_c:
+in_cons += 1
+consensus_frac = in_cons / float(n_active)
+else:
+consensus_frac = 0.0
+# Phi-proxy: combine (1-avg err) and consensus_frac (simple, cheap
+supervisor metric)
+if n_active > 0:
+avg_err = sum(n.err_ema for n in nodes if n.active) /
+float(n_active)
+phi_proxy = max(0.0, min(1.0, (1.0 - avg_err) * consensus_frac))
+else:
+phi_proxy = 0.0
+logs.append({
+"T": float(T),
+"active": float(n_active),
+"giant_component_frac": (gc / float(n_active)) if n_active > 0 else
+0.0,
+"consensus_frac": consensus_frac,
+"phi_proxy": phi_proxy,
+"cycles_executed": float(cycles_executed),
+})
+return logs
+# -----------------------------
+# Tests
+# -----------------------------
+def test_packet_roundtrip():
+rng = random.Random(1)
+for _ in range(1000):
+kind = rng.randrange(4)
+sid = rng.randrange(64)
+ep = rng.randrange(64)
+sal = rng.randrange(64)
+payload = rng.getrandbits(PAYLOAD_BITS)
+u = pack64(kind, sid, ep, sal, payload)
+dec = unpack64(u)
+assert dec is not None
+k2, s2, e2, q2, p2 = dec
+assert (kind, sid, ep, sal, payload & PAYLOAD_MASK) == (k2, s2, e2, q2,
+p2)
+def test_bundle_majority_basic():
+# majority of identical vectors == that vector
+seed = 123
+payloads = [0b101010, 0b101010, 0b101010]
+seed2, out = bundle_majority(payloads, seed)
+assert out & 0b111111 == 0b101010
+assert seed2 != seed # seed updated during tie-break loop (may or may not
+flip)
+def test_three_node_triangle():
+# Small N=3 run ensures the loop executes and consensus fraction becomes
+non-zero.
+sp = SimParams(N=3, Rc=2, cycles=50, lesion_time=1000, lesion_frac=0.0,
+seed=7, fixed_order=True)
+np_ = NodeParams(slices=4)
+budgets = Budgets()
+logs = run_sim(sp, np_, budgets)
+assert len(logs) == 50
+assert logs[-1]["active"] == 3.0
+assert 0.0 <= logs[-1]["consensus_frac"] <= 1.0
+def run_tests():
+test_packet_roundtrip()
+test_bundle_majority_basic()
+test_three_node_triangle()
+print("[OK] all tests passed")
+# -----------------------------
+# CLI
+# -----------------------------
+def main():
+ap = argparse.ArgumentParser()
+ap.add_argument("--N", type=int, default=10_000)
+ap.add_argument("--Rc", type=int, default=12)
+ap.add_argument("--cycles", type=int, default=500)
+ap.add_argument("--lesion_time", type=int, default=200)
+ap.add_argument("--lesion_frac", type=float, default=0.30)
+ap.add_argument("--seed", type=int, default=123)
+ap.add_argument("--fixed_order", action="store_true")
+ap.add_argument("--out_csv", type=str, default="mmcn_logs.csv")
+ap.add_argument("--run_tests", action="store_true")
+args = ap.parse_args()
+if args.run_tests:
+run_tests()
+return
+sp = SimParams(
+N=args.N, Rc=args.Rc, cycles=args.cycles,
+lesion_time=args.lesion_time, lesion_frac=args.lesion_frac,
+seed=args.seed, fixed_order=args.fixed_order
+)
+np_ = NodeParams()
+budgets = Budgets()
+logs = run_sim(sp, np_, budgets)
+with open(args.out_csv, "w", newline="") as f:
+w = csv.DictWriter(f, fieldnames=list(logs[0].keys()))
+w.writeheader()
+for row in logs:
+w.writerow(row)
+print(f"[DONE] wrote {args.out_csv}")
+if __name__ == "__main__":
+main()
+README (run + reproduce)
+Run baseline (10k):
+python3 mmcn_sim.py --N 10000 --Rc 12 --cycles 500 --lesion_time 200 --
+lesion_frac 0.30 --seed 123 --fixed_order --out_csv baseline.csv
+Run tests (CI‑friendly):
+python3 mmcn_sim.py --run_tests
+Notes/limitations: - This Python reference prioritizes clarity and strict enforcement of the logical rules. For high‑speed sweeps at , port to Rust/C and keep the same 64‑bit packet logic and op counting model.
+Stability, Recovery, and Experiments
+Lyapunov‑style stability heuristic (local, computable)
+Exact Lyapunov proofs are not realistic for a stochastic, asynchronous, bounded‑bandwidth swarm, but a Lyapunov‑style proxy can still guide local control. Define for node :
+This proxy combines (i) prediction error (internal surprise), (ii) disagreement with neighbors (local incoherence), and (iii) connectivity shortfall (structural risk).
+Regulation objective: reduce in expectation by adjusting and rewiring pressure. This is analogous in spirit to practical integrated‑information measures that treat “integration” as a property of time‑series predictability rather than an intractable combinatorial quantity.
+Local control heuristics (implemented in simulator): - If high: decrease (avoid oscillatory over‑reaction). - If low: increase (speed consensus). - If lesion detected (neighbor disappearance spike): set recovery_timer , temporarily clamp downward, and increase rewiring urgency (not fully implemented
+above; included as extension point).
+Recovery operators (concrete)
+After lesion time , each surviving node applies:
+Consensus gain adjustment:
+Rewiring pressure increase (if topology module enabled): If , attempt up to new neighbor per cycle until restored.
+N= 105
+i
+V(t) =iiwϵ(t) +ϵiiwdh (t),u (t) +ΔH(i(s)
+ii,si) wmax(0, k−kmin ∣N∣)/k.imin
+Vigi
+7
+VigiVigi
+gi
+tL
+1.
+g←iclip (g−[g,g]min max iΔg)for τ cycles.recovery
+2. ∣N∣<iRc1
+Identity emission increase (optional enhancement): For cycles, emit identity‑tagged STATE packets more often by biasing slice schedule toward slices reserved for identity tags.
+Parameter ranges for sweeps (baseline suggestions): - , , - -
+Experimental protocols (as required)
+These correspond directly to the user’s required suite; the provided simulator already supports baseline and lesion. Sweeps/ablations are implemented by running multiple invocations and aggregating CSVs.
+Baseline run - , chosen above percolation threshold (e.g., 12), , 500 cycles. - Measure: - consensus fraction time series - time series (supervisor metric) - collision/drop rate (add counters if desired; extension point)
+Why must exceed threshold: giant components emerge when effective connectivity exceeds a critical value; under random removal, this is governed by the remaining graph’s mean degree. A course note on random graphs formalizes giant component emergence and shows how random deletion scales the effective graph size; it provides a direct way to reason about post‑lesion connectivity.
+Lesion test - At , remove 30% nodes uniformly at random. - Measure: - time to return above 0.5 - time to return consensus fraction above pre‑lesion baseline -giantcomponentfractionandwhetheritstays≥0.60
+Parameter sweeps Sweep: - - - - - payload bits (requires recompiling constants in code; intentionally a design knob)
+For each point, run 10 trials (different seeds), report mean±std.
+Minimal subsystem tests The included test_three_node_triangle() is the minimal integration check. For richer 3‑node expectations: - initialize node0 belief slice0 to a fixed vector, - inject an anomaly (force node0 salience high for 5 cycles), - expect node1 and node2 salience to rise and their belief to align with node0 under modest .
+3. τrecovery
+g∈min[0.05, 0.20] g∈max[0.70, 0.95] Δg∈[0.005, 0.03] θ∈c[0.10, 0.35] λ∈s[0.05, 0.50]
+N= 10,000 Rcσ=s0.05 Φproxy
+Rc
+8
+t=L200 Φproxy
+R∈c{4, 6, 8, 10, 12, 14, 16, 18, 20, 24} λ∈s{0.05, 0.10, 0.20, 0.30, 0.40, 0.50} θ∈c{0.10, 0.15, 0.20, 0.25, 0.30, 0.35} σ∈s{0.00, 0.02, 0.05, 0.10}
+b∈{24, 32, 40, 48}
+θc
+Failure Modes, Ablations, and Scaling Laws
+Failure modes (module‑level and system‑level)
+Module‑level:−Predictioncollapse:iftoolow,predictorlags→persistenthigh→saliencesaturates→systemstaysinhigh‑dropprioritymode.−Regulationdead‑zone:iftoosmallorrecoverytimerstoolong, system becomes sluggish and misses the consensus latency target. - Identity drift: if anchor update
+not near zero, anchors converge and destroy heterogeneity (loss of functional diversity).
+System‑level: - Fragmentation post‑lesion: too small → giant component falls below threshold; consensus cannot span the swarm. Giant component behavior under deletion is governed by classic random graph results and their “effective size after deletion” equivalence. - Collision‑dominated regime:toomanysimultaneousneighbortransmissions→receivecapenforcesheavydroppingandslowsconvergence; contention theory highlights that throughput collapses under excessive offered load without coordination. - Superposition overload: bundling too many independent hypervectors yields “superposition catastrophe”/interference; VSA references explicitly discuss limitations of superposition and the need to control load.
+Ablations (required) and expected outcomes
+Disable binding (no XOR channel keys): payload becomes unstructured; multiplexing identity/ belief fails; expect higher false positives in anomaly detection and slower or unstable consensus (more interference). Binding/unbinding properties are a core reason VSAs work. Disable superposition (no majority bundling): each packet carries only one neighbor’s state; consensus becomes noisier and slower; local aggregation vanishes. Increase packet to 128 bits: expect faster consensus and lower interference at same degree, demonstrating bandwidth‑consensus tradeoff; also lower collision pressure for the same informational throughput (but violates constraint). Reduce to 500: consensus faster but less robust multi‑scale effects; also percolation margins differ. Disable recovery heuristics: post‑lesion and consensus recovery likely fail the acceptance thresholds.
+Evaluation metrics and success thresholds (explicit)
+Supervisor‑computed metrics (nodes never compute global metrics):
+Anomaly detection TPR/FPR: inject anomalies (corrupt payload bits or force large local error); count ALERT outputs. Consensuslatency:smallestsuchthatconsensusfraction≥target(e.g.,0.90)sustainedforcycles.
+: use a practical, cheap proxy combining predictability and coherence. Full integrated information is not used because it is difficult to compute for large systems; practical measures focus on time‑series predictability and decomposition comparisons. Connectivity: giant component fraction after lesion via BFS/union‑find. Collision/drop rate: if you instrument delivery queues, measure dropped packets due to receive cap.
+αpϵi
+gmin
+αa
+Rc
+9
+6
+10
+5
+11
+N
+Φproxy
+TW
+Φproxy
+7
+Connectivity entropy: entropy of degree distribution of active graph (computed globally).
+Logging plan: - Every cycle: , active count, giant component fraction, consensus fraction, , cycles executed. - Every 10 cycles: sample 1% nodes (deterministically) and log mean/var of , , . - On lesion: record victim ids and pre/post snapshots (global, for reproducibility).
+Scaling laws (useful approximations)
+These are the practical relationships you should validate with sweeps.
+Connectivity in random geometric graphs: connectivity transitions when crosses (up to constants), and average degree scales like . Giant component under deletion (random graphs): deleting a fraction of nodes reduces the effective graph; the condition for macroscopic spread/connectivity is governed by the remaining graph’s effective parameters (captured explicitly in course notes). Gossip consensus time: convergence depends on the spectral properties of the interaction graph; randomized gossip analyses provide bounds and optimization strategies, implying roughly logarithmic scaling in favorable expander‑like graphs and slower scaling in poorly connected graphs.
+Collision regime: throughput vs. offered load is sharply peaked in random access settings; without coordination, successful reception probability drops quickly at high load.
+These scaling laws inform the sweep ranges: vary to keep the graph above connectivity thresholds and vary to trade off speed vs. stability.
+User‑provided reference materials surfaced (uploaded files): - fileciteturn0file0 - fileciteturn0file1 - fileciteturn0file2 - fileciteturn0file3 - fileciteturn0file4 - fileciteturn0file5 - fileciteturn0file6 - fileciteturn0file7 - fileciteturn0file8 - fileciteturn0file9 - fileciteturn0file10
+web.stanford.edu https://web.stanford.edu/~boyd/papers/pdf/gossip.pdf
+diva-portal.org https://www.diva-portal.org/smash/get/diva2%3A1014251/FULLTEXT01.pdf
+TΦproxy
+ϵisigi
+nπr/ log nn2 ≈1
+nπrn2 4
+8
+1
+6
+Rc
+θ, gci
+1
+2 3 11
+www2.mathematik.tu-darmstadt.de https://www2.mathematik.tu-darmstadt.de/~stochastik/SpringSchool2022/Penrose_Lecture_Notes.pdf
+redwood.berkeley.edu https://redwood.berkeley.edu/wp-content/uploads/2021/08/Module2_VSA_models_slides.pdf
+Lectures 10=11 (aloha).ppt https://web.mit.edu/modiano/www/6.263/lec10.pdf
+pcbi.1001052 1..18 https://users.sussex.ac.uk/~anils/Papers/BarrettSeth_PLOSCB2011.pdf
+14.15J / 6.207J Networks, Lecture 11 Giant Component, Generalized Random Graphs https://ocw.mit.edu/courses/14-15j-networks-spring-2018/5be5567152ec2ed3f063a8e676ad669b_MIT14_15JS18_lec11.pdf
+4
+5 10
+6
+7
+8 9

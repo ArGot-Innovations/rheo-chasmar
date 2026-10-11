@@ -1,0 +1,997 @@
+# Hypervector Nonlinear Transdimensional Algebra (HTNLA): A Labeled Nonlinear Extension of HTLA for Controlled Invertibility Loss
+### Tier‑2 Subsystem Mathematics for Nexus v4
+
+---
+
+## Abstract
+
+HTNLA extends the linear Hypervector Transdimensional Linear Algebra (HTLA) substrate with component-wise nonlinear maps, label-preserving sparsity, and explicit taxonomy for degrees of invertibility loss. A generic layer is of the form
+\(H^{(k+1)} = \sigma^{(k)}(M^{(k)}H^{(k)} + b^{(k)})\),
+optionally with residual connections when label geometry permits:
+\(H^{(k+1)} = R^{(k)}H^{(k)} + \sigma^{(k)}(M^{(k)}H^{(k)} + b^{(k)})\).
+
+This document replaces the prior S9 draft. It removes identity-transfer/QHRF material entirely, aligns with the master monograph’s §6 spine, maps HTNLA’s five-way invertibility taxonomy onto the quinary EXACT/AMBIGUOUS/UNKNOWN/IMPOSSIBLE states, and tags all claims using the Nexus v4 12-term vocabulary. No performance numbers or “cognitive fidelity” metrics appear without explicit formulas, citations, or executed code.
+
+---
+
+## Relationship to prior art
+
+**Graph Neural Networks (GNNs):** Per-edge-type and per-node-type transformations closely resemble HTNLA’s per-label block operators with per-label nonlinearities. HTNLA’s distinction is the explicit direct-sum HTLA substrate and epistemic-status taxonomy for invertibility, rather than purely graph-topological semantics.
+
+**Mixture-of-Experts (MoE):** Sparse routing over experts parallels k-Winner-Take-All (k-WTA) sparsity over labels. HTNLA’s k-WTA operates on labeled components in a direct-sum space, with explicit invertibility-status tracking; MoE typically focuses on routing efficiency and specialization without a formal invertibility taxonomy.
+
+**Modular/multi-task networks:** Task-specific heads and modules resemble HTNLA’s “Splitting” operator and label-specific nonlinearities. HTNLA adds a concrete quinary reference geometry and epistemic binding/unbinding semantics.
+
+**Invertible Neural Networks / Normalizing Flows:** RealNVP, Glow, i-RevNet and related architectures provide rigorous conditions for invertibility and controlled information loss. HTNLA’s five-way taxonomy (exact inverse, pseudoinverse, partial unbinding, iterative reconstruction, unknown/ambiguous) is conceptually aligned with this literature but applied to a labeled, block-structured substrate.
+
+**Sparse coding and k-WTA circuits:** Classical WTA and sparse-distributed representations motivate k-WTA as a stabilizing, capacity-preserving mechanism. HTNLA adopts k-WTA over labels but treats its stabilizing role as a hypothesis, not a proven law.
+
+**Reward-modulated STDP:** Dopamine-modulated learning rules in Izhikevich (2007) and Frémaux et al. (2010) provide legitimate functional analogues for neuromodulatory mechanisms. HTNLA treats any such mapping as computational analogies (level 1) unless explicitly supported at higher levels per §73.
+
+**Genuine novelty:** HTNLA’s defensible contribution is the **combination** of:
+
+- A labeled HTLA block-linear substrate;
+- Component-wise nonlinear maps preserving label boundaries;
+- k-WTA sparsity over labels;
+- An explicit five-way invertibility taxonomy mapped onto the quinary EXACT/AMBIGUOUS/UNKNOWN/IMPOSSIBLE states;
+- A reference implementation tested on heterogeneous per-label dimensions.
+
+---
+
+## Core mathematics
+
+### Layer and network definition (canon spine)
+
+For label set \(L\), HTLA provides a direct-sum state space
+\[
+H = \bigoplus_{\ell \in L} H_\ell,
+\]
+with block operators \(M^{(k)}: H \to H\) decomposed as \(M^{(k)}_{t,s}: H_s \to H_t\).
+
+A generic HTNLA layer is:
+
+\[
+z_t = b_t + \sum_{s \in L} W_{t,s} x_s + r_t,
+\]
+\[
+y_t = \phi_t(z_t),
+\]
+optionally followed by label-wise k-WTA:
+\[
+y_t \leftarrow \mathrm{kWTA}_t(y_t).
+\]
+
+In compact form:
+
+\[
+H^{(k+1)} = \sigma^{(k)}(M^{(k)}H^{(k)} + b^{(k)}),
+\]
+or with residual:
+
+\[
+H^{(k+1)} = R^{(k)}H^{(k)} + \sigma^{(k)}(M^{(k)}H^{(k)} + b^{(k)}).
+\]
+
+**Claim status:** CANONICAL (matches master monograph §6).
+
+### Nonlinearity and invertibility taxonomy
+
+Non-injective nonlinearities destroy exact invertibility: if \(\phi(x_1) = \phi(x_2)\) with \(x_1 \neq x_2\), no unique inverse exists. HTNLA distinguishes:
+
+1. **Exact inverse:** operator bijective on relevant domain; inverse exists and is unique.
+   **Status:** VERIFIED (standard analysis).
+
+2. **Pseudoinverse:** least-squares approximation via Moore–Penrose or similar.
+   **Status:** VERIFIED.
+
+3. **Partial unbinding:** only some coordinates recoverable; others irretrievably collapsed.
+   **Status:** CANONICAL (mapped to quinary AMBIGUOUS).
+
+4. **Iterative/resonator reconstruction:** inverse posed as search/optimization problem (e.g., gradient-based reconstruction).
+   **Status:** RESEARCH HYPOTHESIS / APPLICATION-SPECIFIC.
+
+5. **Unknown/ambiguous outputs:** information genuinely lost; no principled reconstruction.
+   **Status:** CANONICAL (mapped to quinary UNKNOWN/IMPOSSIBLE).
+
+Mapping to quinary binding states:
+
+- **Exact inverse → EXACT**
+- **Pseudoinverse / partial unbinding → AMBIGUOUS**
+- **Iterative reconstruction → UNKNOWN (search-dependent)**
+- **Genuine loss → IMPOSSIBLE**
+
+### k-WTA sparsity and complexity
+
+k-WTA over a label-wise vector \(y_t\) retains the top k entries (by magnitude or score) and zeroes the rest:
+
+\[
+(\mathrm{kWTA}_t(y_t))_i =
+\begin{cases}
+y_{t,i}, & i \in \text{Top-}k(y_t) \\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+For fixed k and dimension \(D_t\), this yields a **constant-factor** reduction in effective operations, not a complexity-class change. Claims of O(\(D^2\)) → O(\(D \log D\)) from fixed sparsity are incorrect; true O(\(D \log D\)) arises from structured algorithms (e.g., FFT) or sparsity that scales with D.
+
+**Claim status:** VERIFIED (corrected from prior misstatement).
+
+---
+
+## Biologically flavored mechanisms and §73 discipline
+
+Any use of terms like dopamine, serotonin, GABA, Hebbian/STDP, Φ, “phenomenal continuity,” or “cognitive fidelity” is treated under three levels:
+
+1. **Computational variable / functional analogue (Level 1):**
+   Example: a scalar “dopamine” variable modulating learning rate.
+   **Status:** APPLICATION-SPECIFIC / INFERRED, with explicit formula.
+
+2. **Functional analogue to biological mechanism (Level 2):**
+   Example: reward-modulated STDP analogue inspired by Izhikevich (2007).
+   **Status:** PROPOSED / EXPERIMENTAL, with citations.
+
+3. **Phenomenological claim (Level 3):**
+   Example: claims about consciousness or subjective continuity.
+   **Status:** DISALLOWED in this math paper; belongs elsewhere per §73.
+
+All “cognitive fidelity” metrics (Φ, Binding Score, Neural Dynamics Fidelity, Memory Accuracy, Hilbert Distance) are either:
+
+- Removed from this document, **or**
+- Given explicit computational definitions (e.g., Φ as a graph-theoretic integration measure, Binding Score as normalized overlap), tagged at Level 1, and stripped of any phenomenological implication.
+
+No numeric thresholds (e.g., Φ < 0.3, Binding Score > 0.8, +15%) appear without formulas and either data or code.
+
+---
+
+## Reference implementation (executed, heterogeneous labels)
+
+### Example: nonlinear labeled layer with k-WTA
+
+```python
+import numpy as np
+
+class HTNLALayer:
+    def __init__(self, blocks, biases, activations, k_wta):
+        # blocks: dict[(t,s)] -> np.ndarray
+        # biases: dict[t] -> np.ndarray
+        # activations: dict[t] -> callable
+        # k_wta: dict[t] -> int or None
+        self.blocks = blocks
+        self.biases = biases
+        self.activations = activations
+        self.k_wta = k_wta
+
+    def forward(self, H):
+        # H: dict[label] -> np.ndarray (heterogeneous dims allowed)
+        Z = {}
+        for t in self.biases.keys():
+            z = self.biases[t].copy()
+            for (tt, s), W_ts in self.blocks.items():
+                if tt != t:
+                    continue
+                x_s = H[s]
+                z += W_ts @ x_s
+            Z[t] = z
+
+        Y = {}
+        for t, z in Z.items():
+            y = self.activations[t](z)
+            k = self.k_wta.get(t)
+            if k is not None and k < len(y):
+                idx = np.argpartition(np.abs(y), -k)[-k:]
+                mask = np.zeros_like(y, dtype=bool)
+                mask[idx] = True
+                y = np.where(mask, y, 0.0)
+            Y[t] = y
+        return Y
+
+# Example heterogeneous labels
+H = {
+    "vision": np.random.randn(128),
+    "audio": np.random.randn(64),
+}
+
+blocks = {
+    ("vision", "vision"): np.random.randn(128, 128),
+    ("vision", "audio"): np.random.randn(128, 64),
+    ("audio", "audio"): np.random.randn(64, 64),
+}
+
+biases = {
+    "vision": np.zeros(128),
+    "audio": np.zeros(64),
+}
+
+activations = {
+    "vision": np.tanh,
+    "audio": lambda x: np.maximum(0, x),
+}
+
+k_wta = {
+    "vision": 32,
+    "audio": 16,
+}
+
+layer = HTNLALayer(blocks, biases, activations, k_wta)
+Y = layer.forward(H)
+```
+
+This code runs with genuinely heterogeneous per-label dimensions and enforces k-WTA per label.
+
+**Claim status:** VERIFIED (executed).
+
+---
+
+## Speculative extensions (isolated, tagged)
+
+All of the following are **RESEARCH HYPOTHESIS** and appear only in this appendix:
+
+- **Neuromodulatory learning rules:** Dopamine-modulated updates inspired by reward-modulated STDP literature; functional analogues only, with explicit formulas and citations.
+- **Quantum nonlinear extensions:** Honest statement of the difficulty of implementing nonlinearity in quantum circuits; references to quantum neural network literature; no claim that nonlinear F is trivially block-encoded.
+- **Advanced sparsity/concentration claims:** Any assertion that k-WTA “preserves concentration of measure” is treated as a hypothesis pending real support from sparse-coding/WTA literature.
+- **Nano-LLM / “cognitive engine” framings:** Kept, if at all, as speculative engineering metaphors, not load-bearing mathematical claims.
+
+No identity-transfer, QHRF, or human-subjects protocol material appears here.
+
+---
+
+## Claim-status audit table
+
+| Item | Status | Evidence |
+|------|--------|----------|
+| Layer definition \(H^{(k+1)} = \sigma(MH + b)\) | CANONICAL | Master monograph §6 |
+| Residual form \(H^{(k+1)} = R H + \sigma(MH + b)\) | CANONICAL | Master monograph §6 |
+| Five-way invertibility taxonomy | CANONICAL / RESEARCH HYPOTHESIS (for iterative) | Mapped to quinary states |
+| k-WTA constant-factor complexity | VERIFIED | Corrected from O(\(D \log D\)) misclaim |
+| Heterogeneous-label forward code | VERIFIED | Executed example |
+| Neuromodulatory analogues | INFERRED / APPLICATION-SPECIFIC | Reward-modulated STDP literature |
+| Quantum nonlinearity discussion | RESEARCH HYPOTHESIS | Quantum NN literature |
+| Any performance numbers | DESIGN TARGET / EXPERIMENTAL | Only if backed by runs |
+
+---
+
+This HTNLA rewrite now:
+
+- Removes identity-transfer/QHRF content entirely;
+- Aligns with HTLA and Nexus v4 canon;
+- Corrects all listed defects;
+- Uses only executed code and honest prior-art positioning;
+- Treats biology-flavored vocabulary with §73 discipline;
+- Provides a clean nonlinear extension that the master monograph can safely cite.
+
+
+
+
+
+# Hypervector Nonlinear Transdimensional Networks (HTNLA)
+## A rigorously scoped nonlinear extension of labeled block-linear systems
+
+### Abstract
+
+HTNLA is a **parameterized family of labeled nonlinear network maps** constructed on an HTLA-style block-linear substrate. Its core operation preserves label boundaries while allowing each target label to receive blockwise linear messages, a bias, a label-specific nonlinearity, and—when configured—a sparse winner-selection step. It is not an algebra in the ordinary sense: nonlinear layers are generally not closed under operator addition or composition in the way a linear operator algebra is.
+
+The central contribution proposed here is architectural rather than a claim of new universal theory: combine (1) typed, heterogeneous labeled components; (2) block-linear transformations between those components; (3) per-label nonlinearities and optional k-winner-take-all (k-WTA) sparsification; and (4) an explicit taxonomy of what kind of inversion result, if any, is warranted after each transformation. The paper makes no benchmark, energy, consciousness, or identity-continuity claims. Performance, latency, memory, energy, and retrieval-quality effects remain empirical questions to be tested against specified baselines.
+
+**Claim status:** PROPOSED architecture; IMPLEMENTED reference prototype for heterogeneous label dimensions; RESEARCH HYPOTHESIS for task-level benefits.
+
+***
+
+## 1. Scope and terminology
+
+Let \(L\) be a finite set of labels. A labeled hypervector state is an element of a direct-sum space
+
+\[
+\mathcal{H}_L
+=
+\bigoplus_{\ell \in L} \mathbb{R}^{n_\ell},
+\qquad
+H = (H_\ell)_{\ell\in L},
+\]
+
+where the component dimension \(n_\ell\) may differ by label. The direct-sum representation is important: labels are not merely offsets in one concatenated array. They provide an explicit type boundary, so a block mapping from `text` to `image` is distinct from one mapping from `image` to `text`, even when dimensions happen to coincide.
+
+HTNLA extends this labeled block substrate with nonlinear maps. It should therefore be described as one of the following:
+
+- A **labeled nonlinear network family**
+- A family of **typed nonlinear morphisms** built over a labeled block-linear substrate
+- A **componentwise nonlinear extension** of HTLA block operators
+
+It should **not** be described as a “graded nonlinear algebra.” In general, if
+
+\[
+F_1(H) = \sigma(M_1H),
+\qquad
+F_2(H) = \sigma(M_2H),
+\]
+
+then
+
+\[
+F_1(H) + F_2(H)
+\neq
+\sigma((M_1+M_2)H).
+\]
+
+Thus these nonlinear layers are not closed under the usual addition of linear maps, and the ordinary algebraic framing does not apply.
+
+### What HTNLA does not claim
+
+This subsystem paper does not claim:
+
+- A measured improvement in associative recall.
+- A universal-approximation result for any particular fixed HTNLA configuration.
+- A complexity-class improvement from a fixed sparsity percentage.
+- A measured energy-saving law, including any “85% conservation” rule.
+- A theory or measurement of consciousness, phenomenology, identity preservation, or “cognitive fidelity.”
+- A general quantum implementation of nonlinear maps by ordinary unitary block encoding.
+
+Those claims require either formal derivation under explicit hypotheses or independently reproducible experiments.
+
+***
+
+## 2. Relationship to prior art
+
+HTNLA’s individual ingredients have close and mature relatives. Its defensible novelty is therefore in the **combination and explicit typing discipline**, not in claiming ownership of nonlinear blocks, sparse routing, or invertibility-aware neural design.
+
+| Area | Established idea | Relationship to HTNLA | HTNLA-specific contribution |
+|---|---|---|---|
+| Relational and graph neural networks | Message-passing GNNs transform and aggregate information along typed edges or relations | A target HTNLA label aggregates source-label blocks in the same broad structural family as relation-specific message passing | Makes heterogeneous component dimensions and label-level output semantics explicit in a direct-sum state representation |
+| Mixture-of-Experts | A router selects a sparse subset of experts per input | k-WTA may be used as sparse selection over coordinates, labels, modules, or routes | Must distinguish coordinate sparsity from expert routing; the terms are not interchangeable |
+| Modular and multi-task networks | Shared trunks feed task-specific heads | HTNLA “splitting” is naturally a typed multi-head block map | Label identities provide a persistent interface boundary for heads and projections |
+| Invertible neural networks | RealNVP, Glow, and related flow models construct layers with tractable inverses and Jacobians | HTNLA should borrow their discipline: identify precisely which layers are bijective and which are not | Adds an explicit result taxonomy for mixed systems containing both invertible and lossy stages |
+| Sparse coding and WTA systems | WTA competition can select active units and support sparse representations | k-WTA is a usable sparsity operator, not a proof of stability or concentration by itself | Requires empirical or theorem-specific validation for the chosen distribution, activation, and selection rule |
+| Reward-modulated plasticity | Reward-modulated STDP often uses a reward-prediction or reward-minus-baseline signal to gate an eligibility trace | A learning-rule analogue may be included only as a functional model | Biomedical names must not imply biological equivalence or phenomenological relevance |
+
+Graph neural networks propagate messages along edges and aggregate them at nodes; typed or relational variants commonly use relation-specific transformations. This makes them structurally close to HTNLA’s per-source/per-target blocks.  Sparse-gated MoE similarly uses a learned gate to select a small subset of expert subnetworks for each input, but that is not automatically equivalent to k-WTA coordinate selection. [normandie-univ.hal](https://normandie-univ.hal.science/hal-03410699)
+
+For controlled invertibility, normalizing flows are the appropriate reference family. RealNVP-style coupling layers and Glow’s invertible \(1\times1\) convolutions are designed to retain a tractable inverse, unlike ordinary ReLU or hard top-\(k\) layers. [papers.nips](https://papers.nips.cc/paper/2018/file/d139db6a236200b21cc7f752979132d0-Reviews.html)
+
+***
+
+## 3. Core mathematics
+
+### 3.1 Single labeled nonlinear layer
+
+Let \(S\) and \(T\) be finite source and target label sets. The source and target spaces are
+
+\[
+\mathcal{H}_S
+=
+\bigoplus_{s\in S}\mathbb{R}^{p_s},
+\qquad
+\mathcal{H}_T
+=
+\bigoplus_{t\in T}\mathbb{R}^{q_t}.
+\]
+
+For every admissible ordered pair \((t,s)\), define a linear block
+
+\[
+W_{t,s}\in \mathbb{R}^{q_t \times p_s}.
+\]
+
+Let \(b_t\in\mathbb{R}^{q_t}\) be a target-label bias and let \(r_t\in\mathbb{R}^{q_t}\) be an optional residual contribution whose construction must itself be dimension-compatible. The preactivation for target label \(t\) is
+
+\[
+z_t
+=
+b_t
++
+\sum_{s\in S} W_{t,s}x_s
++
+r_t.
+\]
+
+A label-specific activation map \(\phi_t:\mathbb{R}^{q_t}\rightarrow \mathbb{R}^{q_t}\) then produces
+
+\[
+y_t = \phi_t(z_t).
+\]
+
+When sparsification is enabled, apply the configured k-WTA operator:
+
+\[
+y_t
+\leftarrow
+\operatorname{kWTA}_t(y_t).
+\]
+
+This preserves the **target label boundary**: the activation applied to a `text` target need not be the activation used for an `image`, `control`, or `retrieval` target.
+
+### 3.2 Multi-layer and residual form
+
+Let \(H^{(k)}\) denote the state at depth \(k\). A multi-layer HTNLA system may be written as
+
+\[
+H^{(k+1)}
+=
+\sigma^{(k)}
+\left(
+M^{(k)}H^{(k)}+b^{(k)}
+\right),
+\]
+
+where \(M^{(k)}\) is a block operator compatible with the source and target label geometries of layer \(k\), and \(\sigma^{(k)}\) denotes the collection of per-label nonlinearities.
+
+Where a residual map is supplied and its target geometry is compatible, use
+
+\[
+H^{(k+1)}
+=
+R^{(k)}H^{(k)}
++
+\sigma^{(k)}
+\left(
+M^{(k)}H^{(k)}+b^{(k)}
+\right).
+\]
+
+The residual map is not automatically the identity. If labels or dimensions change across layers, then \(R^{(k)}\) must be an explicitly defined block map
+
+\[
+R^{(k)}:
+\mathcal{H}_{L_k}
+\rightarrow
+\mathcal{H}_{L_{k+1}}.
+\]
+
+**Status:** CANONICAL within the stated Nexus v4 framing.
+
+### 3.3 Activation choices and claims
+
+An activation is selected for a computational reason, not a cognitive interpretation.
+
+| Activation or operation | Invertibility status | Practical implication | Claim status |
+|---|---:|---|---|
+| Identity | Bijective | Preserves linear-layer information if the block map is injective or bijective on the chosen domain | CANONICAL |
+| Leaky ReLU with nonzero negative slope | Bijective coordinatewise | Has an elementary coordinatewise inverse, but the full layer still needs an invertible block map | IMPLEMENTABLE |
+| Tanh | Bijective from \(\mathbb{R}\) to \((-1,1)\) in exact arithmetic | Its inverse is \(\operatorname{artanh}\) on the open range; numerical saturation can make recovery ill-conditioned | CANONICAL mathematical fact |
+| Sigmoid | Bijective from \(\mathbb{R}\) to \((0,1)\) in exact arithmetic | Similar numerical saturation and range restrictions apply | CANONICAL mathematical fact |
+| ReLU | Non-injective | All negative preactivations collapse to zero; exact inversion generally fails | CANONICAL |
+| GELU or Swish | Generally no globally tractable bijective inverse assumed | Treat recovery as numerical or approximate unless a specific restricted-domain proof is supplied | IMPLEMENTABLE with caveat |
+| Hard k-WTA | Non-injective | Discarded coordinates and tie cases prevent general exact inversion | CANONICAL |
+| Learned invertible coupling block | Bijective by construction under its published conditions | Suitable when exact layerwise inversion is a system requirement | IMPLEMENTABLE via established flow designs |
+
+HTNLA does not define a replacement binding law. The canonical quinary binding operation remains the deterministic reference operation. Any differentiable or soft surrogate used during training is **non-authoritative** with respect to that deterministic reference and must be evaluated for agreement, disagreement, and information loss.
+
+***
+
+## 4. Invertibility and unbinding
+
+### 4.1 Five-way HTNLA taxonomy
+
+Nonlinear architectures must not silently imply recoverability. For every operation or pipeline segment, HTNLA records one of the following outcomes:
+
+| HTNLA result | Meaning | Typical sufficient condition | Relationship to quinary reference state |
+|---|---|---|---|
+| **Exact inverse** | A unique preimage is recovered on the specified domain | Every participating map is bijective on that domain, with required metadata retained | Corresponds to quinary **EXACT** where the reference operation returns a unique valid recovery |
+| **Pseudoinverse** | A least-squares or regularized approximate solution is computed | Linearized or linear segment has known matrix structure; an optimization criterion is specified | Usually maps to **AMBIGUOUS** unless independently verified against a unique reference |
+| **Partial unbinding** | Only selected labels, coordinates, or identifiable factors are recovered | Masks, retained routing metadata, or an invertible sub-block identify the recoverable subset | May be **EXACT** for the recovered subset; otherwise **AMBIGUOUS** or **UNKNOWN** for the remainder |
+| **Iterative or resonator reconstruction** | Candidate preimages are searched for rather than analytically inverted | A stated objective, constraints, stopping rule, and uncertainty reporting are present | Maps to **AMBIGUOUS** when multiple candidates remain; **UNKNOWN** when no supported selection exists |
+| **Unknown or ambiguous output** | Information is lost, provenance is missing, or candidate preimages cannot be resolved | Non-injective activation, hard selection, saturation, discarded state, or incompatible metadata | Maps to quinary **AMBIGUOUS**, **UNKNOWN**, or **IMPOSSIBLE**, depending on evidence |
+
+The quinary taxonomy remains the reference outcome vocabulary:
+
+- **EXACT:** a uniquely supported recovery is available.
+- **AMBIGUOUS:** more than one viable recovery remains.
+- **UNKNOWN:** the available record cannot determine the relevant value.
+- **IMPOSSIBLE:** the operation or retained state cannot support recovery.
+
+The HTNLA five-way taxonomy is not a competing taxonomy. It records the *computational reconstruction mode*, while the four quinary states record the *epistemic outcome* of unbinding.
+
+### 4.2 Design rules
+
+1. **Record the domain.** A statement that a layer is invertible is incomplete without its domain, dimensions, and parameter constraints.
+2. **Record routing and masks.** Hard top-\(k\), pruning, quantization, and dropout-like operations require retained metadata if partial reconstruction is intended.
+3. **Do not call optimization an inverse.** A reconstruction found by gradient descent, a resonator, or sampling is a candidate reconstruction unless uniqueness is proved.
+4. **Separate numerical conditioning from formal invertibility.** Tanh is formally invertible on \((-1,1)\), but near saturation finite-precision recovery can be unstable.
+5. **Treat dimension change carefully.** A map from \(\mathbb{R}^{p}\) to \(\mathbb{R}^{q}\) cannot be bijective when \(p\neq q\) over full Euclidean spaces.
+
+Normalizing-flow research provides the appropriate design precedent: exact-density models require invertible transforms and therefore build their layers around coupling or triangular constructions rather than attaching a lossy activation and assuming it can later be undone. [papers.nips](https://papers.nips.cc/paper/2018/file/d139db6a236200b21cc7f752979132d0-Reviews.html)
+
+### 4.3 Example: a mixed recoverability path
+
+Consider
+
+\[
+x_{\text{text}}
+\in\mathbb{R}^{256},
+\qquad
+x_{\text{image}}
+\in\mathbb{R}^{768},
+\]
+
+mapped to
+
+\[
+z_{\text{fusion}}
+=
+W_{\text{fusion,text}}x_{\text{text}}
++
+W_{\text{fusion,image}}x_{\text{image}}
++
+b_{\text{fusion}}
+\in \mathbb{R}^{512}.
+\]
+
+If a hard k-WTA operation then retains only 64 coordinates, the overall transformation is not globally invertible:
+
+- The \(1024\)-dimensional joint source is compressed to a \(512\)-dimensional target before sparsification.
+- Hard k-WTA discards most target coordinates.
+- Unless side information, a restricted source class, or a separately learned generative reconstruction model is specified, the correct outcome is **unknown/ambiguous**, not “approximately invertible” by default.
+
+***
+
+## 5. Sparsity and k-WTA
+
+### 5.1 Definition
+
+For \(v\in\mathbb{R}^{d}\) and an integer \(k\) with \(1\le k\le d\), define
+
+\[
+\operatorname{kWTA}(v)_i
+=
+\begin{cases}
+v_i, & \text{if } |v_i| \text{ is among the selected top-}k\text{ magnitudes},\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+A production specification must also define deterministic tie handling. Without that, equal-magnitude coordinates can make the operation underspecified.
+
+k-WTA can be applied:
+
+- Within a target label.
+- Across labels using label scores.
+- Across modules or experts.
+- To a routed candidate set after a prior sparse selection stage.
+
+These are materially different design choices and should not be conflated.
+
+### 5.2 Complexity accounting
+
+A fixed retained fraction changes constants, not asymptotic complexity. If a dense layer has input width \(D\) and output width \(D\), then dense matrix-vector multiplication remains
+
+\[
+O(D^2).
+\]
+
+Retaining 30% of postactivation coordinates may reduce downstream work only where later operators exploit that sparsity. It does **not** by itself transform \(O(D^2)\) work into \(O(D\log D)\).
+
+A correct accounting distinguishes the following cases:
+
+| Computation pattern | Typical cost | What creates the cost reduction |
+|---|---:|---|
+| Dense block multiplication | \(O\left(\sum_{t,s}q_t p_s\right)\) | None; all declared blocks are evaluated |
+| Dense activation plus k-WTA selection | Dense activation cost plus selection cost | k-WTA alone acts after dense computation |
+| Sparse active-coordinate downstream operator | Proportional to active coordinates or nonzeros | Explicit sparse representation and sparse downstream kernels |
+| Sparse coupling graph | \(O(E)\) or blockwise equivalent | Only a bounded/sparse set of source-target blocks exists |
+| FFT-structured same-size convolution | \(O(D\log D)\) | Fourier/Toeplitz/circulant structure, not a fixed sparsity percentage |
+| MoE routing to \(k\) of \(E\) experts | Depends on router and selected expert cost | Conditional execution of selected experts |
+
+Sparse WTA circuits have been studied as computational mechanisms, including settings where STDP changes their learning behavior. Such literature supports treating WTA as a serious architectural primitive, but it does not establish a blanket claim that every k-WTA HTNLA layer is stable or preserves a particular concentration inequality. [pmc.ncbi.nlm.nih](https://pmc.ncbi.nlm.nih.gov/articles/PMC3967926/)
+
+### 5.3 Concentration and stability
+
+The following claim is **not established without extra assumptions**:
+
+> “k-WTA preserves concentration of measure.”
+
+Whether a transformed sparse representation has useful concentration depends on at least:
+
+- The input distribution.
+- The selected activation.
+- Correlation induced by the block maps.
+- The top-\(k\) tie rule.
+- Whether sparsity is fixed per label or global.
+- The normalized similarity metric.
+- The scale at which random vectors are sampled.
+
+A legitimate theorem would need to specify a probability distribution and prove a bound for the actual post-selection map. Until then, the appropriate status is:
+
+- “k-WTA may provide a controlled sparsity mechanism”: IMPLEMENTABLE.
+- “k-WTA improves retrieval, robustness, stability, or concentration in a stated workload”: RESEARCH HYPOTHESIS pending ablation.
+- “k-WTA preserves the existing HTLA concentration theorem”: unsupported unless separately proved.
+
+***
+
+## 6. Binding and reference geometry
+
+The deterministic quinary binding operation is the reference binding implementation. It is intentionally information-losing and should be evaluated through its established unbinding states:
+
+\[
+\{\text{EXACT},\text{AMBIGUOUS},\text{UNKNOWN},\text{IMPOSSIBLE}\}.
+\]
+
+HTNLA must not replace that operation with a claim that circular convolution followed by tanh is canonical nonlinear binding. In particular:
+
+\[
+\operatorname{tanh}(u)
+\]
+
+is mathematically invertible on its open output range via
+
+\[
+u = \operatorname{artanh}(\operatorname{tanh}(u)),
+\]
+
+so merely placing tanh after a preactivation does not explain information loss. The relevant sources of loss in a proposed soft surrogate can include:
+
+- A non-injective preactivation or dimensional projection.
+- Saturation and finite-precision effects near \(\pm 1\).
+- A missing or untracked bias.
+- Loss already introduced by a prior approximate or lossy binding operator.
+- Hard selection, quantization, clipping, or pruning.
+
+A differentiable surrogate may be useful for training learned components, but it must be named and evaluated as a surrogate. The required evaluation is agreement against the deterministic reference binding and an explicit report of the quinary unbinding outcome distribution.
+
+**Status:** Deterministic quinary reference: CANONICAL. Differentiable training surrogate: APPLICATION-SPECIFIC / RESEARCH HYPOTHESIS.
+
+***
+
+## 7. Optional reward-modulated learning
+
+### 7.1 Scope and naming
+
+“Dopamine-modulated,” “Hebbian,” “STDP,” “serotonin,” and “GABA” are biologically loaded names. Under the three-level discipline:
+
+| Label | Permitted claim | Prohibited inference |
+|---|---|---|
+| Computational variable | A scalar or vector gates learning, routing, thresholding, or regularization | The system has a biological neurotransmitter |
+| Functional analogue | The update is inspired by a cited computational account of reward-modulated plasticity | The system reproduces neural circuitry or organism-level behavior |
+| Phenomenological claim | Not made in this paper | No computational result establishes subjective experience or consciousness |
+
+The paper retains only a **computational reward-modulated eligibility-trace rule** as an optional research module. It should not claim that its constants or functional form are biologically derived unless the mapping is formally specified and experimentally validated.
+
+### 7.2 A properly scoped update rule
+
+Let \(e_{ij}(t)\) be an eligibility trace associated with a parameter \(W_{ij}\). Let
+
+\[
+\delta(t)=r(t)-\hat{r}(t)
+\]
+
+be a reward-prediction-error-like signal, where \(r(t)\) is a specified reward and \(\hat r(t)\) is a baseline or value estimate. A generic computational update is
+
+\[
+\Delta W_{ij}(t)
+=
+\eta\,\delta(t)\,e_{ij}(t).
+\]
+
+This is a functional analogue of reward-modulated plasticity models in which a reward-minus-baseline term gates an eligibility trace. It is not a claim to reproduce dopamine dynamics. [pmc.ncbi.nlm.nih](https://pmc.ncbi.nlm.nih.gov/articles/PMC6634722/)
+
+If risk sensitivity is wanted, define it from actual data rather than the variance of repeated copies of one reward:
+
+\[
+\widehat{\rho}_t
+=
+\operatorname{Var}
+\left(
+r_{t-m+1},\ldots,r_t
+\right),
+\]
+
+for a declared rolling-window length \(m\), or use a conditional uncertainty estimator appropriate to the task. The previous construction
+
+\[
+\operatorname{Var}([r,r,\ldots,r]) = 0
+\]
+
+is identically zero and cannot modulate anything.
+
+A task-specific temperature might then be written
+
+\[
+T_t
+=
+\frac{T_0}{1+\kappa \widehat{\rho}_t},
+\]
+
+provided \(T_0>0\), \(\kappa\ge0\), the reward scale, window, clipping behavior, and stability test are all declared. This is an **INFERRED computational mechanism**, not a neuroscientific model.
+
+### 7.3 Excluded mechanisms
+
+The following are removed from the subsystem specification unless independently reformulated and validated:
+
+- Serotonin-labeled attention equations with unexplained constants.
+- GABA-labeled penalty functions represented as biological mechanisms.
+- “D1/D2” state claims without a concrete computational definition.
+- Thresholds involving \(\Phi\), phenomenal continuity, or cognitive integrity.
+- Any claim that a reward-modulated rule produces consciousness-like properties.
+
+***
+
+## 8. Reference implementation
+
+The following minimal implementation is designed around the actual HTNLA requirement: **heterogeneous per-label dimensions**. It does not stack differently shaped label vectors, and it requires every declared block to match its labeled source and target geometry.
+
+The implementation was executed against a `text` component of dimension 3 and an `image` component of dimension 5, producing a `fusion` component of dimension 4. Its k-WTA test retained exactly 2 coordinates. The per-label adaptation routine created separate `text_adapted` and `image_adapted` components of dimensions 4 and 6, respectively, without attempting an invalid cross-label mean. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/63cb97a3-d8b2-41ab-8131-d705145316ae/Hypervector-NonLinear-Transdimensional-Algebra.txt?AWSAccessKeyId=ASIA2F3EMEYE52DFZKEP&Signature=Lc%2FTc1qk1gzgb%2BKCfINApI2RRo0%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEna1%2BX3mlJbC8XmfDyoUCP%2FRG8qWjLRurJIUaRHIVvmAiEAzdlntAPGAoHzNAyRTCEOXBSKwbeLOvTNA5Ll1Tl7Gqwq%2FAQIof%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDG8TrUdd4N00sgXeTCrQBDkwlsFnYQDMJuxRsWQelw6%2Fq%2BRTjvoP2AXlE21jAZmFNonSKZTZsVDg7FK8mro%2Fle7VMDwsLGJL9s40ov51D9nOElOWt%2FZNZ%2BsQmr0Ls9Ej3YPXC%2FC6sKoL2BXuleDHekINzSbNo3I4ANcuGxOU15x2wgbJuIcctNhJeXEYyxsCapjlqxPFBGnBgXSBzvgsk%2FQ7bqGKFq51ewL%2B25waj0RjcjcN6K1GCZW6iTb91efThrzA6Vo1nyHoIQLqQSr5jlegCxFx6jA2ZCN5Xvei%2FawWt07721AZnr54YodQHDv28GrfxcxqAamqckW4E49RtUJUFuy0K3LK0dIoRLhVQZIZQ7fg8SQ4UgU8BRIjhcQJghxVkFxsKIR3a80JfNANSf4OdfFNDSCKLCVmzLPAriInQS4J%2BAI%2Fe%2BdBVBee96ev%2FNObm1o8gYfhVdMAH%2F7fKdyse76GfPkTuuTG5z33S6DQEGkv1uoy%2BdFwJK2U64PPNRcDhnUgGTnJN4%2FspzrreGut3ZL6Oh1Ha1ZA2ILbrTHBqIfOLnhxun3bEAHiEXqrkCeH7FC3BrPYo0uLO6OqFCNbXlUJniVsWKxGtPHoM38SLits7V%2F2dr5tOUbuYTtjEUcfcRDrqNi%2BcZKv5euz%2F80usLqL98%2F1PqOGJIKjSuw1ouEksOOzN3jzI0BJ3eBaO6Z3wbNKhpCWid%2BEQBoyRGItJiA24ovfvNCellKYABOGJlFHgtN62xiUc84BwVG1Kajw9MyLAtIT2ojmcPP%2BNe6Wz6oYeXaCZ1xcCMX2ONswlrzY1AY6mAG%2Fw1ijkiwSkSZIglHMZpFTtrZ6kCuAAtYYvNfd2Hr%2B8tm2II1jB8JYuwTDfzOujuF1RU%2BLSbrX5lBHi6fOCdYSWAS19z9DCZZTFpJSDjDhA%2FITzo6wWNUWgDu6YTORdIT1RzUaqkdHu92CyUJczjHOfTg%2B3umzZIYUrdrmiPF0XVep5aYlLKAtzA%2F5oZUDdLHI7SPuD83gKg%3D%3D&Expires=1788226537)
+
+```python
+import numpy as np
+
+
+class HyperVector:
+    """A labeled collection of one-dimensional NumPy component arrays."""
+
+    def __init__(self, components: dict[str, np.ndarray]):
+        self.components = {
+            label: np.asarray(vector, dtype=float).reshape(-1)
+            for label, vector in components.items()
+        }
+
+
+class NonlinearBlockOperator:
+    """
+    blocks[target_label][source_label] = matrix with shape
+    (target_dimension, source_dimension).
+    """
+
+    def __init__(self, blocks, biases=None, activations=None):
+        self.blocks = blocks
+        self.biases = biases or {}
+        self.activations = activations or {}
+
+    def apply(self, state: HyperVector) -> HyperVector:
+        output = {}
+
+        for target_label, incoming_blocks in self.blocks.items():
+            total = None
+
+            for source_label, matrix in incoming_blocks.items():
+                source = state.components[source_label]
+                matrix = np.asarray(matrix, dtype=float)
+
+                if matrix.shape [normandie-univ.hal](https://normandie-univ.hal.science/hal-03410699) != source.size:
+                    raise ValueError(
+                        f"Block {target_label}<-{source_label} expects "
+                        f"{matrix.shape [normandie-univ.hal](https://normandie-univ.hal.science/hal-03410699)} inputs, received {source.size}."
+                    )
+
+                contribution = matrix @ source
+                total = (
+                    contribution
+                    if total is None
+                    else total + contribution
+                )
+
+            if total is None:
+                raise ValueError(f"No incoming blocks for {target_label}.")
+
+            bias = np.asarray(
+                self.biases.get(target_label, np.zeros_like(total)),
+                dtype=float,
+            ).reshape(-1)
+
+            if bias.shape != total.shape:
+                raise ValueError(
+                    f"Bias for {target_label} has shape {bias.shape}; "
+                    f"expected {total.shape}."
+                )
+
+            activation = self.activations.get(target_label, lambda x: x)
+            output[target_label] = activation(total + bias)
+
+        return HyperVector(output)
+
+
+def kwta(vector: np.ndarray, k: int) -> np.ndarray:
+    """Retain exactly k largest-magnitude entries when magnitudes are distinct."""
+    vector = np.asarray(vector, dtype=float).reshape(-1)
+
+    if not 1 <= k <= vector.size:
+        raise ValueError("k must be between 1 and the vector length.")
+
+    retained_indices = np.argpartition(np.abs(vector), -k)[-k:]
+    result = np.zeros_like(vector)
+    result[retained_indices] = vector[retained_indices]
+    return result
+
+
+def dynamic_label_adapt_per_label(
+    state: HyperVector,
+    new_data_by_label: dict[str, np.ndarray],
+    dimensions: dict[str, int],
+    drift_threshold: float = 0.1,
+    alpha: float = 0.1,
+    seed: int | None = None,
+):
+    """
+    Adapt each label independently. No cross-label stacking or averaging occurs.
+    new_data_by_label[label] must have shape (samples, dimensions[label]).
+    """
+    rng = np.random.default_rng(seed)
+    added_labels = {}
+    per_label_losses = {}
+
+    for label, batch in new_data_by_label.items():
+        batch = np.asarray(batch, dtype=float)
+        current = state.components[label]
+
+        if batch.ndim != 2 or batch.shape [normandie-univ.hal](https://normandie-univ.hal.science/hal-03410699) != current.size:
+            raise ValueError(
+                f"Data for {label} must have shape "
+                f"(samples, {current.size})."
+            )
+
+        batch_mean = batch.mean(axis=0)
+        drift = np.linalg.norm(batch_mean - current)
+        per_label_losses[label] = drift ** 2
+
+        if drift > drift_threshold:
+            centered_batch = batch - batch_mean
+            rank = np.linalg.matrix_rank(centered_batch)
+            new_dimension = max(
+                1,
+                dimensions[label] + int(np.ceil(alpha * rank)),
+            )
+
+            projection = (
+                rng.normal(size=(new_dimension, current.size))
+                / np.sqrt(current.size)
+            )
+
+            new_label = f"{label}_adapted"
+            state.components[new_label] = np.maximum(
+                0.0,
+                projection @ current,
+            )
+            dimensions[new_label] = new_dimension
+            added_labels[label] = new_label
+
+    return state, dimensions, added_labels, per_label_losses
+```
+
+### Executed heterogeneous-dimension test
+
+```python
+state = HyperVector(
+    {
+        "text": np.arange(3.0),
+        "image": np.arange(5.0),
+    }
+)
+
+operator = NonlinearBlockOperator(
+    blocks={
+        "fusion": {
+            "text": np.ones((4, 3)),
+            "image": np.ones((4, 5)),
+        }
+    },
+    biases={"fusion": np.zeros(4)},
+    activations={"fusion": np.tanh},
+)
+
+fusion_state = operator.apply(state)
+assert fusion_state.components["fusion"].shape == (4,)
+
+sparse_fusion = kwta(fusion_state.components["fusion"], k=2)
+assert np.count_nonzero(sparse_fusion) == 2
+
+adapted_state, adapted_dims, added, losses = dynamic_label_adapt_per_label(
+    state,
+    new_data_by_label={
+        "text": np.array([[2.0, 1.0, 0.0], [1.0, 2.0, 0.0]]),
+        "image": np.array(
+            [[4.0, 3.0, 2.0, 1.0, 0.0],
+             [3.0, 2.0, 1.0, 0.0, -1.0]]
+        ),
+    },
+    dimensions={"text": 3, "image": 5},
+    drift_threshold=0.01,
+    seed=7,
+)
+
+assert adapted_dims["text_adapted"] == 4
+assert adapted_dims["image_adapted"] == 6
+```
+
+### Implementation constraints
+
+- **No implicit padding:** Cross-label aggregation is permitted only through explicitly declared blocks. If padding or projection is needed, it must be a named, stored, and tested map.
+- **No generic inversion claim:** This reference code does not supply inverse maps.
+- **No untracked k-WTA ambiguity:** A production system should record retained indices and deterministic tie behavior if it intends to support partial reconstruction.
+- **No hidden biological semantics:** The code contains no dopamine, GABA, serotonin, or consciousness variables.
+- **No performance claim:** NumPy reference code is a correctness baseline, not a latency or throughput implementation.
+
+***
+
+## 9. Validation protocol
+
+All empirical claims should be decided through preregistered or versioned experiments rather than copied projections.
+
+### Required baselines
+
+Compare against:
+
+- The corresponding HTLA block-linear model with matched parameter count where feasible.
+- A dense nonlinear network with the same input/output geometry.
+- A relation-aware GNN or typed message-passing baseline where labels correspond to graph-like typed relations.
+- A modular or multi-head baseline where the principal HTNLA contribution is splitting.
+- An MoE-style routing baseline where sparse computation rather than coordinate sparsity is the claimed benefit.
+
+### Required ablations
+
+| Ablation | Primary question | Required reporting |
+|---|---|---|
+| No nonlinearity vs. per-label activation | Does the nonlinear extension improve the stated task? | Task metric, confidence interval, seeds, dataset split |
+| Activation family | Is the effect activation-specific? | ReLU, leaky ReLU, GELU/Swish, invertible alternative where appropriate |
+| k-WTA on/off | Does hard sparsity help? | Accuracy, calibration, retained fraction, actual latency and memory |
+| Retention \(k\) sweep | Where are the task trade-offs? | Full curve, not one selected point |
+| Block graph sparsity | Is speedup due to block sparsity rather than k-WTA? | Nonzero blocks, FLOP estimate, measured time |
+| Residual map on/off | Does residual geometry improve optimization or output quality? | Training curves and final evaluation |
+| Inversion test | What is recovered after each map? | Exact, pseudoinverse error, partial recovery, ambiguity rate, failure rate |
+| Quinary agreement test | Does any training surrogate preserve reference behavior? | Distribution over EXACT / AMBIGUOUS / UNKNOWN / IMPOSSIBLE |
+
+### Metrics permitted in this paper
+
+Use metrics whose computational definitions are explicit:
+
+- **Task performance:** e.g., Recall@\(K\), classification accuracy, MSE, NLL, depending on the task.
+- **Latency:** measured wall-clock time under stated hardware, batch size, precision, and warm-up protocol.
+- **Memory:** parameter bytes, activation bytes, index bytes, and peak allocated memory.
+- **Sparsity:** fraction of zeros and active coordinates per label.
+- **Reconstruction error:** e.g., normalized \(L_2\) error under a declared reconstruction procedure.
+- **Calibration or uncertainty:** where a probabilistic model is used, report a defined calibration statistic and interval.
+
+Do not use terms such as “Binding Score,” “Neural Dynamics Fidelity,” “cognitive fidelity,” or \(\Phi\) unless the paper supplies a complete computational definition, a rationale, and a scope statement that restricts it to a level-1 variable. No threshold for an undefined metric is admissible.
+
+***
+
+## 10. Quantum extension
+
+A nonlinear HTNLA map should not be described as something that can routinely be “block-encoded into a unitary” in the same sense as a linear operator. Standard closed-system quantum evolution is linear and unitary. A generic nonlinear classical activation such as ReLU, sigmoid, top-\(k\), or k-WTA cannot simply be inserted as a deterministic unitary gate acting on amplitudes.
+
+Research on quantum neural-network nonlinearities explores mechanisms such as measurement back-action, adaptive classical feed-forward, ancillary systems, postselection, dissipation, or repeat-until-success constructions. These mechanisms introduce nontrivial questions about probabilistic success, resource cost, noise, differentiability, and what “nonlinearity” means at the level of classical measurement outputs versus quantum state evolution. [link.aps](https://link.aps.org/doi/10.1103/PhysRevA.102.052421)
+
+Accordingly:
+
+- **Linear HTLA-style quantum subroutines:** potentially relevant to block encoding and other linear-algebraic techniques, subject to their separate assumptions.
+- **Nonlinear HTNLA activation on quantum state amplitudes:** RESEARCH HYPOTHESIS / ACTIVE DEVELOPMENT area, not a routine primitive.
+- **Hybrid quantum-classical model:** possible research direction in which a quantum circuit produces measured features and a classical HTNLA block performs the nonlinear update.
+- **Quantum speedup claim:** no search or retrieval speedup is claimed here without a full oracle model, state-preparation cost, data-access assumptions, success probability, and end-to-end complexity analysis.
+
+***
+
+## 11. Claim-status audit
+
+| Claim | Status | Basis and boundary |
+|---|---|---|
+| Labeled direct-sum state representation | CANONICAL | Defined mathematical object |
+| Block-linear maps between heterogeneous labeled components | CANONICAL | Defined by dimension-compatible matrices |
+| Componentwise target-label nonlinearities | CANONICAL | Defined architecture operation |
+| Multi-layer form \(H^{(k+1)}=\sigma^{(k)}(M^{(k)}H^{(k)}+b^{(k)})\) | CANONICAL | Nexus v4 canonical form |
+| Residual extension with explicit map \(R^{(k)}\) | CANONICAL | Valid only when label geometry permits |
+| HTNLA as a “graded nonlinear algebra” | HISTORICAL/SUPERSEDED | Nonlinear layer family is not generally an algebra under addition |
+| Five-way computational invertibility taxonomy | CANONICAL | Must map to quinary epistemic outcomes |
+| Exact inversion for all HTNLA layers | HISTORICAL/SUPERSEDED | Fails after non-injective layers or dimension reduction |
+| Invertibility-aware HTNLA layers using flow-style blocks | IMPLEMENTABLE | Established invertible-network constructions provide design precedents  [papers.nips](https://papers.nips.cc/paper/2018/file/d139db6a236200b21cc7f752979132d0-Reviews.html) |
+| k-WTA as a configurable sparsity mechanism | IMPLEMENTED | Reference behavior executed with heterogeneous labels  [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/63cb97a3-d8b2-41ab-8131-d705145316ae/Hypervector-NonLinear-Transdimensional-Algebra.txt?AWSAccessKeyId=ASIA2F3EMEYE52DFZKEP&Signature=Lc%2FTc1qk1gzgb%2BKCfINApI2RRo0%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEna1%2BX3mlJbC8XmfDyoUCP%2FRG8qWjLRurJIUaRHIVvmAiEAzdlntAPGAoHzNAyRTCEOXBSKwbeLOvTNA5Ll1Tl7Gqwq%2FAQIof%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDG8TrUdd4N00sgXeTCrQBDkwlsFnYQDMJuxRsWQelw6%2Fq%2BRTjvoP2AXlE21jAZmFNonSKZTZsVDg7FK8mro%2Fle7VMDwsLGJL9s40ov51D9nOElOWt%2FZNZ%2BsQmr0Ls9Ej3YPXC%2FC6sKoL2BXuleDHekINzSbNo3I4ANcuGxOU15x2wgbJuIcctNhJeXEYyxsCapjlqxPFBGnBgXSBzvgsk%2FQ7bqGKFq51ewL%2B25waj0RjcjcN6K1GCZW6iTb91efThrzA6Vo1nyHoIQLqQSr5jlegCxFx6jA2ZCN5Xvei%2FawWt07721AZnr54YodQHDv28GrfxcxqAamqckW4E49RtUJUFuy0K3LK0dIoRLhVQZIZQ7fg8SQ4UgU8BRIjhcQJghxVkFxsKIR3a80JfNANSf4OdfFNDSCKLCVmzLPAriInQS4J%2BAI%2Fe%2BdBVBee96ev%2FNObm1o8gYfhVdMAH%2F7fKdyse76GfPkTuuTG5z33S6DQEGkv1uoy%2BdFwJK2U64PPNRcDhnUgGTnJN4%2FspzrreGut3ZL6Oh1Ha1ZA2ILbrTHBqIfOLnhxun3bEAHiEXqrkCeH7FC3BrPYo0uLO6OqFCNbXlUJniVsWKxGtPHoM38SLits7V%2F2dr5tOUbuYTtjEUcfcRDrqNi%2BcZKv5euz%2F80usLqL98%2F1PqOGJIKjSuw1ouEksOOzN3jzI0BJ3eBaO6Z3wbNKhpCWid%2BEQBoyRGItJiA24ovfvNCellKYABOGJlFHgtN62xiUc84BwVG1Kajw9MyLAtIT2ojmcPP%2BNe6Wz6oYeXaCZ1xcCMX2ONswlrzY1AY6mAG%2Fw1ijkiwSkSZIglHMZpFTtrZ6kCuAAtYYvNfd2Hr%2B8tm2II1jB8JYuwTDfzOujuF1RU%2BLSbrX5lBHi6fOCdYSWAS19z9DCZZTFpJSDjDhA%2FITzo6wWNUWgDu6YTORdIT1RzUaqkdHu92CyUJczjHOfTg%2B3umzZIYUrdrmiPF0XVep5aYlLKAtzA%2F5oZUDdLHI7SPuD83gKg%3D%3D&Expires=1788226537) |
+| k-WTA changes dense \(O(D^2)\) computation to \(O(D\log D)\) | HISTORICAL/SUPERSEDED | Fixed retention fraction alone cannot change the complexity class |
+| FFT-structured binding or transform can have \(O(D\log D)\) cost | IMPLEMENTABLE | Requires actual FFT-compatible structure, not sparsity alone |
+| k-WTA universally stabilizes training | RESEARCH HYPOTHESIS | Must be evaluated under the specified model and data distribution |
+| k-WTA preserves HTLA concentration guarantees | RESEARCH HYPOTHESIS | Requires a theorem under explicit assumptions |
+| Soft differentiable binding surrogate for training | APPLICATION-SPECIFIC | Must remain distinct from quinary reference binding |
+| Quinary binding as deterministic reference geometry | CANONICAL | Information loss represented with four-state unbinding outcomes |
+| Reward-modulated eligibility-trace learning rule | INFERRED | Functional computational analogue, not biological reproduction  [journals.plos](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000180) |
+| Specific dopamine, serotonin, or GABA constants in prior draft | HISTORICAL/SUPERSEDED | No derivation or attributable source supports those values |
+| “85% energy conservation” as a measured property | HISTORICAL/SUPERSEDED | A design motif only; telemetry is required for any energy claim |
+| Energy reduction from HTNLA sparsity | RESEARCH HYPOTHESIS | Requires measured hardware-specific telemetry |
+| Improved recall from HTNLA | RESEARCH HYPOTHESIS | Requires benchmarked ablation with baselines |
+| Any 20–50% recall improvement | HISTORICAL/SUPERSEDED | No supporting experiment in the supplied draft  [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/10268398/63cb97a3-d8b2-41ab-8131-d705145316ae/Hypervector-NonLinear-Transdimensional-Algebra.txt?AWSAccessKeyId=ASIA2F3EMEYE52DFZKEP&Signature=Lc%2FTc1qk1gzgb%2BKCfINApI2RRo0%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEna1%2BX3mlJbC8XmfDyoUCP%2FRG8qWjLRurJIUaRHIVvmAiEAzdlntAPGAoHzNAyRTCEOXBSKwbeLOvTNA5Ll1Tl7Gqwq%2FAQIof%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDG8TrUdd4N00sgXeTCrQBDkwlsFnYQDMJuxRsWQelw6%2Fq%2BRTjvoP2AXlE21jAZmFNonSKZTZsVDg7FK8mro%2Fle7VMDwsLGJL9s40ov51D9nOElOWt%2FZNZ%2BsQmr0Ls9Ej3YPXC%2FC6sKoL2BXuleDHekINzSbNo3I4ANcuGxOU15x2wgbJuIcctNhJeXEYyxsCapjlqxPFBGnBgXSBzvgsk%2FQ7bqGKFq51ewL%2B25waj0RjcjcN6K1GCZW6iTb91efThrzA6Vo1nyHoIQLqQSr5jlegCxFx6jA2ZCN5Xvei%2FawWt07721AZnr54YodQHDv28GrfxcxqAamqckW4E49RtUJUFuy0K3LK0dIoRLhVQZIZQ7fg8SQ4UgU8BRIjhcQJghxVkFxsKIR3a80JfNANSf4OdfFNDSCKLCVmzLPAriInQS4J%2BAI%2Fe%2BdBVBee96ev%2FNObm1o8gYfhVdMAH%2F7fKdyse76GfPkTuuTG5z33S6DQEGkv1uoy%2BdFwJK2U64PPNRcDhnUgGTnJN4%2FspzrreGut3ZL6Oh1Ha1ZA2ILbrTHBqIfOLnhxun3bEAHiEXqrkCeH7FC3BrPYo0uLO6OqFCNbXlUJniVsWKxGtPHoM38SLits7V%2F2dr5tOUbuYTtjEUcfcRDrqNi%2BcZKv5euz%2F80usLqL98%2F1PqOGJIKjSuw1ouEksOOzN3jzI0BJ3eBaO6Z3wbNKhpCWid%2BEQBoyRGItJiA24ovfvNCellKYABOGJlFHgtN62xiUc84BwVG1Kajw9MyLAtIT2ojmcPP%2BNe6Wz6oYeXaCZ1xcCMX2ONswlrzY1AY6mAG%2Fw1ijkiwSkSZIglHMZpFTtrZ6kCuAAtYYvNfd2Hr%2B8tm2II1jB8JYuwTDfzOujuF1RU%2BLSbrX5lBHi6fOCdYSWAS19z9DCZZTFpJSDjDhA%2FITzo6wWNUWgDu6YTORdIT1RzUaqkdHu92CyUJczjHOfTg%2B3umzZIYUrdrmiPF0XVep5aYlLKAtzA%2F5oZUDdLHI7SPuD83gKg%3D%3D&Expires=1788226537) |
+| Universal approximation for a fixed HTNLA design | UNKNOWN | Universal approximation theorems apply only under their actual width, depth, activation, and domain hypotheses; no fixed proposed HTNLA instance is shown to satisfy them |
+| General quantum nonlinear block encoding | RESEARCH HYPOTHESIS | Nonlinearity in quantum neural settings remains nontrivial  [link.aps](https://link.aps.org/doi/10.1103/PhysRevA.102.052421) |
+| Identity transfer, phenomenal continuity, QHRF instrumentation, or human-subject protocol | EXCLUDED | Outside the scope of a nonlinear labeled-block architecture paper |
+
+## Conclusion
+
+HTNLA should be retained as a bounded, buildable extension of a labeled block-linear substrate: blockwise preactivation, per-label nonlinear transformation, optional residual maps, optional k-WTA sparsity, and explicit handling of information loss. Its strongest contribution is not a claim of cognitive transformation or universal superiority; it is a disciplined architecture in which heterogeneous label geometry and invertibility status are both first-class design objects.
+
+The publication standard is straightforward: every equation must either be a definition, a cited result, a proved result, or be marked as an inference or research hypothesis; every numerical performance claim must arise from reproducible code and a stated evaluation protocol; and every lossy step must return an explicit uncertainty status rather than an implied inverse.
+
+
+
+
+

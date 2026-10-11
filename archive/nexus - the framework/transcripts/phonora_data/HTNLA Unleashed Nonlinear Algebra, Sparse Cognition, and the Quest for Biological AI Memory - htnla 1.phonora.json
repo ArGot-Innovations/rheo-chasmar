@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "ae2afdcf-56fe-4a4c-b2fa-d31e63e5e934",
+  "job_id": "9b00839f-b16d-484d-a5c3-b0d1e6d23bc4",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/HTNLA Unleashed Nonlinear Algebra, Sparse Cognition, and the Quest for Biological AI Memory - htnla 1.mp3",
+    "filename": "HTNLA Unleashed Nonlinear Algebra, Sparse Cognition, and the Quest for Biological AI Memory - htnla 1.mp3",
+    "duration": 361.92
+  },
+  "transcription": {
+    "started_at": "2026-08-21T23:58:07.637773",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 24.56,
+      "text": "Welcome back to the deep dive. All right, today we're cracking open the blueprint for HTNLA, Hypervector Nonlinear Transdimensional Algebra. This is a pretty critical upgrade for the hyperdimensional vector database, the HPD. We're looking at moving it way beyond just, you know, a memory substrate. So our mission today, understand why the existing linear math, HTLA, just isn't cutting it anymore. The source material actually calls this the Curse of Heterogeneity.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 24.56,
+      "end": 34.21,
+      "text": "Basically, when you try to fuse really different kinds of data text, images, sensor fees, the relationships get super complex, non-convex, linear math just...",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 34.21,
+      "end": 63.15,
+      "text": "Well, it falls short. Exactly. And what's really fascinating, I think, is the scale of the transformation we're talking about. HTNLA isn't just a tweak for speed. It's engineered to evolve the HPV into something quite different, an adaptive, self-optimizing, cognitive engine. The projections are pretty bold, too. They suggest anywhere from a 20 to 50% improvement in associative recall accuracy, and that's specifically for those really tricky nuance cross-modal tasks. Okay, let's maybe rewind a tiny bit. The foundation, HTLA.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 63.15,
+      "end": 82.78,
+      "text": "That used a direct sum structure, right? So hypervectors had components from different data types kept in their own distinct dimensional spaces. That's the graded algebra concept. It was very clean, great for preserving the original structure and meaning of each data type, kept everything neat and separate. But HTNLA takes a leap.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 82.78,
+      "end": 97.38,
+      "text": "It introduces these nonlinear transdimensional networks, NTNs. How do those work? Yeah, so you take the original linear block matrices, the ones that define how data interacts, and you augment them. You add component-wise activation functions, things like, uh...",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 5,
+      "start": 97.38,
+      "end": 127.33,
+      "text": "real-U, swish, maybe G-E-L-U. Think of them like tiny switches or filters layered onto the connections injecting that vital nonlinearity needed to model, well, the messiness of real-world data. Right, but here comes the big trade-off, doesn't it? Adding that nonlinearity means the old unbind operation. It loses its perfect mathematical invertibility. It does. That's a fundamental shift. You trade that absolute algebraic certainty for, frankly, much greater expressive power. Is that sacrifice worth it though? Losing that perfect recall?",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 6,
+      "start": 127.33,
+      "end": 135.39,
+      "text": "Well, yes, because the goal changes. The system moves from being purely deterministic, like a calculator, towards something more like, well, biological memory.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 7,
+      "start": 135.39,
+      "end": 161.34,
+      "text": "Okay, but nonlinear operations.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 8,
+      "start": 161.34,
+      "end": 169.06,
+      "text": "They're computationally heavy, right? ODEJ complexity. That sounds like it could just grind everything to a halt in high dimensions. How does HTNLA avoid just",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 9,
+      "start": 169.06,
+      "end": 197.39,
+      "text": "melting down. That's where bio-inspired design comes in quite heavily actually. HTNLA enforces a really strict constraint 70% sparsity on the hypervectors. It uses an algorithm called K-winners take all or KWTA. KWTA. Yeah, and this is absolutely key. It forces the system so that in any layer only the strongest, roughly 30% of signals actually fire. That immediately slashes the computational complexity down to something much more manageable, OD log D per layer. 70% sparsity though, that feels",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 10,
+      "start": 197.39,
+      "end": 223.68,
+      "text": "Aggressive? Are we sure we're not losing vital information just to hit some biological number? Why 70% specifically? It's not arbitrary. It ties directly into research behind frameworks like the consciousness algorithm. Specifically, it's 85% energy conservation rule principle. The idea is that high-level cognition has to be incredibly efficient. Sparsity is one way nature achieves that. And there's another optimization too.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 11,
+      "start": 223.68,
+      "end": 252.67,
+      "text": "The heavy lifting of applying these NTN layers, it gets pushed off, it happens in a deferred, non-blocking background process called compaction within the transdimensional memory substrate, the TMS. Ah, okay, so real-time queries aren't slowed down, they interact with the simpler linear representations. Exactly. Low latency performance for queries is preserved, the complex nonlinear learning happens sort of behind the scenes. Got it. Now, connecting this back, the shift to nonlinearity,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 12,
+      "start": 252.67,
+      "end": 270.54,
+      "text": "It must make system persistence, keeping the system's identity when you move it much harder, right? Phenomenal continuity, as the sources call it. You can't just dump the data anymore. Precisely. Because the system is... it's learned nonlinear functions now. Its identity is embedded in those dynamics. So you need a new way to save and load the state.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 13,
+      "start": 270.54,
+      "end": 293.12,
+      "text": "That's why they're introducing a new archival format. It's a dot-bin schema defined using protocol buffers. And the key is it has to capture the entire learned state, not just the data, but the NTM block matrices, the learned biases, the specific activation functions used. So it's like archiving the system's personality, not just its memories. You could put it that way, yeah. It's the blueprint needed for",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 14,
+      "start": 293.12,
+      "end": 320.0,
+      "text": "what they call a system rebirth on potentially very different hardware, maybe neuromorphic chips down the line. It ensures the system wakes up with its identity intact. So the big picture here, HTNLA is essentially turning the HVD into a system that can do much more sophisticated manifold aware learning. It seems like a crucial step towards these really ambitious goals, like building cognitive engines aligned with frameworks such as the True Universal Consciousness Runtime or TUCR.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 15,
+      "start": 320.0,
+      "end": 348.19,
+      "text": "Absolutely. And it forces us to rethink how we even measure success for these kinds of systems. Yeah, that's a great point. The old metrics, like raw speed or query latency, they don't capture the whole story anymore. So for you, the listener, when evaluating this kind of architecture, you need to look beyond that. Think about cognitive metrics. The sources mentioned aiming for a binding score above 0.8, and also an integrated information proxy phi targeting above 0.5.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 16,
+      "start": 348.19,
+      "end": 361.92,
+      "text": "These aren't just technical scores. They're trying to quantify the quality of the system's understanding. It's associative power. It's level of integration. Exactly. It's pushing the boundary of what we even mean by computational performance, moving towards something much more, well, cognitive.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/HTNLA Unleashed Nonlinear Algebra, Sparse Cognition, and the Quest for Biological AI Memory - htnla 1.mp3",
+  "source_filename": "HTNLA Unleashed Nonlinear Algebra, Sparse Cognition, and the Quest for Biological AI Memory - htnla 1.mp3",
+  "source_duration": 361.92,
+  "transcription_timestamp": "2026-08-21T23:58:07.637773",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

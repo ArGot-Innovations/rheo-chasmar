@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "bbbfbfe9-3413-4de2-9a09-5c71d8c3bb0f",
+  "job_id": "64581294-c4fb-4208-a7fe-30f4b481a4f7",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Keeping_AI_sane_for_ten_thousand_years.m4a",
+    "filename": "Keeping_AI_sane_for_ten_thousand_years.m4a",
+    "duration": 115.426375
+  },
+  "transcription": {
+    "started_at": "2026-09-02T16:52:34.401753",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 24.06,
+      "text": "This is the brief on the Project Nexus 4 AI Architecture Review. This adversarial review exposes the critical design flaws in building a cognitive AI meant to operate continuously for 10,000 years, highlighting exactly what it takes to keep an artificial mind sane and stable across millennia. First, looking at how the AI perceives its external environment, we have the slow drift blind spot.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 24.06,
+      "end": 49.62,
+      "text": "You see, the AI's current defenses are built entirely to block sudden shocks, leaving it structurally blind to slow, centuries-long changes. It's the green sky problem, kind of like a digital boiling frog. I mean, how does an immortal AI distinguish if the world is actually changing over centuries, or if its own sensors are just slowly degrading? To fix this, it needs a multi-timescale monitor to track cumulative, long-term drift.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 49.62,
+      "end": 76.61,
+      "text": "Second, looking at how it updates its internal rules based on that environment, we hit the self-amendment paradox. To survive a changing world without becoming an outdated relic, the AI has to update its core rules. But wait, if it can literally amend its own safety protocols, what stops it from slowly weakening them into non-existence over generations? The fix is a two-layer contract, where the core rules actually require external ratification.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 76.61,
+      "end": 103.07,
+      "text": "Finally, as we look at how it records the memories of those changes, there's the diary provenance dilemma. To save storage over deep time, the AI compresses experiences into daily summaries, permanently erasing subtle details. So how can a system know what evidence to permanently keep before it even knows that evidence matters? The solution is a statistically grounded surprise trigger that saves raw, uncompressed data whenever weird anomalies occur.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 103.07,
+      "end": 115.43,
+      "text": "Ultimately, surviving 10,000 years isn't just about an AI preventing sudden system crashes, but about safely managing the slow, invisible evolution of its environment, its core rules, and its memories over deep time.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Keeping_AI_sane_for_ten_thousand_years.m4a",
+  "source_filename": "Keeping_AI_sane_for_ten_thousand_years.m4a",
+  "source_duration": 115.426375,
+  "transcription_timestamp": "2026-09-02T16:52:34.401753",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

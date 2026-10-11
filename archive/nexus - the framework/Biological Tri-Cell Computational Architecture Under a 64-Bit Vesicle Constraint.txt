@@ -1,0 +1,857 @@
+Biological Tri-Cell Computational Architecture Under a 64-Bit Vesicle Constraint
+Biological grounding and design commitments
+This specification defines an in silico multicellular tissue of cells (target ) in which each cell is a tripartite computational unit: Nucleus (identity + regulation), Cytoplasm (processing + prediction + metabolism), and Membrane (receptors + interface + vesicle emission/uptake). The tissue achieves (i) multi-scale consensus (“quorum” decisions emerging from local chemical context), (ii) lesion-resilient regeneration after sudden necrosis, and (iii) local Lyapunov-style homeostatic control, under a strict communication and energy budget.
+This work uses biological primitives as the implementation vocabulary: vesicles (EV-like carriers), receptor binding and uptake, transcriptional regulation, signal degradation, ATP limits, mitosis, apoptosis, adhesion, and diffusion-like spread through a tissue adjacency lattice. The communication bottleneck is enforced as: each living cell emits exactly one 64-bit-equivalent vesicle payload per its own biological cycle, and each cell can internalize at most 8 vesicle payloads per its own cycle.
+The implementation is biologically inspired by extracellular vesicles (EVs), including exosomes (commonly described as ~30–150 nm vesicles) and more broadly “small EVs,” which are widely discussed as intercellular carriers of proteins and nucleic acids (including RNAs) and can be internalized through multiple uptake routes (endocytosis variants, phagocytosis/macropinocytosis, and fusion-like mechanisms).
+For tissue-scale coordination, the chemical field behavior is grounded in reaction–diffusion thinking: spatial patterns can arise from local reactions plus diffusion-like spread, with classic analysis showing symmetry breaking and pattern emergence from initially homogeneous states. For population-wide switching, the “quorum” mechanism is taken from canonical bacterial quorum sensing: cells release chemical signals whose extracellular accumulation tracks local density and triggers coordinated gene-expression changes when surpassing thresholds.
+Mathematical specification of the tri-compartment cell and tissue
+Tissue geometry and adjacency
+Let the tissue be an adhered lattice embedded in 2D: cells occupy sites (e.g., a grid for ). Define an adhesion neighborhood using a fixed stencil (e.g., Moore neighborhood of
+radius 1: up to 8 neighbors). This is the cell’s physical “contact neighborhood” and also the discrete substrate for diffusion-like spread.
+To represent diffusion on the tissue lattice, use a graph-Laplacian diffusion operator: the discrete Laplacian on a graph generates a diffusion process and is closely tied to random-walk diffusion. This
+NN= 10,000
+1
+2
+3
+x∈iZ2 100 × 100 N= 10,000 Ni
+4
+lets us specify reaction–diffusion dynamics on the adhesion graph without introducing any global coordination primitive.
+Core cell state vectors and molecular budgets
+Each cell has three compartments with explicit state variables. To meet the “molecular copy-number framing,” all scalar states below are stored as bounded nonnegative integers (copy-number proxies), even if updated via continuous approximations.
+Nucleus (Core-A): identity + transcriptional regulation - : lineage/identity label (8-bit equivalent, fixed over cell lifetime except mutation/ablation experiments). -
+, each : TF-like copy numbers controlling homeostasis, repair, mitosis, apoptosis. - : small GRN memory (optional; default additional regulators).
+Cytoplasm (Core-B): prediction + processing + metabolism - : ATP pool. - : local tissue consensus estimate (“setpoint”) for the cell. - : “stress integrator” (slow variable accumulating mismatch and damage). - : local “ -proxy” scalar for homeostasis/health (observer metric; used internally only as a proxy controller input in this spec, distinct from IIT). fileciteturn0file0
+Membrane (Core-C): receptors + vesicle I/O - Receptor array counts for each vesicle class : , with matching 4-bit vesicle “message_type.” - Bound receptor counters
+(optional explicit binding state; by default we treat binding probabilistically). - Uptake pool : multiset of vesicles internalized since last cell cycle boundary (hard-capped at 8 processed per cycle; overflow is degraded).
+Deterministic intra-cell “micro-cycle” schedule
+Each cell has an asynchronous biological clock. Let be its phase. Each simulation macro-tick advances by , and
+When , the cell completes one biological cycle and performs the micro-cycle update (then ). The ±5% drift is enforced by sampling at initialization (or slowly drifting it), and no global
+synchronization is used.
+Within a cell cycle boundary, update in this deterministic order:
+Membrane uptake processing (bounded) Process up to 8 internalized vesicles from . For each vesicle, decode the 64-bit payload into fields (Section “Vesicle payload protocol”). Accumulate cytoplasmic inputs:
+i
+I∈i{0,… , 255} T =i
+(T,T,T,T)ihomeo
+irepair
+imit
+iapo
+T∈[0,T]max
+G ∈i[0,G]max gg= 4
+A∈i[0,A]max ∈
+s
+^
+ i[0,S]max
+u∈i[0,U]max
+ϕ∈i[0, Φ]max Φ
+kR∈i,k
+[0,R]max k∈{0,… , 15} Bi,k
+Ui
+θ(t)∈i[0, 1) Δt
+θ(t+iΔt)= θ(t)+iωΔt,ω∈ii[0.95, 1.05]ω.0
+θ≥i1 θ←iθ−i1 ωi
+1. Ui
+in =i( , , , )siin ui
+in ρiin fi
+in
+where is a decoded neighborhood consensus estimate average, is decoded stress average,
+is decoded neighbor density cue, and are action flags (repair/mitosis/apoptosis cues).
+Cytoplasmic processing / prediction alignment Update by combining (a) internal persistence, (b) decoded neighbor estimates, and (c) nuclear bias:
+with modeling extracellular noise at the decoder/integration stage. Quorum-sensing in bacteria involves thresholded responses to accumulated signals; this spec implements that thresholding in the nucleus step below.
+Update stress integrator:
+so stress grows with consensus mismatch and with low density (lesion edge).
+Nuclear regulation and fate decisions Update TF-like copy numbers using Hill-like saturating responses to stress and density:
+where is a Hill-like rectified saturating nonlinearity and projects into .
+This encodes “quorum thresholds” as TF activations that jump when a density-dependent signal crosses a threshold—biologically analogous to quorum circuits that switch coordinated behaviors when autoinducers accumulate past a critical level.
+Membrane receptor expression and vesicle emission Receptor arrays are transcriptionally regulated:
+where sets relative emphasis (homeostasis vs repair vs mitosis vs apoptosis).
+Finally, emit exactly one vesicle containing a 64-bit payload (Section “Vesicle payload protocol”). The payload encodes the cell’s identity, its consensus estimate , its stress , and density/fate flags. The vesicle then undergoes diffusion-like spread and probabilistic uptake as defined below.
+siin ui
+in
+ρiin fi
+in
+2.
+s
+^
+ i
+←
+s
+^
+ iΠ((1 −[0,S]max α)+
+s
+^
+ iα+siin αT)+bi
+homeo ξ,i
+ξ∼iN (0,σ)e2
+3
+u←iΠ((1 −[0,U]max λ)u+uiλ−u
+s
+^
+ i+siin λmax(0, ρ−ρ
+⋆)),ρiin
+1.
+T←irepair Π(T+i
+repair ηH(u;κ) −rirδT),ri
+repair
+T←imit Π(T+i
+mit ηH(ρ−m⋆;κ) −ρi
+in mδT),mi
+mit
+T←iapo Π(T+i
+apo ηH(u−aiu;κ) −†
+aδT),aiapo
+H(z;κ)= z+κ+
+z+Π[0,T]max
+5
+2.
+R←i,kΠ(R+[0,R]max i,kγF(T , ,u) −kki
+s
+^
+ iiδR),Ri,k
+Fk
+s
+^
+ iui
+Extracellular vesicle transport, degradation, and uptake kinetics
+Transport and degradation (reaction–diffusion form). Let be the extracellular density of vesicles of class at position . A continuum approximation is:
+where secretion corresponds to each cell’s “one vesicle per cycle” emission (as a point source), and captures enzymatic/physical clearance. This is the canonical reaction–diffusion structure used in morphogen and pattern formation models, where diffusion plus local reactions generate large-scale spatial coordination.
+Discrete simulation transport (graph diffusion form). For the simulator, we implement vesicles as discrete objects that perform a bounded random walk on the adhesion graph. Random walks and graph Laplacians are dual views of diffusion on a discrete substrate.
+A vesicle executes hops per macro-tick (parameterized by diffusion constant), moving from a cell to a random alive neighbor along . It is removed after a TTL (half-life proxy) or with per-step degradation probability tied to .
+Receptor binding and uptake. Uptake is modeled as receptor-ligand style kinetics: association and dissociation rates govern complex formation, and links kinetics to equilibrium affinity. For proteins, association rate constants are often diffusion-limited and commonly discussed in a broad range of – (order-of-magnitude guidance used here only to set plausible simulation scales).
+For a vesicle of class “encountering” cell , let be available receptors. Define uptake probability over a small interval as:
+and accept uptake if (a) a Bernoulli draw succeeds, and (b) the cell has not exceeded the 8-per-cycle uptake processing limit. The “multi-route” biological reality of EV uptake (multiple endocytic and fusion-related mechanisms) is abstracted here as a single probabilistic internalization gate with capacity and affinity parameters.
+Lesion model, regeneration operators, and contact inhibition
+Necrotic lesion. At absolute time (baseline cycles), delete 30% of cells. “Deletion” means: cells become nonfunctional, stop cycling, stop emitting vesicles, and are removed from adhesion occupancy (sites become empty). This mirrors lesion/removal procedures used in resilience experiments in the user’s broader runtime concepts. fileciteturn0file9
+v(x,t)kkx
+= ∂t∂vk
+D∇v−k2
+kλv+kkδ(x−i
+∑x) q(t)−ii,kδ(x−i
+∑x) uptake (t),ii,k
+qi,kλk
+2
+6
+h
+Ni
+λk
+(k, k)on off
+K=Dk/koffon 7
+105 10 M s7 −1 −1
+8
+kiRi,kfree
+Δt
+p=i,kbind 1 − exp(−kRΔt),on,ki,k
+free
+9
+tLt=L200
+Mitosis (regrowth). A living cell triggers mitosis when: - density cue (space is available), and - exceeds a threshold, and - ATP exceeds a mitosis cost.
+Mitosis selects a neighboring empty site and instantiates a daughter cell with inherited nuclear identity , TFs partially copied (with noise), and reset membrane receptors. Contact-inhibition is captured by the density gating (mitosis is suppressed when local density is high), consistent with models that use logistic-like growth as a caricature for contact inhibition effects in cell populations.
+Apoptosis (stability enforcement). Apoptosis triggers if stress exceeds for sustained time or if nuclear apoptosis factor is high. This prevents runaway accumulation of dysfunctional cells (a key anti-pathology operator).
+Cell-aware Lyapunov homeostasis
+Define a local Lyapunov proxy for each cell, computable only from intracellular variables and local neighborhood-derived estimates:
+Intuition: - the first term enforces local consensus, - the second penalizes accumulated stress, - the third penalizes energy deficit (cannot maintain homeostasis), - the fourth penalizes low density (lesion boundary pressure).
+A cell-aware control heuristic then adjusts transcription/emission to reduce : - If dominates, bias emission toward “homeostasis” vesicle types that carry more precisely (higher quantization priority). - If density deficit dominates, bias emission toward “repair/mitosis” flags and increase and . - If stress dominates, increase apoptosis vigilance unless density is low (to avoid self-elimination at wound edge).
+This is a Lyapunov-style regulator because it is explicitly built to reduce a nonnegative “energy” via local actions. (The simulator logs both and aggregate tissue proxies; Section “Experimental protocols.”)
+Vesicle payload protocol as a 32-nt RNA string
+Why 32 nucleotides implement a 64-bit constraint
+A 4-letter nucleotide alphabet can encode up to bits per nucleotide in principle; practical DNA/ RNA data storage often achieves somewhat less than 2 bits/nt due to coding constraints (e.g., avoiding problematic motifs), but the 2-bit/nt bound provides the clean 64-bit-equivalent mapping target used here.
+Separately, EVs are widely documented to carry RNAs (including mRNAs and noncoding RNAs), motivating an RNA-sequence substrate as a plausible symbolic stand-in for an EV cargo channel in the simulator.
+<ρiin ρ⋆Ti
+mit
+Ai
+I
+10
+uiu†Tiapo
+Vi
+V=iw( −s
+s
+^
+ i) +siin 2 wu+ui
+2 w(A−A⋆A) +i+
+2 w(ρ−ρ⋆) .ρi
+in + 2
+Vi( −
+s
+^
+ i)siin 2
+s
+^
+ iTimit Ti
+repair
+Tiapo
+ViVi
+log (4) =2 2
+11
+12
+Bit layout (exact 64-bit schema)
+Wedefinethe64−bitpayloadasthefollowingpackedfields(MSB→LSB),designedtosupportconsensus+ lesion repair while remaining decodable with bounded local logic:
+Preamble/version: 4 bits Lineage/identity: 8 bits ( ) Vesicle class (“message_type”): 4 bits ( ) Consensus estimate: 12 bits ( quantized) Stress proxy: 12 bits ( quantized) Local density cue: 8 bits ( quantized) Fate/repair flags: 4 bits (bitmask: repair, mitosis, apoptosis, reserved) CRC: 12 bits (CRC-12 over the first 52 bits)
+This yields bits exactly.
+RNA base encoding
+Mapeach2−bitchunktoanRNAbase:−00→A−01→C−10→G−11→U
+Thus the 64-bit payload becomes a 32-nt RNA string:
+Packing, release, uptake, and decay rules
+Vesicle formation (membrane emission). - Exactly one vesicle is formed per cell cycle boundary for each alive cell. - A fixed ATP cost is charged for “bud + load + release.” The simulator enforces this energy cost and can force a cell into failure if mandatory emission is unaffordable.
+Uptake and decoding. - Uptake uses the receptor-gated probabilistic mechanism described earlier. -Decoding runs only inside the recipient cytoplasm after internalization; payload is discarded after decoding. −“Competitivebinding”ishandledby(i)receptoravailability,and(ii)uptakecapacity≤8percellcycle;vesicles beyond capacity degrade (collision handling at the membrane capacity boundary). Uptake diversity and binding/uptake mechanisms are abstracted from EV literature into this capacity-limited stochastic gate.
+Signal degradation. - A vesicle can be lost before uptake via TTL expiry or per-step degradation probability tied to (extracellular clearance), reflecting that EVs can be cleared/degraded and that uptake is not guaranteed.
+P
+Ii
+k∈[0, 15]
+s
+^
+ i
+ui
+ρi
+4 + 8 + 4 + 12 + 12 + 8 + 4 + 12 = 64
+RNA(P) ∈A,C,G,U.32
+Ri,kfree
+13
+λk14
+Encoding/decoding pseudocode (CRC included)
+encode_payload(cell_state):
+bits = []
+bits += preamble4
+bits += uint8(identity)
+bits += uint4(message_type)
+bits += uint12(q12(consensus_estimate))
+bits += uint12(q12(stress_proxy))
+bits += uint8(q8(local_density))
+bits += uint4(flags)
+crc = crc12(bits) # over first 52 bits
+bits += uint12(crc)
+rna = bits_to_rna(bits) # 2 bits per base (A,C,G,U)
+return rna
+decode_payload(rna):
+bits = rna_to_bits(rna)
+verify_crc12(bits[0:52], bits[52:64]) else reject
+parse fields and return struct {identity, message_type, consensus_q, stress_q,
+density_q, flags}
+Reference simulator and data structures
+In silico data structures
+The following “systems-language style” structs convey the simulator’s concrete state layout:
+struct Nucleus {
+u8 identity; // fixed lineage label
+u16 TF_homeo;
+u16 TF_repair;
+u16 TF_mit;
+u16 TF_apo;
+}
+struct Cytoplasm {
+u32 ATP;
+u16 s_hat; // consensus estimate (copy-number proxy /
+quantized)
+u16 stress; // u_i
+u16 phi_proxy; // observer-like scalar (also used locally as proxy
+input)
+u8 density_local;
+}
+struct Membrane {
+u16 receptors[16]; // R_{i,k}
+u8uptake
+c
+​
+ ount
+c
+​
+ ycle;//capacitycounter(≤8)
+Vesicle uptake_pool[8]; // bounded: keep only first 8, drop rest
+}
+struct Vesicle {
+u16 ttl;
+u8 message_type; // 0..15
+u16 carrier_cell; // current lattice position (graph node index)
+u32 payload_hi;
+u32 payload_lo; // total 64-bit payload
+}
+Allowed and forbidden operations (anti-nonphysical guardrails)
+This simulator enforces: - Allowed: local receptor binding/uptake, local TF updates, local vesicle emission, diffusion-like hops to adjacent adhered neighbors, stochastic decay, mitosis into adjacent empty sites, apoptosis of individual cells. - Forbidden: instant long-range signaling, global averaging in the cell logic, broadcasting to all cells, unlimited vesicle reception, emitting >1 vesicle per cycle, and energy-free transcription/receptor turnover.
+These guardrails ensure the tissue’s coordination cannot “cheat” by using omniscient global state.
+Metabolic budget model (ATP as compute limit)
+We assign each cell a per-cycle ATP production plus a bounded carryover. ATP is consumed by: -vesicle emission (mandatory cost), - processing each internalized vesicle (decoder cost), - TF updates (regulatory cost), - receptor turnover (membrane maintenance), - mitosis (large cost), - motility/adhesion change (optional cost).
+The high cost of protein synthesis is commonly discussed as ~4 ATP-equivalents per peptide bond (ATP/ GTP equivalents), which motivates assigning large costs to growth (mitosis) relative to small signaling steps.
+These costs are not intended to be quantitatively exact cell biophysics; they are a strict accounting mechanism to enforce the design constraint that “computation” is metabolically limited.
+Single-file runnable Python reference implementation
+The code below is a complete minimal reference simulator that: - implements the Nucleus/Cytoplasm/ Membrane micro-cycle, - enforces 1 vesicle emission per alive-cell cycle, - enforces ≤8 vesicle internalizations processed per recipient cycle, - simulates diffusion-like vesicle hops on an adhesion neighborhood, - runs baseline + lesion at , - logs key metrics.
+Aprod
+15
+tL
+# tri_cell_tissue_sim.py
+# Reference simulator for a Tri-Cell (Nucleus/Cytoplasm/Membrane) tissue
+# Communication: exactly 1 vesicle (64-bit) emitted per cell cycle; max 8
+vesicles processed per cell cycle.
+from __future__ import annotations
+from dataclasses import dataclass, field
+from typing import List, Tuple, Dict, Optional
+import random
+import math
+# -----------------------------
+# Utilities: CRC-12 (simple, reproducible)
+# -----------------------------
+CRC12_POLY = 0x80F # CRC-12/UMTS polynomial (common 12-bit CRC poly)
+def crc12(bits: List[int]) -> int:
+"""Compute CRC-12 over a list of bits (0/1). Returns 12-bit int."""
+reg = 0
+for b in bits:
+reg = ((reg << 1) | (b & 1)) & 0x1FFF # keep 13 bits for division step
+if reg & 0x1000: # if top bit set
+reg ^= CRC12_POLY
+return reg & 0xFFF
+def int_to_bits(x: int, width: int) -> List[int]:
+return [(x >> (width - 1 - i)) & 1 for i in range(width)]
+def bits_to_int(bits: List[int]) -> int:
+x = 0
+for b in bits:
+x = (x << 1) | (b & 1)
+return x
+RNA_MAP = {0b00: "A", 0b01: "C", 0b10: "G", 0b11: "U"}
+RNA_INV = {"A": 0b00, "C": 0b01, "G": 0b10, "U": 0b11}
+def bits_to_rna(bits64: List[int]) -> str:
+assert len(bits64) == 64
+out = []
+for i in range(0, 64, 2):
+two = (bits64[i] << 1) | bits64[i + 1]
+out.append(RNA_MAP[two])
+return "".join(out)
+def rna_to_bits(rna32: str) -> List[int]:
+assert len(rna32) == 32
+bits = []
+for ch in rna32:
+v = RNA_INV[ch]
+bits.append((v >> 1) & 1)
+bits.append(v & 1)
+assert len(bits) == 64
+return bits
+def q_clip(x: float, max_int: int) -> int:
+return max(0, min(max_int, int(round(x))))
+def q12(x: float, max_val: float = 1.0) -> int:
+# map [0, max_val] to [0, 4095]
+return q_clip((x / max_val) * 4095.0, 4095)
+def uq12(u: int, max_val: float = 1.0) -> float:
+return (u / 4095.0) * max_val
+def q8(x: float, max_val: float = 1.0) -> int:
+return q_clip((x / max_val) * 255.0, 255)
+def uq8(u: int, max_val: float = 1.0) -> float:
+return (u / 255.0) * max_val
+# -----------------------------
+# Data structures
+# -----------------------------
+@dataclass
+class Vesicle:
+# 64-bit payload stored as two 32-bit ints for portability
+payload_hi: int
+payload_lo: int
+message_type: int
+carrier: int # current node index on adhesion lattice
+ttl: int # time-to-live in hop steps
+def as_uint64_bits(self) -> List[int]:
+x = ((self.payload_hi & 0xFFFFFFFF) << 32) | (self.payload_lo &
+0xFFFFFFFF)
+return int_to_bits(x, 64)
+@dataclass
+class Nucleus:
+identity: int # 0..255
+tf_homeo: float = 0.5
+tf_repair: float = 0.0
+tf_mit: float = 0.0
+tf_apo: float = 0.0
+@dataclass
+class Cytoplasm:
+atp: float = 0.0
+s_hat: float = 0.5
+stress: float = 0.0
+phi_proxy: float = 1.0
+density_local: float = 1.0
+@dataclass
+class Membrane:
+receptors: List[float] = field(default_factory=lambda: [20.0] * 16) #
+R_{i,k}
+uptake_pool: List[Vesicle] = field(default_factory=list)
+uptake_count_cycle: int = 0 # processed per local cycle
+@dataclass
+class Cell:
+idx: int
+pos: Tuple[int, int]
+alive: bool = True
+phase: float = 0.0
+rate: float = 1.0 # async drift multiplier
+nucleus: Nucleus = field(default_factory=lambda: Nucleus(identity=0))
+cytoplasm: Cytoplasm = field(default_factory=Cytoplasm)
+membrane: Membrane = field(default_factory=Membrane)
+# -----------------------------
+# Core tissue simulator
+# -----------------------------
+@dataclass
+class SimParams:
+# Timing
+dt: float = 0.25 # macro-tick
+cycles_total: int = 500
+lesion_cycle: int = 200
+# Communication + uptake constraints
+max_uptake_per_cycle: int = 8
+vesicle_ttl: int = 6
+diffusion_hops_per_dt: int = 1
+# Noise
+sigma_e: float = 0.05
+# Kinetics (abstracted)
+kon: float = 0.25 # per dt per receptor unit (dimensionless)
+decay_p: float = 0.08 # per hop
+# Homeostasis / thresholds
+alpha_consensus: float = 0.35
+density_target: float = 0.85
+stress_decay: float = 0.10
+stress_gain_mismatch: float = 0.35
+stress_gain_density: float = 0.50
+stress_apoptosis: float = 1.2
+mitosis_thresh: float = 0.65
+# Energy
+atp_prod_per_cycle: float = 1200.0
+atp_max: float = 5000.0
+cost_emit: float = 250.0
+cost_decode_per_ves: float = 15.0
+cost_regulate: float = 20.0
+cost_mitosis: float = 500.0
+cost_move: float = 30.0
+@dataclass
+class TelemetryRow:
+global_cycle: int
+alive: int
+phi_proxy: float
+mean_stress: float
+vesicles_in_space: int
+class Tissue:
+def __init__(self, w: int, h: int, params: SimParams, seed: int = 0):
+self.w = w
+self.h = h
+self.N = w * h
+self.p = params
+random.seed(seed)
+self.cells: List[Cell] = []
+for idx in range(self.N):
+x = idx % w
+y = idx // w
+c = Cell(
+idx=idx,
+pos=(x, y),
+alive=True,
+phase=random.random(),
+rate=random.uniform(0.95, 1.05),
+nucleus=Nucleus(identity=random.randrange(0, 256)),
+cytoplasm=Cytoplasm(atp=random.uniform(500.0, 1500.0)),
+membrane=Membrane(),
+)
+self.cells.append(c)
+self.neighbors: List[List[int]] = [self._moore_neighbors(i) for i in
+range(self.N)]
+self.vesicles: List[Vesicle] = []
+self.telemetry: List[TelemetryRow] = []
+# Track global cycle count as observer metric
+self._cycles_elapsed = 0
+def _moore_neighbors(self, idx: int) -> List[int]:
+x = idx % self.w
+y = idx // self.w
+nn = []
+for dy in (-1, 0, 1):
+for dx in (-1, 0, 1):
+if dx == 0 and dy == 0:
+continue
+xx = x + dx
+yy = y + dy
+if 0 <= xx < self.w and 0 <= yy < self.h:
+nn.append(yy * self.w + xx)
+return nn
+def _alive_neighbor_density(self, idx: int) -> float:
+nbrs = self.neighbors[idx]
+if not nbrs:
+return 0.0
+alive = sum(1 for j in nbrs if self.cells[j].alive)
+return alive / float(len(nbrs))
+# -----------------------------
+# Payload pack/unpack
+# -----------------------------
+def pack_payload(self, cell: Cell, message_type: int, flags: int) ->
+Tuple[int, int]:
+preamble = 0b1010 # 4-bit
+identity = cell.nucleus.identity & 0xFF
+k = message_type & 0xF
+s_q = q12(cell.cytoplasm.s_hat, max_val=1.0)
+u_q = q12(min(1.0, cell.cytoplasm.stress / 2.0), max_val=1.0) #
+normalize stress ~[0,2] -> [0,1]
+rho_q = q8(cell.cytoplasm.density_local, max_val=1.0)
+flags4 = flags & 0xF
+bits = []
+bits += int_to_bits(preamble, 4)
+bits += int_to_bits(identity, 8)
+bits += int_to_bits(k, 4)
+bits += int_to_bits(s_q, 12)
+bits += int_to_bits(u_q, 12)
+bits += int_to_bits(rho_q, 8)
+bits += int_to_bits(flags4, 4)
+c = crc12(bits)
+bits += int_to_bits(c, 12)
+assert len(bits) == 64
+x = bits_to_int(bits)
+hi = (x >> 32) & 0xFFFFFFFF
+lo = x & 0xFFFFFFFF
+return hi, lo
+def unpack_payload(self, ves: Vesicle) -> Optional[Dict[str, int]]:
+bits = ves.as_uint64_bits()
+head = bits[:52]
+given_crc = bits_to_int(bits[52:])
+if crc12(head) != given_crc:
+return None
+preamble = bits_to_int(bits[0:4])
+if preamble != 0b1010:
+return None
+identity = bits_to_int(bits[4:12])
+k = bits_to_int(bits[12:16])
+s_q = bits_to_int(bits[16:28])
+u_q = bits_to_int(bits[28:40])
+rho_q = bits_to_int(bits[40:48])
+flags = bits_to_int(bits[48:52])
+return {"identity": identity, "k": k, "s_q": s_q, "u_q": u_q, "rho_q":
+rho_q, "flags": flags}
+# -----------------------------
+# Vesicle ecology: hop, decay, uptake
+# -----------------------------
+def _attempt_uptake(self, target_idx: int, ves: Vesicle) -> bool:
+cell = self.cells[target_idx]
+if not cell.alive:
+return False
+if cell.membrane.uptake_count_cycle >= self.p.max_uptake_per_cycle:
+return False
+# receptor-gated uptake probability (abstracted)
+R = max(0.0, cell.membrane.receptors[ves.message_type])
+p_bind = 1.0 - math.exp(-self.p.kon * R * self.p.dt)
+if random.random() < p_bind:
+# internalize
+cell.membrane.uptake_pool.append(ves)
+return True
+return False
+def _vesicle_step(self):
+new_ves = []
+for ves in self.vesicles:
+if ves.ttl <= 0:
+continue
+if random.random() < self.p.decay_p:
+continue
+# hop along adhesion neighborhood
+cur = ves.carrier
+nbrs = self.neighbors[cur]
+if nbrs:
+nxt = random.choice(nbrs)
+ves.carrier = nxt
+ves.ttl -= 1
+# attempt uptake at current location
+if self._attempt_uptake(ves.carrier, ves):
+continue # consumed
+new_ves.append(ves)
+self.vesicles = new_ves
+# -----------------------------
+# Cell micro-cycle at local cycle boundary
+# -----------------------------
+def _cell_cycle_update(self, cell: Cell):
+p = self.p
+# reset cycle counters
+cell.membrane.uptake_count_cycle = 0
+# ATP production
+cell.cytoplasm.atp = min(p.atp_max, cell.cytoplasm.atp +
+p.atp_prod_per_cycle)
+# (1) Membrane uptake processing: up to 8
+s_in = []
+u_in = []
+rho_in = []
+flags_in = []
+take = min(p.max_uptake_per_cycle, len(cell.membrane.uptake_pool))
+for _ in range(take):
+ves = cell.membrane.uptake_pool.pop(0)
+decoded = self.unpack_payload(ves)
+cell.membrane.uptake_count_cycle += 1
+cell.cytoplasm.atp -= p.cost_decode_per_ves
+if decoded is None:
+continue
+s_in.append(uq12(decoded["s_q"], max_val=1.0))
+u_in.append(uq12(decoded["u_q"], max_val=1.0))
+rho_in.append(uq8(decoded["rho_q"], max_val=1.0))
+flags_in.append(decoded["flags"])
+# estimate density locally from alive neighbors (not from any global
+signal)
+cell.cytoplasm.density_local = self._alive_neighbor_density(cell.idx)
+if s_in:
+s_bar = sum(s_in) / len(s_in)
+else:
+s_bar = cell.cytoplasm.s_hat # no new info
+# (2) Cytoplasm update (consensus + stress)
+# noise at integration stage
+noise = random.gauss(0.0, p.sigma_e)
+s_new = (1.0 - p.alpha_consensus) * cell.cytoplasm.s_hat +
+p.alpha_consensus * s_bar
+cell.cytoplasm.s_hat = max(0.0, min(1.0, s_new + noise))
+mismatch = abs(cell.cytoplasm.s_hat - s_bar)
+density_def = max(0.0, p.density_target - cell.cytoplasm.density_local)
+cell.cytoplasm.stress = max(
+0.0,
+(1.0 - p.stress_decay) * cell.cytoplasm.stress
++ p.stress_gain_mismatch * mismatch
++ p.stress_gain_density * density_def
+)
+# Basic phi-proxy: alive fraction is computed globally for logging only;
+# cells don't have access to it. Locally, use coherence proxy:
+nbrs = [j for j in self.neighbors[cell.idx] if self.cells[j].alive]
+if nbrs:
+d = sum(abs(cell.cytoplasm.s_hat - self.cells[j].cytoplasm.s_hat)
+for j in nbrs) / len(nbrs)
+coherence = math.exp(-3.0 * d)
+else:
+coherence = 0.0
+cell.cytoplasm.phi_proxy = coherence
+# (3) Nucleus regulation
+# repair and mitosis increase with stress/density deficit; apoptosis
+increases with sustained high stress
+cell.cytoplasm.atp -= p.cost_regulate
+cell.nucleus.tf_repair = min(1.0, 0.85 * cell.nucleus.tf_repair + 0.30
+* min(1.0, cell.cytoplasm.stress))
+cell.nucleus.tf_mit = min(1.0, 0.85 * cell.nucleus.tf_mit + 0.60 *
+min(1.0, density_def))
+cell.nucleus.tf_apo = min(1.0, 0.90 * cell.nucleus.tf_apo + 0.40 *
+max(0.0, cell.cytoplasm.stress - 0.7))
+cell.nucleus.tf_homeo = max(0.0, min(1.0, 0.95 * cell.nucleus.tf_homeo
++ 0.05 * (1.0 - mismatch)))
+# (4) Fate decisions
+# apoptosis
+if cell.cytoplasm.stress > p.stress_apoptosis and cell.nucleus.tf_apo >
+0.7:
+cell.alive = False
+return
+# mitosis: revive a neighboring dead site
+if cell.nucleus.tf_mit > p.mitosis_thresh and cell.cytoplasm.atp >=
+p.cost_mitosis:
+dead_sites = [j for j in self.neighbors[cell.idx] if not
+self.cells[j].alive]
+if dead_sites:
+j = random.choice(dead_sites)
+self._revive_cell(parent=cell, target=self.cells[j])
+cell.cytoplasm.atp -= p.cost_mitosis
+# optional motility: move into adjacent dead site (swap occupancy
+conceptually)
+if cell.nucleus.tf_repair > 0.6 and cell.cytoplasm.atp >= p.cost_move:
+dead_sites = [j for j in self.neighbors[cell.idx] if not
+self.cells[j].alive]
+if dead_sites and random.random() < 0.15:
+j = random.choice(dead_sites)
+# "move" by reviving target and killing self (a crude migration
+proxy)
+self._revive_cell(parent=cell, target=self.cells[j])
+cell.alive = False
+return
+# (5) Membrane receptor expression (simple coupling)
+for k in range(16):
+base = 20.0
+bump = 30.0 * (cell.nucleus.tf_homeo if k == 1 else 0.0)
+bump += 25.0 * (cell.nucleus.tf_repair if k == 2 else 0.0)
+bump += 25.0 * (cell.nucleus.tf_mit if k == 3 else 0.0)
+bump += 20.0 * (cell.nucleus.tf_apo if k == 4 else 0.0)
+cell.membrane.receptors[k] = max(0.0, min(100.0, 0.9 *
+cell.membrane.receptors[k] + 0.1 * (base + bump)))
+# (6) Vesicle emission: exactly one per cycle
+# choose message type by dominant TF state
+message_type = 1
+flags = 0
+if cell.nucleus.tf_repair > 0.5:
+message_type = 2
+flags |= 0b0001
+if cell.nucleus.tf_mit > 0.6 and cell.cytoplasm.density_local <
+p.density_target:
+message_type = 3
+flags |= 0b0010
+if cell.nucleus.tf_apo > 0.7:
+message_type = 4
+flags |= 0b0100
+# mandatory emission ATP cost
+cell.cytoplasm.atp -= p.cost_emit
+if cell.cytoplasm.atp < 0.0:
+# energy failure => necrotic
+cell.alive = False
+return
+hi, lo = self.pack_payload(cell, message_type=message_type, flags=flags)
+ves = Vesicle(
+payload_hi=hi,
+payload_lo=lo,
+message_type=message_type,
+carrier=cell.idx,
+ttl=p.vesicle_ttl
+)
+self.vesicles.append(ves)
+def _revive_cell(self, parent: Cell, target: Cell):
+# create daughter cell in target slot
+target.alive = True
+target.phase = random.random()
+target.rate = random.uniform(0.95, 1.05)
+target.nucleus.identity = parent.nucleus.identity
+# TF inheritance with mild noise
+target.nucleus.tf_homeo = max(0.0, min(1.0, parent.nucleus.tf_homeo +
+random.gauss(0.0, 0.03)))
+target.nucleus.tf_repair = max(0.0, min(1.0, parent.nucleus.tf_repair +
+random.gauss(0.0, 0.03)))
+target.nucleus.tf_mit = max(0.0, min(1.0, parent.nucleus.tf_mit +
+random.gauss(0.0, 0.03)))
+target.nucleus.tf_apo = max(0.0, min(1.0, parent.nucleus.tf_apo +
+random.gauss(0.0, 0.03)))
+# cytoplasm reset-ish
+target.cytoplasm.atp = random.uniform(500.0, 1200.0)
+target.cytoplasm.s_hat = parent.cytoplasm.s_hat
+target.cytoplasm.stress = 0.0
+target.cytoplasm.phi_proxy = 1.0
+target.membrane.uptake_pool.clear()
+target.membrane.uptake_count_cycle = 0
+def apply_lesion(self, frac: float = 0.30, clustered: bool = False):
+idxs = [c.idx for c in self.cells if c.alive]
+kill = int(frac * len(idxs))
+if kill <= 0:
+return
+if not clustered:
+victims = set(random.sample(idxs, kill))
+else:
+# cluster around a random center
+center = random.choice(idxs)
+cx, cy = self.cells[center].pos
+# kill closest by Manhattan distance
+dlist = sorted(idxs, key=lambda i: abs(self.cells[i].pos[0] - cx) +
+abs(self.cells[i].pos[1] - cy))
+victims = set(dlist[:kill])
+for i in victims:
+self.cells[i].alive = False
+self.cells[i].membrane.uptake_pool.clear()
+def step(self):
+# vesicle diffusion/uptake substeps
+for _ in range(self.p.diffusion_hops_per_dt):
+if self.vesicles:
+self._vesicle_step()
+# advance phases; run local cycle updates when phase crosses 1
+for cell in self.cells:
+if not cell.alive:
+continue
+cell.phase += cell.rate * self.p.dt
+while cell.phase >= 1.0 and cell.alive:
+cell.phase -= 1.0
+self._cell_cycle_update(cell)
+def run(self, lesion: bool = True, clustered_lesion: bool = False):
+# define macro-steps to approximate "global cycles" for observer logging
+macro_steps = int(self.p.cycles_total / self.p.dt)
+lesion_step = int(self.p.lesion_cycle / self.p.dt)
+for t in range(macro_steps + 1):
+if lesion and t == lesion_step:
+self.apply_lesion(frac=0.30, clustered=clustered_lesion)
+self.step()
+# observer telemetry (cells do not get access)
+if t % int(1.0 / self.p.dt) == 0: # about once per nominal cycle
+global_cycle = int(t * self.p.dt)
+alive = sum(1 for c in self.cells if c.alive)
+mean_phi = sum(c.cytoplasm.phi_proxy for c in self.cells if
+c.alive) / max(1, alive)
+mean_stress = sum(c.cytoplasm.stress for c in self.cells if
+c.alive) / max(1, alive)
+self.telemetry.append(TelemetryRow(
+global_cycle=global_cycle,
+alive=alive,
+phi_proxy=mean_phi,
+mean_stress=mean_stress,
+vesicles_in_space=len(self.vesicles),
+))
+def main():
+params = SimParams()
+tissue = Tissue(w=100, h=100, params=params, seed=7)
+tissue.run(lesion=True, clustered_lesion=False)
+# print summary and a few telemetry rows
+print("Telemetry samples (cycle, alive, phi_proxy, mean_stress, vesicles):")
+for row in tissue.telemetry[:5]:
+print(row)
+print("...")
+for row in tissue.telemetry[-5:]:
+print(row)
+if __name__ == "__main__":
+main()
+The uptake/binding abstraction in this simulator is deliberately capacity-limited and probabilistic, reflecting the biological reality that EV uptake is mediated by multiple mechanisms and can be saturable. The reaction–diffusion inspiration is implemented via random-walk diffusion on the adhesion neighborhood, consistent with the relationship between random walks and discrete Laplacian diffusion.
+Experimental protocols, metrics, and scaling expectations
+Experiments (baseline, lesion, minimal subsystem, ablations)
+Baseline run (healthy tissue). - cells on a lattice - (already parameterized in the simulator) - Run 500 cycles - Record -proxy time series, consensus coherence, uptake loss rates.
+The choice of noise at integration/decoding mirrors the reality that chemical communication channels are noisy and uptake is not guaranteed.
+Necrotic lesion test. - At , delete 30% of cells (uniform random or spatially clustered) - Measure recovery time back to pre-lesion coherence and alive fraction; log boundary repair dynamics. This aligns with lesion-and-recovery stress testing used in the user’s broader “lesion + recovery protocol” framing. fileciteturn0file9
+Minimal viable subsystem (3-cell organism). Use 3 cells in a triangle (one cell has an externally forced stimulus by adjusting or stress). Expected behavior: - Identity remains stable (nuclear does not drift). - Cytoplasmic aligns across neighbors given sufficient receptor binding. - Membrane emission switches between homeostasis and repair if the triangle is “thinned” (remove one neighbor temporarily).
+Pathology ablation suite. Run the tissue with controlled ablations: - Disable receptor binding (set ). - Disable transcription feedback (freeze TF updates). - Violate constraint by increasing payload to 128 bits (should improve coordination but violates spec). - Infinite ATP (remove energy enforcement) to test runaway proliferation risk.
+Quantitative metrics and telemetry plan
+Observer-side metrics (not available to cells): - Consensus coherence: mean neighbor mismatch , or its exponential transform used in the code. - Consensus latency: first cycle when
+mismatch drops below threshold and stays there. - Homeostatic -proxy: mean of local coherence proxy (logged) multiplied by alive fraction; this follows the spirit of “scalar health metrics” used elsewhere in the user’s frameworks. fileciteturn0file0 - Connectivity entropy: Shannon entropy of alive-cell degree distribution on the adhesion lattice. - Giant component size: size of largest connected alive region (compute periodically). - Vesicle loss rate: fraction decayed before uptake; fraction rejected by CRC; fraction
+14
+6
+N= 10,000 100 × 100 σ=e0.05
+Φ
+14
+t=L200
+s
+^
+
+I
+s
+^
+
+k=on 0
+∣−∣E∣1 ∑(i,j)
+s
+^
+ i∣
+s
+^
+ j
+Φ
+dropped due to capacity saturation. - Lesion recovery time: cycles to restore alive fraction to (or chosen threshold) and restore -proxy to within of pre-lesion average.
+Scaling relationships (from diffusion and contact-inhibition caricatures)
+Because diffusion distance scales like in standard diffusion theory, increasing the characteristic tissue linear size (with at fixed density) tends to increase mixing/coordination times like
+for purely diffusion-limited information spread.
+Collision/saturation likelihood at a membrane under local vesicle density is well-approximated by a Poisson arrival model in small windows: with per-cycle uptake cap 8, the overflow probability grows rapidly once expected arrivals exceed that cap (useful for tuning , TTL, and neighborhood size). (This is a modeling inference; the simulator measures it directly.)
+Regrowth time after lesion can be compared to logistic-like growth caricatures used in contact inhibition modeling: regrowth rate is effectively limited by available space and proliferation suppression at high density.
+Parameter sweeps (practical plan)
+A minimal sweep set that exposes the key phase transitions: - Diffusion hops per dt: (0 disables spread) - Vesicle TTL: - Noise : - Quorum density target :
+- ATP production per cycle: - Uptake cap: fixed at 8 (spec), but can be ablated to for pathology exploration.
+Failure modes and pathology analyses
+This architecture is intentionally capable of both recovery and pathological regimes; the value of the simulator is that these regimes are explicit and testable.
+Communication pathologies (membrane-centered). - Receptor downregulation / binding disabled: vesicles rarely internalize neighborhood coupling collapses consensus coherence decays and lesion recovery fails (no coordinated repair cues). EV uptake is known to involve multiple pathways and can be sensitive to receptor/interaction context; this motivates explicitly testing uptake failure. - Uptake saturation / autoimmune-like cascades: if vesicle density is too high (TTL too long, diffusion too strong), high arrival rates force constant overflow beyond the 8-per-cycle cap, increasing information loss and destabilizing control (cells respond to noisy partial views). - Checksum rejection dominance: if CRC failures are artificially increased (ablation), coherent coordination collapses even if diffusion is strong.
+Regulation pathologies (nucleus-centered). - Runaway proliferation (cancer-like): removing ATP constraints or making mitosis too cheap yields unchecked mitosis after a lesion, overshooting density and causing instability—illustrating why growth must be metabolically expensive relative to signaling. -Senescence-like trap: if mitosis threshold is too strict or ATP production too low, lesioned regions remain under-filled; boundary cells persist in high stress without sufficient repair action. - Apoptosis cascade: if apoptosis thresholds are too low, post-lesion stress triggers widespread cell death beyond the initial 30% deletion.
+≥0.95NΦϵ
+Dt
+LN∼ L2t∼ L/D∼2
+N/D16
+ρ
+Dk
+17
+{0, 1, 2, 3} {2, 4, 6, 10} σe{0.00, 0.02, 0.05, 0.10} ρ⋆
+{0.6, 0.75, 0.85, 0.95} {600, 900, 1200, 1800} {0, 4, 8, 16}
+⇒⇒
+14
+18
+Transport/diffusion pathologies (tissue-scale). - Under-diffusion: too few diffusion hops or too short TTL makes signaling hyperlocal; consensus fragments into domains and quorum decisions fail to align across the tissue (a classic diffusion-limited coordination failure). - Over-diffusion: too many hops or too long TTL homogenizes signals and saturates receptors, collapsing selectivity; the tissue loses the ability to localize repair to lesion boundaries and may oscillate.
+Model−structureablations(interpretabilityexperiments).−Disablemembraneuptakeentirely→revealshow much of homeostasis is driven by coupling vs intrinsic regulation. - Freeze nuclear TFupdates→reveals whether cytoplasm-only averaging can maintain tissue coherence (it generally cannot under lesion). −Doublepayloadsizeto128bits→shouldreduceambiguityandspeedrecovery,demonstratingthatthestrict64−bitlimitisarealcapacitybottleneck(butviolatesconstraints).−Reduceto500→revealsfinite−size effects (quorum thresholds and recovery times shift with size, consistent with diffusion-limited scaling arguments).
+Overview of Extracellular Vesicles, Their Origin, Composition ... https://pmc.ncbi.nlm.nih.gov/articles/PMC6678302/?utm_source=chatgpt.com
+The Chemical Basis of Morphogenesis AM Turing https://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf?utm_source=chatgpt.com
+Quorum sensing: cell-to-cell communication in bacteria https://pubmed.ncbi.nlm.nih.gov/16212498/?utm_source=chatgpt.com
+Graph Laplacians and their Convergence on Random ... https://www.jmlr.org/papers/volume8/hein07a/hein07a.pdf?utm_source=chatgpt.com
+Effects of target binding kinetics on in vivo drug efficacy - PMC https://pmc.ncbi.nlm.nih.gov/articles/PMC4945762/?utm_source=chatgpt.com
+Association Rate Constant - an overview https://www.sciencedirect.com/topics/nursing-and-health-professions/association-rate-constant?utm_source=chatgpt.com
+Routes and mechanisms of extracellular vesicle uptake - PMC https://pmc.ncbi.nlm.nih.gov/articles/PMC4122821/?utm_source=chatgpt.com
+Optimal Quantification of Contact Inhibition in Cell Populations https://pmc.ncbi.nlm.nih.gov/articles/PMC5685786/?utm_source=chatgpt.com
+DNA Data Storage - PMC https://pmc.ncbi.nlm.nih.gov/articles/PMC10296570/?utm_source=chatgpt.com
+RNA in extracellular vesicles - PMC - NIH https://pmc.ncbi.nlm.nih.gov/articles/PMC5474163/?utm_source=chatgpt.com
+GTP before ATP: The energy currency at the origin of genes https://pmc.ncbi.nlm.nih.gov/articles/PMC7616719/?utm_source=chatgpt.com
+Brownian Motion https://mcc.caltech.edu/Ph127/b/Lecture15.pdf?utm_source=chatgpt.com
+N
+19
+1
+2
+3 5
+4 6 19
+7
+8
+9 13 14
+10 17
+11
+12
+15 18
+16

@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "d518d4e9-7406-4a6a-b2f0-7c7553d3f9ba",
+  "job_id": "5f203a35-b272-4ebc-9d27-c1b5d5b0c312",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Debugging_a_Cyber-Physical_AI__The_Computability_Ceiling.mp4",
+    "filename": "Debugging_a_Cyber-Physical_AI__The_Computability_Ceiling.mp4",
+    "duration": 576.853375
+  },
+  "transcription": {
+    "started_at": "2026-08-21T23:02:34.080928",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 29.46,
+      "text": "When you deploy an unstable control loop in a purely digital environment, the system outputs garbage data. When you deploy that same loop in an advanced cyber-physical system, the actuators tear themselves apart. The physical world does not forgive theoretical mathematical errors. Industry roadmaps typically assume a linear progression. We build artificial general intelligence, scale its cognitive bandwidth to achieve artificial superintelligence,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 29.46,
+      "end": 58.46,
+      "text": "and finally arrive at ASC, or Tier VIII. But framing self-creation as the next step after superintelligence is a category error. Intelligence measures cognitive capability against a human baseline. Self-creation measures operational closure, the degree to which a system's construction is not held fixed by an external designer. A biological bacterium is fully self-creating, yet possesses minimal intelligence. These are orthogonal axes.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 58.46,
+      "end": 86.64,
+      "text": "To audit exactly what happens when an AI attempts to rewrite its own architecture, we can examine the TUCR Cyber Physical Stack. This is a framework specifically designed to bridge discrete high-dimensional cognition with continuous robotic actuation. By analyzing the stack mathematically, a strict physical reality emerges. Unconstrained self-creation stands in irreducible mathematical tension with physical safety.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 86.64,
+      "end": 113.12,
+      "text": "The mechanisms required to guarantee a robot will not destroy itself, directly conflict, with the mechanisms required for that robot to author its own entirely novel logic. While we can engineer a rigorously safe, highly sovereign agent, what we can accurately call a Tier 7 system, true Tier 8 self-creation is constrained by the hard boundaries of algorithmic computability. We start at the foundation, the discrete substrate.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 113.12,
+      "end": 138.93,
+      "text": "In the TUCR architecture, data is mapped into a vector symbolic architecture to provide noise-resistant representations. Canonical hypervectors are stored in parallel bit planes, a sine plane, a magnitude 1 plane, and a magnitude 2 plane. This equation defines the original positional binary decode mapping. The system explicitly declares a clamped quinary alphabet, restricted between negative 2 and 2,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 5,
+      "start": 138.93,
+      "end": 167.01,
+      "text": "But if both magnitude planes hold a true value, the equation evaluates to three, an untracked scale error. The canonical repair enforces bit-plane orthogonality. A high-winds-decode rule catches the problematic state, strictly binding the mathematical image back to the allowed five-state space. A similar mathematical error existed in how the system measured semantic distance between concepts. Early iterations utilized an exact match XNOR logic gate across the bit planes to judge similarity.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 6,
+      "start": 167.01,
+      "end": 195.3,
+      "text": "Because XNOR measures exact symbolic equality, it scores a slight magnitude mismatch identically to a complete polar opposite. The system loses perception of scalar proximity. This split graph demonstrates the solution. On the left, the XNOR gate produces rigid binary step logic. On the right, we replace it with a decoded cosine similarity operator. By normalizing the dot product of the active quinary values, the system correctly preserves a graded semantic ranking",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 7,
+      "start": 195.3,
+      "end": 222.74,
+      "text": "differentiating small variations from total oppositions. Enforcing absolute mathematical closure on this discrete layer is mandatory. If an out-of-bounds magnitude error bypasses masking protocols here, it propagates directly through the transducer into the physical actuator sum. Bridging the theoretical cognitive layer and the physical robotic plant requires a cyber-physical interface. The initial TUCR design utilized a static, unbounded feed-forward map",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 8,
+      "start": 222.74,
+      "end": 245.38,
+      "text": "It assumed the theoretical signal demanded by the AI was the exact output realized by the physical hardware. Executing unbounded linear commands on a physical plant is dangerous. Actuators have strict limits. Linear controller demands more force than hardware can provide. The integral terms accumulate massive, unresolvable errors known as integral windup.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 9,
+      "start": 245.38,
+      "end": 274.3,
+      "text": "A robust cyber-physical controller requires a closed-loop feedback architecture, incorporating the physical plant's kinematic state. We introduce dynamic back calculation. When commands exceed physical limits, a saturation filter steps in. The back calculation loop continuously unwinds the integrator state, so error cannot accumulate. Simultaneously, the low-level driver must enforce strict kinematic bounds on maximum acceleration and maximum jerk.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 10,
+      "start": 274.3,
+      "end": 303.41,
+      "text": "Rapid cognitive shifts in the AI's processing generate high-frequency commands. Without back calculation and jerk limiting, those high-frequency commands translate into actuator chattering. The hardware literally vibrates itself to pieces. Protecting the hardware requires defining how we measure the stability of the system's continuous operational state. The original documentation claimed that identifying negative real parts in local Jacobian eigenvalues guaranteed global stability.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 11,
+      "start": 303.41,
+      "end": 330.3,
+      "text": "In stochastic calculus, deterministic eigenvalues provide absolutely no certificates for highly nonlinear, noise-driven systems. For a continuous system driven by white noise, stability is evaluated using ito-calculus and the infinitesimal generator. Because additive noise remains present even at equilibrium, strict asymptotic convergence is impossible. The correct target is exponential mean square boundedness.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 12,
+      "start": 330.3,
+      "end": 353.18,
+      "text": "If the system begins to exceed those bounds, a failsafe must engage. The original architecture used a biological heuristic, a 70% bitwise AND mask. Upon detecting instability, it simply masked the active hypervectors, resulting in an instantaneous zeroing of the control signals. Instantaneous zeroing destroys the hypervector's magnitude information completely.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 13,
+      "start": 353.18,
+      "end": 378.27,
+      "text": "In a physical environment, abruptly petting a high torque command to zero induces massive destructive physical transience. It is a heuristic panic button that damages the exact hardware it is trying to save. We replace the panic button with a mathematically principled approach, control barrier functions. While a Lyapunov function guarantees convergence toward a target,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 14,
+      "start": 378.27,
+      "end": 401.65,
+      "text": "A control barrier function guarantees the trajectory never exits a predefined safe region. On this 2D state space map, the safety filter is in action. At every control step, the system solves a quadratic program. If a command threatens to breach safety constraints, the filter intercepts it, projecting the command to the nearest mathematically safe action.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 15,
+      "start": 401.65,
+      "end": 425.3,
+      "text": "If the solver cannot find a safe projection due to severe external perturbations, it initiates a smoothed, jerk-limited, graceful decouple. By relying on control barrier functions, the system can safely interact with the physical world without exiting predefined energy and load parameters. The repaired control stack yields a robust, highly sovereign cyber-physical agent.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 16,
+      "start": 425.3,
+      "end": 453.17,
+      "text": "The constraints we applied ensure alphabet closure, resource boundary adherence, and forward and variant barrier preservation. But the stated ambition of this architecture is Tier 8. To achieve true auto-poesis, the AI must autonomously author novel structural primitives and transition matrices. It must maintain a comprehensive recursive state model, analyzing its own architecture genome, and proposing structural edits to itself. This requires a proof-carrying loop.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 17,
+      "start": 453.17,
+      "end": 480.45,
+      "text": "The system proposes a modification, edits the genome graph, and compiles the runtime. Finally, it executes the fourth step, verification. This verification function is the absolute bottleneck. To enter the live system, it must output a computable truth value. To authorize a self-authored architectural modification, the system must definitively prove that the newly generated structure preserves all control barrier function limits and stochastic bounds.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 18,
+      "start": 480.45,
+      "end": 503.6,
+      "text": "A system that generates its own geometry and dimensionality operates with a constantly moving equilibrium. The burden of mathematical proof must be re-earned at every single structural change, pitting creation directly against ability. This verification requirement places the ambition of self-creation squarely against an immovable wall in computer science, RISIS Theorem.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 19,
+      "start": 503.6,
+      "end": 524.53,
+      "text": "RICE's theorem establishes that all non-trivial semantic properties of Turing-complete programs are undecidable. A semantic property depends on a program's behavioral execution rather than its syntactic structure. Determining whether an arbitrary, newly synthesized self-modification inherently preserves safety bounds is a semantic property.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 20,
+      "start": 524.53,
+      "end": 554.46,
+      "text": "If the AI generates an entirely novel logic paradigm or semantic operator outside a pre-specified grammar, the verification function will fail. No algorithmic verifier can guarantee the safety of unbounded self-modifications. The system inevitably encounters the halting problem, yielding infinite loops. The system can only guarantee safety if permitted self-edits are artificially restricted. By limiting modifications to a decidable finite grammar, the verifier becomes computable.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 21,
+      "start": 554.46,
+      "end": 576.66,
+      "text": "The system operates safely, but it is strictly confined to self-configuration within a fixed grammar. In the capability ladder, this is sovereignty. This is Tier 7. Genuine Tier 8 creation requires unverifiable semantic operators that can never pass a strict safety gate. In cyber-physical AI, algorithmic computability remains the absolute ceiling for self-creating logic.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Debugging_a_Cyber-Physical_AI__The_Computability_Ceiling.mp4",
+  "source_filename": "Debugging_a_Cyber-Physical_AI__The_Computability_Ceiling.mp4",
+  "source_duration": 576.853375,
+  "transcription_timestamp": "2026-08-21T23:02:34.080928",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

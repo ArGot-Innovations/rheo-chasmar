@@ -1,0 +1,503 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "f5ce16f2-7b30-4ab6-b207-49085e8326ea",
+  "job_id": "3d07dd60-b565-409b-af22-e39f337a73ad",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Conquering_the_Curse_of_Heterogeneity_Hypervector_Algebra_s_Uni.m4a",
+    "filename": "Conquering_the_Curse_of_Heterogeneity_Hypervector_Algebra_s_Uni.m4a",
+    "duration": 1050.285
+  },
+  "transcription": {
+    "started_at": "2026-08-21T22:46:51.623857",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 25.28,
+      "text": "Welcome back to the deep dive. If you work with real-world data, you've probably felt this pain. Your input isn't neat, it's not uniform, it's certainly not monochromatic. Yeah, I mean, your data lives in totally different worlds, doesn't it? You might have, say, a 768 dimensional text embedding from something like BERT sitting next to a 512d image vector from a vision model, maybe even a little five-dimensional time series snippet. Algebraically, they just",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 25.28,
+      "end": 44.05,
+      "text": "They don't mix. And that's the kicker, right? Because traditional linear algebra, which is, let's face it, the engine driving almost all machine learning, it demands everything, lives in one single consistent dimension. So we're stuck doing these awkward workarounds, patting with zeros, flattening complex structures, just simple concatenation sometimes, anything to make the matrices multiply.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 44.05,
+      "end": 67.23,
+      "text": "Our sources actually have a great name for this mess, the curse of heterogeneity. You end up sacrificing so much vital structural information from each specific data type, just smashing it flat to fit the math. It's fascinating though, because researchers have definitely clocked this. They see this fundamental mismatch between the math tools we've inherited and the kind of messy, multimodal data we actually have. And they've come up with a really rigorous response.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 67.23,
+      "end": 96.64,
+      "text": "Hypervector Linear Transdimensional Algebra, or HTLA for short. And the vision here, it's not just about tweaking algorithms, it's bigger, it's about building a unified calculus, thinking about linear algebra from the ground up, designing it to work natively across all these different labeled finite dimensional pieces. So our mission today is really to unpack HTLA's formal structure. We want to show you how it provides this principled, structured kind of grammar for multimodal AI. It genuinely feels like it could change the whole game.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 96.64,
+      "end": 126.14,
+      "text": "Okay, so if the big problem is these different dimensions, basically not speaking the same language, where does this new algebraic grammar even start? What's the absolute basic building block? Well, you have to start by creating something, some entity that can actually hold all those different pieces, but critically, without squashing them together, respecting their boundaries. Think of the hypervector, let's call it aero dollars. It's not just a long flat list. Imagine it more like a really organized high-tech toolkit.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 5,
+      "start": 126.14,
+      "end": 155.04,
+      "text": "You know, all your specialized tools, the Texas Bedding Wrench, the Indid Vector, Screwdriver, the Time Series Pliers, they're all in one box. I row dollars. But each one stays in its own dedicated, labeled compartment. It keeps its original shape and size. That makes a lot of intuitive sense, like a compartmentalized toolbox. So how does the math actually enforce that structure? How do you stop the tools from just rattling around together? Right. That structured organization comes from defining the hypervector space. Yeah. Using a specific mathematical construction.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 6,
+      "start": 155.04,
+      "end": 180.58,
+      "text": "The direct sum, you'll see it written as Bugoplus Clanit, it's a direct sum of all the individual vector spaces, hell hell, where each one gets a unique dimension label. And the key thing about the direct sum, why it's not just simple concatenation, is that it combines these components, hell hell, into a single algebraic thing, but it preserves their original dimensionality, their label, their distinct identity. It's designed to be dimension agnostic right from the start.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 7,
+      "start": 180.58,
+      "end": 210.1,
+      "text": "Got it. So the hypervector is our organized input, holding all the diverse data pieces correctly. Then the next logical thing we need is the operations, right? The recipes for how to mix and transform these inputs, which I guess brings us to the transdimensional operators. Precisely. And these operators, they have a really neat structure too. They're basically large matrices, but they're built out of blocks. So you have little ball-less LTRs a day. Now each individual block LTR day isn't some crazy new math, it's just a standard linear map.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 8,
+      "start": 210.1,
+      "end": 230.32,
+      "text": "like you'd learn in any linear algebra course. But crucially, it's specifically designed to map from a particular source component space, identified by labels, a lie, to a particular target component space, labeled TET. And if you don't need a connection, say you don't want to map audio features directly to image predictions, then that block audio image is just filled with zeros, simple as that.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 9,
+      "start": 230.32,
+      "end": 257.17,
+      "text": "Ah, okay, so the complexity isn't in inventing new math within the blocks, it's in designing the connections which blocks exist and which are zero. That does feel much cleaner than wrestling with one gigantic, undifferentiated matrix. It is. And there's another layer here that makes this really practical for the kind of messy real-world data we actually encounter. Has this built-in tolerance for approximation? The sources are clear that HTLA often defines its core embedding morphisms.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 10,
+      "start": 257.17,
+      "end": 286.4,
+      "text": "That's the way you move data between these different labeled spaces using random projection, often based on something standard like a Gaussian distribution. And this isn't just a random choice, pardon pun, it leverages a really important piece of theory. The Johnson-Lindenstrasse Lemma, or JL Lemma. Right, the JL Lemma. You hear it mentioned sometimes, often without much context. Why should someone listening care that HTLA leans on this particular lemma? What's the payoff? Well, the payoff is huge, actually, because the JL Lemma gives you this",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 11,
+      "start": 286.4,
+      "end": 313.06,
+      "text": "Probabilistic Guarantee. It essentially says you can take high dimensional data and project it down into a much lower dimension and critically, the distances between the points won't get distorted too much. And that's vital for HTLA. It means the framework has robustness against approximation errors and noise baked right into its foundations. When we transform these hypervectors, maybe compress them, we know we're likely preserving these central relationships within the data.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 12,
+      "start": 313.06,
+      "end": 342.59,
+      "text": "It's designed from the outset to handle the unavoidable noise you get with multimodal inputs. Okay, so we've got the structure sorted, the hypervectors hold the data correctly, the operators define the transformations, that's the how of the algebra, but you know, structure by itself isn't always enough, especially in AI, we need meaning, right? How does HTLA go beyond just math structure and start integrating the semantics, the actual meaning or importance of these very different data types? Yeah, that's a great question. And this is where things get really interesting. We move into",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 13,
+      "start": 342.59,
+      "end": 362.4,
+      "text": "quantifying the relationships between hypervectors using something called the graded inner product. You'd write it as Langel HK Rangel Dahl. Now, it starts with the standard inner product idea, which, you know, measures similarity, but it adds this crucial layer of semantic control. Looking at the formula here, Langel HK Rangel Carangle.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 14,
+      "start": 362.4,
+      "end": 386.82,
+      "text": "It looks like a sum of the normal inner products for each component, Langel, Hell, Care, Rangle. But each one is multiplied by this weight, Langel. So the set of weights, some of them, seems to be doing all the heavy liftings semantically. It absolutely is. This collection of weights, dollars, is what they call the label kernel. And this is the critical innovation for semantics. These weights aren't just random numbers, they're designed by the person building the model.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 15,
+      "start": 386.82,
+      "end": 416.06,
+      "text": "Typically, they're based on some idea of distance or similarity between a given label and maybe some central reference label dollars, or a core concept you kill about. So, for example, let's say your main goal, your elk dollars, is predicting customer satisfaction. You as the designer might decide that text reviews, label text, are semantically closer or more important to satisfaction than, say, the image of the product, label image, so you'd give a higher value than image dollar.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 16,
+      "start": 416.06,
+      "end": 445.6,
+      "text": "Maybe using a formula like doll measures that semantic distance. Right, and that's the aha moment for you, the listener. You realize the graded inner product is where HTLA lets the practitioner actively embed contextual importance. You're not just treating that 768 dimensional text vector and the 512 dimensional image vector as somehow mathematically equal just because they happen to be sitting next to each other in some concatenated structure anymore. That's precisely the key insight. You can explicitly encode these learned",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 17,
+      "start": 445.6,
+      "end": 470.32,
+      "text": "or maybe domain knowledge-driven semantic relationships between the different data types right into the math via this kernel. It allows the designer to directly control and importantly analyze exactly how much influence each specific data modality should have on the final result. It elevates the whole process from just structural algebra to genuinely semantically aware computation. Okay, let's shift gears a bit and get into the operational mechanics.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 18,
+      "start": 470.32,
+      "end": 499.6,
+      "text": "If we have our hypervector input dollar and our transdimensional operator dollar, how do we actually solve a transdimensional system? You know, the common task where you have a target output hypervector, y dollars, and you want to find the input hypervector, 6u dollars, such that Lyalex equals y dollars. That's core to a lot of learning systems. Now, the sources mentioned that to actually compute the solution, you first have to flatten that blocky transdimensional operator dollars into one single potentially enormous matrix dollar.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 19,
+      "start": 499.6,
+      "end": 528.48,
+      "text": "Wait a second. We kicked this whole deep dive off by criticizing things like concatenation because they caused the curse of heterogeneity. But now, to actually solve the system, we're flattening the whole operator into one big matrix doll. Aren't we just falling back into the same trap we wanted to escape? Huh. That's a really sharp point. And it highlights exactly where the HTLA structure provides the benefit, even with flattening. Yes, for the numerical computation step, because, let's be honest, our current hardware is optimized for large, contiguous arrays you do flatten dollars into dollar.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 20,
+      "start": 528.48,
+      "end": 552.67,
+      "text": "But how you solve the system makes the LI is fundamentally different and much more principled because of the underlying HTLA structure. We don't just throw standard solvers at it and hope for the best. HTLA explicitly leverages established techniques for numerical stability, specifically the regularized pseudo inverse. This is often derived using singular value decomposition, SVD, and includes a regularization term like $1 plus lambda",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 21,
+      "start": 552.67,
+      "end": 574.48,
+      "text": "V Sigma 2 plus Lambda I-1, Sigma UT-TOE. The sources even mention a typical value like Lambda dollars one one. This regularization is key. It ensures we can find stable solutions even if some of those internal blocks lures are messy, maybe ill conditioned, or don't have full rank, which is common with real data. The crucial difference is that the HTLA framework defines and relies on this rigorous stable mechanism.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 22,
+      "start": 574.48,
+      "end": 600.22,
+      "text": "Traditional ad hoc flattening just creates the big matrix and leads you hoping standard techniques won't break. HTLA builds the numerical stability in. Okay, that makes sense. So the block structure defines the architecture in the meaning, but the actual number crunching uses robust, regularized matrix methods on the flatten version. And to help us design these block architectures in the first place, HTLA offers a formal operator taxonomy.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 23,
+      "start": 600.22,
+      "end": 616.8,
+      "text": "A kind of vocabulary for building these things. Exactly. It gives practitioners a structured way to think about system design. And there are a few key types that are immediately useful for anyone doing machine learning. First up, you have the Fusion operator. This is your classic multimodal integration pattern.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 24,
+      "start": 616.8,
+      "end": 641.71,
+      "text": "It's designed specifically to combine features from multiple different sources, let's say, image features and text features, into a single unified shared representation within the hypervector space. Can you give us a quick, concrete example of fusion? Like, what would that look like in practice? Sure. Imagine you have a social media post. A fusion operator could take the text component, maybe 280 characters labeled text, and the associated image.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 25,
+      "start": 641.71,
+      "end": 660.24,
+      "text": "label image process and merge them using specific blocks within the operator dollars and then output a single dense vector, maybe label fusedrebb, to predict something like the likelihood of user engagement or conversion. Then conversely, you have the splitting operator. This does the opposite. It takes a single, perhaps already fused,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 26,
+      "start": 660.24,
+      "end": 672.64,
+      "text": "shared representation and uses it to generate predictions for multiple different tasks simultaneously. Ah, so a splitting operator could take that fused-up vector from the social media post example and generate both a prediction for conversion likelihood.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 27,
+      "start": 672.64,
+      "end": 698.48,
+      "text": "and maybe an estimate of the optimal adbid price test. Two distinct outputs originating from that one shared representation. That taxonomy definitely seems like it provides powerful design templates. And what's really nice is that this block structure, even though the final flattened matrix dollar could be absolutely massive in theory, actually leads to computational efficiencies. HTLA naturally supports something called block SVD approximation.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 28,
+      "start": 698.48,
+      "end": 726.82,
+      "text": "Because MaGaller isn't just an arbitrary huge matrix. It has this known block structure inherited from dollar. We don't necessarily have to compute or compress the entire thing all at once. Right. So instead of trying to run a full singular value decomposition on some potentially billion parameter matrix, you can perform SVD, maybe SVD, truncation for compression, locally on the much smaller individual blocks dollar that make up the operator. Which is computationally crucial.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 29,
+      "start": 726.82,
+      "end": 745.63,
+      "text": "It means these operations, including things like compression or approximation, can often be done on these smaller, more manageable pieces. This significantly helps manage the complexity and makes computation feasible, even when the theoretical size of the fully flattened dollar would be completely prohibitive otherwise. Okay, let's dive a bit deeper into the theory underlying all this.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 30,
+      "start": 745.63,
+      "end": 774.46,
+      "text": "The sources bring up a really interesting insight connected to the capacity bound theorem. This basically tells us about the maximum amount of information you can reliably pack into these hypervectors. Yes, the capacity bound theorem reveals something genuinely counterintuitive, I think, about the trade-off between the structure, how many labels you have, and the size, the dimension of each component. It confirms that, yes, the total information capacity grows as you add more dimensions overall, it scales with some of the dimensions across all labels.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 31,
+      "start": 774.46,
+      "end": 799.38,
+      "text": "But, and this is the crucial part, it suffers from pretty rapidly diminishing returns if you try to make any single dimension, excessively large. The theory suggests there's a logarithmic penalty, out appears the denominator of the bound, if you rely too heavily on just one or two massive dimensional components. So the key design principle that falls out of this, if you want to maximize the useful information capacity of your hypervector system, is this.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 32,
+      "start": 799.38,
+      "end": 819.17,
+      "text": "It's often strategically better to use a larger number of distinct labels, each with a moderately sized dimension, rather than trying to cram everything into just a few labels with enormous dimensions. The quality of the labeled structure can actually beat sheer brute force dimensionality. It's quite a philosophical shift, isn't it? It's pretty into people in arcane.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 33,
+      "start": 819.17,
+      "end": 846.59,
+      "text": "Especially for data scientists, often trained to seek the biggest single vector representation possible. That principle really does have broad implications, especially when you look at how HTLA connects to other fields. For instance, the framework seems to provide a much more formal, rigorous mathematical footing for hyperdimensional computing, HDC. Exactly. HDC uses these high-dimensional vectors in operations like binding and unbinding, which often look a bit like ad hoc linear algebra.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 34,
+      "start": 846.59,
+      "end": 860.27,
+      "text": "HTLA comes along and formalizes those operations within its transdimensional framework and importantly it provides explicit robustness guarantees like those tied to the JLMMA which were often just observed empirically in HTC before",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 35,
+      "start": 860.27,
+      "end": 889.55,
+      "text": "And looking even further ahead, there's this fascinating potential connection to quantum computing via the quantum extension idea. The sources suggest that if you replace the direct sum Big A Plus structure with a tensor product and swap out real numbers for complex numbers, then HTLA starts to look like a classical algebraic framework that mirrors quantum circuits operating on labeled quipets or wires. Yes, quite suggestive. It hints that HTLA could potentially serve as a powerful classical toolkit for designing, analyzing, or maybe even simulating",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 36,
+      "start": 889.55,
+      "end": 916.66,
+      "text": "and so on.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 37,
+      "start": 916.66,
+      "end": 939.63,
+      "text": "And underpinning this manifesto is perhaps the most exciting computational promise. A critical conjecture. The conjecture is that, within the HTLA framework, the complexity of computing gradients, which is essential for training almost all modern ML models, scales only logarithmically with the number of labels. That is, it scales as a dollar. If this logarithmic scaling conjecture holds true, it would be an absolute game changer.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 38,
+      "start": 939.63,
+      "end": 950.91,
+      "text": "It would mean HTLA offers potentially immense computational advantages, especially for problems with a huge number of modalities or tasks, far outstripping the efficiency of any traditional approach that relies on flattening everything first.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 39,
+      "start": 950.91,
+      "end": 980.21,
+      "text": "Wow, that really brings us towards the end of our deep dive today into the, well, the deep mathematics of dimension, you could say. What we've really seen is that HTLA isn't pitching itself as just another tool in the toolbox. It feels more like a foundational shift in the mathematics itself. It's trying to move AI away from these often cumbersome, sometimes theoretically shaky ad hoc methods for data fusion and towards a much more rigorous, principled, and structured algebraic language. One that's actually capable of handling the true",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 40,
+      "start": 980.21,
+      "end": 999.02,
+      "text": "labeled complexity we see in real-world data. And just to leave you with one final thought to mull over, something that builds directly on that label kernel idea we discussed. The sources briefly mentioned the possibility of defining an information geometric curvature, let's call it capit info, on the space of labels itself using those semantic kernel weights.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 41,
+      "start": 999.31,
+      "end": 1026.77,
+      "text": "Now think about what that implies. It suggests that the inherent geometric structure of the relationships between your data types, like, is the semantic connection between image and text relatively flat? Or is it highly curved in this abstract information space? Could it actually play a direct role in determining the stability, and maybe even the performance of your learning system? So what if you could actually use techniques inspired by geometry? Maybe something like geometric regularization, perhaps drawing ideas from Ricci flow from",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 42,
+      "start": 1026.77,
+      "end": 1050.29,
+      "text": "differential geometry to actively encourage your transdimensional operators to respect this underlying hidden label structure. It potentially opens the door to designing AI systems that are not only powerful but also inherently more stable, perhaps symmetry aware and potentially far more interpretable just by properly understanding and leveraging the geometry of how your different data types relate to each other. Something to think about.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Conquering_the_Curse_of_Heterogeneity_Hypervector_Algebra_s_Uni.m4a",
+  "source_filename": "Conquering_the_Curse_of_Heterogeneity_Hypervector_Algebra_s_Uni.m4a",
+  "source_duration": 1050.285,
+  "transcription_timestamp": "2026-08-21T22:46:51.623857",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

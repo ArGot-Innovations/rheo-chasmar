@@ -1,0 +1,21 @@
+# Large media — kept locally, not tracked in git
+*.m4a
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+
+# Editor / office lock and swap files
+.~lock.*#
+*.kate-swp
+*~

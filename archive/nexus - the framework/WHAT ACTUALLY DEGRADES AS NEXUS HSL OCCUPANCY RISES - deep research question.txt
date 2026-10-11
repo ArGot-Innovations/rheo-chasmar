@@ -1,0 +1,1693 @@
+# DEEP RESEARCH PROMPT
+
+# WHAT ACTUALLY DEGRADES AS NEXUS HSL OCCUPANCY RISES?
+#
+# Scalar Binding Collisions, Composite Occupancy, Global k-WTA
+# Information Deletion, Semantic Cleanup, and the Real Meaning
+# of K_REF = 307 in the 1,024-D Quinary Nexus HSL
+
+## CENTRAL CLAIM UNDER INVESTIGATION
+
+The current HTLA draft contains or implies the following claim:
+
+    "As occupancy rises, more composite/binder pairs collide
+    under that budget and the classification degrades from
+    precise to unreliable; K_wall = 307 is where current
+    testing places that degradation point."
+
+Perform a rigorous, source-driven, code-grounded,
+mathematical, and empirical investigation of this statement.
+
+DO NOT attempt to preserve the sentence.
+
+DO NOT attempt to disprove the sentence merely because prior
+research criticized it.
+
+Determine which individual causal claims are actually true.
+
+The final answer must establish:
+
+    WHAT changes as occupancy rises;
+
+    WHERE in the Nexus processing pipeline the change occurs;
+
+    WHY it occurs mathematically or computationally;
+
+    WHETHER the effect is local or whole-vector;
+
+    WHETHER the effect is intrinsic to quinary binding or
+    introduced by another Nexus operation;
+
+    WHETHER there is any genuine breakpoint;
+
+    and WHETHER the number 307 is involved because of the
+    mathematics, because of controller policy, or simply
+    because software deliberately imposes it.
+
+This is NOT another generic "Why 307?" literature review.
+
+That research has already been performed.
+
+This investigation is specifically about the causal claim:
+
+    increasing occupancy
+        ->
+    collisions
+        ->
+    degraded epistemic classification
+        ->
+    threshold at 307.
+
+Every arrow must now be tested independently.
+
+================================================================
+0. CRITICAL EXECUTION REQUIREMENT
+================================================================
+
+DO THE RESEARCH.
+
+Do not produce a speculative architectural essay.
+
+Use all available connected sources.
+
+You MUST inspect, where accessible:
+
+    Google Drive Nexus corpus
+    GitHub Nexus/reference implementation history
+    current canonical Nexus monograph
+    current HTLA Tier-2 paper
+    current Claude HTLA v2 draft
+    project_nexus_v4_reference_reviewed.txt
+    historical TMS sparsity documents
+    HTLA-to-HTNLA transformation material
+    quinary binding/unbinding documents
+    CA/TUCR/HTLA empirical-test artifacts
+    architecture spreadsheets
+    verification/property-test artifacts
+    source/revision history around K_WALL
+    existing "Why 307?" deep-research reports
+    recently uploaded critique transcripts.
+
+At minimum locate and inspect the following named artifacts
+if they remain accessible:
+
+    "Why 307? Capacity, Sparsity, Collision,
+     Recoverability, and Structural Vacuum in the
+     1,024-D Quinary Nexus HSL"
+
+    "1024-D Quinary Nexus HSL Reference Geometry -
+     deep research prompt - answers"
+
+    "project_nexus_v4_reference_reviewed.txt"
+
+    "Transdimensional Memory Substrate Engineering"
+
+    "HTLA to HTNLA Transformation Plan"
+
+    "CA TUCR HTNLA framework test results 1"
+
+    "Cognitive Architecture Unbinding Protocol"
+
+    "The 30% Guess Behind the 307 Wall"
+
+    "Is the 307 hypervector wall load-bearing?"
+
+    "The Engineering Elegance of Constant 307"
+
+    "Unmasking the K=307 Wall"
+
+    "Why Nexus vectors cap at 307"
+
+Treat the transcripts as ADVERSARIAL COMMENTARY,
+not authoritative evidence.
+
+Verify every technical proposition they introduce against:
+
+    primary Nexus source
+    executable Nexus implementation
+    primary external literature
+    or independent mathematical derivation.
+
+Do not rely on public-web search when internal Nexus evidence
+is available.
+
+================================================================
+1. ESTABLISH PRECISE OCCUPANCY VARIABLES
+================================================================
+
+Previous discussion has repeatedly overloaded the symbol K.
+
+Stop doing that.
+
+Define separate quantities such as:
+
+    K_src
+        active coordinates in a source/constituent vector
+
+    K_key
+        active coordinates in the binder/key
+
+    K_cmp
+        active coordinates in the raw bound composite
+
+    K_pre
+        occupancy immediately before global competition
+
+    k_allow
+        controller-provided k-WTA allowance
+
+    K_post
+        active coordinates after k-WTA / projection
+
+    K_ref = 307
+        current reference controller ceiling
+
+Use the actual architecture's notation if it already provides
+better names.
+
+This distinction is mandatory.
+
+A claim such as:
+
+    "failure occurs when K > 307"
+
+is meaningless until the research says WHICH K.
+
+In particular investigate whether the historical/current
+documents silently confuse:
+
+    source occupancy > 307
+
+with:
+
+    composite occupancy > 307.
+
+================================================================
+2. VERIFY THE CURRENT REFERENCE IMPLEMENTATION
+================================================================
+
+Audit the authoritative current reference implementation.
+
+Determine exactly:
+
+    DIM
+    alphabet
+    bit-plane representation
+    binding implementation
+    partial_unbind implementation
+    apply_k_wta implementation
+    controller computation of k_allow
+    semantic_snap / cleanup implementation
+    bundle implementation
+    actual runtime call graph.
+
+Answer explicitly:
+
+1. Can the underlying HSL object represent >307 active
+   coordinates?
+
+2. Does its constructor reject >307?
+
+3. Does serialization reject >307?
+
+4. Does binding reject >307?
+
+5. Does partial_unbind inspect global active count?
+
+6. Does apply_k_wta accept arbitrary k <= D?
+
+7. Is 307 imposed only because:
+
+       k_allow = min(..., 307)
+
+   or equivalent controller logic?
+
+8. Is K_REF therefore a:
+
+       representation limit
+
+       validation invariant
+
+       controller limit
+
+       runtime policy
+
+       or some combination?
+
+This must be established from code, not documentation prose.
+
+================================================================
+3. REPRODUCE THE EXISTING REFERENCE-CODE SWEEP
+================================================================
+
+A prior source-grounded report claims to have executed the
+reference implementation and found:
+
+    source K = 306
+    source K = 307
+    source K = 308
+
+have smooth, statistically indistinguishable behavior;
+
+the 307 cap does not engage at those source occupancies;
+
+and the true constituent remains admissible before k-WTA.
+
+Reproduce this experiment independently.
+
+Do not copy the prior table.
+
+Report:
+
+    exact source file / commit / hash
+    RNG seeds
+    number of trials
+    support sampling procedure
+    sign distribution
+    magnitude distribution
+    p_mag2
+    exact definition of every reported metric.
+
+Use at least 1,000 trials per important K where computationally
+reasonable, and confidence intervals.
+
+Required K_src sweep:
+
+    16
+    32
+    64
+    96
+    128
+    160
+    192
+    224
+    256
+    288
+
+    300
+    304
+    306
+    307
+    308
+    310
+    312
+    320
+
+    384
+    448
+    512
+
+    520
+    540
+    550
+    555
+    560
+    561
+    565
+    570
+    580
+    600
+
+    640
+    704
+    768
+    896
+    1024
+
+================================================================
+4. PROVE OR REFUTE LOCAL OCCUPANCY INDEPENDENCE
+================================================================
+
+The current reference binding is approximately:
+
+    bind(q_i, r_i)
+        =
+        0
+            if q_i = 0 or r_i = 0
+
+        sign(q_i r_i) min(|q_i|, |r_i|)
+            otherwise
+
+over:
+
+    Q = {-2,-1,0,+1,+2}.
+
+Formally prove or disprove:
+
+    THEOREM CANDIDATE
+
+    If vector binding is coordinate-separable and
+    partial unbinding is computed coordinatewise,
+    the local inverse possibility set at coordinate i
+
+        Poss(c_i,r_i)
+
+    depends only on:
+
+        c_i
+        r_i
+        Q
+        bind()
+
+    and is independent of all coordinates j != i
+    and therefore independent of global occupancy.
+
+If the theorem is true, state it explicitly.
+
+Then state its LIMIT.
+
+It does NOT imply that:
+
+    aggregate epistemic-state frequencies are K-independent;
+
+    whole-vector reconstruction is K-independent;
+
+    global k-WTA is K-independent;
+
+    cleanup retrieval is K-independent;
+
+    bundling crosstalk is K-independent.
+
+The research must prevent those distinct claims from being
+silently merged.
+
+================================================================
+5. EXHAUSTIVELY DERIVE THE SCALAR BINDING ALGEBRA
+================================================================
+
+Enumerate all:
+
+    25 (q,r) input pairs
+
+and the complete:
+
+    bind(q,r) table.
+
+Then enumerate every possible:
+
+    (c,r)
+
+pair and compute:
+
+    Poss(c,r)
+        =
+    {q in Q : bind(q,r)=c}.
+
+Report candidate-set cardinality.
+
+Resolve the existing disagreement concerning UNKNOWN.
+
+One research run claims:
+
+    |Poss| = 0
+        -> IMPOSSIBLE
+
+    |Poss| = 1
+        -> EXACT
+
+    |Poss| > 1
+        -> AMBIGUOUS
+
+    UNKNOWN comes from outside the Poss construction.
+
+Another source-grounded interpretation claims:
+
+    Poss = Q
+        -> UNKNOWN
+
+which occurs when:
+
+    c = 0
+    r = 0
+
+because a vacuum binder supplies no constituent information.
+
+Determine the semantics implemented by CURRENT authoritative
+Nexus code.
+
+Do not substitute whichever interpretation produces the
+prettiest mathematics.
+
+================================================================
+6. AUDIT THE "FOUR-STATE LATTICE" CLAIM
+================================================================
+
+Determine the exact mathematical relationship among:
+
+    EXACT
+    AMBIGUOUS
+    UNKNOWN
+    IMPOSSIBLE.
+
+A prior report suggests the clean structure is actually:
+
+    P(Q)
+
+the full powerset lattice, with:
+
+    empty set
+        -> IMPOSSIBLE
+
+    singleton sets
+        -> EXACT
+
+    intermediate nonempty proper subsets
+        -> AMBIGUOUS
+
+    Q itself
+        -> UNKNOWN.
+
+If that is correct, note an important subtlety:
+
+    EXACT is not one lattice element.
+
+It is a CLASS of singleton elements.
+
+Likewise:
+
+    AMBIGUOUS is a class of several subsets.
+
+Therefore the four words themselves do not automatically form
+a four-element lattice.
+
+Test whether meet and join are well-defined after quotienting
+P(Q) into those four summary categories.
+
+If not:
+
+    do NOT say "the four states form a lattice."
+
+Instead say something like:
+
+    "partial-unbind candidate sets inhabit a powerset
+     information lattice, over which the four canonical
+     epistemic labels form a summary classification."
+
+Investigate abstract interpretation or information orders only
+as necessary.
+
+Do not invoke Belnap-Dunn merely because there are four words.
+
+================================================================
+7. DEFINE "COLLISION" BEFORE MEASURING IT
+================================================================
+
+The disputed sentence uses:
+
+    "more composite/binder pairs collide"
+
+but "collision" currently has multiple meanings.
+
+Distinguish at least:
+
+A. SCALAR FORWARD COLLISION
+
+    (q1,r1) != (q2,r2)
+
+but:
+
+    bind(q1,r1) = bind(q2,r2).
+
+B. LOCAL INVERSE AMBIGUITY
+
+    |Poss(c,r)| > 1.
+
+C. WHOLE-VECTOR EXACT COLLISION
+
+    (q1,r1) != (q2,r2)
+
+but:
+
+    Bind(q1,r1) = Bind(q2,r2).
+
+D. SUPPORT OVERLAP
+
+    active supports intersect.
+
+E. BUNDLE CROSSTALK
+
+    superposed structures interfere.
+
+F. CLEANUP COLLISION
+
+    multiple stored candidates are similarly compatible with
+    the reconstructed state.
+
+G. ANN ERROR
+
+    approximate search disagrees with an exact-search oracle.
+
+H. PROJECTION COLLISION / INFORMATION DELETION
+
+    multiple distinct pre-kWTA states map to the same
+    post-kWTA state because discarded coordinates vanish.
+
+Analyze each separately.
+
+Never report:
+
+    "collision rate"
+
+without naming which collision notion is being measured.
+
+================================================================
+8. SUPPORT-OVERLAP GEOMETRY
+================================================================
+
+For exact K_src-element supports independently drawn over
+D=1024:
+
+    X = |A intersection B|
+
+derive:
+
+    X ~ Hypergeometric(D,K_src,K_src)
+
+    E[X] = K_src^2 / D
+
+and the exact variance.
+
+At K_src = 307 calculate:
+
+    expectation
+    variance
+    standard deviation
+    P(X=0)
+    relevant quantiles.
+
+Do the same around:
+
+    256
+    288
+    307
+    320
+    384
+    512
+    560
+    561
+    640.
+
+State clearly:
+
+    increasing overlap
+        !=
+    demonstrated recovery failure.
+
+The research must locate the mechanism that converts overlap
+into an actual downstream error.
+
+================================================================
+9. COMPOSITE OCCUPANCY IS NOT SOURCE OCCUPANCY
+================================================================
+
+For the conservative min-sign binding:
+
+    coordinate survives
+        iff
+    both source coordinates are nonzero.
+
+Thus for independent equal-K_src supports:
+
+    E[K_cmp]
+        =
+    K_src^2 / D.
+
+Verify analytically and empirically.
+
+The prior source-grounded study reports:
+
+    E[K_cmp] = 307
+
+only when:
+
+    K_src ~= sqrt(307*1024)
+          ~= 560.7.
+
+This may be one of the most important findings in the entire
+investigation.
+
+Compute the FULL distribution of K_cmp, not merely its mean.
+
+For each K_src near this region calculate:
+
+    P(K_cmp > 307)
+
+    P(K_cmp = 307)
+
+    P(K_cmp < 307).
+
+Find the source occupancy at which:
+
+    P(K_cmp > 307) = 0.01
+    P(K_cmp > 307) = 0.05
+    P(K_cmp > 307) = 0.10
+    P(K_cmp > 307) = 0.50
+    P(K_cmp > 307) = 0.90
+    P(K_cmp > 307) = 0.95
+    P(K_cmp > 307) = 0.99.
+
+This establishes when the controller's 307 projection policy
+actually becomes operational under the stated distribution.
+
+If that occurs around source K ~= 560 rather than source
+K=307, the canonical prose must not imply that source
+occupancy 308 crosses a recovery cliff.
+
+================================================================
+10. GLOBAL k-WTA AS A MANY-TO-ONE PROJECTION
+================================================================
+
+Treat k-WTA formally as a global operator:
+
+    P_k : Q^D -> Q^D
+
+or the appropriate actual domain/codomain.
+
+Study:
+
+    F_total
+        =
+    P_k o Bind
+
+where k <= 307 in the reference controller.
+
+The important question is:
+
+> Is the K-dependent information loss attributed to
+> "binding collisions" actually created by the global
+> projection P_k?
+
+Show mathematically that if:
+
+    K_cmp > k_allow
+
+then multiple distinct preprojection composites may map to the
+same retained top-k state.
+
+That is a many-to-one information-loss mechanism independent
+of the scalar min-sign ambiguity.
+
+Measure:
+
+    number of coordinates pruned
+    fraction of valid evidence pruned
+    entropy before projection
+    entropy after projection
+    true-constituent admissibility
+    partial-unbind distance
+    candidate-set widening
+    semantic-cleanup degradation.
+
+Repeat while varying the cap itself:
+
+    k_cap =
+    128
+    192
+    256
+    288
+    300
+    307
+    320
+    352
+    384
+    448
+    512
+    640
+    768
+    1024.
+
+If error varies smoothly with k_cap, state so.
+
+If a breakpoint exists, estimate it rather than assuming 307.
+
+================================================================
+11. DISTINGUISH POLICY DISCONTINUITY FROM NATURAL DISCONTINUITY
+================================================================
+
+Software can create a sharp discontinuity simply by enforcing:
+
+    if K_cmp > 307:
+        prune_to_307()
+
+That is a POLICY discontinuity.
+
+It does not prove an underlying mathematical phase transition.
+
+Separate:
+
+    natural behavior of Bind / Unbind
+
+from:
+
+    discontinuity introduced by controller policy.
+
+Ask:
+
+    What does the system do at K_cmp=307?
+
+    What does it do at K_cmp=308?
+
+If the only difference is that software invokes a pruning rule,
+then the correct claim is:
+
+    "the reference controller imposes a discrete policy
+     boundary at 307"
+
+not:
+
+    "the representation naturally loses recoverability at
+     307."
+
+================================================================
+12. TEST THE MULTI-WAY BINDING ARGUMENT PROPERLY
+================================================================
+
+Several critique transcripts claim K=307 is valuable because
+successive conservative bindings have expected support:
+
+    307
+    92
+    27
+    8
+    2.48
+    ...
+
+and therefore "five-way binding is guaranteed."
+
+Audit this claim aggressively.
+
+For m independently supported vectors with occupancy p:
+
+    E[K_m] = D p^m
+
+may be correct under the chosen model.
+
+But:
+
+    E[K_m] > 1
+
+does NOT imply:
+
+    P(K_m > 0) ~= 1.
+
+Calculate the actual distribution.
+
+Report:
+
+    E[K_m]
+    Var(K_m)
+    P(K_m = 0)
+    P(K_m >= 1)
+    P(K_m >= 2)
+    P(K_m >= 4)
+    P(K_m >= 8)
+
+for:
+
+    K_src =
+    128
+    192
+    256
+    288
+    300
+    307
+    320
+    352
+    384
+    448
+    512
+
+and relevant binding depths.
+
+Be precise about whether m means:
+
+    number of operands
+
+or:
+
+    number of binary binding operations.
+
+Then investigate the architecture history.
+
+Was "must survive five bindings" an actual design requirement
+that PRECEDED the 30% policy?
+
+If not, this can at most become a modern engineering
+observation, not historical justification.
+
+================================================================
+13. BUNDLING / SUPERPOSITION MUST BE PROVEN RELEVANT
+================================================================
+
+Some documents and transcripts defend 307 using:
+
+    crosstalk
+    bundle noise
+    superposition SNR.
+
+First establish whether the CURRENT authoritative runtime
+actually invokes bundling in the relevant path.
+
+A bundle method existing in a class is not enough.
+
+Trace the call graph.
+
+If bundling is actually used:
+
+    characterize the exact bundle law;
+
+    derive its noise model;
+
+    measure cleanup performance versus K;
+
+    measure bundle load versus K;
+
+    compare against exact oracle retrieval.
+
+If bundling is NOT used in the authoritative execution path:
+
+    do not use bundling crosstalk as justification for K_REF.
+
+Classify it as:
+
+    FUTURE / APPLICATION-SPECIFIC / RESEARCH HYPOTHESIS.
+
+================================================================
+14. SEMANTIC CLEANUP IS A SEPARATE RECOVERY PROBLEM
+================================================================
+
+The strongest counterargument in the new critique material is:
+
+    coordinatewise partial unbinding may remain valid,
+    yet whole-vector semantic cleanup may become unreliable.
+
+Test this directly.
+
+Inspect the actual:
+
+    semantic_snap
+    cleanup memory
+    admissible-set distance
+    candidate selection
+
+machinery.
+
+Define:
+
+    algebraic admissibility
+
+separately from:
+
+    semantic identification.
+
+Possible situation:
+
+    true constituent remains inside every local Poss set
+
+but:
+
+    cleanup retrieves the wrong stored state.
+
+That must be called:
+
+    CLEANUP FAILURE
+
+not:
+
+    UNBINDING FAILURE.
+
+Construct controlled planted-codebook experiments if no real
+evaluation corpus exists.
+
+Measure:
+
+    true-candidate rank
+    top-1 accuracy
+    top-k accuracy
+    margin to second candidate
+    false-snap rate
+    unresolved rate
+    ambiguity rate.
+
+Sweep both:
+
+    source K
+
+and:
+
+    controller k_cap.
+
+================================================================
+15. ANN/HNSW — ONLY IF ACTUALLY INVOLVED
+================================================================
+
+The previous source-grounded report found no HNSW
+implementation in the reference artifact.
+
+Verify this.
+
+Do not manufacture ANN benchmarks for a runtime that does not
+use ANN in this path.
+
+If ANN/HNSW is part of the current architecture elsewhere,
+distinguish:
+
+    exact semantic retrieval
+
+from:
+
+    approximate index retrieval.
+
+Use the separate Nexus RetrievalGeometry contract.
+
+Measure:
+
+    exact oracle ranking
+    ANN ranking
+    Recall@k
+    candidate margin
+    hubness
+    latency.
+
+Never attribute an ANN approximation error to quinary
+recoverability.
+
+================================================================
+16. REJECT THE "BIT BUDGET" STORY UNLESS A BUDGET EXISTS
+================================================================
+
+The draft says:
+
+    "under that budget"
+
+Determine what physical/computational budget that phrase means.
+
+Audit the current packed representation.
+
+If it is:
+
+    3 x 1024 fixed bit planes
+    = 3072 bits
+    = 384 raw bytes
+
+regardless of active-coordinate count,
+
+then global occupancy does not consume additional packed bits.
+
+Explicitly inspect whether there is any:
+
+    sparse coordinate-list format
+    fixed active-entry table
+    page boundary
+    cache-line boundary
+    SIMD boundary
+    serialization switch
+    metadata threshold
+
+at 307.
+
+If none exists, classify:
+
+    "fixed per-coordinate bit budget causes collisions
+     past 307"
+
+as unsupported.
+
+If "budget" really means:
+
+    controller active-state budget
+
+say so explicitly.
+
+================================================================
+17. VERIFY THE HISTORICAL PROVENANCE PRECISELY
+================================================================
+
+A prior source-grounded investigation reports approximately:
+
+    Sep 9 2025:
+        70% sparsity appears as CA/TMS design constraint
+
+    Sep 22 2025:
+        k_factor=0.3 explicitly implements 70% sparsity
+
+    early 2026:
+        1024 appears as one dimension choice
+
+    Jun 25 2026:
+        earlier revision challenges 70% "wall"
+        later revision introduces explicit 307 cap
+
+    Jul 18 2026:
+        floor(0.3*1024) ~= 307 explicitly stated
+
+    Jul 21 2026:
+        DIM=1024 and K_WALL=307 hard-coded in
+        reference implementation.
+
+Reconstruct this independently using:
+
+    dated documents
+    Drive revision history
+    commit history
+    exact quoted passages.
+
+Do not use timestamps alone when copied text may predate the
+file object.
+
+Determine specifically:
+
+    Did 70% precede 307?
+
+    Did k_factor=0.3 precede 307?
+
+    Was 307 ever benchmark-selected?
+
+    When did "recoverability degrades beyond 307" first
+    appear?
+
+    Was that sentence later than the constant itself?
+
+If yes, classify it as possible POST-HOC RATIONALE.
+
+================================================================
+18. AUDIT "CURRENT TESTING PLACES THE DEGRADATION POINT AT 307"
+================================================================
+
+This exact clause must receive its own forensic audit.
+
+Search:
+
+    tests
+    benchmarks
+    notebooks
+    CSVs
+    plots
+    CI artifacts
+    property tests
+    research reports
+    validation documents.
+
+A test that says:
+
+    active_count <= 307
+
+does not count.
+
+A test that says:
+
+    apply_k_wta(k=307) returns <=307 active values
+
+does not count.
+
+A valid experiment must have measured a recovery outcome as a
+function of multiple K values.
+
+Locate:
+
+    experiment definition
+    raw data
+    code
+    K sweep
+    metric
+    acceptance criterion
+    uncertainty/confidence interval.
+
+If no historical experiment did this, then:
+
+    "current testing places that degradation point at 307"
+
+must be classified:
+
+    UNSUPPORTED
+    or
+    HISTORICAL/SUPERSEDED.
+
+================================================================
+19. EXTERNAL LITERATURE CLAIM AUDIT
+================================================================
+
+The transcripts contain several claims that sound plausible
+but may be architecture-specific or wrong.
+
+Verify each from PRIMARY sources.
+
+CLAIM 1:
+
+    "Optimal sparse HDC density is 1/sqrt(D)."
+
+Determine:
+
+    which specific representation family;
+    which objective;
+    which assumptions;
+    whether it applies to Nexus quinary min-sign binding.
+
+Do not generalize a sparse-binary result.
+
+CLAIM 2:
+
+    "20-30% k-WTA is an established optimal plateau."
+
+Identify the original papers and actual experiments.
+
+Determine whether they say:
+
+    universal optimum
+
+or merely:
+
+    application-specific tested parameter.
+
+CLAIM 3:
+
+    "30% minimizes reconstruction error."
+
+Find the exact architecture/task.
+
+Do not import autoencoder reconstruction ratios directly into
+HSL symbolic occupancy.
+
+CLAIM 4:
+
+    "K=307 guarantees five-level binding."
+
+Replace expectation arguments with extinction probabilities.
+
+CLAIM 5:
+
+    "Higher occupancy necessarily worsens whole-vector
+     collisions."
+
+Check whether exact whole-vector forward collisions may
+actually DECREASE because more coordinates carry information.
+
+CLAIM 6:
+
+    "Higher occupancy necessarily worsens ANN geometry."
+
+Separate random cosine concentration from labeled semantic
+neighbor separability.
+
+================================================================
+20. RANDOM COSINE RESULT — VERIFY BUT DO NOT OVERGENERALIZE
+================================================================
+
+A prior experiment reports random-pair cosine SD approximately:
+
+    1/sqrt(D)
+    ~= 0.03125
+
+across a broad occupancy range.
+
+Reproduce the result.
+
+Derive the approximation under the relevant random model.
+
+Then state exactly what it does and does NOT imply.
+
+It may establish:
+
+    random zero-mean vector concentration is largely
+    dimension-controlled.
+
+It does NOT establish:
+
+    semantic retrieval is K-independent;
+
+    HNSW recall is K-independent;
+
+    learned/nonuniform HSL vectors behave identically.
+
+================================================================
+21. DEFINE RECOVERABILITY AS A VECTOR OF METRICS
+================================================================
+
+Do not produce a single vague "recoverability score."
+
+Report separately:
+
+    local Poss-set precision
+
+    fraction EXACT
+
+    fraction AMBIGUOUS
+
+    fraction UNKNOWN
+
+    fraction IMPOSSIBLE
+
+    true constituent locally admissible?
+
+    number of pruned valid coordinates
+
+    whole-vector admissible-set distance
+
+    exact reconstruction rate
+
+    cleanup top-1 accuracy
+
+    cleanup top-k accuracy
+
+    cleanup candidate margin
+
+    ANN recall, if applicable
+
+    multi-way support survival
+
+    bundle SNR, if applicable.
+
+This is necessary because occupancy may improve one
+recoverability notion while degrading another.
+
+================================================================
+22. CHANGE-POINT ANALYSIS
+================================================================
+
+For every empirical metric f(K):
+
+    fit a smooth model;
+
+    fit a segmented model;
+
+    estimate any breakpoint freely;
+
+    compare models.
+
+Do not fix the breakpoint at 307.
+
+Use confidence intervals / bootstrap where appropriate.
+
+Specifically compare behavior near:
+
+    source K ~307
+
+and:
+
+    source K ~561
+
+because the latter is where expected composite occupancy
+reaches the imposed 307 controller ceiling under the
+independent-support model.
+
+A particularly important result would be:
+
+    no natural change near K_src=307
+
+but:
+
+    projection-induced change begins when K_cmp crosses 307.
+
+If that occurs, document it explicitly.
+
+================================================================
+23. MULTI-OBJECTIVE ENGINEERING JUSTIFICATION
+================================================================
+
+The absence of a mathematical wall does NOT imply that 307
+must be removed.
+
+Investigate whether it is a defensible modern operating point.
+
+Candidate objectives:
+
+    semantic cleanup accuracy
+    candidate separation
+    binding-depth survival
+    representational entropy
+    overlap
+    downstream active-state cost
+    deterministic controller demand
+    robustness under corruption
+    latency
+    power/energy proxy
+    HSL packing/processing cost
+    homeostatic behavior.
+
+Construct Pareto fronts.
+
+Do not invent objective weights.
+
+Compare at least:
+
+    192
+    256
+    288
+    300
+    307
+    320
+    352
+    384
+    448
+    512.
+
+Ask:
+
+    Is 307 Pareto-dominated?
+
+    Is 307 Pareto-efficient?
+
+    Is there a Pareto knee near 307?
+
+    Are 288/300/307/320/352 statistically equivalent?
+
+This allows the architecture to say:
+
+    "307 remains a useful calibrated policy"
+
+without falsely saying:
+
+    "307 is a natural algebraic wall."
+
+================================================================
+24. HOMEOSTASIS / CONTROLLER CONSEQUENCES
+================================================================
+
+Investigate whether changing K_REF affects:
+
+    controller calibration
+    deterministic replay
+    calibration fingerprints
+    Cyrae/TUCR/HTCE control assumptions
+    energy/resource budgets
+    active-state trajectories.
+
+A constant can be historically heuristic yet become
+operationally load-bearing because other components were
+calibrated around it.
+
+Separate:
+
+    ORIGINAL JUSTIFICATION
+
+from:
+
+    CURRENT DEPENDENCY.
+
+Possible result:
+
+    307 was not scientifically derived originally,
+    but current Nexus components now rely upon its value for
+    deterministic calibration.
+
+That would make it:
+
+    operationally significant
+
+without making it:
+
+    mathematically fundamental.
+
+================================================================
+25. REQUIRED CAUSAL DAG
+================================================================
+
+Produce a causal/mechanistic diagram showing the best-supported
+path.
+
+For example, if evidence supports it:
+
+    K_src
+      |
+      v
+    support overlap
+      |
+      v
+    K_cmp
+      |
+      +------------------------------+
+      |                              |
+      v                              v
+    scalar partial unbind       K_cmp > k_allow
+    remains locally valid            |
+                                     v
+                                global k-WTA
+                                     |
+                                     v
+                            valid coordinates deleted
+                                     |
+                                     v
+                          candidate set / cleanup worsens
+
+But use the real result.
+
+Do not assume this example is correct.
+
+================================================================
+26. REQUIRED CLAIM-BY-CLAIM VERDICT
+================================================================
+
+Evaluate these independently:
+
+A.
+    "As source occupancy rises, scalar binding collisions
+     increase."
+
+B.
+    "As source occupancy rises, local partial-unbind
+     possibility sets become intrinsically less precise."
+
+C.
+    "As source occupancy rises, aggregate EXACT/AMBIGUOUS/
+     UNKNOWN frequencies change."
+
+D.
+    "As source occupancy rises, expected support overlap
+     increases."
+
+E.
+    "As source occupancy rises, exact whole-vector collision
+     probability increases."
+
+F.
+    "As source occupancy rises, raw composite occupancy
+     increases."
+
+G.
+    "Once composite occupancy exceeds controller allowance,
+     k-WTA deletes valid information."
+
+H.
+    "k-WTA deletion worsens downstream reconstruction."
+
+I.
+    "Semantic cleanup becomes less reliable at higher
+     occupancy."
+
+J.
+    "A natural degradation breakpoint exists at source
+     K=307."
+
+K.
+    "A policy breakpoint exists when K_cmp exceeds the
+     configured controller cap of 307."
+
+L.
+    "Historical Nexus testing identified 307 as a recovery
+     threshold."
+
+M.
+    "307 remains defensible as a current engineering
+     operating point."
+
+Use:
+
+    VERIFIED
+    SUPPORTED
+    PARTIALLY SUPPORTED
+    APPLICATION-SPECIFIC
+    DESIGN CHOICE
+    UNESTABLISHED
+    FALSIFIED.
+
+Provide direct evidence for every verdict.
+
+================================================================
+27. REQUIRED FINAL DISSECTION OF THE ORIGINAL SENTENCE
+================================================================
+
+Original sentence:
+
+    "As occupancy rises, more composite/binder pairs collide
+    under that budget and the classification degrades from
+    precise to unreliable; K_wall=307 is where current testing
+    places that degradation point."
+
+Break it into these clauses:
+
+1.
+    "As occupancy rises..."
+
+Which occupancy?
+
+2.
+    "...more composite/binder pairs collide..."
+
+Which definition of collision?
+
+3.
+    "...under that budget..."
+
+Which budget?
+
+4.
+    "...the classification degrades from precise to
+    unreliable..."
+
+Which classifier and which metric?
+
+5.
+    "...K_wall=307 is where current testing places that
+    degradation point."
+
+Which test?
+
+For each clause return:
+
+    correct
+    partly correct
+    wrong mechanism
+    unsupported
+    falsified.
+
+================================================================
+28. REQUIRED REPLACEMENT LANGUAGE
+================================================================
+
+Produce three replacement forms.
+
+### A. Mathematical statement
+
+State what the binding/unbinding mathematics establishes.
+
+### B. Engineering statement
+
+State what the controller/k-WTA/runtime actually does.
+
+### C. Canonical HTLA sentence
+
+One sentence suitable for direct insertion into the
+Tier-2 specification.
+
+The canonical sentence must not use:
+
+    wall
+    recoverability threshold
+    empirically optimal
+    collision threshold
+    current testing established
+
+unless those exact claims survive this research.
+
+================================================================
+29. REQUIRED ADVERSARIAL REVIEW
+================================================================
+
+Attack every major conclusion.
+
+If you conclude:
+
+    local unbinding is K-independent
+
+then search for hidden global constraints.
+
+If you conclude:
+
+    k-WTA is the actual source of degradation
+
+then rerun recovery without k-WTA.
+
+If you conclude:
+
+    cleanup degrades with K
+
+then compare against an exact cleanup oracle.
+
+If you conclude:
+
+    307 is historically heuristic
+
+search earlier revisions for a benchmark.
+
+If you conclude:
+
+    307 is nevertheless Pareto-efficient
+
+compare neighboring K values.
+
+If you conclude:
+
+    five-way binding supports 307
+
+compute extinction probability rather than expected support.
+
+If you conclude:
+
+    random cosine geometry is occupancy-independent
+
+test learned/nonuniform vector distributions before making a
+semantic retrieval claim.
+
+================================================================
+30. FINAL REQUIRED OUTPUT
+================================================================
+
+Produce a research report containing:
+
+    Executive verdict
+
+    Evidence hierarchy
+
+    Provenance timeline
+
+    Current implementation call graph
+
+    Precise K variable taxonomy
+
+    Scalar binding table
+
+    Partial-unbind theorem/proof
+
+    Epistemic possibility-set semantics
+
+    Four-label lattice/abstraction analysis
+
+    Support-overlap derivation
+
+    Composite-occupancy distribution
+
+    Probability of crossing K_REF
+
+    Whole-vector collision analysis
+
+    k-WTA projection analysis
+
+    Reproduced empirical K sweep
+
+    Multi-way binding extinction analysis
+
+    Semantic cleanup experiment
+
+    ANN analysis only if actually relevant
+
+    External literature claim audit
+
+    Change-point analysis
+
+    Pareto / engineering operating-point analysis
+
+    Current downstream dependency assessment
+
+    Clause-by-clause verdict on the original sentence
+
+    Exact canonical replacement language.
+
+End with the answer to this question:
+
+> What, precisely, happens in Nexus when occupancy rises,
+> and what scientifically defensible meaning should the
+> number 307 have in the canonical HTLA specification?
+
+Do not rewrite HTLA itself.
+
+Return the research necessary to support the later rewrite.

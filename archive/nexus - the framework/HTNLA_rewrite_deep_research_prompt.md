@@ -1,0 +1,98 @@
+# Deep Research Prompt: Rewriting HTNLA as a Rigorous Nexus v4 Subsystem Paper
+
+**How to use this:** Paste this whole prompt into a frontier reasoning model with real web search / deep research capability. Attach or paste immediately after it: the current HTNLA draft ("Hypervector Nonlinear Transdimensional Algebra (HTNLA): A Unified, Lossless Blueprint," including its verbatim Research-dossier archive). This prompt is the companion to the HTLA deep-research prompt already produced — HTNLA is the nonlinear extension of that linear substrate, and the two rewrites must agree with each other wherever they overlap.
+
+---
+
+## Mission
+
+HTNLA is registered in the Nexus 4 corpus as **S9, a Tier 2 subsystem-math source**. The master monograph's Part III already contains a short, correctly-hedged distillation of it (§6, quoted in full below) — component-wise nonlinear activation on top of HTLA's block operators, an explicit five-way taxonomy for degrees of invertibility loss, no invented benchmark numbers, no consciousness-metric cosplay. The current standalone draft is not that. It has real bones (per-label nonlinearity, k-WTA sparsity, residual connections are all legitimate, useful ideas) buried under invented statistics, at least two pieces of code that don't run, and — the big one — several thousand words of a *different document* (a human identity-transfer research protocol) stapled onto the back of a linear algebra paper.
+
+The job: produce the long-form, fully rigorous, honestly-scoped version of HTNLA that the master monograph's condensed §6 can safely point to, capable of replacing S9 outright.
+
+---
+
+## Ground truth you must not contradict (Nexus v4 canon, current as of the 2026-08-28/31 monograph)
+
+**§6 of the master monograph, verbatim — this is the spine the rewrite must elaborate on, not deviate from:**
+
+> HTNLA extends the linear block calculus by inserting nonlinear maps while preserving label boundaries. A generic target component is z_t = b_t + Σ_s W_{t,s}x_s + r_t, followed by y_t = φ_t(z_t), and, where configured, y_t ← kWTA_t(y_t). A multi-layer nonlinear transdimensional network may be written H^(k+1) = σ^(k)(M^(k)H^(k) + b^(k)), optionally with a residual map when source and target label geometry permits: H^(k+1) = R^(k)H^(k) + σ^(k)(M^(k)H^(k) + b^(k)).
+>
+> **6.1 What nonlinearity changes.** Linear invertibility cannot be assumed after a non-injective nonlinearity. If φ collapses distinct states, φ(x₁)=φ(x₂), x₁≠x₂, then an exact inverse does not exist. HTNLA must therefore distinguish: exact inverse where the operator is bijective on the relevant domain; pseudoinverse where a least-squares approximation is defined; partial unbinding where only some coordinates are recoverable; iterative/resonator reconstruction where the inverse is a search problem; unknown or ambiguous outputs where information has genuinely been lost. This distinction is a recurring Nexus principle: uncertainty is represented, not papered over.
+
+**The reference geometry this must stay consistent with:** the quinary binding operation is a deterministic, deliberately information-losing intersection-plus-sign-composition-plus-conservative-magnitude operation (not circular-convolution-plus-tanh), with a four-state partial-unbind taxonomy: `EXACT / AMBIGUOUS / UNKNOWN / IMPOSSIBLE`. HTNLA's own five-way invertibility taxonomy above must map onto this, not reintroduce a separate, less rigorous scheme.
+
+**§73 of the master monograph ("Consciousness Claims and Category Errors")** governs every biologically- or consciousness-flavored name in this draft (dopamine, serotonin, GABA, Hebbian/STDP, "phenomenal continuity," Φ, "cognitive fidelity"). It distinguishes three levels — computational variable / functional analogue / phenomenological claim — and states plainly: "evidence for level 1 does not establish level 3." Apply this explicitly to every such term in the rewrite rather than letting the borrowed vocabulary imply more than it's earned.
+
+**Also standing:** the 12-term claim-status vocabulary (`CANONICAL, IMPLEMENTED, VERIFIED, PARTIALLY IMPLEMENTED, ACTIVE DEVELOPMENT, PROPOSED, DESIGN TARGET, EXPERIMENTAL, RESEARCH HYPOTHESIS, APPLICATION-SPECIFIC, HISTORICAL/SUPERSEDED, INFERRED`) — reuse it, don't invent a new one. And the already-ratified correction on the "85% energy conservation" number: it is a design motif, not a measured law, and any energy claim needs real telemetry, not a percentage asserted as fact.
+
+---
+
+## Major structural issue: this document is two documents, and only one of them is HTNLA
+
+Sections 6 and 9.6 through 9.12.26 of the draft (Phenomenal Continuity and Identity Preservation, the Hybrid Identity Transfer Protocol, QHRF measurement — Brillouin microscopy, NV-diamond magnetometry, specific laser wattages and pulse widths — PyMC hierarchical fidelity models, NWB/JSON schemas for a human-subjects project, and a literal IRB/consent checklist including "destructive transfer") have essentially nothing to do with nonlinear block operators, activation functions, or k-WTA sparsity. They belong to a different, adjacent question — what does substrate/identity continuity mean — that Nexus v4 has **already answered better elsewhere**: the current Identity Architecture canonical monograph grounds continuity in AmmunIty (a security/homeostasis application) and the Educated Bookseller business lineage, not in neural-signal capture instrumentation. Keeping the QHRF material inside the HTNLA math paper does three bad things at once: it makes a legitimate linear-algebra extension look like it's smuggling in a brain-uploading proposal; it duplicates and contradicts a concern the corpus has already resolved more soberly; and it guarantees that any technically literate reader who gets past the math will hit the identity-transfer material and stop trusting the rest of the document.
+
+**Required action:** remove sections 6 and 9.6–9.12.26 from the HTNLA paper entirely. If this material has ongoing value as TUCR's speculative/fictional layer, it belongs in its own separate, explicitly-labeled document (worldbuilding, not a research proposal) — not stitched into either the math papers or the real Identity Architecture engineering monograph. Do not summarize it, footnote it, or preserve a "lossless" pointer to it inside the HTNLA rewrite; a math paper does not need a cross-reference to a human-subjects protocol.
+
+---
+
+## Defects in the retained (actual HTNLA) material — fix all of these
+
+| # | Location | What's wrong | Fix |
+|---|---|---|---|
+| 1 | §3.3, "graded ℝ-algebra" → "graded nonlinear algebra" | Once nonlinearity enters, this isn't just imprecise the way it was for HTLA — it stops making formal sense at all. Two nonlinear layers σ(M₁H) and σ(M₂H) don't even satisfy σ(M₁H)+σ(M₂H) = σ((M₁+M₂)H) in general, so the space of HTNLA layers isn't closed under addition the way a linear operator space is — there is no algebra here to be "graded." | Reframe: HTNLA defines a family of parameterized nonlinear maps built on top of HTLA's block structure (which *is* correctly framed via the Peirce-decomposition/ringoid treatment from the HTLA rewrite). Call it a network/architecture family, or a category of labeled nonlinear morphisms — not an algebra, graded or otherwise. |
+| 2 | §3.3, tanh-based nonlinear binding, `bind(H,K) = tanh(H⊙K+b)` | Diagnosed as causing "non-invertible in a direct sense" — but tanh is actually invertible on its open range via artanh. The real sources of information loss are saturation/precision near ±1, the unknown/untracked bias b, and the pre-existing approximate nature of circular-convolution binding itself (already true before any nonlinearity is added). This entire construction is also inconsistent with the canonical quinary binding operation, which was adopted specifically to replace it. | Remove tanh-based binding. Describe HTNLA's binding contribution as: how (if at all) a differentiable/soft nonlinear analogue is used during *training* of learned components, explicitly distinct from and non-authoritative over the deterministic quinary reference binding — and map the five-way invertibility taxonomy above onto the quinary system's EXACT/AMBIGUOUS/UNKNOWN/IMPOSSIBLE states rather than inventing a parallel one. |
+| 3 | §3.4, §5.1, §6.2 (three separate occurrences), "70% sparsity constraint reduces the computational cost from O(D²) to O(D log D)" | Identical error to the one already corrected in the HTLA rewrite: a fixed retention fraction gives a constant-factor speedup (~3x at 70% sparsity), not a complexity-class change. Real O(D log D) comes from FFT-based structure or from block-level coupling-graph sparsity that shrinks relative to D, not from k-WTA on a dense vector. | Apply the identical fix specified in the HTLA prompt. Do not re-derive it differently here — the underlying mathematical mistake is the same regardless of which paper it appears in. |
+| 4 | Abstract vs. §1.2 | Abstract states as achieved fact: "achieving 20-50% improvement in associative recall accuracy." §1.2 says "Projections *indicate* a substantial 20-50% improvement." Same number, hedge present in one place and silently dropped in the other — inside a single document. No experiment anywhere backs either version. | Drop the number entirely unless a real ablation is run. If a directional claim is wanted, state it as a single, consistently-hedged `RESEARCH HYPOTHESIS` with a stated test protocol (see the ablation checklist already sketched in §9.4/9.12 of the draft — that part is a legitimate, keepable idea, it's the pre-loaded "answer" that isn't). |
+| 5 | §6.2, §7.1/8.2 tables — Φ, Binding Score, Neural Dynamics Fidelity, Memory Accuracy, Hilbert Distance | Precise numeric thresholds (Φ<0.3, +15%, Binding Score>0.8) are set for metrics with **no formula given anywhere** for how any of them is actually computed from HTNLA state. This is exactly the pattern §73 exists to prevent. | Either drop these "cognitive fidelity" metrics from a math/architecture paper entirely, or give each one an explicit level-1 computational definition (a real formula) and tag it accordingly — no numeric threshold survives without one. |
+| 6 | Nearly every substantive claim in the document, including the most specific ones (20-50%, 85%, O(D log D), Φ<0.3) | All trace to a single repeatedly-cited internal source ("HVD Architectural Plan - The TMS HDF5 Hierarchical Model.txt," footnoted "1" dozens of times) with no independent external verification anywhere. Citing the same unverified internal document forty times is not forty pieces of evidence — it's one unverified claim, repeated. | Anything above `RESEARCH HYPOTHESIS` needs either a real external citation or a derivation/execution the reader can check themselves. |
+| 7 | §7.3/8.3 comparison table, "Expressive Power: High (Universal Approximator)" | True for some member of this architecture family at unbounded width; not established for the specific fixed-sparsity, few-layer network actually proposed. | Cite the universal approximation theorem's actual hypotheses (width/depth conditions) and state plainly whether the proposed architecture is known to satisfy them, or soften the cell. |
+| 8 | §9.9, neuromodulatory formulas (serotonin-modulated attention, GABA sparse-coding constraint, dopamine-modulated Hebbian rule) with specific unexplained constants | Real neuroscience vocabulary attached to invented functional forms and constants (γ, τ_focus, σ_att, θ_inhib) with no derivation or citation. | See Open Research Questions #3 below — either ground these in the real reward-modulated-STDP literature with correctly attributed functional forms, or explicitly tag as `INFERRED`/loosely-inspired-by, never as if the specific constants came from somewhere. |
+| 9 | Phased roadmap (§1.2, and the verbatim archive's §6.1 "Phase 1 Months 1-3... benchmarked... target latency <10ms per layer") | Project planning dressed with the same false precision as the math. | Tag with `PROPOSED` / `DESIGN TARGET` per the existing vocabulary; this is a minor, mechanical fix once the tagging discipline is applied consistently. |
+
+---
+
+## Verified code bugs — confirmed by execution, not inspection
+
+- **`risk_aware_modulation`**: as literally written, `np.dot(M, H) + 0.1*DA*H` is a shape-mismatch crash the moment M's output dimension differs from H's input dimension (confirmed: `ValueError: operands could not be broadcast together with shapes (50,) (100,)` on the paper's own example dimensions). Separately, and more importantly: `risk = np.var([reward] * 10)` computes the variance of ten identical copies of one number, which is **mathematically always exactly 0**, for any reward value — confirmed by execution. The entire "risk-aware" temperature modulation this feeds is inert by construction; whatever real signal was intended for `risk`, this formula cannot carry it. Needs a real variance computation over an actual distribution of outcomes (e.g., a rolling window of past rewards) if the risk-modulation idea is worth keeping.
+- **`dynamic_label_adapt`**: `current_mean = np.mean([hypervector.components[l] for l in labels], axis=0)` requires every label's component to have the same dimension to stack — confirmed to throw a numpy inhomogeneous-shape error the moment two labels have genuinely different dimensions, which is the entire premise HTLA/HTNLA exist to handle. Needs to either operate per-label or use an explicit padding/projection step before any cross-label averaging, with the dimension-adaptation logic actually tested against heterogeneous inputs before publication.
+- General instruction: every code listing in the rewrite must be executed against inputs with genuinely different per-label dimensions (not all-same-size toy examples) before being included, since that's precisely the condition under which several of these functions break.
+
+---
+
+## Open research questions — actually investigate these
+
+1. **Novelty scoping for the nonlinear extension specifically.** Beyond the HTLA-level prior art already identified (Named Tensor Notation, categorical deep learning), HTNLA's actual closest relatives are: Graph Neural Networks with per-edge-type/per-node-type transformations (structurally very close to per-label blocks with per-label nonlinearities); Mixture-of-Experts architectures (sparse routing closely analogous to k-WTA over labels); modular/multi-task networks with task-specific heads (the "Splitting" operator concept). Survey these and state honestly what HTNLA's label-plus-epistemic-status combination adds that they don't already do.
+2. **Invertibility taxonomy grounding.** The "exact / pseudoinverse / partial unbinding / iterative reconstruction / unknown" five-way distinction should be connected to the real, well-established Invertible Neural Networks / Normalizing Flows literature (e.g., RealNVP, Glow, i-RevNet) — this is exactly the right existing research area for reasoning rigorously about designing neural network layers with controlled, provable invertibility properties, and is far stronger grounding than "gradient ascent" hand-waving.
+3. **Dopamine-modulated learning grounding.** Real, correctly-attributable literature exists: Izhikevich (2007, *Cerebral Cortex*, "Solving the distal reward problem through linkage of STDP and dopamine signaling"), and reward-modulated-STDP theory in Frémaux, Sprekeler & Gerstner (2010, *J. Neuroscience*) and Legenstein, Pecevski & Maass (2008, *PLOS Comp. Biol.*). Determine whether the draft's specific functional forms can be honestly attributed to (a correctly-cited, explicitly-labeled functional analogue of) this literature, or whether they should be simplified and clearly marked `INFERRED`.
+4. **k-WTA's actual stabilizing/concentration properties.** The draft asserts sparsity "acts as a stabilizing force" and "preserves the Concentration of Measure property" without derivation. Search sparse-coding and winner-take-all computational literature (e.g., work descending from classical WTA circuit theory, and sparse-distributed-representation literature) for any result that would actually support this, and either cite it properly or downgrade the claim.
+5. **Quantum nonlinearity — this is a known hard problem, not a solved primitive.** The draft's claim that "nonlinear transformation F can be block-encoded into a unitary matrix U_F" glosses over a real, actively-published-on difficulty: quantum evolution is fundamentally linear/unitary, and implementing genuine nonlinearity requires ancilla qubits with measurement-induced (probabilistic) collapse, repeat-until-success protocols, or hybrid quantum-classical splits — confirmed as an open, non-trivial research area across multiple 2020–2025 papers on quantum neural networks. Rewrite this section to state the real difficulty honestly, citing the actual quantum-neural-network literature on nonlinearity implementation, rather than treating block-encoding of a nonlinear map as a routine extension of the (genuinely more tractable) linear QSVT machinery used in the HTLA quantum appendix.
+
+---
+
+## What "legitimate" and "novel" mean here
+
+Same standard as the HTLA rewrite: label every claim at the confidence it has earned, and locate the genuine novelty in the actual combination, not in individual borrowed tools. For HTNLA specifically, the defensible thesis is: a component-wise nonlinear extension of a labeled block-linear substrate, paired with an explicit, typed taxonomy for degrees of invertibility loss (rather than silently assuming or silently discarding invertibility), integrated with a concrete deterministic reference implementation. That is a real, useful, buildable contribution. "Transforming a memory substrate into a fully adaptive, self-optimizing cognitive engine" suitable for "nano-LLMs" is not a claim this paper can support and shouldn't attempt to.
+
+---
+
+## Required output structure
+
+1. Title + abstract calibrated to what's proven, cited, or explicitly hypothesized. No "foundational," "profound," "self-optimizing cognitive engine," or consciousness-flavored language in the framing.
+2. Short "Relationship to Prior Art" section (GNNs/MoE, invertible NNs, k-WTA/sparse coding, reward-modulated STDP if kept).
+3. Core mathematics: the layer definition and multi-layer/residual form exactly as already canonized in §6 above; the five-way invertibility taxonomy mapped explicitly onto the quinary EXACT/AMBIGUOUS/UNKNOWN/IMPOSSIBLE states.
+4. Sparsity (k-WTA): correctly scoped complexity claims (constant-factor, not complexity-class, unless block-sparsity is doing the real work).
+5. Any biologically-named mechanism kept: explicitly tagged per §73's three levels, with real citations where claimed.
+6. Reference implementation: real, executed code only, tested against heterogeneous per-label dimensions.
+7. Closing claim-status audit table, reusing the 12-term vocabulary.
+8. **No section 6-equivalent or 9.6-9.12-equivalent material** — phenomenal continuity, identity transfer, and QHRF instrumentation do not appear in this document at all.
+
+---
+
+## Hard constraints
+
+- No unqualified superlatives, no consciousness-science vocabulary used without the §73 three-level tagging applied.
+- No number without a citation or a pointer to code that was actually run to produce it.
+- No claim cites the single internal architecture-plan document as if repetition were verification.
+- Every equation is proved, cited, or explicitly tagged `RESEARCH HYPOTHESIS` / `INFERRED` — no fourth option.
+- The identity-transfer/QHRF material does not appear anywhere in this document, including as a summary, a footnote, or a "see also" pointer.

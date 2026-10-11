@@ -1,0 +1,819 @@
+# DEEP RESEARCH PROMPT
+
+# Retrieval Geometry for Nexus 4:
+# Metric, Pseudometric, Quasimetric, Kernel, and Compatibility Requirements
+# for HTLA/HTNLA Similarity and ANN/HNSW Search
+
+## Mission
+
+Perform a source-driven mathematical and systems research investigation into the following question:
+
+What geometric and algebraic properties must a similarity, distance, compatibility, or cross-label scoring function satisfy before Nexus 4 may safely use it as the retrieval geometry for approximate nearest-neighbor search — particularly HNSW — and what role, if any, must the triangle inequality play?
+
+The goal is to establish a rigorous canonical contract between:
+
+    HTLA / HTNLA scoring semantics
+            |
+            v
+    HVD retrieval geometry
+            |
+            v
+    ANN / HNSW or alternate retrieval index
+
+The result must determine whether Nexus needs:
+
+- a true metric;
+- a pseudometric;
+- a semimetric;
+- a quasimetric;
+- an asymmetric distance;
+- a positive-semidefinite kernel;
+- a conditionally negative-definite distance;
+- a monotone similarity transform;
+- or merely an arbitrary ranking score,
+
+for different classes of retrieval algorithms.
+
+Do NOT assume in advance that HNSW requires the triangle inequality.
+
+Do NOT assume in advance that arbitrary nonmetric or asymmetric scores are safe.
+
+Research the actual theory and empirical evidence.
+
+---
+
+# CRITICAL EXECUTION REQUIREMENT
+
+DO THE RESEARCH.
+
+Do not answer from memory alone.
+
+Before writing the synthesis:
+
+1. Search current scholarly literature and authoritative implementation documentation.
+2. Inspect the original HNSW paper and subsequent theoretical/empirical work.
+3. Investigate ANN behavior in metric and nonmetric spaces.
+4. Investigate asymmetric nearest-neighbor search.
+5. Investigate similarity functions that are not metrics.
+6. Investigate graph-based ANN construction heuristics and what properties they implicitly exploit.
+7. Compare HNSW with alternative ANN/index methods where relevant.
+8. Verify claims against actual implementations such as FAISS, hnswlib, Lucene, pgvector, or other authoritative sources where useful.
+9. Search specifically for counterexamples to the claim that triangle inequality is required.
+10. Search specifically for cases where violating metric assumptions measurably harms recall, navigability, pruning, construction quality, or theoretical guarantees.
+
+The final answer must distinguish:
+
+    mathematical requirement
+    implementation assumption
+    performance heuristic
+    empirical tendency
+    theorem
+    Nexus design preference
+
+These are not interchangeable.
+
+---
+
+# NEXUS CONTEXT
+
+HTLA represents heterogeneous labeled state:
+
+    H = direct-sum_l R^(n_l)
+
+Aligned-label similarity may use a weighted inner product:
+
+    <H,K>_w
+        =
+    sum_l w_l <H_l,K_l>
+
+Under appropriate strictly positive weights this induces a norm and therefore a standard cosine-type geometry.
+
+Cross-label comparison may instead use something like:
+
+    C_W(H,K)
+        =
+    sum_(l,m)
+        w_lm
+        <P_(l->m) H_l, K_m>
+
+where:
+
+- P_(l->m) is an explicitly configured cross-label transform;
+- w_lm may be asymmetric;
+- the resulting global operator need not be symmetric;
+- it need not be positive semidefinite;
+- it need not induce a norm;
+- it need not define a distance;
+- it need not satisfy triangle inequality.
+
+Therefore:
+
+    cross-label compatibility score
+        !=
+    inner product
+
+and:
+
+    compatibility score
+        !=
+    metric
+
+unless the required mathematical properties are independently established.
+
+The research must determine what this means for ANN indexing.
+
+---
+
+# CENTRAL QUESTIONS
+
+## 1. What exactly does HNSW require?
+
+Read the original HNSW literature and relevant subsequent work.
+
+Determine whether HNSW formally requires:
+
+    non-negativity
+    identity of indiscernibles
+    symmetry
+    triangle inequality
+
+or whether it can operate over more general dissimilarity/ranking functions.
+
+Separate:
+
+- what the algorithm can execute with;
+- what the implementation APIs permit;
+- what theoretical analyses assume;
+- what construction/search heuristics exploit;
+- what is needed for reliable empirical recall.
+
+Explicitly test the statement:
+
+    "HNSW depends on the triangle inequality."
+
+Classify it as:
+
+    TRUE
+    PARTIALLY TRUE
+    CONTEXT-DEPENDENT
+    FALSE
+
+and explain precisely why.
+
+---
+
+## 2. Distinguish the relevant geometric structures
+
+Give rigorous definitions and relationships among at least:
+
+### Metric
+
+d(x,y) >= 0
+
+d(x,y) = 0 iff x = y
+
+d(x,y) = d(y,x)
+
+d(x,z) <= d(x,y) + d(y,z)
+
+### Pseudometric
+
+Allows:
+
+    d(x,y)=0
+
+for distinct x and y.
+
+### Semimetric
+
+Research the terminology carefully because literature varies.
+
+Do not assume one universal definition.
+
+### Quasimetric / quasi-metric
+
+Investigate asymmetric distance functions.
+
+For example:
+
+    d(x,y) != d(y,x)
+
+while some directed triangle condition may still hold.
+
+Determine the standard terminology in the relevant mathematical and ANN literature.
+
+### Similarity
+
+A larger-is-better score that may not define a distance.
+
+### Kernel
+
+Determine when:
+
+    K(x,y)
+
+is positive semidefinite and therefore corresponds to an inner product in a feature space.
+
+### Indefinite kernel / similarity
+
+Investigate what fails when PSD does not hold.
+
+### Divergence
+
+Examples such as KL divergence:
+
+    D_KL(p || q)
+
+which is asymmetric and does not satisfy ordinary metric axioms.
+
+Investigate how nearest-neighbor search is handled for such quantities.
+
+---
+
+# 3. WHICH TRIANGLE PROPERTY, IF ANY, DOES NEXUS NEED?
+
+This is the central research problem.
+
+Investigate at least:
+
+## Ordinary triangle inequality
+
+    d(x,z)
+        <=
+    d(x,y) + d(y,z)
+
+## Relaxed triangle inequalities
+
+For some constant c >= 1:
+
+    d(x,z)
+        <=
+    c [d(x,y) + d(y,z)]
+
+Determine whether such spaces appear in ANN research and whether guarantees survive.
+
+## Directed / quasimetric triangle inequality
+
+For asymmetric d:
+
+    d(x,z)
+        <=
+    d(x,y) + d(y,z)
+
+while:
+
+    d(x,y)
+        !=
+    d(y,x)
+
+Investigate whether this is sufficient for useful directed retrieval structures.
+
+## Four-point / negative-type properties
+
+Investigate whether embeddings or ANN methods rely more naturally on:
+
+- negative type;
+- Euclidean embeddability;
+- doubling dimension;
+- bounded expansion;
+- intrinsic dimensionality;
+- low-dimensional manifold assumptions;
+
+rather than triangle inequality alone.
+
+## Monotonic ordering
+
+Could HNSW require only that a supplied score preserve a meaningful ranking?
+
+For a similarity s and distance d, if:
+
+    s(x,y) = f(d(x,y))
+
+for strictly monotone f,
+
+then ranking is preserved.
+
+Investigate when this is sufficient.
+
+---
+
+# 4. COSINE SIMILARITY MUST BE HANDLED CAREFULLY
+
+Research the exact geometry of cosine similarity.
+
+Distinguish:
+
+    cosine similarity
+
+from:
+
+    1 - cosine similarity
+
+from:
+
+    angular distance
+
+and determine which are metrics.
+
+For normalized vectors, examine:
+
+    d_angle(x,y)
+        =
+    arccos(cos(x,y))
+
+and other commonly used transforms.
+
+Determine whether:
+
+    1 - cos(x,y)
+
+satisfies triangle inequality.
+
+Do not assume.
+
+Explain what FAISS/HNSW-style implementations actually do when using cosine similarity.
+
+This is directly relevant because Nexus currently uses cosine-like graded similarities.
+
+---
+
+# 5. INNER PRODUCT / MAXIMUM INNER PRODUCT SEARCH
+
+Research Maximum Inner Product Search (MIPS).
+
+HTLA/HTNLA may produce scores of the form:
+
+    s(x,y) = x^T A y
+
+or cross-label analogues.
+
+Determine:
+
+- whether MIPS requires a metric;
+- common reductions from MIPS to Euclidean or cosine ANN;
+- asymmetric transformations used in MIPS;
+- implications for HNSW;
+- whether a PSD A changes the available geometry;
+- what happens when A is indefinite.
+
+Investigate whether Nexus should classify some retrieval problems as:
+
+    metric ANN
+
+versus:
+
+    MIPS
+
+versus:
+
+    general compatibility ranking
+
+instead of pretending they are the same operation.
+
+---
+
+# 6. PSD CROSS-LABEL OPERATORS
+
+Suppose Nexus constructs:
+
+    K_W(H,K)
+        =
+    H^T A_W K
+
+Research what conditions on A_W imply:
+
+### Symmetric inner-product geometry
+
+    A_W = A_W^T
+    A_W positive definite
+
+### Positive-semidefinite kernel geometry
+
+    A_W = A_W^T
+    A_W positive semidefinite
+
+### Indefinite bilinear form
+
+A_W has positive and negative eigenvalues.
+
+### Directed score
+
+    A_W != A_W^T
+
+Determine for each case:
+
+- whether it defines an inner product;
+- whether it defines a norm;
+- whether a valid metric can be induced;
+- whether cosine normalization is meaningful;
+- whether HNSW can still be used;
+- what guarantees are lost;
+- whether a transform to another retrieval space is possible.
+
+---
+
+# 7. ASYMMETRIC CROSS-LABEL RETRIEVAL
+
+Nexus may legitimately have directional relationships:
+
+    source modality -> target modality
+
+where:
+
+    compatibility(H,K)
+        !=
+    compatibility(K,H)
+
+Examples might conceptually include:
+
+    evidence -> hypothesis
+    sensor -> latent state
+    query -> candidate
+    action -> predicted consequence
+
+Research ANN methods for asymmetric similarity/distance.
+
+Determine whether options include:
+
+- asymmetric transformations;
+- directed proximity graphs;
+- bipartite indexes;
+- query/data-space transformations;
+- MIPS reductions;
+- separate query and database encoders.
+
+Determine whether standard HNSW can appropriately support these cases or whether Nexus should use a different retrieval contract.
+
+---
+
+# 8. HNSW INTERNAL HEURISTICS
+
+Investigate HNSW's graph construction and neighbor-selection heuristics.
+
+Determine where geometric assumptions enter.
+
+Specifically research:
+
+- greedy graph traversal;
+- neighbor selection;
+- diversification heuristics;
+- relative neighborhood concepts;
+- pruning;
+- layer construction;
+- entry-point search.
+
+Ask:
+
+Does triangle inequality make these heuristics more effective even when it is not a strict execution requirement?
+
+Could a severely nonmetric score create:
+
+- poor graph navigability;
+- local minima;
+- hub formation;
+- degraded recall;
+- unstable insertion-order behavior;
+- pathological neighbor selection?
+
+Find evidence.
+
+Do not speculate without labeling it.
+
+---
+
+# 9. NONMETRIC RETRIEVAL FAILURE MODES
+
+Search for explicit pathological examples.
+
+Construct or cite examples where a scoring function violates triangle inequality or symmetry and causes:
+
+- greedy traversal failure;
+- disconnected useful neighborhoods;
+- ranking instability;
+- failure of metric-tree pruning;
+- degraded graph ANN recall.
+
+Distinguish algorithms that fundamentally require metricity — such as some metric trees — from algorithms that merely benefit from metric structure.
+
+This distinction is critical.
+
+---
+
+# 10. ALTERNATIVE INDEXES
+
+If Nexus cross-label compatibility does not satisfy the geometry HNSW needs for acceptable behavior, investigate alternatives.
+
+At minimum compare relevant cases for:
+
+- brute-force exact ranking;
+- HNSW;
+- IVF;
+- product quantization;
+- FAISS MIPS methods;
+- DiskANN or graph ANN variants;
+- locality-sensitive hashing;
+- metric trees;
+- asymmetric ANN methods;
+- learned retrieval indexes.
+
+Do not provide a generic benchmark catalogue.
+
+Answer specifically:
+
+    Which index family matches which mathematical scoring contract?
+
+---
+
+# 11. PROPOSE A NEXUS RETRIEVAL-GEOMETRY TYPE SYSTEM
+
+Based on the research, determine whether Nexus should declare retrieval geometry explicitly.
+
+For example:
+
+    RetrievalGeometry =
+    {
+        EUCLIDEAN_METRIC,
+        ANGULAR_METRIC,
+        PSEUDOMETRIC,
+        QUASIMETRIC,
+        PSD_KERNEL,
+        MIPS,
+        DIRECTED_COMPATIBILITY,
+        GENERAL_SCORE
+    }
+
+Do not adopt these exact labels automatically.
+
+Research first.
+
+For each geometry class specify:
+
+- required mathematical properties;
+- legal indexes;
+- prohibited indexes;
+- normalization requirements;
+- expected guarantees;
+- validation tests.
+
+The goal is to prevent this architecture:
+
+    arbitrary score
+        |
+        v
+    HNSW
+        |
+        v
+    hope
+
+Instead:
+
+    declared retrieval geometry
+        |
+        v
+    verified mathematical properties
+        |
+        v
+    compatible index family
+        |
+        v
+    validated recall contract
+
+---
+
+# 12. PROPOSE EXECUTABLE PROPERTY TESTS
+
+Determine what can actually be tested in code.
+
+For a configured cross-label score C on sampled states, possible checks might include:
+
+    finite outputs
+    non-negativity
+    symmetry error
+    identity behavior
+    empirical triangle-violation rate
+    relaxed-triangle constant
+    PSD eigenvalue test
+    ranking stability
+    recall@k under exact baseline
+
+Research which of these are mathematically legitimate and useful.
+
+A finite sample cannot prove a universal metric property.
+
+Make that distinction explicit.
+
+But Nexus may still use empirical tests to detect obvious configuration failure.
+
+Propose a validation stack separating:
+
+    theorem / construction guarantee
+
+from:
+
+    numerical validation
+
+from:
+
+    empirical retrieval benchmark.
+
+---
+
+# 13. APPROXIMATE GEOMETRY
+
+HTLA and HTNLA may use:
+
+- dimensional projection;
+- quantization;
+- low-rank approximation;
+- learned transforms.
+
+Research how approximation changes retrieval geometry.
+
+If:
+
+    x -> P x
+
+approximately preserves distances,
+
+what guarantee can be made about nearest-neighbor rankings?
+
+If a learned HTNLA transform changes generation:
+
+    g_1 -> g_2
+
+when is an old ANN index geometrically stale?
+
+Relate this to the Nexus invariant:
+
+    representation_generation(query)
+        must be compatible with
+    representation_generation(index)
+
+Determine whether geometry-contract versioning should become part of index metadata.
+
+---
+
+# 14. CRITICAL NEXUS DISTINCTIONS
+
+Preserve these distinctions:
+
+    similarity != identity
+
+    similarity != truth
+
+    similarity != authorization
+
+    ANN result != canonical state
+
+    compatibility != metric
+
+    asymmetric score != quasimetric
+        unless quasimetric axioms are established
+
+    PSD kernel != metric automatically
+
+    executable distance function
+        !=
+    geometrically appropriate ANN function
+
+    empirical recall
+        !=
+    formal correctness guarantee
+
+---
+
+# 15. REQUIRED OUTPUT
+
+Produce a rigorous research paper containing:
+
+## A. Executive conclusion
+
+Answer immediately:
+
+1. Does HNSW require triangle inequality?
+2. What properties does it actually require?
+3. What properties materially improve its behavior?
+4. What geometry should Nexus require for ordinary HVD similarity retrieval?
+5. What should Nexus do with asymmetric cross-label compatibility?
+
+## B. Mathematical taxonomy
+
+Metric, pseudometric, semimetric, quasimetric, divergence, PSD kernel, indefinite kernel, MIPS, general similarity.
+
+## C. HNSW requirements
+
+Separate theorem, implementation, and empirical behavior.
+
+## D. HTLA aligned-label retrieval
+
+Determine the strongest appropriate geometry.
+
+## E. HTLA cross-label retrieval
+
+Determine when it is metric, kernel, MIPS, asymmetric, or merely a score.
+
+## F. HTNLA retrieval
+
+Analyze learned/nonlinear transform consequences.
+
+## G. Index compatibility matrix
+
+Example:
+
+    geometry class
+    HNSW?
+    metric tree?
+    MIPS index?
+    exact scan?
+    guarantees
+    cautions
+
+## H. Triangle-property recommendation
+
+State exactly which triangle property, if any, Nexus should canonically require.
+
+If the answer depends on retrieval class, say so.
+
+Do NOT force one global answer.
+
+## I. Validation specification
+
+Provide executable tests and benchmark requirements.
+
+## J. Proposed Nexus engineering laws
+
+Produce concise candidate laws suitable for the canonical monograph.
+
+Examples to investigate, not assume:
+
+    undeclared geometry must not back an ANN index
+
+    arbitrary compatibility must not be advertised as distance
+
+    ANN index generation must bind to geometry generation
+
+    metric-required algorithms require verified metric contracts
+
+## K. Open research questions
+
+Identify what remains uncertain.
+
+---
+
+# REQUIRED ADVERSARIAL REVIEW
+
+Before finalizing, attack the conclusion.
+
+Specifically search for evidence that:
+
+- HNSW performs well on strongly nonmetric scores;
+- triangle inequality is irrelevant to graph ANN;
+- PSD restrictions are unnecessarily conservative;
+- symmetrizing a directional score destroys useful semantics;
+- MIPS reductions distort Nexus cross-label meaning;
+- empirical recall testing may be sufficient without metric proofs.
+
+Present the strongest opposing case.
+
+Then state what Nexus should do anyway and why.
+
+---
+
+# CLAIM STATUS
+
+Classify important conclusions as:
+
+    THEOREM
+    ESTABLISHED MATHEMATICS
+    ALGORITHM REQUIREMENT
+    IMPLEMENTATION REQUIREMENT
+    EMPIRICAL OBSERVATION
+    NEXUS DESIGN CHOICE
+    PROPOSED
+    RESEARCH QUESTION
+
+Do not turn a design preference into a mathematical theorem.
+
+---
+
+# FINAL EXECUTION INSTRUCTION
+
+Do the literature research before answering.
+
+Do not merely explain triangle inequality.
+
+The purpose is to determine the exact retrieval-geometry contract Nexus needs between HTLA/HTNLA and HVD ANN search.
+
+The final conclusion must be strong enough that we can safely rewrite the Nexus technical specification without making either of these mistakes:
+
+    "HNSW requires a metric"
+
+when that is not actually true,
+
+or:
+
+    "HNSW accepts any callable score, therefore geometry does not matter"
+
+when that is also not actually true.
+
+Find the defensible middle.

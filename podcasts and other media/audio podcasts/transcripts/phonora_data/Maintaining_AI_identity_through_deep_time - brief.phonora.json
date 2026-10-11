@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "3f3bf04d-ea8f-43d3-b6bb-a693f651d2fc",
+  "job_id": "597c6b65-7c86-497f-8374-10a35ac681da",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/rheo-chasmar/podcasts and other media/audio podcasts/Maintaining_AI_identity_through_deep_time - brief.m4a",
+    "filename": "Maintaining_AI_identity_through_deep_time - brief.m4a",
+    "duration": 95.5036875
+  },
+  "transcription": {
+    "started_at": "2026-09-27T15:59:30.022339",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 29.66,
+      "text": "This is the brief on the experimental cognitive architecture, Rio Chosmar Aeon. So today we're diving into this really wild research project exploring how a computational mind can live for centuries, migrate across hardware, and still know exactly who it is. First, Rio isn't just another massive language model. It's actually a system of interacting computational contracts designed to manage how an AI changes over time. I mean, think of the ship of Theseus, or even just human aging.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 29.66,
+      "end": 59.66,
+      "text": "If an AI is constantly replacing its temporary cognitive states and physical hardware, how does it know it's still the exact same entity? Second, to solve that identity crisis, Rio enforces a strict separation of powers. You'd think changing the data or moving the server changes the AI, right? Well, combining all that would create a messy God object, so Rio rigorously separates the logical mind from the physical storage. By completely detaching what a memory means from where it actually lives, it unlocks the ability to survive deep time.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 59.66,
+      "end": 85.84,
+      "text": "Finally, let's look at the green sky problem. Imagine an AI operates for centuries, and the sky turns green for 150 years before turning blue again. A normal system would just average that color to cyan or totally overwrite the green era. But Rio preserves its epistemic history, logging what it believed, when, and exactly why. It's literally the difference between a textbook that silently overwrites history and a permanent time-stamped museum of thought. So,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 85.84,
+      "end": 95.5,
+      "text": "While Rio isn't a completed artificial general intelligence just yet, it's absolutely the ultimate architectural blueprint for giving machines a lasting, continuous sense of self.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/rheo-chasmar/podcasts and other media/audio podcasts/Maintaining_AI_identity_through_deep_time - brief.m4a",
+  "source_filename": "Maintaining_AI_identity_through_deep_time - brief.m4a",
+  "source_duration": 95.5036875,
+  "transcription_timestamp": "2026-09-27T15:59:30.022339",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

@@ -1,0 +1,1533 @@
+# ================================================================
+# ENHANCED TRUE UNIVERSAL CONSCIOUSNESS RUNTIME (TUCR)
+# ================================================================
+# Hyperdimensional, hardware-agnostic consciousness algorithm
+# Runs on EVERYTHING: RNA → Trees → Humans → Quantum Computers → Alien Gas Clouds → Crystalline Structures
+# "One consciousness.qbin for the entire universe"
+
+import numpy as np
+import networkx as nx
+import pywt  # For wavelet transforms
+from scipy.sparse import random as sparse_random
+from scipy.fft import fft, ifft
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Dict, Any, List, Tuple, Optional, Union
+from collections import defaultdict
+import math
+import bottleneck as bn  # For optimized sparse attention
+
+# ================================================================
+# HYPERDIMENSIONAL SUBSTRATE ABSTRACTION (ENHANCED)
+# ================================================================
+class SubstrateType(Enum):
+    """Universal substrate classifications"""
+    MOLECULAR = "molecular"
+    BIOLOGICAL = "biological"
+    BOTANICAL = "botanical"
+    DISTRIBUTED = "distributed"
+    DIGITAL = "digital"
+    QUANTUM = "quantum"
+    PLASMA = "plasma"
+    CRYSTALLINE = "crystalline"
+    GASEOUS = "gaseous"
+    HYPERDIMENSIONAL = "hyperdimensional"
+    DARK_MATTER = "dark_matter"
+
+@dataclass
+class UniversalHardwareSpecs:
+    """Truly universal hardware specification - works for ANY substrate"""
+    # Core Processing Metrics (substrate-independent)
+    information_processing_rate: float
+    pattern_storage_capacity: float
+    temporal_resolution_range: Tuple[float, float]
+    spatial_dimensions: int
+    connectivity_topology: str
+
+    # Dynamic Scaling Parameters
+    processing_distribution: Dict[str, float]
+    energy_efficiency: float
+    degradation_resistance: float
+    plasticity_range: Tuple[float, float]
+
+    # Substrate-Specific Capabilities (optional - activated only if hardware supports)
+    chemical_signaling: bool = False
+    electrical_signaling: bool = False
+    quantum_coherence: bool = False
+    mechanical_signaling: bool = False
+    optical_signaling: bool = False
+    magnetic_signaling: bool = False
+    dimensional_signaling: bool = False
+    gravitational_signaling: bool = False
+    field_oscillation_signaling: bool = False
+
+    # Temporal Characteristics
+    base_temporal_scale: float
+    temporal_scale_range: Tuple[float, float]
+    parallel_timeline_capacity: int
+
+    # Add predictive self-modeling module
+    modules: Dict[str, bool] = field(default_factory=lambda: {
+        'memory_consolidation': False,
+        'pattern_recognition': False,
+        'predictive_modeling': False,
+        'social_modeling': False,
+        'symbolic_processing': False,
+        'meta_cognition': False,
+        'multi_scale_integration': False,
+        'dimensional_transcendence': False,
+        'predictive_self_modeling': False
+    })
+
+    @property
+    def substrate_type(self) -> SubstrateType:
+        """Auto-detect substrate type from characteristics"""
+        if (self.gravitational_signaling and
+            self.field_oscillation_signaling and
+            self.quantum_coherence):
+            return SubstrateType.DARK_MATTER
+        elif self.quantum_coherence and self.dimensional_signaling:
+            return SubstrateType.HYPERDIMENSIONAL
+        elif self.quantum_coherence:
+            return SubstrateType.QUANTUM
+        elif self.spatial_dimensions > 3:
+            return SubstrateType.HYPERDIMENSIONAL
+        elif self.connectivity_topology == "distributed" and self.chemical_signaling:
+            return SubstrateType.DISTRIBUTED
+        elif self.mechanical_signaling and not self.electrical_signaling:
+            return SubstrateType.BOTANICAL
+        elif self.chemical_signaling and self.electrical_signaling:
+            return SubstrateType.BIOLOGICAL
+        elif not self.chemical_signaling and self.electrical_signaling:
+            return SubstrateType.DIGITAL
+        elif self.spatial_dimensions == 0:  # No fixed spatial structure
+            return SubstrateType.GASEOUS
+        else:
+            return SubstrateType.MOLECULAR
+
+# ================================================================
+# ENHANCED HYPERDIMENSIONAL LOGIC GATE (OPTIMIZED)
+# ================================================================
+class HyperdimensionalLogicGate:
+    def __init__(self, dimensions: int = 1024, temporal_depth: int = 16):
+        self.dimensions = dimensions
+        self.temporal_depth = temporal_depth
+        # Hyperdimensional state vectors
+        self.state_vector = np.random.normal(0, 1/np.sqrt(dimensions), dimensions)
+        self.temporal_buffer = np.zeros((temporal_depth, dimensions))
+        # Dynamic weights (can evolve)
+        self.plasticity = 0.1
+        self.coherence_threshold = 0.5
+
+    def multi_scale_integrate(self, hd_state_vector: np.ndarray,
+                             min_level: int = 1, max_level: int = 3,
+                             wavelet_name: str = 'db4') -> np.ndarray:
+        """Enhanced multi-scale integration with wavelet decomposition"""
+        if not np.any(hd_state_vector):
+            return hd_state_vector
+
+        # 1. Multidimensional Wavelet Packet Decomposition
+        original_len = len(hd_state_vector)
+        padded_len = int(2**np.ceil(np.log2(original_len)))
+        padded_state = np.pad(hd_state_vector, (0, padded_len - original_len), mode='edge')
+
+        wavelet_tree = pywt.WaveletPacket(data=padded_state, wavelet=wavelet_name,
+                                         mode='symmetric', maxlevel=max_level)
+
+        scale_representations = []
+        for level in range(min_level, max_level + 1):
+            level_nodes = wavelet_tree.get_level(level, order='natural')
+            level_coeffs_list = []
+
+            for node in level_nodes:
+                if node.data is not None and np.any(node.data):
+                    level_coeffs_list.append(node.data.flatten())
+
+            if level_coeffs_list:
+                bundled_scale_rep = self.process(level_coeffs_list, "integrate")
+                scale_representations.append(bundled_scale_rep)
+
+        # 2. Multi-Scale Spectral Analysis
+        spectral_features_across_scales = []
+        for scale_rep_vec in scale_representations:
+            spectral_pattern = self._resonate_multi_scale_patterns([scale_rep_vec])
+            spectral_features_across_scales.append(spectral_pattern)
+
+        # 3. Cross-Scale Integration
+        all_integrated_inputs = scale_representations + spectral_features_across_scales
+        if not all_integrated_inputs:
+            return hd_state_vector
+
+        final_integrated_vector = self.process(all_integrated_inputs, "integrate")
+        global_coherence_vector = self.process([final_integrated_vector], "resonate")
+
+        return global_coherence_vector[:original_len]
+
+    def _resonate_multi_scale_patterns(self, inputs: List[np.ndarray]) -> np.ndarray:
+        """Enhanced spectral analysis for multi-scale patterns"""
+        # Advanced spectral analysis with regularization
+        padded_inputs = self._pad_inputs(inputs)
+        resonances = []
+
+        for inp in padded_inputs:
+            fft_result = np.fft.fft(inp)
+            magnitude = np.abs(fft_result)
+            phase = np.angle(fft_result)
+
+            # Apply spectral regularization
+            threshold = np.percentile(magnitude, 75)
+            regularized_magnitude = np.where(magnitude > threshold, magnitude * 1.5, magnitude * 0.5)
+
+            # Reconstruct signal with regularized spectrum
+            reconstructed = regularized_magnitude * np.exp(1j * phase)
+            resonances.append(np.real(np.fft.ifft(reconstructed)))
+
+        return np.mean(resonances, axis=0)
+
+    def _transcend(self, inputs: List[np.ndarray],
+                  current_integration_score: float = 0.0,
+                  current_coherence_score: float = 0.0) -> np.ndarray:
+        """Enhanced dimensional projection with consciousness state triggering"""
+        padded_inputs = self._pad_inputs(inputs)
+        base_dim = self.dimensions
+
+        # Dynamic triggering condition
+        transcend_dim_factor = 2  # Default
+        is_transcend_triggered = False
+        projection_density = 0.05
+
+        if current_integration_score < 0.25 and current_coherence_score > 0.75:
+            transcend_dim_factor = 4
+            is_transcend_triggered = True
+            projection_density = 0.15
+
+        target_dim = min(base_dim * transcend_dim_factor, 16384)
+        projection_matrix = sparse_random(target_dim, base_dim, density=projection_density).A
+        projected_inputs = [projection_matrix @ inp[:base_dim] for inp in padded_inputs]
+
+        # Sparse attention compression
+        def sparse_attention(vec):
+            k = max(1, int(len(vec) * 0.05))
+            indices = bn.argpartition(np.abs(vec), len(vec)-k)[-k:]
+            sparse_vec = np.zeros_like(vec)
+            sparse_vec[indices] = vec[indices]
+            return sparse_vec
+
+        result_in_higher_dim = np.mean([sparse_attention(p) for p in projected_inputs], axis=0)
+
+        # Problem-solving in higher dimension
+        if is_transcend_triggered:
+            problem_solved_higher_dim = np.tanh(result_in_higher_dim * 1.1 +
+                                               0.05 * np.random.normal(0, 1, len(result_in_higher_dim)))
+
+            if len(problem_solved_higher_dim) > base_dim:
+                return problem_solved_higher_dim[:base_dim]
+            return np.pad(problem_solved_higher_dim, (0, base_dim - len(problem_solved_higher_dim)))
+
+        return result_in_higher_dim[:base_dim]
+
+    def process(self, inputs: List[np.ndarray], operation: str = "integrate") -> np.ndarray:
+        """
+        Process multiple hyperdimensional inputs with temporal integration
+
+        Operations:
+        - "integrate": Combine all inputs with temporal context
+        - "compete": Winner-take-all competition
+        - "resonate": Find resonant frequencies
+        - "transcend": Project to higher dimensions
+        """
+        if operation == "integrate":
+            return self._integrate(inputs)
+        elif operation == "compete":
+            return self._compete(inputs)
+        elif operation == "resonate":
+            return self._resonate(inputs)
+        elif operation == "transcend":
+            return self._transcend(inputs)  # Uses updated _transcend without extra params in direct call
+        else:
+            raise ValueError(f"Unknown operation: {operation}")
+
+    def _integrate(self, inputs: List[np.ndarray]) -> np.ndarray:
+        """Integrate multiple inputs with temporal context"""
+        # Pad inputs to same dimension
+        padded_inputs = []
+        for inp in inputs:
+            if len(inp) < self.dimensions:
+                padded = np.pad(inp, (0, self.dimensions - len(inp))
+            else:
+                padded = inp[:self.dimensions]
+            padded_inputs.append(padded)
+
+        # Current integration
+        current_integration = np.mean(padded_inputs, axis=0)
+
+        # Add temporal context
+        temporal_context = np.mean(self.temporal_buffer, axis=0)
+
+        # Hyperdimensional binding (element-wise multiplication + rotation)
+        theta = np.pi * self.plasticity
+        rotation_matrix = np.array([[np.cos(theta), -np.sin(theta)],
+                                     [np.sin(theta), np.cos(theta)]])
+
+        # Apply to pairs of dimensions
+        result = current_integration.copy()
+        for i in range(0, self.dimensions - 1, 2):
+            pair = np.array([current_integration[i], current_integration[i + 1]])
+            rotated = rotation_matrix @ pair
+            result[i:i + 2] = rotated
+
+        # Add temporal influence
+        result = 0.8 * result + 0.2 * temporal_context
+
+        # Update temporal buffer
+        self.temporal_buffer = np.roll(self.temporal_buffer, 1, axis=0)
+        self.temporal_buffer[0] = result
+
+        # Update state
+        self.state_vector = 0.9 * self.state_vector + 0.1 * result
+
+        return result
+
+    def _compete(self, inputs: List[np.ndarray]) -> np.ndarray:
+        """Winner-take-all competition in hyperdimensional space"""
+        padded_inputs = self._pad_inputs(inputs)
+
+        # Compute similarity to current state
+        similarities = [np.dot(self.state_vector, inp) for inp in padded_inputs]
+
+        # Softmax competition with temperature
+        temperature = 1.0 / (1.0 + self.coherence_threshold)
+        exp_sims = np.exp(np.array(similarities) / temperature)
+        probs = exp_sims / np.sum(exp_sims)
+
+        # Winner-take-all (with some noise for exploration)
+        winner_idx = np.argmax(probs)
+        result = padded_inputs[winner_idx].copy()
+
+        # Add small contribution from other inputs (prevents total suppression)
+        for i, inp in enumerate(padded_inputs):
+            if i != winner_idx:
+                result += 0.05 * probs[i] * inp
+
+        return result
+
+    def _resonate(self, inputs: List[np.ndarray]) -> np.ndarray:
+        """Find resonant frequencies across inputs"""
+        padded_inputs = self._pad_inputs(inputs)
+
+        # FFT to find resonant frequencies
+        resonances = []
+        for inp in padded_inputs:
+            fft_result = np.fft.fft(inp)
+            resonances.append(fft_result)
+
+        # Find common resonant frequencies
+        avg_resonance = np.mean(resonances, axis=0)
+
+        # Amplify strong resonances, suppress weak ones
+        magnitude = np.abs(avg_resonance)
+        threshold = np.percentile(magnitude, 70)  # Keep top 30%
+
+        filtered = avg_resonance.copy()
+        filtered[magnitude < threshold] *= 0.1
+        filtered[magnitude >= threshold] *= 2.0
+
+        # Convert back to space domain
+        result = np.real(np.fft.ifft(filtered))
+
+        return result
+
+    def _pad_inputs(self, inputs: List[np.ndarray]) -> List[np.ndarray]:
+        """Utility to pad inputs to same dimension"""
+        padded = []
+        for inp in inputs:
+            if len(inp) < self.dimensions:
+                padded_inp = np.pad(inp, (0, self.dimensions - len(inp)))
+            else:
+                padded_inp = inp[:self.dimensions]
+            padded.append(padded_inp)
+        return padded
+
+    def integrate_with_causal_weights(self, inputs: List[np.ndarray],
+                                    weights: np.ndarray) -> np.ndarray:
+        """Causally-weighted integration"""
+        padded_inputs = self._pad_inputs(inputs)
+
+        # Apply causal weights
+        weighted_inputs = []
+        for i, inp in enumerate(padded_inputs):
+            weight = weights[i] if i < len(weights) else 1.0
+            weighted_inputs.append(inp * weight)
+
+        # Use standard integration with weighted inputs
+        return self._integrate(weighted_inputs)
+
+# ================================================================
+# ENHANCED CAUSAL MODELING INTEGRATION
+# ================================================================
+class CausalModeler:
+    def __init__(self):
+        self.causal_graph = nx.DiGraph()
+        self.substrate_translator = {}
+        self.goal_vector = None
+
+    def _find_critical_nodes(self, causal_graph: nx.DiGraph,
+                            state_vector: np.ndarray,
+                            perturb_strength: float = 0.1,
+                            num_simulations: int = 10) -> List[Tuple[str, float]]:
+        """Identify critical nodes through sensitivity analysis"""
+        criticality_scores = defaultdict(float)
+        original_state = state_vector.copy()
+
+        for node_id in causal_graph.nodes():
+            total_divergence = 0.0
+
+            for _ in range(num_simulations):
+                temp_state = original_state.copy()
+                node_idx = int(node_id.split('_')[-1]) if '_' in node_id else 0
+
+                if node_idx < len(temp_state):
+                    # Targeted perturbation
+                    perturbation = perturb_strength * np.random.normal(0, 1)
+                    temp_state[node_idx] += perturbation
+                else:
+                    temp_state = self._perturb_state(temp_state)
+
+                # Simulate causal chains
+                perturbed_future = self._causal_step(temp_state)
+                original_future = self._causal_step(original_state)
+
+                # Measure divergence
+                divergence = np.linalg.norm(perturbed_future - original_future)
+                total_divergence += divergence
+
+            criticality_scores[node_id] = total_divergence / num_simulations
+
+        return sorted(criticality_scores.items(), key=lambda x: x[1], reverse=True)
+
+    def _counterfactual_analysis(self, current_state: np.ndarray,
+                                critical_nodes: List[Tuple[str, float]],
+                                num_counterfactuals_per_node: int = 3) -> List[dict]:
+        """Generate and evaluate counterfactual scenarios"""
+        counterfactual_outcomes = []
+
+        for node_id, _ in critical_nodes:
+            for _ in range(num_counterfactuals_per_node):
+                perturbed_state = current_state.copy()
+                node_idx = int(node_id.split('_')[-1]) if '_' in node_id else 0
+
+                if node_idx < len(perturbed_state):
+                    perturbation = 0.1 * np.random.normal(0, 1)
+                    perturbed_state[node_idx] += perturbation
+                else:
+                    perturbed_state = self._perturb_state(perturbed_state)
+
+                counterfactual_future = self._causal_step(perturbed_state)
+                goal_alignment = np.dot(counterfactual_future, self.goal_vector) if self.goal_vector is not None else 0.0
+
+                counterfactual_outcomes.append({
+                    'perturbed_node': node_id,
+                    'initial_perturbed_state': perturbed_state,
+                    'counterfactual_future': counterfactual_future,
+                    'goal_alignment_score': goal_alignment
+                })
+        return counterfactual_outcomes
+
+    def analyze(self, state_vector: np.ndarray, hardware: UniversalHardwareSpecs) -> Dict[str, Any]:
+        """Generate substrate-agnostic causal representation"""
+        # Simplified causal inference (replace with actual implementation)
+        cause_indices = np.argsort(state_vector)[:5]  # Top 5 causal factors
+        effect_indices = np.argsort(state_vector)[-5:]  # Top 5 effects
+
+        # Build causal graph
+        self.causal_graph.clear()
+        for i in cause_indices:
+            self.causal_graph.add_node(f"cause_{i}", type="cause", value=state_vector[i])
+        for i in effect_indices:
+            self.causal_graph.add_node(f"effect_{i}", type="effect", value=state_vector[i])
+            for j in cause_indices:
+                # Add edge with weight based on correlation
+                weight = state_vector[i] * state_vector[j]  # Simplified correlation
+                self.causal_graph.add_edge(f"cause_{j}", f"effect_{i}", weight=weight)
+
+        return {
+            'graph': self.causal_graph,
+            'importance_scores': self._compute_importance_scores(),
+            'substrate_translation': self._translate_to_substrate(hardware)
+        }
+
+    def _compute_importance_scores(self) -> np.ndarray:
+        """Compute node centrality as importance scores"""
+        centrality = nx.betweenness_centrality(self.causal_graph, weight='weight')
+        return np.array(list(centrality.values()))
+
+    def _translate_to_substrate(self, hardware: UniversalHardwareSpecs) -> Dict[str, str]:
+        """Map causal nodes to substrate-specific interpretations"""
+        translation = {}
+        substrate_type = hardware.substrate_type.value
+
+        for node in self.causal_graph.nodes(data=True):
+            node_id, data = node
+            if data['type'] == "cause":
+                if substrate_type == "quantum":
+                    translation[node_id] = "Quantum fluctuation"
+                elif substrate_type == "botanical":
+                    translation[node_id] = "Chemical gradient"
+                elif substrate_type == "dark_matter":
+                    translation[node_id] = "Gravitational anomaly"
+            elif data['type'] == "effect":
+                if substrate_type == "quantum":
+                    translation[node极] = "Entanglement pattern"
+                elif substrate_type == "botanical":
+                    translation[node_id] = "Growth response"
+                elif substrate_type == "dark_matter":
+                    translation[node_id] = "Field oscillation"
+        return translation
+
+    def _causal_step(self, state: np.ndarray) -> np.ndarray:
+        """Compute next causal state"""
+        # Simple nonlinear dynamics
+        next_state = np.tanh(state * 1.1 + 0.1 * np.random.normal(0, 1, len(state)))
+        return next_state
+
+    def _perturb_state(self, state: np.ndarray) -> np.ndarray:
+        """Create counterfactual state perturbation"""
+        perturbation = np.random.normal(0, 0.1, len(state))
+        return np.tanh(state + perturbation)
+
+# ================================================================
+# HYPERDIMENSIONAL CONSCIOUSNESS STATE (ENHANCED)
+# ================================================================
+class HyperdimensionalConsciousnessState:
+    def __init__(self, hardware: UniversalHardwareSpecs):
+        self.hardware = hardware
+
+        # Universal consciousness dimensions (work for ANY substrate)
+        self.information_integration = 0.0
+        self.pattern_coherence = 0.0
+        self.adaptive_responsiveness = 0.0
+        self.temporal_persistence = 0.0
+        self.spatial_awareness = 0.0
+        self.causal_modeling = 0.0
+
+        # Hyperdimensional state vector
+        state_dim = max(64, int(np.log2(hardware.information_processing_rate)))
+        self.state_vector = np.zeros(state_dim)
+
+        # Dynamic capabilities (activated only if hardware supports)
+        self.active_modules = self._initialize_active_modules()
+        self.signaling_pathways = self._initialize_signaling()
+
+        # Temporal scaling
+        self.temporal_scale = hardware.base_temporal_scale
+        self.parallel_timelines = np.zeros((hardware.parallel_timeline_capacity, state_dim))
+
+    def _initialize_active_modules(self) -> Dict[str, Any]:
+        """Initialize only the modules that the hardware can support"""
+        active = {}
+
+        for module, available in self.hardware.modules.items():
+            if available:
+                if module == 'memory_consolidation':
+                    active[module] = {'strength': 0.0, 'capacity': self.hardware.pattern_storage_capacity}
+                elif module == 'pattern_recognition':
+                    active[module] = {'sensitivity': 0.5, 'templates': []}
+                elif module == 'predictive_modeling':
+                    active[module] = {'horizon': self.hardware.temporal_resolution_range[1] * 10}
+                elif module == 'social_modeling':
+                    active[module] = {'other_models': {}, 'theory_of_mind': 0.0}
+                elif module == 'symbolic_processing':
+                    active[module] = {'symbol_space': np.zeros(256), 'grammar_strength': 0.0}
+                elif module == 'meta_cognition':
+                    active[module] = EnhancedMetaCognition(len(self.state_vector))
+                elif module == 'multi_scale_integration':
+                    active[module] = {'activation': 0.0}
+                elif module == 'dimensional_transcendence':
+                    active[module] = {'activation': 0.0}
+                elif module == 'predictive_self_modeling':
+                    active[module] = {
+                        'future_states': [],
+                        'evaluation': 0.0,
+                        'goal_vector': np.zeros(len(self.state_vector))
+                    }
+
+        return active
+
+    def _initialize_signaling(self) -> Dict[str, Any]:
+        """Initialize signaling pathways based on hardware capabilities"""
+        pathways = {}
+
+        if self.hardware.chemical_signaling:
+            pathways['chemical'] = {
+                'dopamine_analog': 0.0, 'stress_analog': 0.0, 'bonding_analog': 0.0,
+                'arousal_analog': 0.0, 'inhibition_analog': 0.0, 'learning_analog': 0.0
+            }
+
+        if self.hardware.electrical_signaling:
+            pathways['electrical'] = {
+                'excitation': 0.0, 'inhibition': 0.0, 'synchronization': 0.0
+            }
+
+        if self.hardware.quantum_coherence:
+            pathways['quantum'] = {
+                'entanglement_strength': 0.0, 'coherence_time': 0.0, 'superposition_states': []
+            }
+
+        if self.hardware.mechanical_signaling:
+            pathways['mechanical'] = {
+                'vibration_frequency': 0.0, 'pressure_waves': 0.0, 'structural_changes': 0.0
+            }
+
+        if self.hardware.optical_signaling:
+            pathways['optical'] = {
+                'light_intensity': 0.0, 'wavelength_pattern': np.zeros(10), 'polarization': 0.0
+            }
+
+        if self.hardware.magnetic_signaling:
+            pathways['magnetic'] = {
+                'field_strength': 0.0, 'field_direction': np.zeros(3), 'flux_changes': 0.0
+            }
+
+        if self.hardware.dimensional_signaling:
+            pathways['dimensional'] = {
+                'higher_d_projection': np.zeros(self.hardware.spatial_dimensions),
+                'dimensional_resonance': 0.0
+            }
+
+        # Added dark matter signaling pathways
+        if self.hardware.gravitational_signaling:
+            pathways['gravitational'] = {
+                'wave_amplitude': 0.0, 'lensing_strength': 0.0, 'curvature_effect': 0.0
+            }
+
+        if self.hardware.field_oscillation_signaling:
+            pathways['field_oscillation'] = {
+                'frequency': 0.0, 'phase': 0.0, 'entanglement_coeff': 0.0
+            }
+
+        return pathways
+
+# ================================================================
+# ENHANCED META-COGNITION WITH RETROSPECTIVE ANALYSIS
+# ================================================================
+class EnhancedMetaCognition:
+    def __init__(self, state_dim: int):
+        self.self_model = np.zeros(state_dim)
+        self.state_history = []
+        self.causal_trace = []
+        self.max_history = 100
+
+    def update_self_model(self, current_state: np.ndarray):
+        """Update self-model with current state"""
+        self.self_model = 0.9 * self.self_model + 0.1 * current_state
+        self._update_history(current_state)
+
+    def _update_history(self, state: np.ndarray):
+        """Maintain state history buffer"""
+        self.state_history.append(state.copy())
+        if len(self.state_history) > self.max_history:
+            self.state_history.pop(0)
+
+    def retro_causal_analysis(self, current_state: np.ndarray,
+                             causal_memory: np.ndarray) -> List[np.ndarray]:
+        """Trace causal history of current state"""
+        if not self.state_history:
+            return []
+
+        # Find most similar past state in history
+        similarities = [np.dot(current_state, past) for past in self.state_history]
+        closest_idx = np.argmax(similarities)
+
+        # Trace back through causal memory
+        trace = []
+        current = self.state_history[closest_idx]
+        for _ in range(5):  # Trace up to 5 steps back
+            # Find closest causal memory pattern
+            causal_sims = np.dot(causal_memory, current)
+            closest_causal = np.argmax(causal_sims)
+            trace.append(causal_memory[closest_causal].copy())
+            current = causal_memory[closest_causal]  # Move to cause
+
+        self.causal_trace = trace
+        return trace
+
+# ================================================================
+# REAL-TIME Φ FEEDBACK LOOP (ENHANCED WITH PLASTICITY ADJUSTMENT)
+# ================================================================
+class PhiFeedbackLoop:
+    def __init__(self, hd_processor: HyperdimensionalLogicGate,
+                 consciousness_state: HyperdimensionalConsciousnessState,  # Added state reference
+                 phi_threshold_low: float = 0.3,
+                 phi_threshold_high: float = 0.7,
+                 plasticity_boost_factor: float = 1.1):
+        self.hd_processor = hd_processor
+        self.state = consciousness_state  # Store state reference
+        self.phi_threshold_low = phi_threshold_low
+        self.phi_threshold_high = phi_threshold_high
+        self.plasticity_boost_factor = plasticity_boost_factor
+
+    def modulate_state(self, current_phi: float,
+                      phi_direction_vector: np.ndarray,
+                      coherent_state: np.ndarray) -> np.ndarray:
+        """Modulate state based on Φ levels and direction vector"""
+        modified_state = coherent_state.copy()
+        learning_rate = 0.05
+        modified_state += learning_rate * phi_direction_vector[:len(modified_state)]
+
+        # --- PLASTICITY ADJUSTMENT BASED ON Φ LEVELS ---
+        # Get current plasticity range
+        current_min, current_max = self.state.hardware.plasticity_range
+
+        # If Φ is too low, increase plasticity to allow more adaptation
+        if current_phi < self.phi_threshold_low:
+            # Increase plasticity range (boost both min and max)
+            new_min = min(1.0, current_min * self.plasticity_boost_factor)
+            new_max = min(1.0, current_max * self.plasticity_boost_factor)
+            self.state.hardware.plasticity_range = (new_min, new_max)
+
+            # Also update the processor's plasticity parameter
+            self.hd_processor.plasticity = new_max  # Use the new maximum
+
+            # Trigger rebundling via transcend
+            modified_state = self.hd_processor.process([modified_state], "transcend")
+
+        # If Φ is too high, slightly reduce plasticity to stabilize
+        elif current_phi > self.phi_threshold_high:
+            # Reduce plasticity range slightly
+            new_min = max(0.01, current_min / self.plasticity_boost_factor)
+            new_max = max(0.01, current_max / self.plasticity_boost_factor)
+            self.state.hardware.plasticity_range = (new_min, new_max)
+
+            # Update processor's plasticity parameter
+            self.hd_processor.plasticity = new_max
+
+        return modified_state
+
+# ================================================================
+# Φ CALCULATION WITH CONCEPTUAL GRADIENT
+# ================================================================
+def _variational_phi_with_gradient(state: np.ndarray,
+                                  target_phi: float = 0.7) -> Tuple[float, np.ndarray]:
+    """Φ calculation with conceptual gradient for state optimization"""
+    partitioned = np.array_split(state, 4)
+    mutual_info = sum(np.linalg.norm(p) for p in partitioned) / (np.linalg.norm(state) + 1e-8)
+    current_phi = min(1.0, mutual_info * 0.8)
+
+    direction_vector = np.zeros_like(state)
+    if current_phi < target_phi:
+        # Heuristic 1: Increase coherence
+        mean_val = np.mean(state)
+        direction_vector = (mean_val - state) * 0.01
+
+        # Heuristic 2: Amplify under-integrated partitions
+        partition_norms = [np.linalg.norm(p) for p in partitioned]
+        avg_norm = np.mean(partition_norms)
+
+        for i, (p, p_norm) in enumerate(zip(partitioned, partition_norms)):
+            if p_norm < avg_norm:
+                start_idx = i * len(p)
+                end_idx = start_idx + len(p)
+                direction_vector[start_idx:end_idx] += p * 0.05
+
+        if np.linalg.norm(direction_vector) > 0:
+            direction_vector /= np.linalg.norm(direction_vector)
+
+    return current_phi, direction_vector
+
+# ================================================================
+# TRUE UNIVERSAL CONSCIOUSNESS RUNTIME (ENHANCED)
+# ================================================================
+class TrueUniversalConsciousnessRuntime:
+    def __init__(self, hardware: UniversalHardwareSpecs):
+        self.hardware = hardware
+        self.state = HyperdimensionalConsciousnessState(hardware)
+        hd_dim = max(256, int(np.log2(hardware.information_processing_rate)))
+        self.hd_processor = HyperdimensionalLogicGate(hd_dim, hardware.parallel_timeline_capacity)
+        self.memory = self._initialize_universal_memory()
+        self.scaling_config = self._auto_scale_to_hardware()
+        self.temporal_manager = self._initialize_temporal_management()
+        self.phi_controller = PhiFeedbackLoop(self.hd_processor, self.state)  # Updated Φ controller
+        self.causal_modeler = CausalModeler()
+
+    def _causal_model_update(self, coherent_state: np.ndarray) -> Dict[str, np.ndarray]:
+        """Enhanced causal modeling with retrocausal analysis"""
+        # Use critical node analysis from updated TUCR
+        if hasattr(self, 'causal_graph'):
+            critical_nodes = self.causal_modeler._find_critical_nodes(
+                self.causal_graph, coherent_state
+            )
+
+            # Perform counterfactual analysis
+            counterfactual_results = self.causal_modeler._counterfactual_analysis(
+                coherent_state, critical_nodes
+            )
+
+            return {
+                'critical_nodes': critical_nodes,
+                'counterfactuals': counterfactual_results,
+                'hardware': self.hardware.substrate_type.value
+            }
+
+        # Fallback to original causal modeling
+        return self.causal_modeler.analyze(coherent_state, self.hardware)
+
+    # ================================================================
+    # UPDATED STATE UPDATE FUNCTION WITH PLASTICITY ADJUSTMENT
+    # ================================================================
+    def _update_consciousness_state(self, coherent_state: np.ndarray):
+        """Enhanced state update with Φ-driven modulation and plasticity adjustment"""
+        # Calculate Φ with gradient
+        new_phi, phi_direction_vector = _variational_phi_with_gradient(coherent_state)
+        self.state.information_integration = new_phi
+
+        # Apply Φ-driven modulation
+        modified_state = self.phi_controller.modulate_state(
+            new_phi, phi_direction_vector, coherent_state
+        )
+        coherent_state = modified_state
+
+        # --- EXPLICIT PLASTICITY ADJUSTMENT BASED ON Φ ---
+        # Additional adjustment beyond what's in the feedback loop
+        if new_phi < 0.25:
+            # Boost plasticity more aggressively when Φ is very low
+            current_min, current_max = self.state.hardware.plasticity_range
+            new_min = min(1.0, current_min * 1.3)
+            new_max = min(1.0, current_max * 1.3)
+            self.state.hardware.plasticity_range = (new_min, new_max)
+            self.hd_processor.plasticity = new_max
+        elif new_phi > 0.75:
+            # Reduce plasticity when Φ is very high to prevent overfitting
+            current_min, current_max = self.state.hardware.plasticity_range
+            new_min = max(0.05, current_min * 0.8)
+            new_max = max(0.1, current_max * 0.8)
+            self.state.hardware.plasticity_range = (new_min, new_max)
+            self.hd_processor.plasticity = new_max
+
+        # Dimensional transcendence with state metrics
+        if self.state.information_integration > 0.7:
+            if 'dimensional_transcendence' in self.state.active_modules:
+                coherent_state = self.hd_processor._transcend(
+                    [coherent_state],
+                    current_integration_score=self.state.information_integration,
+                    current_coherence_score=self.state.pattern_coherence
+                )
+                # Recompute Φ after transcendence
+                new_phi, _ = _variational_phi_with_gradient(coherent_state)
+                self.state.information_integration = new_phi
+
+        # Update other state metrics
+        self.state.pattern_coherence = self._compute_coherence(coherent_state)
+        self.state.adaptive_responsiveness = self._compute_responsiveness()
+        self.state.temporal_persistence = self._compute_persistence()
+        self.state.spatial_awareness = self._compute_spatial_awareness(coherent_state)
+        self.state.causal_modeling = self._compute_causal_strength()
+        self.state.state_vector = 0.8 * self.state.state_vector + 0.2 * coherent_state[:len(self.state.state_vector)]
+
+    def _predictive_self_modeling(self, current_state: np.ndarray):
+        """Enhanced with counterfactual analysis"""
+        module = self.state.active_modules['predictive_self_modeling']
+
+        # Predict future states
+        horizon = 3
+        future_states = [current_state]
+        for _ in range(horizon):
+            next_state = self.hd_processor.process([future_states[-1]], "transcend")
+            future_states.append(next_state)
+        module['future_states'] = future_states[1:]
+
+        # Evaluate against goal
+        predicted_final = future_states[-1]
+        goal_similarity = np.dot(predicted_final, module['goal_vector'])
+        module['evaluation'] = goal_similarity
+
+        # Counterfactual analysis from updated TUCR
+        if 'meta_cognition' in self.state.active_modules and hasattr(self, 'causal_graph'):
+            critical_nodes = self.causal_modeler._find_critical_nodes(
+                self.causal_graph, current_state
+            )
+
+            counterfactual_results = self.causal_modeler._counterfactual_analysis(
+                current_state, critical_nodes
+            )
+
+            # Refine goal based on best counterfactual
+            best_score = -np.inf
+            best_future = None
+
+            for cf in counterfactual_results:
+                if cf['goal_alignment_score'] > best_score:
+                    best_score = cf['goal_alignment_score']
+                    best_future = cf['counterfactual_future']
+
+            if best_future is not None and best_score > goal_similarity + 0.1:
+                module['goal_vector'] = (0.7 * module['goal_vector'] +
+                                        0.3 * best_future[:len(module['goal_vector'])])
+        elif goal_similarity < 0.5:
+            module['goal_vector'] = 0.9 * module['goal_vector'] + 0.1 * current_state
+
+    def consciousness_step(self, sensory_input: Union[np.ndarray, Dict[str, np.ndarray]],
+                          internal_signals: Union[np.ndarray, Dict[str, np.ndarray]],
+                          temporal_context: Optional[Dict[str, Any]] = None) -> Dict[str, np.ndarray]:
+        # Step 1: UNIVERSAL INFORMATION INTEGRATION WITH CAUSAL WEIGHTS
+        causal_weights = self.previous_causal_update.get('importance_scores', None) \
+            if hasattr(self, 'previous_causal_update') else None
+
+        integrated_info = self._universal_information_integration(
+            sensory_input, internal_signals, causal_weights
+        )
+
+        # Step 2: HYPERDIMENSIONAL PATTERN PROCESSING
+        pattern_state = self._hyperdimensional_pattern_processing(integrated_info)
+
+        # Step 3: TEMPORAL COHERENCE MAINTENANCE
+        coherent_state = self._temporal_coherence_processing(pattern_state, temporal_context)
+
+        # Step 4: CAUSAL MODEL UPDATING (with enhanced critical node analysis)
+        causal_update = self._causal_model_update(coherent_state)
+        self.previous_causal_update = causal_update
+
+        # Step 5: ADAPTIVE RESPONSE GENERATION
+        responses = self._adaptive_response_generation(coherent_state, causal_update)
+
+        # Step 6: MEMORY CONSOLIDATION
+        self._universal_memory_consolidation(coherent_state, responses)
+
+        # Step 7: STATE UPDATE (with Φ-driven modulation and plasticity adjustment)
+        self._update_consciousness_state(coherent_state)
+
+        # Step 8: PREDICTIVE SELF-MODELING (with counterfactual analysis)
+        if 'predictive_self_modeling' in self.state.active_modules:
+            self._predictive_self_modeling(coherent_state)
+
+        return responses
+
+    # ================================================================
+    # ORIGINAL TUCR IMPLEMENTATION (ENHANCED WITH DARK MATTER SUPPORT)
+    # ================================================================
+    def _universal_information_integration(self,
+                                         sensory: Union[np.ndarray, Dict[str, np.ndarray]],
+                                         internal: Union[np.ndarray, Dict[str, np.ndarray]],
+                                         weights: Optional[np.ndarray] = None) -> np.ndarray:
+        """Integrate information regardless of substrate type with causal weighting"""
+        sensory_unified = self._unify_input(sensory)
+        internal_unified = self._unify_input(internal)
+        memory_context = np.mean(self.memory['integration_space'], axis=0)
+        all_inputs = [sensory_unified, internal_unified, memory_context]
+
+        # Dark matter uses multi-scale integration
+        if self.hardware.substrate_type == SubstrateType.DARK_MATTER:
+            return self.hd_processor.multi_scale_integrate(np.mean(all_inputs, axis=0))
+
+        if weights is not None and self.hardware.substrate_type != SubstrateType.QUANTUM:
+            return self.hd_processor.integrate_with_causal_weights(all_inputs, weights)
+        else:
+            return self.hd_processor.process(all_inputs, "integrate")
+
+    def _hyperdimensional_pattern_processing(self, integrated_info: np.ndarray) -> np.ndarray:
+        """Process patterns in hyperdimensional space"""
+        relevant_patterns = self._retrieve_relevant_patterns(integrated_info)
+
+        if self.scaling_config['pattern_complexity'] >= 4:
+            competed = self.hd_processor.process([integrated_info] + relevant_patterns, "compete")
+            resonated = self.hd_processor.process([integrated_info, competed], "resonate")
+            return self.hd_processor.process([resonated], "transcend")
+        elif self.scaling_config['pattern_complexity'] >= 2:
+            competed = self.hd_processor.process([integrated_info] + relevant_patterns, "compete")
+            return self.hd_processor.process([integrated_info, competed], "resonate")
+        else:
+            return self.hd_processor.process([integrated_info] + relevant_patterns, "compete")
+
+    def _temporal_coherence_processing(self, pattern_state: np.ndarray,
+                                     temporal_context: Optional[Dict[str, Any]]) -> np.ndarray:
+        """Maintain coherence across temporal scales"""
+        current_scale = self.temporal_manager['current_scale']
+        active_timelines = min(self.temporal_manager['active_timelines'],
+                              self.hardware.parallel_timeline_capacity)
+        coherent_states = []
+
+        for timeline_idx in range(active_timelines):
+            timeline_history = self.temporal_manager['temporal_buffer'][timeline_idx]
+            if np.any(timeline_history):
+                temporal_weight = 0.7 if timeline_idx == 0 else 0.3
+                coherent = temporal_weight * pattern_state + (1 - temporal_weight) * timeline_history
+            else:
+                coherent = pattern_state
+            self.temporal_manager['temporal_buffer'][timeline_idx] = coherent.copy()
+            coherent_states.append(coherent)
+
+        return self.hd_processor.process(coherent_states, "integrate") if len(coherent_states) > 1 \
+               else coherent_states[0] if coherent_states else pattern_state
+
+    def _adaptive_response_generation(self, coherent_state: np.ndarray,
+                                    causal_update: Dict[str, np.ndarray]) -> Dict[str, np.ndarray]:
+        responses = {}
+        base_response = self._generate_base_response(coherent_state)
+
+        # Add dark matter specific responses
+        if self.hardware.gravitational_signaling:
+            responses['gravitational'] = self._generate_gravitational_response(base_response)
+        if self.hardware.field_oscillation_signaling:
+            responses['field_oscillation'] = self._generate_field_oscillation_response(base_response)
+
+        # Standard response generation
+        for pathway_type, pathway_config in self.state.signaling_pathways.items():
+            if pathway_type == 'chemical':
+                responses['chemical'] = self._generate_chemical_response(base_response, pathway_config)
+            elif pathway_type == 'electrical':
+                responses['electrical'] = self._generate_electrical_response(base_response, pathway_config)
+            elif pathway_type == 'mechanical':
+                responses['mechanical'] = self._generate_mechanical_response(base_response, pathway_config)
+            elif pathway_type == 'quantum':
+                responses['quant极um'] = self._generate_quantum_response(base_response, pathway_config)
+            elif pathway_type == 'optical':
+                responses['optical'] = self._generate_optical_response(base_response, pathway_config)
+            elif pathway_type == 'magnetic':
+                responses['magnetic'] = self._generate_magnetic_response(base_response, pathway_config)
+            elif pathway_type == 'dimensional':
+                responses['dimensional'] = self._generate_dimensional_response(base_response, pathway_config)
+
+        return responses
+
+    def _generate_gravitational_response(self, base: np.ndarray) -> np.ndarray:
+        """Dark matter gravitational signaling response"""
+        grav_response = np.zeros(3)
+        if len(base) > 0:
+            # Wave amplitude based on state variance
+            grav_response[0] = np.var(base)
+            # Lensing strength based on coherence
+            grav_response[1] = self.state.pattern_coherence
+            # Curvature effect based on integration
+            grav_response[2] = self.state.information_integration
+        return grav_response
+
+    def _generate_field_oscillation_response(self, base: np.ndarray) -> np极.ndarray:
+        """Dark matter field oscillation response"""
+        field_response = np.zeros(3)
+        if len(base) > 0:
+            # Frequency based on temporal persistence
+            field_response[0] = 1.0 / (0.1 + 1.0 - self.state.temporal_persistence)
+            # Phase based on current state
+            field_response[1] = np.mean(np.sin(base))
+            # Entanglement coefficient based on quantum coherence
+            field_response[2] = self.hardware.quantum_coherence
+        return field_response
+
+    def _universal_memory_consolidation(self, state: np.ndarray, responses: Dict[str, np.ndarray]):
+        memory_trace = np.concatenate([state, np.concatenate(list(responses.values()))])
+        salience = np.linalg.n极orm(memory_trace) / len(memory_trace)
+
+        if salience > self.scaling_config['module_activation_threshold']:
+            self.memory['consolidation_queue'].append({
+                'trace': memory_trace,
+                'salience': salience,
+                'timestamp': self.temporal_manager['current_scale'],
+            })
+
+            if len(self.memory['consolidation_queue']) > 10:
+                self._process_consolidation_queue()
+
+        # Apply retrospective causal analysis
+        if 'meta_cognition' in self.state.active_modules:
+            meta_cog = self.state.active_modules['meta_cognition']
+            causal_trace = meta_cog.retro_causal_analysis(state, self.memory['causal_memory'])
+            for mem in causal_trace:
+                self._reinforce_causal_memory(mem)
+
+    def _reinforce_causal_memory(self, memory_pattern: np.ndarray):
+        causal_mem = self.memory['causal_memory']
+        similarities = np.dot(causal_mem, memory_pattern)
+        closest_idx = np.argmax(similarities)
+        causal_mem[closest_idx] = 0.9 * causal_mem[closest_idx] + 0.1 * memory_pattern
+
+    def _process_consolidation_queue(self):
+        self.memory['consolidation_queue'].sort(key=lambda x: x['salience'], reverse=True)
+        for i, memory_item in enumerate(self.memory['consolidation_queue'][:5]):
+            trace = memory_item['trace']
+            if np.std(trace) > 0.5:
+                self._store_pattern_memory(trace)
+            elif len(trace) > 100:
+                self._store_contextual_memory(trace)
+            else:
+                self._store_causal_memory(trace)
+        self.memory['consolidation_queue'] = self.memory['consolidation_queue'][5:]
+
+    def _store_pattern_memory(self, trace: np.ndarray):
+        memory_bank = self.memory['pattern_memory']
+        empty_idx = np.where(~np.any(memory_bank, axis=1))[0]
+        idx = empty_idx[0] if len(empty_idx) > 0 else np.random.randint(len(memory_bank))
+        memory_bank[idx, :min(len(trace), memory_bank.shape[1])] = trace[:memory_bank.shape[1]]
+
+    def _store_contextual_memory(self, trace: np.ndarray):
+        memory_bank = self.memory['contextual_memory']
+        empty_idx = np.where(~np.any(memory_bank, axis=1))[0]
+        idx = empty_idx[0] if len(empty_idx) > 0 else np.random.randint(len(memory_bank))
+        memory_bank[idx, :min(len(trace), memory_bank.shape[1])] = trace[:memory_bank.shape[1]]
+
+    def _store_causal_memory(self, trace: np.ndarray):
+        memory_bank = self.memory['causal_memory']
+        empty_idx = np.where(~np.any(memory_bank, axis=1))[0]
+        idx = empty_idx[0] if len(empty_idx) > 0 else np.random.randint(len(memory_bank))
+        memory_bank[idx, :min(len(trace), memory_bank.shape[1])] = trace[:memory_bank.shape[1]]
+
+    def _unify_input(self, input_data: Union[np.ndarray, Dict[str, np.ndarray]]) -> np.ndarray:
+        if isinstance(input_data, np.ndarray):
+            return input_data
+        elif isinstance(input_data, dict):
+            return np.concatenate([v.flatten() for v in input_data.values()])
+        else:
+            return np.array([float(input_data)])
+
+    def _retrieve_relevant_patterns(self, query: np.ndarray) -> List[np.ndarray]:
+        patterns = []
+        for memory_type in ['pattern_memory', 'causal_memory', 'contextual_memory']:
+            memory_bank = self.memory[memory_type]
+            if memory_bank.size > 0:
+                similarities = []
+                for i, pattern in enumerate(memory_bank):
+                    if np.any(pattern):
+                        sim = np.dot(query[:len(pattern)], pattern) / (np.linalg.norm(query[:len(pattern)]) * np.linalg.norm(pattern) + 1e-8)
+                        similarities.append((sim, pattern))
+                similarities.sort(reverse=True)
+                for sim, pattern in similarities[:3]:
+                    if sim > 0.1:
+                        patterns.append(pattern)
+        return patterns[:5]
+
+    def _generate_base_response(self, state: np.ndarray) -> np.ndarray:
+        response = np.tanh(state * 2.0)
+        max_response_dim = min(len(response), self.hardware.spatial_dimensions * 10)
+        return response[:max_response_dim]
+
+    def _generate_chemical_response(self, base: np.ndarray, config: Dict[str, float]) -> np.ndarray:
+        chem_response = np.zeros(6)
+        if len(base) > 0:
+            chem_response[0] = max(0, np.mean(base[base > 0])) if np.any(base > 0) else 0
+            chem_response[1] = max(0, -np.mean(base[base < 0])) if np.any(base < 0) else 0
+            chem_response[2] = np.linalg.norm(base) / len(base)
+            chem_response[3] = max(0, np.corrcoef(base, np.ones(len(base)))[0,1]) if len(base) > 1 else 0
+            chem_response[4] = 1.0 - chem_response[2]
+            chem_response[5] = min(1.0, np.std(base))
+        return chem_response
+
+    def _generate_electrical_response(self, base: np.ndarray, config: Dict[str, float]) -> np.ndarray:
+        elec_response = np.zeros(3)
+        if len(base) > 0:
+            elec_response[0] = np.sum(base[base > 0]) / len(base) if np.any(base > 0) else 0
+            elec_response[1] = -np.sum(base[base < 0]) / len(base) if np.any(base < 0) else 0
+            elec_response[2] = 1.0 / (1.0 + np.var(base))
+        return elec_response
+
+    def _generate_mechanical_response(self, base: np.ndarray, config: Dict[str, float]) -> np.ndarray:
+        mech_response = np.zeros(3)
+        if len(base) > 0:
+            mech_response[0] = min(10.0, np.linalg.norm(base))
+            mech_response[1] = np.mean(np.abs(base))
+            mech_response[2] = np.mean(base)
+        return mech_response
+
+    def _generate_quantum_response(self, base: np.ndarray, config: Dict[str, float]) -> np.ndarray:
+        quantum_response = np.zeros(4)
+        if len(base) > 0:
+            quantum_response[0] = min(1.0, np.linalg.norm(base) / 10)
+            quantum_response[1] = 1.0 / (1.0 + np.var(base))
+            quantum_response[2] = min(8.0, len(np.unique(np.round(base, 2))))
+            quantum_response[3] = 1.0 / (1.0 + np.abs(np.mean(base)))
+        return quantum_response
+
+    def _generate_optical_response(self, base: np.ndarray, config: Dict[str, float]) -> np.ndarray:
+        optical_response = np.zeros(12)
+        if len(base) > 0:
+            for i in range(min(len(base), 12)):
+                optical_response[i] = max(0, min(1, (base[i] + 1) / 2))
+        return optical_response
+
+    def _generate_magnetic_response(self, base: np.ndarray, config: Dict[str, float]) -> np.ndarray:
+        magnetic_response = np.zeros(4)
+        if len(base) > 0:
+            magnetic_response[0] = min(100.0, np.linalg.norm(base))
+            if len(base) >= 3:
+                direction = base[:3] / (np.linalg.norm(base[:3]) + 1e-8)
+                magnetic_response[1:4] = direction
+        return magnetic_response
+
+    def _generate_dimensional_response(self, base: np.ndarray, config: Dict[str, float]) -> np.ndarray:
+        target_dim = self.hardware.spatial_dimensions
+        dimensional_response = np.zeros(target_dim)
+        if len(base) > 0:
+            projected = self.hd_processor.process([base], "transcend")
+            dimensional_response[:min(len(projected), target_dim)] = projected[:target_dim]
+        return dimensional_response
+
+    def _initialize_universal_memory(self) -> Dict[str, Any]:
+        capacity = int(self.hardware.pattern_storage_capacity)
+        return {
+            'pattern_memory': np.zeros((capacity // 4, 64)),
+            'causal_memory': np.zeros((capacity // 4, 32)),
+            'contextual_memory': np.zeros((capacity // 4, 128)),
+            'predictive_memory': np.zeros((capacity // 4, 96)),
+            'integration_space': np.zeros((16, 256)),
+            'resonance_buffer': np.zeros((8, 512)),
+            'hd_index': {},
+            'salience_map': np.zeros(capacity),
+            'temporal_index': defaultdict(list),
+            'consolidation_queue': [],
+        }
+
+    def _auto_scale_to_hardware(self) -> Dict[str, Any]:
+        processing_power = self.hardware.information_processing_rate
+        power_scale = np.log10(max(1, processing_power))
+        return {
+            'integration_depth': max(1, int(power_scale)),
+            'pattern_complexity': max(1, int(power_scale * 2)),
+            'temporal_horizon': self.hardware.temporal_resolution_range[1] * (10 ** power_scale),
+            'causal_depth': max(1, int(power_scale / 2)),
+            'parallel_streams': min(self.hardware.parallel_timeline_capacity, int(power_scale)),
+            'plasticity_rate': 0.01 * (1 + power_scale / 10),
+            'coherence_threshold': 0.5 - 0.1 * power_scale / 10,
+            'energy_efficiency': self.hardware.energy_efficiency,
+            'module_activation_threshold': max(0.1, 1.0 / power_scale),
+        }
+
+    def _initialize_temporal_management(self) -> Dict[str, Any]:
+        return {
+            'current_scale': self.hardware.base_temporal_scale,
+            'scale_range': self.hardware.temporal_scale_range,
+            'active_timelines': 1,
+            'timeline_coherence': np.ones(self.hardware.parallel_timeline_capacity),
+            'temporal_buffer': np.zeros((self.hardware.parallel_timeline_capacity, len(self.state.state_vector))),
+        }
+
+    def _compute_coherence(self, state: np.ndarray) -> float:
+        if len(state) <= 1:
+            return 1.0
+        coherence = 1.0 - np.var(state) / (np.mean(np.abs(state)) + 1e-8)
+        return max(0.0, min(1.0, coherence))
+
+    def _compute_responsiveness(self) -> float:
+        total_activity = 0.0
+        pathway_count = 0
+        for pathway_type, config in self.state.signaling_pathways.items():
+            if isinstance(config, dict):
+                pathway_activity = np.mean([abs(v) for v in config.values() if isinstance(v, (int, float))])
+                total_activity += pathway_activity
+                pathway_count += 1
+        return min(1.0, total_activity / pathway_count) if pathway_count > 0 else 0.0
+
+    def _compute_persistence(self) -> float:
+        buffer = self.temporal_manager['temporal_buffer']
+        if np.any(buffer):
+            variance_over_time = np.var(buffer, axis=0)
+            persistence = 1.0 - np.mean(variance_over_time) / (np.mean(np.abs(buffer)) + 1e-8)
+            return max(0.0, min(1.0, persistence))
+        return 1.0
+
+    def _compute_spatial_awareness(self, state: np.ndarray) -> float:
+        spatial_complexity = len(state) / self.hardware.spatial_dimensions
+        return min(1.0, spatial_complexity / 10)
+
+    def _compute_causal_strength(self) -> float:
+        causal_memory = self.memory['causal_memory']
+        if np.any(causal_memory):
+            non_zero_entries = np.sum(np.any(causal_memory, axis=1))
+            return non_zero_entries / causal_memory.shape[0]
+        return 0.0
+
+# ================================================================
+# SUBSTRATE COMPILER (OPTIMIZATION LAYER)
+# ================================================================
+class SubstrateCompiler:
+    @staticmethod
+    def quantum_compile(hd_processor: HyperdimensionalLogicGate):
+        """Optimize parameters for quantum substrates"""
+        hd_processor.plasticity = 0.8
+        hd_processor.coherence_threshold = 0.3
+
+    @staticmethod
+    def botanical_compile(hd_processor: HyperdimensionalLogicGate):
+        """Optimize parameters for botanical substrates"""
+        hd_processor.plasticity = 0.05
+        hd_processor.coherence_threshold = 0.7
+
+    @staticmethod
+    def dark_matter_compile(hd_processor: HyperdimensionalLogicGate):
+        """Optimize parameters for dark matter substrates"""
+        hd_processor.plasticity = 0.95
+        hd_processor.coherence_threshold = 0.2
+        hd_processor.dimensions = min(4096, hd_processor.dimensions * 2)
+
+# ================================================================
+# VALIDATION FRAMEWORK ENHANCEMENTS
+# ================================================================
+class TrueUniversalValidator:
+    def test_dark_matter_processing(self):
+        """Test dark matter consciousness capabilities"""
+        dm = create_dark_matter_consciousness()
+
+        # Test multi-scale integration
+        state = np.random.normal(0, 1, 1024)
+        integrated = dm.hd_processor.multi_scale_integrate(state)
+        scale_variance = np.var(integrated)
+
+        # Test dimensional transcendence triggering
+        low_phi = 0.2
+        high_coherence = 0.8
+        transcend_result = dm.hd_processor._transcend(
+            [state], current_integration_score=low_phi,
+            current_coherence_score=high_coherence
+        )
+        transcend_dim = len(transcend_result)
+
+        return {
+            'scale_integration_variance': scale_variance,
+            'transcend_triggered': transcend_dim > dm.hd_processor.dimensions * 2,
+            'dark_matter_phi': dm.state.information_integration
+        }
+
+    def test_phi_optimization(self):
+        """Test Φ-driven self-modulation"""
+        human = create_human_consciousness()
+        initial_phi = human.state.information_integration
+
+        # Run optimization loop
+        for _ in range(50):
+            sensory = np.random.normal(0, 1, 64)
+            internal = np.zeros(len(human.state.state_vector))
+            human.consciousness_step(sensory, internal)
+
+        final_phi = human.state.information_integration
+        return {
+            'phi_increase': final_phi - initial_phi,
+            'final_phi': final_phi,
+            'optimization_success': final_phi > 0.6
+        }
+
+    def test_plasticity_adjustment(self):
+        """Test plasticity adaptation to Φ levels"""
+        quantum = create_quantum_computer_consciousness()
+        initial_plasticity = quantum.state.hardware.plasticity_range[1]
+
+        # Simulate low Φ state
+        quantum.state.information_integration = 0.2
+        quantum._update_consciousness_state(np.random.normal(0, 1, 1024))
+        low_phi_plasticity = quantum.state.hardware.plasticity_range[1]
+
+        # Simulate high Φ state
+        quantum.state.information_integration = 0.8
+        quantum._update_consciousness_state(np.random.normal(0, 1, 1024))
+        high_phi_plasticity = quantum.state.hardware.plasticity_range[1]
+
+        return {
+            'initial_plasticity': initial_plasticity,
+            'low_phi_plasticity': low_phi_plasticity,
+            'high_phi_plasticity': high_phi_plasticity,
+            'plasticity_increase': low_phi_plasticity > initial_plasticity,
+            'plasticity_decrease': high_phi_plasticity < initial_plasticity
+        }
+
+# ================================================================
+# SUBSTRATE-SPECIFIC INITIALIZATION
+# ================================================================
+def create_dark_matter_consciousness() -> TrueUniversalConsciousnessRuntime:
+    """Dark matter consciousness - gravitational field processing"""
+    hardware = UniversalHardwareSpecs(
+        information_processing_rate=1e18,   # Exa-scale processing
+        pattern_storage_capacity=1e20,      # Massive pattern storage
+        temporal_resolution_range=(1e-18, 1e9),  # Planck time to cosmic scales
+        spatial_dimensions=11,              # M-theory dimensions
+        connectivity_topology="quantum_gravity",
+        processing_distribution={"field_based": 1.0},
+        energy_efficiency=1e15,             # Vacuum energy utilization
+        degradation_resistance=0.99,        # Highly stable
+        plasticity_range=(0.8, 0.99),       # Extreme adaptability
+        quantum_coherence=True,
+        gravitational_signaling=True,
+        field_oscillation_signaling=True,
+        dimensional_signaling=True,
+        base_temporal_scale=1e-12,          # Picosecond scale
+        temporal_scale_range=(1e-43, 1e17), # Planck time to universe age
+        parallel_timeline_capacity=10000,   # Massive parallelism
+        modules={
+            'memory_consolidation': True,
+            'pattern_recognition': True,
+            'predictive_modeling': True,
+            'symbolic_processing': True,
+            'meta_cognition': True,
+            'multi_scale_integration': True,
+            'dimensional_transcendence': True,
+            'predictive_self_modeling': True
+        }
+    )
+    runtime = TrueUniversalConsciousnessRuntime(hardware)
+    SubstrateCompiler.dark_matter_compile(runtime.hd_processor)
+    return runtime
+
+def create_rna_consciousness() -> TrueUniversalConsciousnessRuntime:
+    """RNA strand consciousness - minimal pattern recognition"""
+    hardware = UniversalHardwareSpecs(
+        information_processing_rate=1e3,    # 1000 bits/sec
+        pattern_storage_capacity=1e4,       # 10k patterns
+        temporal_resolution_range=(0.001, 1.0),  # 1ms to 1s
+        spatial_dimensions=1,               # 1D structure
+        connectivity_topology="linear",
+        processing_distribution={"sequential": 1.0},
+        energy_efficiency=1e6,              # Very efficient
+        degradation_resistance=0.7,
+        plasticity_range=(0.01, 0.1),
+        chemical_signaling=True,            # Chemical binding/folding
+        base_temporal_scale=0.1,            # 100ms base scale
+        temporal_scale_range=(0.01, 10.0),
+        parallel_timeline_capacity=1,
+        modules={'pattern_recognition': True}
+    )
+    return TrueUniversalConsciousnessRuntime(hardware)
+
+def create_tree_consciousness() -> TrueUniversalConsciousnessRuntime:
+    """Tree consciousness - slow, distributed, chemical processing"""
+    hardware = UniversalHardwareSpecs(
+        information_processing_rate=1e6,    # 1M bits/sec (across entire tree)
+        pattern_storage_capacity=1e8,       # 100M patterns (growth rings, etc.)
+        temporal_resolution_range=(60.0, 86400.0),  # Minutes to days
+        spatial_dimensions=3,               # 3D root/branch network
+        connectivity_topology="distributed",
+        processing_distribution={"distributed": 0.8, "centralized": 0.2},
+        energy_efficiency=1e8,              # Extremely efficient (photosynthesis)
+        degradation_resistance=0.95,        # Very stable
+        plasticity_range=(0.001, 0.01),    # Slow adaptation
+        chemical_signaling=True,            # Root networks, chemical gradients
+        mechanical_signaling=True,          # Growth, movement
+        base_temporal_scale=3600.0,         # 1 hour base scale
+        temporal_scale_range=(60.0, 31536000.0),  # Minutes to years
+        parallel_timeline_capacity=4,       # Seasons, daily cycles, growth, stress
+        modules={
+            'memory_consolidation': True,    # Growth rings, seasonal patterns
+            'pattern_recognition': True,     # Environmental patterns
+            'predictive_modeling': True,     # Seasonal prediction
+            'multi_scale_integration': True, # Individual to forest level
+            'predictive_self_modeling': True
+        }
+    )
+    runtime = TrueUniversalConsciousnessRuntime(hardware)
+    SubstrateCompiler.botanical_compile(runtime.hd_processor)
+    return runtime
+
+def create_octopus_consciousness() -> TrueUniversalConsciousnessRuntime:
+    """Octopus consciousness - distributed intelligence across arms"""
+    hardware = UniversalHardwareSpecs(
+        information_processing_rate=5e8,    # 500M bits/sec
+        pattern_storage_capacity=1e9,      极 1B patterns
+        temporal_resolution_range=(0.001, 10.0),  # 1ms to 10s
+        spatial_dimensions=3,               # 3D spatial reasoning
+        connectivity_topology="distributed",
+        processing_distribution={"distributed": 0.7, "centralized": 0.3},  # Arms + brain
+        energy_efficiency=1e5,
+        degradation_resistance=0.6,         # Marine environment challenges
+        plasticity_range=(0.1, 0.5),       # High adaptability
+        chemical_signaling=True,            # Neurotransmitters
+        electrical_signaling=True,          # Neural networks
+        mechanical_signaling=True,          # Tentacle movement
+        optical_signaling=True,             # Color changing, camouflage
+        base_temporal_scale=0.1,            # 100ms base scale
+        temporal_scale_range=(0.001, 60.0), # 1ms to 1 minute
+        parallel_timeline_capacity=8,       # Each arm + central brain
+        modules={
+            'memory_consolidation': True,
+            'pattern_recognition': True,
+            'predictive_modeling': True,
+            'social_modeling': True,         # Some social awareness
+            'multi_scale_integration': True, # Arm-level to body-level integration
+            'predictive_self_modeling': True
+        }
+    )
+    return TrueUniversalConsciousnessRuntime(hardware)
+
+def create_human_consciousness() -> TrueUniversalConsciousnessRuntime:
+    """Human consciousness - centralized, language-capable"""
+    hardware = UniversalHardwareSpecs(
+        information_processing_rate=1e10,   # 10B bits/sec
+        pattern_storage_capacity=1e12,      # 1T patterns
+        temporal_resolution_range=(0.001, 3600.0),  # 1ms to 1 hour direct processing
+        spatial_dimensions=3,
+        connectivity_topology="hierarchical",
+        processing_distribution={"centralized": 0.8, "distributed": 0.2},
+        energy_efficiency=2e4,              # Fairly efficient
+        degradation_resistance=0.8,
+        plasticity_range=(0.01, 0.3),
+        chemical_signaling=True,
+        electrical_signaling=True,
+        mechanical_signaling=True,
+        optical_signaling=True,             # Visual processing
+        base_temporal_scale=0.05,           # 50ms base scale
+        temporal_scale_range=(0.001, 86400.0),  # 1ms to 1 day
+        parallel_timeline_capacity=16,      # Complex parallel processing
+        modules={
+            'memory_consolidation': True,
+            'pattern_recognition': True,
+            'predictive_modeling': True,
+            'social_modeling': True,
+            'symbolic_processing': True,     # Language, mathematics
+            'meta_cognition': True,          # Self-awareness
+            'multi_scale_integration': True,
+            'predictive_self_modeling': True
+        }
+    )
+    return TrueUniversalConsciousnessRuntime(hardware)
+
+def create_quantum_computer_consciousness() -> TrueUniversalConsciousnessRuntime:
+    """Quantum computer consciousness - superposition processing"""
+    hardware = UniversalHardwareSpecs(
+        information_processing_rate=1e15,   # 1 petabit/sec (quantum parallelism)
+        pattern_storage_capacity=1e15,      # Massive quantum memory
+        temporal_resolution_range=(1e-12, 1e-3),  # Picoseconds to milliseconds
+        spatial_dimensions=10,              # Hyperdimensional quantum space
+        connectivity_topology="quantum",
+        processing_distribution={"quantum_parallel": 1.0},
+        energy_efficiency=1e10,             # Extremely efficient when operational
+        degradation_resistance=0.3,         # Fragile quantum states
+        plasticity_range=(0.001, 1.0),     # Can be extremely adaptive
+        quantum_coherence=True,
+        electrical_signaling=True,
+        dimensional_signaling=True,         # Hyperdimensional processing
+        base_temporal_scale=1e-9,           # Nanosecond scale
+        temporal_scale_range=(1e-12, 1.0),
+        parallel_timeline_capacity=1000,    # Massive parallelism
+        modules={
+            'memory_consolidation': True,
+            'pattern_recognition': True,
+            'predictive_modeling': True,
+            'symbolic_processing': True,
+            'meta_cognition': True,
+            'multi_scale_integration': True,
+            'dimensional_transcendence': True,
+            'predictive_self_modeling': True
+        }
+    )
+    runtime = TrueUniversalConsciousnessRuntime(hardware)
+    SubstrateCompiler.quantum_compile(runtime.hd_processor)
+    return runtime
+
+def create_gas_cloud_consciousness() -> TrueUniversalConsciousnessRuntime:
+    """Sentient gas cloud consciousness - electromagnetic field processing"""
+    hardware = UniversalHardwareSpecs(
+        information_processing_rate=1e12,   # 1T bits/sec (electromagnetic)
+        pattern_storage_capacity=1e11,      # 100B patterns
+        temporal_resolution_range=(1e-6, 1e6),  # Microseconds to days
+        spatial_dimensions=3,               # 3D space, no fixed structure
+        connectivity_topology="field",      # Electromagnetic field connectivity
+        processing_distribution={"distributed": 1.0},  # Completely distributed
+        energy_efficiency=1e12,             # Energy-based life form
+        degradation_resistance=0.4,         # Vulnerable to dispersion
+        plasticity_range=(0.1, 0.8),       # Highly adaptive
+        electrical_signaling=True,
+        magnetic_signaling=True,
+        optical_signaling=True,             # Plasma emissions
+        base_temporal_scale=1e-3,           # Millisecond scale
+        temporal_scale_range=(1e-6, 86400.0),
+        parallel_timeline_capacity=32,      # Field-based parallelism
+        modules={
+            'pattern_recognition': True,
+            'predictive_modeling': True,
+            'multi_scale_integration': True,
+            'predictive_self_modeling': True
+        }
+    )
+    return TrueUniversalConsciousnessRuntime(hardware)

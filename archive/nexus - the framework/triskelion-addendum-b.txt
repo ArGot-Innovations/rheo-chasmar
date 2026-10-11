@@ -1,0 +1,1358 @@
+================================================================================
+       THE TRISKELION PROTOCOL: ADDENDUM B - GENERAL-PURPOSE NANOBOTS
+================================================================================
+Reference Identifier: TRISKELION-PROTO-SPEC-ADDENDUM-B
+Authoritative Release: August 15, 2026
+Status: ARCHITECTURAL ADDENDUM AND MANDATORY MATHEMATICS/CHEMISTRY AUDIT PLAN
+Scope: Biohybrid-to-Synthetic Nanobot Architecture, Swarm Control, Safety,
+       Fabrication/Repair Tooling, and Formal Validation Requirements
+
+This document is Addendum B to:
+  - triskelion-master-specification.txt
+  - triskelion-addendum-a.txt
+
+It consolidates the current Project Nexus / Triskelion nanobot concept and
+clarifies the intended meaning of the term "nanobot." It also establishes a
+mandatory audit gate: the existing DCSI and Biological Tri-Cell Architecture
+(BTCA) mathematics and chemistry must be audited line by line before any new
+nanobot mathematics is accepted as canonical.
+
+IMPORTANT EPISTEMIC STATUS
+---------------------------
+This addendum is a research architecture and simulation specification. It is not
+an experimentally validated biomedical system, not a clinical treatment design,
+and not a wet-lab construction protocol. Statements in the existing Triskelion,
+DCSI, BTCA, HTLA, HSL, and related documents may contain heuristics, simulation
+assumptions, dimensional errors, unsupported constants, or model-generated
+hallucinations. Addendum B explicitly prevents those claims from silently
+becoming canonical nanobot mathematics.
+
+================================================================================
+SECTION 1: CANONICAL DEFINITION OF "NANOBOT"
+================================================================================
+
+1.1 Naming Policy
+-----------------
+The canonical public-facing term is:
+
+  NANOBOT
+
+This term is retained intentionally because it is concise, memorable, futuristic,
+and understandable to a non-specialist audience.
+
+For internal technical precision, the architecture MAY use subtype labels such
+as:
+
+  - Biohybrid Nanobot
+  - Augmented Biohybrid Nanobot
+  - Synthetic Nanobot
+  - General-Purpose Synthetic Nanobot
+
+The word "nanobot" in Triskelion does NOT primarily mean a conventionally
+miniaturized metal robot containing gears, motors, a silicon CPU, and a miniature
+battery.
+
+The intended endpoint is a programmable, cell-like physical agent whose sensing,
+state transitions, communication, actuation, metabolism/energy handling, repair,
+and swarm behavior are implemented using biological, molecular, synthetic-cell,
+and eventually fully engineered mechanisms.
+
+1.2 Distinction from Supporting Microrobotic/Nanorobotic Machinery
+------------------------------------------------------------------
+Fabricated microrobots, magnetic swimmers, DNA machines, externally actuated
+carriers, molecular devices, and related technologies are not rejected by this
+architecture.
+
+They are reclassified as part of the NANOBOT TOOLCHAIN.
+
+Their expected roles include:
+
+  - constructing nanobot components;
+  - transporting components to assembly sites;
+  - manipulating or positioning nanobots;
+  - inspecting nanobots or damaged swarms;
+  - delivering replacement material;
+  - repairing damaged nanobots;
+  - removing failed nanobots;
+  - providing temporary external actuation;
+  - providing diagnostic or calibration support.
+
+Thus:
+
+  SUPPORT MICROROBOTICS != THE NANOBOT
+
+but:
+
+  SUPPORT MICROROBOTICS -> MANUFACTURE + SERVICE + REPAIR OF NANOBOTS
+
+This distinction is canonical for Addendum B.
+
+================================================================================
+SECTION 2: DEVELOPMENT ROADMAP - BIOHYBRID FIRST, SYNTHETIC ENDPOINT
+================================================================================
+
+2.1 Architectural Strategy
+--------------------------
+The preferred development direction is:
+
+  PHASE 1: BIOHYBRID NANOBOT
+      Existing living cell supplies the biological runtime.
+      Synthetic control layers supply increasing programmability.
+
+  PHASE 2: AUGMENTED BIOHYBRID NANOBOT
+      Synthetic sensing, communication, logic, safety, identity, and external
+      control are progressively expanded while dependence on native cell
+      behavior is reduced.
+
+  PHASE 3: MINIMAL SYNTHETIC NANOBOT
+      A synthetic cell-like chassis provides bounded sensing, signaling, energy
+      handling, local state, limited actuation, and communication.
+
+  PHASE 4: AUTONOMOUS SYNTHETIC NANOBOT
+      The synthetic chassis gains robust navigation, adaptive task behavior,
+      self-diagnostics, bounded self-repair, and swarm-level participation.
+
+  PHASE 5: GENERAL-PURPOSE SYNTHETIC NANOBOT PLATFORM
+      A common chassis and runtime execute task-specific programs without
+      requiring organ-specific nanobot species.
+
+2.2 Why the Biohybrid Stage Exists
+----------------------------------
+The biohybrid stage is a bootstrap substrate.
+
+A living cell already contains extremely sophisticated machinery for:
+
+  - membrane maintenance;
+  - molecular sensing;
+  - protein synthesis;
+  - energy conversion;
+  - intracellular transport;
+  - environmental response;
+  - motility in some cell types;
+  - repair;
+  - secretion;
+  - regulated state transitions.
+
+The near-term engineering problem is therefore not to recreate all cellular
+machinery immediately. It is to impose a reliable programmable control and
+safety layer over a biological runtime while learning which functions can later
+be replaced by synthetic equivalents.
+
+2.3 Why the Fully Synthetic Endpoint Remains Preferred
+------------------------------------------------------
+The long-term target remains a fully synthetic architecture because it offers the
+possibility of:
+
+  - a reduced and explicitly defined state space;
+  - tighter control of permissible operations;
+  - explicit communication protocols;
+  - explicit memory models;
+  - reproducible component interfaces;
+  - substrate-level observability;
+  - reduced dependence on undocumented native cell behavior;
+  - common swarm semantics;
+  - stronger compatibility with distributed-computing principles.
+
+The synthetic endpoint must NOT be described as deterministic merely because it
+is engineered. At microscopic biological and molecular scales, stochasticity,
+thermal noise, diffusion, degradation, fluid dynamics, communication loss,
+component failure, and environmental uncertainty remain fundamental system
+properties.
+
+================================================================================
+SECTION 3: ONE GENERAL-PURPOSE SWARM, NOT ORGAN-SPECIFIC BOT SPECIES
+================================================================================
+
+3.1 Rejected Architecture: Organ-Specific Nanobots
+--------------------------------------------------
+The following architecture is explicitly rejected as the default design:
+
+  LiverBot
+  HeartBot
+  KidneyBot
+  LungBot
+  BrainBot
+  ...
+
+A proliferation of organ-specific nanobot species would create avoidable
+complexity in:
+
+  - manufacturing;
+  - fleet versioning;
+  - safety certification;
+  - compatibility;
+  - command routing;
+  - lifecycle management;
+  - repair tooling;
+  - in-body population accounting;
+  - failure analysis;
+  - long-term maintenance.
+
+It would also increase the number of biologically active variants capable of
+misclassification, ectopic activity, inappropriate proliferation, or other
+pathological behavior.
+
+3.2 Canonical Architecture: General-Purpose Chassis
+---------------------------------------------------
+The preferred design is a single general-purpose nanobot platform with a common:
+
+  - physical chassis;
+  - identity system;
+  - safety kernel;
+  - communication protocol;
+  - local sensing interface;
+  - task interpreter;
+  - resource/energy model;
+  - integrity monitor;
+  - swarm protocol;
+  - shutdown path.
+
+Task specialization is temporary and programmatic.
+
+Conceptually:
+
+  GENERAL-PURPOSE NANOBOT
+          |
+          +--> receives authorized objective
+          |
+          +--> observes local environment
+          |
+          +--> verifies that local conditions match objective
+          |
+          +--> loads/activates bounded task state
+          |
+          +--> performs repair/diagnostic/transport/signaling work
+          |
+          +--> exits task state
+          |
+          +--> returns to idle, safe, maintenance, or disposal state
+
+A liver repair mission and a cardiac repair mission SHOULD therefore use the same
+base nanobot population whenever physically possible. The difference is the
+mission state, local biological context, and authorized action set, not a new
+species of nanobot.
+
+================================================================================
+SECTION 4: THE SWARM IS THE COMPUTER
+================================================================================
+
+4.1 Individual Nanobots Should Remain Locally Simple
+----------------------------------------------------
+The architecture does not require each nanobot to contain a miniature general
+computer. The individual agent may remain comparatively simple.
+
+The minimal conceptual local capabilities are:
+
+  - sense;
+  - classify local state;
+  - maintain bounded internal state;
+  - compare observed state with expected/authorized state;
+  - exchange small messages;
+  - adjust local action;
+  - maintain energy/resource accounting;
+  - detect local integrity failure;
+  - enter a safe state;
+  - participate in local swarm consensus.
+
+Complex behavior is expected to emerge from interaction among many restricted
+agents.
+
+4.2 DCSI Is the Computational Skeleton
+--------------------------------------
+The existing Distributed Cognitive Swarm Intelligence (DCSI) work already
+contains architectural primitives directly relevant to the nanobot system:
+
+  - time-varying neighborhood graphs;
+  - partial observability;
+  - stochastic node behavior;
+  - strict local-only information access;
+  - asynchronous local clocks;
+  - bounded communication;
+  - bounded compute;
+  - bounded memory;
+  - resource depletion;
+  - sensor noise;
+  - packet loss/corruption;
+  - node failure;
+  - catastrophic lesion tests;
+  - re-coherence after node loss;
+  - emergent consensus;
+  - salience propagation;
+  - module-aware fault tolerance.
+
+Therefore, nanobot research begins by REUSING and AUDITING DCSI, not by inventing
+a new distributed-systems theory from zero.
+
+4.3 BTCA Is the Biological Mapping Layer
+----------------------------------------
+The Biological Tri-Cell Architecture provides an existing biological abstraction
+for:
+
+  - Nucleus/Core-A: identity and slow regulation;
+  - Cytoplasm/Core-B: processing, prediction, metabolism, and stress integration;
+  - Membrane/Core-C: sensing, receptors, communication, and environmental
+    interface;
+  - local metabolic limits;
+  - local signaling;
+  - lesion recovery;
+  - mitosis/apoptosis state handling;
+  - contact/density regulation;
+  - local Lyapunov-style homeostatic control.
+
+BTCA is therefore treated as a candidate BIOLOGICAL ADAPTER for the early
+biohybrid nanobot, not as unquestioned ground truth.
+
+================================================================================
+SECTION 5: CONTROL PLANE - AGI OBJECTIVES PLUS LOCAL BIOLOGICAL REALITY
+================================================================================
+
+5.1 External AGI/Server Role
+----------------------------
+The external AGI is the high-level control plane.
+
+Its responsibilities may include:
+
+  - interpreting patient/system objectives;
+  - selecting mission goals;
+  - assigning priority;
+  - deciding whether a repair task is authorized;
+  - monitoring aggregate telemetry;
+  - issuing coarse task instructions;
+  - revoking tasks;
+  - ordering swarm withdrawal, quiescence, or disposal;
+  - coordinating external imaging, actuation, or service microrobots.
+
+The AGI MUST NOT be treated as omniscient.
+
+The body remains a partially observed environment. A remote model can be wrong,
+outdated, spatially imprecise, or operating on delayed telemetry.
+
+5.2 Local Verification Rule
+---------------------------
+External instruction is NECESSARY but SHOULD NOT be SUFFICIENT for high-risk local
+action.
+
+The canonical rule is:
+
+  EXTERNAL INTENT + LOCAL VERIFICATION + SAFETY AUTHORITY -> ACTION
+
+A command such as "repair tissue in region X" should be interpreted as an
+authorization envelope, not as unconditional permission to proliferate or alter
+tissue.
+
+A nanobot/swarm should independently determine whether local sensed conditions
+match the expected tissue/damage context before activating high-impact behavior.
+
+5.3 Capability Is Not Authority
+-------------------------------
+A central architectural invariant is:
+
+  CAPABILITY != AUTHORITY
+
+A general-purpose nanobot may physically possess mechanisms that could support
+multiple tasks, but it must not have standing permission to activate all of them.
+
+The most privileged capabilities include, at minimum:
+
+  - replication;
+  - differentiation/state conversion;
+  - persistent engraftment;
+  - tissue remodeling;
+  - long-lived secretion of growth signals;
+  - irreversible local structural change;
+  - transfer of persistent program state to other cells/agents.
+
+These operations require stronger authorization and stronger local verification
+than ordinary sensing, messaging, or reversible maintenance activity.
+
+================================================================================
+SECTION 6: GENERAL-PURPOSE REPAIR MODEL
+================================================================================
+
+6.1 Tissue Repair Is a Mission, Not a Nanobot Species
+-----------------------------------------------------
+A repair mission is represented conceptually as a temporary task profile loaded
+onto the common nanobot chassis.
+
+The task profile may specify:
+
+  - target condition class;
+  - expected local biomarkers/physical features;
+  - allowed action set;
+  - forbidden action set;
+  - maximum duration;
+  - maximum resource expenditure;
+  - maximum local swarm density;
+  - maximum replication authority, normally zero unless explicitly enabled;
+  - success criteria;
+  - abort criteria;
+  - disposal/quiescence behavior.
+
+6.2 Navigation Does Not Require a Microscopic GPS
+-------------------------------------------------
+The original concept remains: nanobots need not maintain a complete internal map
+of the body.
+
+Navigation can be formulated as a hierarchy of cues:
+
+  1. External coarse guidance from the control plane.
+  2. Flow-assisted transport through the body.
+  3. Local chemical/biophysical gradients.
+  4. Receptor-defined tissue context.
+  5. Local damage/inflammation/structural cues.
+  6. Swarm-to-swarm/local-neighbor signaling.
+  7. Final local verification before task activation.
+
+The exact navigation mathematics are NOT canonical in this addendum. Earlier
+conversation-level chemotaxis equations are explicitly classified as illustrative
+toy models pending the audit defined in Section 11.
+
+6.3 Stem-Cell-Like Repair Versus Permanent Stem-Cell Identity
+-------------------------------------------------------------
+The architecture does not require every nanobot to permanently be a pluripotent
+stem cell.
+
+The biohybrid stage may use living cells because natural cells provide useful
+metabolism, sensing, synthesis, and repair machinery. However, unrestricted
+pluripotency and unrestricted proliferation are safety liabilities.
+
+The preferred abstraction is:
+
+  programmable regenerative behavior
+
+rather than:
+
+  permanently free-roaming pluripotent stem cell
+
+The fully synthetic endpoint should reproduce only the capabilities needed for a
+mission, not every behavior of a natural stem cell.
+
+================================================================================
+SECTION 7: THE CENTRAL SAFETY PROBLEM - PREVENTING PATHOLOGICAL GROWTH
+================================================================================
+
+7.1 Terminology
+---------------
+The term "metastasis" is used colloquially in project discussion to describe a
+swarm or engineered-cell population spreading and growing where it should not.
+
+For technical work, the failure classes must be distinguished:
+
+  - uncontrolled proliferation;
+  - tumorigenicity;
+  - neoplastic transformation;
+  - teratoma formation from residual pluripotent cells;
+  - ectopic engraftment;
+  - inappropriate differentiation;
+  - unwanted migration/dissemination;
+  - escape from apoptosis;
+  - mutation or silencing of safety circuitry;
+  - pathological growth-factor signaling;
+  - command/control loss;
+  - swarm-state corruption.
+
+7.2 Why General Purpose Increases the Safety Burden
+---------------------------------------------------
+A general-purpose chassis is desirable because it reduces fleet complexity.
+However, generality also increases the number of actions a compromised agent may
+be physically capable of performing.
+
+Therefore the system must enforce separation between:
+
+  - what the chassis CAN do;
+  - what the current mission MAY do;
+  - what local conditions justify;
+  - what the safety kernel will permit.
+
+7.3 Defense in Depth
+--------------------
+No single anti-proliferation mechanism is sufficient.
+
+The research architecture should investigate independent containment layers such
+as:
+
+  - bounded replication authority;
+  - density/contact-dependent inhibition;
+  - resource-dependent replication limits;
+  - finite mission lifetime;
+  - integrity-dependent task execution;
+  - independent apoptosis/disposal mechanisms;
+  - local tissue-context verification;
+  - external revocation;
+  - swarm quorum requirements for privileged actions;
+  - anomaly detection for lineage/state drift;
+  - population caps;
+  - replication accounting;
+  - fail-closed behavior after communication loss;
+  - non-replicating fallback modes;
+  - removal by immune-compatible or external service mechanisms.
+
+These are architectural research requirements, not claims that present biology
+can implement them perfectly.
+
+7.4 Safety Circuits Must Be Treated as Fallible
+-----------------------------------------------
+A kill switch, apoptosis trigger, contact-inhibition rule, or other containment
+mechanism must never be modeled as infallible.
+
+The simulation program must include failure modes such as:
+
+  - switch mutation;
+  - switch silencing;
+  - receptor loss;
+  - false-negative context sensing;
+  - false-positive repair activation;
+  - signal spoofing/corruption;
+  - local resource-model failure;
+  - partial controller isolation;
+  - multiple simultaneous safety-layer failures.
+
+The safety question is therefore not:
+
+  "Does the system have a kill switch?"
+
+It is:
+
+  "What is the probability and consequence of escape when one or more independent
+   containment layers fail?"
+
+================================================================================
+SECTION 8: NANOBOT INTERNAL ARCHITECTURE - LOGICAL TARGET
+================================================================================
+
+8.1 Common Logical Modules
+--------------------------
+The long-term general-purpose synthetic nanobot should be designed around common
+logical modules even if their physical implementation changes across generations:
+
+  1. Identity and Integrity Core
+     - persistent identity;
+     - version/provenance;
+     - integrity checks;
+     - lineage/task authorization state.
+
+  2. Sensor Interface
+     - local chemical cues;
+     - local physical cues;
+     - receptor/ligand state;
+     - damage/inflammation context;
+     - neighbor-derived state summaries.
+
+  3. Local State and Task Engine
+     - bounded state machine;
+     - task authorization;
+     - local context verification;
+     - abort/rollback state.
+
+  4. Communication Interface
+     - constrained local messages;
+     - swarm summaries;
+     - external-control interface where physically possible;
+     - authentication/integrity appropriate to the substrate.
+
+  5. Energy/Resource Controller
+     - energy acquisition;
+     - energy accounting;
+     - task-energy limits;
+     - starvation response.
+
+  6. Actuation/Repair Interface
+     - movement or adhesion change;
+     - material transport;
+     - local secretion/deposition;
+     - removal of debris;
+     - structural repair functions;
+     - other mission-defined outputs.
+
+  7. Safety Kernel
+     - privileged-operation gating;
+     - density/population constraints;
+     - integrity response;
+     - shutdown/quiescence;
+     - apoptosis/disassembly where substrate permits.
+
+  8. Maintenance Interface
+     - external microrobot/DNA-machine interaction;
+     - component replacement;
+     - calibration;
+     - retrieval/removal.
+
+8.2 Substrate Independence
+--------------------------
+The logical architecture should remain stable while the physical substrate
+changes:
+
+  GENERATION 1:
+    Logical Nanobot Runtime -> Biological Adapter -> Living Cell
+
+  GENERATION 2:
+    Logical Nanobot Runtime -> Hybrid Molecular Adapter -> Augmented Living Cell
+
+  GENERATION 3+:
+    Logical Nanobot Runtime -> Synthetic Molecular Runtime -> Synthetic Chassis
+
+This is intentionally aligned with the broader Nexus principle of preserving
+functional organization while allowing the implementation substrate to change.
+
+================================================================================
+SECTION 9: SUPPORT MICROROBOTS, DNA MACHINES, AND EXTERNAL SERVICE SYSTEMS
+================================================================================
+
+9.1 Service Layer
+-----------------
+Conventional microrobotic and molecular-machine research is integrated as a
+service layer surrounding the nanobot ecosystem.
+
+Candidate service roles include:
+
+  - assembly jig;
+  - component shuttle;
+  - magnetic positioning aid;
+  - targeted delivery carrier;
+  - diagnostic probe;
+  - nanobot retriever;
+  - damaged-agent remover;
+  - localized energy/actuation aid;
+  - sensor/calibration device;
+  - repair-material carrier.
+
+9.2 Separation of Responsibilities
+----------------------------------
+The Triskelion nanobot should not be forced to contain every possible physical
+function internally.
+
+Where a function is rare, expensive, bulky, or better performed externally, it
+may be delegated to a service device.
+
+This creates an ecosystem analogous to conventional computing:
+
+  NANOBOT             = endpoint/node
+  SWARM               = distributed computer
+  AGI/SERVER           = control plane
+  SERVICE MICROROBOTS  = maintenance/field-service equipment
+  DNA/MOLECULAR TOOLS  = molecular fabrication/repair equipment
+  EXTERNAL IMAGING     = observability infrastructure
+
+================================================================================
+SECTION 10: RELATIONSHIP TO EXISTING TRISKELION FAILURE CONTINGENCIES
+================================================================================
+
+10.1 Existing Contingencies Are Reused
+--------------------------------------
+The Triskelion/DCSI/BTCA corpus already models several classes of non-determinism
+and damage relevant to nanobots:
+
+  - stochastic node failure;
+  - bit/message corruption;
+  - sensor noise;
+  - environmental drift;
+  - asynchronous clocks;
+  - bounded neighbor counts;
+  - bounded communication;
+  - bounded energy;
+  - catastrophic lesion events;
+  - re-coherence after node loss;
+  - local-only consensus;
+  - module failure;
+  - identity drift;
+  - packet storms/silence;
+  - isolation;
+  - runaway proliferation in the BTCA pathology model;
+  - apoptosis and density/contact gating;
+  - local homeostatic control.
+
+Nanobot design should extend these contingencies rather than duplicating them.
+
+10.2 New Nanobot-Specific Failure Classes
+-----------------------------------------
+The nanobot layer adds or emphasizes:
+
+  - ectopic task execution;
+  - tumorigenicity and uncontrolled proliferation;
+  - task-program corruption;
+  - AGI command error;
+  - AGI/swarm disagreement;
+  - local-context misclassification;
+  - safety-circuit escape;
+  - persistence beyond authorized lifetime;
+  - loss of external controllability;
+  - inappropriate material deposition;
+  - inappropriate tissue remodeling;
+  - service-tool induced damage;
+  - hybrid-to-synthetic interface mismatch;
+  - repair operations that accidentally preserve a compromised nanobot.
+
+================================================================================
+SECTION 11: MANDATORY DCSI + BTCA MATHEMATICS AND CHEMISTRY AUDIT
+================================================================================
+
+11.1 Audit Gate
+---------------
+BEFORE constructing or canonizing the actual nanobot mathematics, the existing
+DCSI, BTCA, Triskelion Master Specification, and Addendum A equations MUST be
+audited line by line.
+
+No equation may be inherited merely because it appears in an older master
+specification, a NotebookLM/Gemini-generated synthesis, a podcast, a model answer,
+or an earlier research document.
+
+11.2 Required Classification Labels
+------------------------------------
+Every equation, numerical constant, kinetic rule, scaling law, and claimed
+physical constraint must receive one or more of the following labels:
+
+  [DERIVED]
+    Follows from stated assumptions by an explicit derivation that can be checked.
+
+  [BIOLOGICALLY GROUNDED]
+    Form and/or parameterization is supported by identifiable experimental or
+    peer-reviewed biological literature for the relevant substrate and regime.
+
+  [PHYSICALLY GROUNDED]
+    Form and/or parameterization follows from established physical law in the
+    relevant scale/regime.
+
+  [SIMULATION ASSUMPTION]
+    Deliberately imposed to define the experiment; not claimed as a law of nature.
+
+  [HEURISTIC]
+    Useful engineering/controller approximation without a formal derivation or
+    direct biological equivalence.
+
+  [DIMENSIONALLY SUSPECT]
+    Units do not obviously close, variables mix counts/concentrations/probabilities,
+    or the equation requires missing dimensional factors.
+
+  [UNSUPPORTED]
+    No adequate source, derivation, experimental result, or stated modeling reason
+    currently supports the claim.
+
+  [CONTRADICTORY]
+    Conflicts with another canonical constraint or equation.
+
+  [TERMINOLOGY ERROR]
+    Mathematical, chemical, biological, or physical terminology is used in a way
+    that changes or obscures its technical meaning.
+
+  [UNKNOWN]
+    Status cannot yet be determined and requires targeted research.
+
+11.3 Required Audit Record for Every Equation
+---------------------------------------------
+For every equation E_j, the audit must record:
+
+  Equation ID:
+  Source filename:
+  Source section/line/page:
+  Original equation:
+  Intended meaning:
+  Variables:
+  Units for every variable:
+  Domain/range:
+  Time/space scale:
+  Derivation or source:
+  Classification label(s):
+  Dimensional analysis:
+  Hidden assumptions:
+  Known failure modes:
+  Numerical implementation concerns:
+  Whether the equation is local or observer-side:
+  Whether a nanobot can physically access every required variable:
+  Whether the equation violates bandwidth/memory/energy constraints:
+  Falsification or test method:
+  Recommended action: KEEP / REWRITE / REPARAMETERIZE / QUARANTINE / DELETE
+
+11.4 Mandatory Source Set
+-------------------------
+At minimum, the audit must cover the equations and constants contained in:
+
+  - triskelion-master-specification.txt
+  - triskelion-addendum-a.txt
+  - The DCSI Multi-Module Cognitive Swarm Architecture - A-L Specification.txt
+  - Mathematical and Architectural Requirements for Phase 1 DCSI Swarm Simulation.txt
+  - Biological Tri-Cell Computational Architecture Under a 64-Bit Vesicle Constraint.txt
+  - Biological Tri-Cell Architecture: Multi-Scale Consensus and Homeostatic Control.txt
+  - Biological Tri-Cell Architecture Simulation
+  - Multi-Module Cognitive Swarm Architecture: Technical Briefing
+  - relevant HTLA/HSL source documents used by those equations
+
+11.5 Preliminary Audit Flags Already Identified
+-----------------------------------------------
+The following items are NOT a completed audit. They are known issues that must be
+entered into the formal audit queue.
+
+A. RECEPTOR-BINDING DIMENSIONALITY
+
+Current form appearing in the BTCA/master material:
+
+  p_bind = 1 - exp(-k_on * R_free * dt)
+
+If k_on is expressed as a conventional bimolecular association constant in
+concentration^-1 time^-1, multiplying it directly by a receptor COUNT and time
+does not produce a dimensionless exponent. The model must explicitly distinguish
+receptor count, receptor surface density, ligand concentration, encounter rate,
+and pseudo-first-order approximations.
+
+Status:
+  [DIMENSIONALLY SUSPECT]
+  [REQUIRES REWRITE]
+
+B. 32-NT RNA == 64 RAW BITS
+
+The mapping:
+
+  4 nucleotide symbols -> 2 raw bits per nucleotide
+  32 nucleotides -> 64 raw theoretical bits
+
+is an information-capacity abstraction. It is not automatically equivalent to 64
+reliable application bits after sequence constraints, coding redundancy,
+recognition requirements, degradation, framing, error correction, and biological
+implementation overhead.
+
+The term "32-bp RNA" is also incorrect unless a duplex is specifically intended.
+A single RNA sequence should normally be described as 32 nt.
+
+Status:
+  raw mapping: [DERIVED]
+  reliable biological payload claim: [UNSUPPORTED] until channel model exists
+  "32-bp RNA": [TERMINOLOGY ERROR] where single-stranded RNA is intended
+
+C. ADDENDUM A RNA SCRAMBLE SIDE-CHANNEL PROBLEM
+
+The current Addendum A transcoder returns both:
+
+  rna_str
+  scramble_depth
+
+but the strict 32-nt/64-bit channel does not visibly encode scramble_depth inside
+the same payload. A receiver therefore requires side information to reverse the
+scrambling, violating the claim of a self-contained strict 64-bit channel unless a
+new in-band coding scheme is defined.
+
+Status:
+  [CONTRADICTORY]
+  [REQUIRES REWRITE]
+
+D. CONNECTIVITY/PERCOLATION CONSTANT
+
+The DCSI material currently uses a constant-style condition resembling:
+
+  pi * R_c^2 * N / A > 4.5
+
+and describes it as ensuring connectivity.
+
+A constant mean-degree/percolation threshold is not generally identical to a full
+connectivity guarantee for a random geometric graph. Connectivity, giant-component
+formation, k-connectivity, boundary effects, dimensionality, and post-lesion
+connectivity must be separated.
+
+Status:
+  [HEURISTIC] or [SIMULATION ASSUMPTION] unless properly derived
+  [UNSUPPORTED] as a universal connectivity guarantee
+
+E. XOR USED AS "REINFORCEMENT"
+
+XOR can be useful as a binary binding/difference operation, but XOR by itself does
+not mean consensus reinforcement. Consensus/bundling and binding must be separated.
+Majority/bundling, weighted accumulation, Hamming similarity, and XOR binding
+should not be conflated.
+
+Status:
+  [TERMINOLOGY/OPERATOR ERROR]
+  [REQUIRES REWRITE]
+
+F. HSL DISTANCE/METRIC CLAIM
+
+A composite expression combining physical distance, hypervector similarity, and
+salience difference is not automatically a valid Riemannian metric. Normalization,
+metric properties, triangle inequality, topology, and manifold assumptions must be
+proved or the quantity should be called a dissimilarity/energy functional.
+
+Status:
+  [UNSUPPORTED] as a formal Riemannian metric until proven
+  [HEURISTIC] as a simulation dissimilarity if explicitly declared
+
+G. CHEMOTAXIS/NAVIGATION EQUATIONS FROM CURRENT DISCUSSION
+
+Any previously proposed single-gradient equation of the form:
+
+  velocity = gradient response + flow + noise
+
+is a toy intuition only. It omits receptor adaptation/saturation, adhesion,
+extravasation, stochastic persistence, geometry, tissue mechanics, multi-cue
+integration, and other factors.
+
+Status:
+  [HEURISTIC]
+  [NON-CANONICAL]
+
+H. ONE VESICLE PER CYCLE VS "INCREASE EMISSION RATE"
+
+The master/BTCA materials simultaneously state a strict one-vesicle-per-cycle
+communication bottleneck and describe lesion-boundary cells as increasing vesicle
+emission rate.
+
+The model must specify whether "increase" means:
+
+  - shorten the biological cycle;
+  - increase payload priority;
+  - increase release probability;
+  - emit more than one vesicle, thereby violating the constraint;
+  - or something else.
+
+Status:
+  [CONTRADICTORY]
+
+I. "HILL" FUNCTION WITHOUT HILL EXPONENT
+
+Addendum A uses a rectified saturating function resembling:
+
+  H(z;k) = max(0,z) / (max(0,z) + k)
+
+This is a saturating response with an implicit exponent of 1, not a general Hill
+function unless the modeling decision is explicitly stated. Claims of biological
+validation require parameter-specific sources.
+
+Status:
+  [HEURISTIC] unless sourced and parameterized
+  [TERMINOLOGY CLARIFICATION REQUIRED]
+
+J. BIOLOGICAL CONSTANT TRANSFER ACROSS SUBSTRATES
+
+Constants or energy budgets borrowed from one organism or cell type must not be
+silently transferred to mammalian cells, engineered cells, synthetic cells, or
+future nanobots. Values such as power budgets, receptor rates, diffusion ranges,
+and ATP costs must be tied to the relevant substrate.
+
+Status:
+  [UNSUPPORTED] when cross-substrate transfer lacks justification
+
+K. PHI-PROXY STATUS
+
+The existing Phi-proxy is an engineering observer/controller metric unless a
+separate derivation demonstrates equivalence to a specific formal theory. It must
+not be presented as direct proof or measurement of consciousness.
+
+Status:
+  [HEURISTIC]
+  [OBSERVER-SIDE METRIC]
+
+L. JL / SIMHASH / COLLISION CLAIMS IN ADDENDUM A
+
+The Johnson-Lindenstrauss, SimHash, collision, and projection sections require
+fresh mathematical review. In particular:
+
+  - constants in JL bounds are theorem/assumption dependent;
+  - projected dimension should not casually be described as "bits" when the
+    mathematical object is a real-valued embedding dimension;
+  - exact sketch equality probability is not the same as false consensus under a
+    similarity threshold;
+  - nearest-neighbor dictionary effects require a proper multiple-comparison model;
+  - a low raw collision probability does not by itself "validate" semantic
+    transmission.
+
+Status:
+  [REQUIRES FORMAL RE-DERIVATION]
+
+M. RIEMANNIAN CENTER-OF-MASS ASSUMPTIONS
+
+The Addendum A Riemannian mean code appears to operate on normalized vectors on a
+unit hypersphere. That does not automatically implement a general HSL manifold.
+The manifold, metric, normalization, curvature assumptions, and local-vs-global
+availability must be explicit.
+
+Status:
+  [SIMULATION ASSUMPTION] if restricted to a hypersphere model
+  [UNSUPPORTED] as a universal HSL implementation
+
+N. GLOBAL VARIABLES INSIDE A LOCAL-ONLY ARCHITECTURE
+
+Any equation requiring a global field, global mean, global center, or all-node
+state must be classified as either:
+
+  - observer-side telemetry;
+  - an offline analysis quantity;
+  - or a distributed approximation computed from local messages.
+
+A nanobot cannot use a variable it cannot physically observe or reconstruct.
+
+Status:
+  [ARCHITECTURAL CONSISTENCY CHECK REQUIRED]
+
+11.6 Audit Rule for Numerical Constants
+---------------------------------------
+Every numerical constant must answer:
+
+  WHY THIS NUMBER?
+
+Permitted answers include:
+
+  - experimentally measured value for the relevant substrate;
+  - derived physical constant;
+  - value chosen by dimensional scaling;
+  - parameter sweep range;
+  - explicit simulation stress-test value;
+  - fitted parameter with dataset/procedure;
+  - placeholder marked UNKNOWN.
+
+"Research validated" without a traceable source is not an acceptable provenance
+label.
+
+11.7 Audit Rule for Units
+-------------------------
+Every physical equation must pass dimensional analysis before implementation.
+
+Counts, concentrations, probabilities, rates, energies, powers, lengths, times,
+velocities, diffusion coefficients, receptor densities, and dimensionless control
+states must not be mixed without explicit conversion.
+
+11.8 Audit Rule for Accessibility
+---------------------------------
+Every state variable used by a nanobot controller must be classified as:
+
+  LOCAL SENSOR VALUE
+  LOCAL INTERNAL VALUE
+  NEIGHBOR-DERIVED VALUE
+  EXTERNAL COMMAND VALUE
+  OBSERVER-ONLY VALUE
+
+Observer-only values are forbidden inside the nanobot control loop.
+
+================================================================================
+SECTION 12: ONLY AFTER THE AUDIT - CONSTRUCT THE ACTUAL NANOBOT MATHEMATICS
+================================================================================
+
+12.1 No Premature Canonical Equations
+-------------------------------------
+Addendum B intentionally does NOT declare a final nanobot state vector,
+chemotaxis law, reaction network, population-growth law, or safety equation.
+
+Those equations are to be constructed AFTER completion of the audit in Section
+11.
+
+12.2 Required Mathematical Layers
+---------------------------------
+The post-audit nanobot mathematics must be built in the following order:
+
+  LAYER 1: PHYSICAL SUBSTRATE MODEL
+    geometry, fluid/tissue environment, diffusion, temperature, mechanics,
+    degradation, transport.
+
+  LAYER 2: SINGLE-NANOBOT STATE MODEL
+    identity, integrity, local sensor state, task state, energy/resources,
+    communication state, safety state.
+
+  LAYER 3: SENSOR AND RECEPTOR MODEL
+    concentrations vs counts, binding kinetics, saturation, noise, adaptation,
+    false positives/negatives.
+
+  LAYER 4: MOTION/NAVIGATION MODEL
+    flow, active motility if present, adhesion, local gradients, persistence,
+    boundary crossing, uncertainty.
+
+  LAYER 5: COMMUNICATION MODEL
+    channel substrate, effective payload, error model, latency, local reach,
+    collision/saturation, authentication/integrity.
+
+  LAYER 6: SWARM TOPOLOGY AND CONSENSUS
+    time-varying graph, local neighborhoods, failure tolerance, re-coherence,
+    no hidden global access.
+
+  LAYER 7: TASK EXECUTION MODEL
+    reversible tasks first; privileged irreversible actions separately.
+
+  LAYER 8: POPULATION/REPLICATION MODEL
+    replication authority, density limits, resource limits, mutation/escape,
+    apoptosis/disassembly, tumorigenicity stress tests.
+
+  LAYER 9: AGI CONTROL-PLANE MODEL
+    command latency, incomplete observability, command error, revocation,
+    disagreement with local state.
+
+  LAYER 10: SERVICE/MAINTENANCE MODEL
+    interaction with support microrobots, molecular tools, retrieval, repair,
+    and replacement.
+
+12.3 Acceptance Criteria for a New Equation
+-------------------------------------------
+No new nanobot equation becomes canonical until it has:
+
+  - defined variables;
+  - defined units;
+  - defined domain/range;
+  - stated assumptions;
+  - source or derivation;
+  - classification label;
+  - dimensional closure;
+  - numerical stability analysis;
+  - implementation mapping;
+  - falsification test;
+  - failure-mode analysis;
+  - confirmation that all required inputs are physically accessible.
+
+================================================================================
+SECTION 13: SIMULATION-FIRST RESEARCH PROGRAM
+================================================================================
+
+13.1 Phase N0 - Corpus Audit
+----------------------------
+Deliverables:
+
+  - equation inventory;
+  - constants inventory;
+  - units inventory;
+  - contradiction register;
+  - unsupported-claim register;
+  - terminology correction register;
+  - source/provenance map;
+  - revised canonical DCSI/BTCA mathematical core.
+
+13.2 Phase N1 - General-Purpose Nanobot Digital Twin
+----------------------------------------------------
+Build a substrate-agnostic simulation containing:
+
+  - many identical general-purpose agents;
+  - bounded local state;
+  - asynchronous clocks;
+  - noisy local sensing;
+  - time-varying communication neighborhoods;
+  - packet loss/corruption;
+  - energy/resource constraints;
+  - node failure;
+  - task authorization;
+  - local context verification;
+  - safe-state transitions.
+
+No wet biology is required for this phase.
+
+13.3 Phase N2 - Pathology and Escape Simulation
+-----------------------------------------------
+Stress tests must include:
+
+  - unauthorized replication;
+  - false tissue classification;
+  - corrupted AGI command;
+  - external communication loss;
+  - apoptosis failure;
+  - density-gating failure;
+  - mutation/silencing of one safety layer;
+  - mutation/silencing of multiple safety layers;
+  - ectopic migration;
+  - over-repair;
+  - pathological tissue remodeling;
+  - runaway local population growth;
+  - swarm fragmentation;
+  - recovery after large node loss.
+
+13.4 Phase N3 - Biohybrid Mapping
+---------------------------------
+Only after N0-N2 produce a stable abstract architecture should candidate living
+cell substrates be mapped onto the logical modules.
+
+The mapping must document which functions are:
+
+  - native biological behavior;
+  - engineered control behavior;
+  - external service behavior;
+  - simulated abstraction only.
+
+13.5 Phase N4 - Progressive Synthetic Replacement
+--------------------------------------------------
+Replace biological functions one subsystem at a time while preserving the common
+logical interfaces.
+
+The migration principle is:
+
+  DO NOT REWRITE THE SWARM ARCHITECTURE FOR EACH NEW SUBSTRATE.
+
+Instead:
+
+  preserve the logical protocol;
+  replace the substrate adapter;
+  re-audit the physical model;
+  revalidate safety.
+
+================================================================================
+SECTION 14: RESEARCH QUESTIONS CREATED BY ADDENDUM B
+================================================================================
+
+The following questions become explicit Triskelion research tracks:
+
+  1. What is the smallest physically realizable general-purpose nanobot state
+     machine?
+
+  2. Which DCSI functions survive under realistic molecular communication and
+     energy constraints?
+
+  3. What communication substrate provides the best tradeoff among payload,
+     latency, reliability, energy, and biological compatibility?
+
+  4. How should a local nanobot distinguish damage from normal remodeling,
+     inflammation, infection, cancer, and transient stress?
+
+  5. How can external AGI objectives be authenticated and reconciled with local
+     contradictory evidence?
+
+  6. Which operations must always remain privileged?
+
+  7. How can replication be made unnecessary for most missions?
+
+  8. If replication is required, what independent containment layers prevent
+     runaway growth and safety-circuit escape?
+
+  9. How should the swarm recognize and isolate a compromised nanobot?
+
+ 10. How can support microrobots and molecular tools inspect, repair, retrieve,
+     or destroy compromised nanobots without injuring host tissue?
+
+ 11. Which functions are best left biological in the hybrid generations, and
+     which should be replaced first by synthetic components?
+
+ 12. What mathematical invariants must remain unchanged when migrating from a
+     living-cell substrate to a fully synthetic chassis?
+
+ 13. What constitutes successful repair without over-repair?
+
+ 14. How should the system prove mission completion and return to a safe state?
+
+ 15. What is the maximum safe in-body population under different communication,
+     energy, immune, and clearance regimes?
+
+================================================================================
+SECTION 15: CANONICAL DECISIONS RECORDED BY ADDENDUM B
+================================================================================
+
+The following decisions are canonical unless superseded by later Triskelion
+review:
+
+  1. The public project term is NANOBOT.
+
+  2. Triskelion nanobots are not defined as miniature conventional metal robots.
+
+  3. Fabricated microrobots, magnetic swimmers, DNA machines, molecular devices,
+     and externally actuated carriers belong to the fabrication, service, and
+     repair toolchain surrounding the actual nanobots.
+
+  4. The development path begins with biohybrid programmable cellular agents and
+     deliberately advances toward a fully synthetic nanobot chassis.
+
+  5. The final platform is general purpose. Organ-specific permanent nanobot
+     species are rejected as the default architecture.
+
+  6. Task specialization is programmatic and temporary.
+
+  7. The swarm, not the individual nanobot, is the primary distributed computer.
+
+  8. DCSI is the initial computational skeleton and BTCA is the initial biological
+     mapping layer, both subject to audit.
+
+  9. The AGI/server is a control plane, not an omniscient controller.
+
+ 10. High-risk actions require both external authorization and local contextual
+     verification.
+
+ 11. Capability is explicitly separated from authority.
+
+ 12. Replication, persistent engraftment, differentiation/state conversion, and
+     irreversible remodeling are privileged operations.
+
+ 13. Preventing uncontrolled proliferation, ectopic persistence, safety-circuit
+     escape, and other cancer-like/pathological behaviors is a first-class
+     architectural problem, not a late-stage implementation detail.
+
+ 14. Existing Triskelion stochastic, lesion, failure, and homeostatic contingencies
+     are inherited conceptually where valid, not reinvented.
+
+ 15. No current DCSI/BTCA mathematical or chemical equation is exempt from the
+     Section 11 audit merely because it appears in the existing master document.
+
+ 16. The actual canonical nanobot mathematics will be constructed only after the
+     audit classifies, repairs, or rejects the inherited equations.
+
+================================================================================
+SECTION 16: EXTERNAL SCIENTIFIC GROUNDING - NON-CANONICAL REFERENCE CONTEXT
+================================================================================
+
+The architecture is future-facing, but several present-day research directions
+support individual pieces of the roadmap. These references DO NOT validate the
+complete Triskelion nanobot system.
+
+Representative research areas include:
+
+  - programmable synthetic receptors controlling mammalian cell behavior;
+  - engineered cellular therapies and living medicines;
+  - synthetic-cell communication and synthetic-cell/natural-cell interfaces;
+  - genetically programmed synthetic cells;
+  - magnetic and soft microrobots for targeted delivery and external actuation;
+  - molecular/DNA machinery;
+  - inducible safety switches in pluripotent-cell research;
+  - tumorigenicity assessment for pluripotent stem-cell therapies.
+
+Representative papers/reviews for the audit/research bibliography:
+
+  - Kalogriopoulos et al., "Synthetic GPCRs for programmable sensing and control
+    of cell behaviour," Nature, 2025.
+
+  - Moghimianavval et al., "Strategies and applications of synthetic cell
+    communication," Nature Chemical Biology, 2025.
+
+  - Monck et al., "Genetically programmed synthetic cells for thermo-responsive
+    protein synthesis and cargo release," Nature Chemical Biology, 2024.
+
+  - Harimoto et al., "Delivering living medicines with biomaterials," Nature
+    Reviews Materials, 2025.
+
+  - Shi et al., "Precision installation of a highly efficient suicide gene safety
+    switch in human induced pluripotent stem cells," Stem Cells Translational
+    Medicine, 2020.
+
+  - Martin et al., "Targeted biallelic integration of an inducible Caspase 9
+    suicide gene in iPSCs for safer therapies," Molecular Therapy - Methods and
+    Clinical Development, 2022.
+
+These references must be checked directly during formal research. They are not a
+substitute for the line-by-line audit.
+
+================================================================================
+SECTION 17: ADDENDUM B IMPLEMENTATION ORDER
+================================================================================
+
+The required next sequence is:
+
+  STEP 1:
+    Freeze the current Triskelion/DCSI/BTCA source corpus for audit provenance.
+
+  STEP 2:
+    Inventory every equation, constant, scaling law, and biological claim.
+
+  STEP 3:
+    Apply the Section 11 classification system line by line.
+
+  STEP 4:
+    Repair dimensional, mathematical, chemical, terminology, and architectural
+    errors.
+
+  STEP 5:
+    Produce a clean audited DCSI/BTCA mathematical kernel.
+
+  STEP 6:
+    Construct the substrate-independent nanobot mathematics from that kernel.
+
+  STEP 7:
+    Build the general-purpose digital-twin swarm.
+
+  STEP 8:
+    Attack it with proliferation, command-error, mutation, isolation, lesion,
+    resource-starvation, and communication-failure tests.
+
+  STEP 9:
+    Only after the abstract architecture survives, map it onto candidate
+    biohybrid substrates.
+
+  STEP 10:
+    Progressively replace biological subsystems with synthetic implementations
+    while preserving the common logical interfaces and repeating safety audits.
+
+================================================================================
+                              END OF ADDENDUM B
+================================================================================

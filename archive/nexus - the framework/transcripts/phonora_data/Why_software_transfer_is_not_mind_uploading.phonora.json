@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "4f5d55dc-0296-4bbf-aacf-eb7ab1f4fc62",
+  "job_id": "3f090214-ce46-4b3e-9425-4e36f6a17c8c",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Why_software_transfer_is_not_mind_uploading.m4a",
+    "filename": "Why_software_transfer_is_not_mind_uploading.m4a",
+    "duration": 106.3009375
+  },
+  "transcription": {
+    "started_at": "2026-09-01T11:38:35.451040",
+    "model": "medium",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "medium",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 28.34,
+      "text": "This is the brief on digital continuity and the limits of mind uploading. So, the Nexus project just dropped a huge engineering breakthrough for transferring software across systems. But, they're strictly warning us not to confuse this with the sci-fi dream of actually uploading human consciousness. First, for software, identity is all about a verifiable path, you know, not just a snapshot. Nexus uses QMT, or quantum mechanical transformation,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 28.34,
+      "end": 57.97,
+      "text": "and dot-cuban packages to preserve a program. Rather than just copying bytes, these tools verify a program's entire continuous history, its providence. Think of it like a legal chain of custody. A perfect atom-for-atom replica of a knife isn't the actual murder weapon without that unbroken paper trail proving exactly how it got there. Second, branching totally breaks identity. Just because two perfectly duplicated programs act exactly the same doesn't mean they're the same entity.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 57.97,
+      "end": 83.47,
+      "text": "Now, you might be thinking, wait, if we have two identical copies, how does the system actually resolve this split-brain paradox? Well, for software, Nexus simply forces a non-forking policy, declaring a single authoritative winner by administrative fiat. Finally, this framework hits a hard wall when applied to us humans. Because we obviously can't just enforce an administrative rule on a living person, software continuity does not equal human survival.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 83.47,
+      "end": 106.3,
+      "text": "Despite the wild sci-fi claims, advanced biological sensors like Berlion Microscopy or NV Diamond Magnetometry literally only measure physical properties like tissue stiffness or magnetic fields. They absolutely do not detect memories, personal identity, or a conscious soul. We can successfully engineer an unbroken chain of custody for code, but the first-person human experience remains strictly untransferable.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Why_software_transfer_is_not_mind_uploading.m4a",
+  "source_filename": "Why_software_transfer_is_not_mind_uploading.m4a",
+  "source_duration": 106.3009375,
+  "transcription_timestamp": "2026-09-01T11:38:35.451040",
+  "model": "medium",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "medium",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

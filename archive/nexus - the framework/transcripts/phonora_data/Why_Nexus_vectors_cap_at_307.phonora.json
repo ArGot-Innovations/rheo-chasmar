@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "8eeadea6-be8f-4c76-9f50-6a1d8eafde10",
+  "job_id": "6bc9ab01-842a-4f9c-a652-1ecabc298e81",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Why_Nexus_vectors_cap_at_307.m4a",
+    "filename": "Why_Nexus_vectors_cap_at_307.m4a",
+    "duration": 99.1491875
+  },
+  "transcription": {
+    "started_at": "2026-09-01T16:12:16.258996",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 27.15,
+      "text": "This is the brief on the Nexus HSL 307 reference constant. Inside the Nexus Hyperdimensional Computing Architecture, there's a strict rule capping active vector coordinates at 307 out of 1024. So, is this a hard boundary set by physics or just a bureaucratic speed limit decided by a committee? To figure that out, we really have to look at the math. First, the origin of 307 is honestly just a hard-coded design convention.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 27.15,
+      "end": 54.86,
+      "text": "It's literally 30% of 1024, rounded down. You might be wondering why not a clean computer science number like 256? Well, an early aesthetic target called for a 70% structural vacuum and that legacy choice just got permanently baked in. So, if it's just a legacy rule, does exceeding it actually break the system's data recovery? Second, mathematical analysis completely falsifies the idea of a recoverability wall.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 54.86,
+      "end": 83.36,
+      "text": "The system's quinary binding rule evaluates each coordinate independently. It's exactly like checking the time on 1,024 independent clocks. One breaking doesn't change the time on all the rest. Degradation happens on a smooth curve, not a sudden cliff. So what's the actual practical function of this limit today? Finally, 307 simply acts as a practical engineering reference cap. Maintaining that 30% occupancy keeps vector overlaps super manageable, around 92 shared coordinates which successfully controls noise.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 83.36,
+      "end": 99.15,
+      "text": "We really need to demystify our terms and call it a reference occupancy cap instead of an impenetrable wall. Ultimately, 307 is just a functional speed limit for the Nexus architecture, proving that sometimes the most mysterious constants in our systems are simply legacy choices disguised as deep math.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Why_Nexus_vectors_cap_at_307.m4a",
+  "source_filename": "Why_Nexus_vectors_cap_at_307.m4a",
+  "source_duration": 99.1491875,
+  "transcription_timestamp": "2026-09-01T16:12:16.258996",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

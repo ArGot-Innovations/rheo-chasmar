@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "74eb3edc-0e41-4312-877a-87183398a8ab",
+  "job_id": "164ad97f-1c56-4c7f-ae22-895628198334",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/HVD_Nexus_4_Recursive_Database_Architecture.m4a",
+    "filename": "HVD_Nexus_4_Recursive_Database_Architecture.m4a",
+    "duration": 125.96825
+  },
+  "transcription": {
+    "started_at": "2026-08-27T13:43:38.671163",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 25.5,
+      "text": "This is the brief on the HVD Nexus for recursive cognitive database architecture. It's essentially our master technical blueprint, taking some incredibly complex concepts and synthesizing them into a mathematically rigorous beginner-to-expert guide for building a self-healing cognitive database. First up, we're seeing a huge paradigm shift from static databases to dynamic cognitive fields.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 25.5,
+      "end": 52.85,
+      "text": "The hyperdimensional vector database, or HVD, is a complete, independent cognitive database, while the hyperdimensional thought cloud engine manages the active cognitive field. It's kind of like a soup kitchen. Instead of rigid inheritance trees, data forms temporary overlapping coalitions based entirely on context, just like unrelated people temporarily gathering for soup, interacting, and then dispersing.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 53.14,
+      "end": 78.16,
+      "text": "Second, you're probably wondering how on earth does a system physically store and calculate these rapidly changing, sometimes contradictory, cognitive realities without completely crashing? Well, it splits the workload. The transdimensional memory substrate handles the active live storage using clever structural sharing and copy-on-write mechanics while HDF5 acts as your cold, durable vault.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 78.16,
+      "end": 98.8,
+      "text": "and underlying all this is hypervector nonlinear transdimensional algebra, providing the actual calculus to seamlessly process these wildly complex dimensions. Finally, this theoretical math connects directly to a real benchmarkable code base that's absolutely ready for production. You can verify this logic yourself.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 98.8,
+      "end": 125.97,
+      "text": "Just search for the Google Drive file engineering a transdimensional memory substrate.txt, or dive right into the GitHub repo specifically for docsHVD15architecture.pmd and hvtmsv15storage.py. Ultimately, this master blueprint completely transforms the HVD from a simple vector index into a mathematically formal, dynamically recursive substrate built to power true digital cognition.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/HVD_Nexus_4_Recursive_Database_Architecture.m4a",
+  "source_filename": "HVD_Nexus_4_Recursive_Database_Architecture.m4a",
+  "source_duration": 125.96825,
+  "transcription_timestamp": "2026-08-27T13:43:38.671163",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

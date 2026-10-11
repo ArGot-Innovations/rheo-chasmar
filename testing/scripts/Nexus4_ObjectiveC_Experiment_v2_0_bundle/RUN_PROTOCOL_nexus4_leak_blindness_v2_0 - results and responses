@@ -2161,3 +2161,12 @@ The reference JSON was not provided in the upload, so mechanical comparison agai
 Claude (sonnet max)
 
 
+Ran it exactly per protocol. Summary:
+
+**Provenance:** Script hash matched the official `178f5bd6...` exactly (no corruption). Executed unmodified: Ubuntu 24.04.4, x86_64, Python 3.12.3, NumPy 2.4.4 (reference was 3.13.5/2.3.5 — expected difference, noted). Result JSON hash: `85786f35...`.
+
+**Result:** Run status **VALID** — all 8 self-tests passed. All historical P1–P8 verdicts reproduced with zero drift from the v1.1 record (P3/P4/P5 still correctly FAIL — those falsified predictions were preserved, not rewritten). All six R1–R6 post-pilot replication targets **PASS**, and I independently re-derived each from the raw tables rather than trusting the script's self-reported verdict.
+
+**Gap:** `nexus4_leak_blindness_v2_0_reference.json`/`.md` weren't in this upload, so step 7 (reference comparison, response section 11) couldn't be done — if you share that file I can do a mechanical field-by-field diff.
+
+The panel-response doc has all 17 required sections, including 8 methodological attacks + repairs (one per required category: signal model, null model, calibration, MDR metric, horizon test, identifiability, reference semantics, architectural transfer — the biggest one is that nothing here tests a hysteretic control, so the Green-Sky "does it go quiet again" split in §5 may not transfer to real THDE at all), tagged answers to Q1–Q9, an ownership map, and two new predictions dated and marked as post-hoc.

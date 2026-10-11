@@ -1,0 +1,889 @@
+Mathematical and Architectural Requirements for Phase 1 DCSI Swarm Simulation
+Formal system model
+SECTION A — FORMAL SYSTEM MODEL
+Minimum-viable mathematical object
+To be executable (not “hand-wavy”), Phase 1 must commit to a hybrid model that is simultaneously:
+a stochastic interacting particle system (nodes as particles in a flow field), a time-varying proximity graph (communication edges appear/disappear with motion and occlusion), a coupled nonlinear dynamical system (salience/consensus/HTLA state variables coupled across graph edges).
+This is not optional: the lesion requirement (random deletion of 30% mid-run), plus strict local communication, forces you to reason about switching topology and robust consensus under node/link loss. Standard results for switching-topology consensus provide the right proof obligations, but only if you specify the graph process and update schedule precisely.
+State definition and state-space minimality
+The prompt proposes the per-node state:
+This is directionally correct, but it is still underspecified. A minimal, defensible Phase-1 state must fix dimensions, domains, and update cadence.
+A smallest defensible choice (supports anomaly detection and maze-style navigation by local gradients) is:
+Position (2D domain is the minimal tractable “fluid-like” environment; 3D is optional but multiplies compute and neighbor search cost without increasing conceptual validity in Phase 1). Velocity (or omit and use overdamped dynamics; see below). Sensory state , with minimal:
+: scalar field sample (anomaly = unusual ). : . : (wall proximity enables maze interactions).
+HTLA hyper-state , where is a fixed hypervector space (defined concretely in Section C).
+1
+x(t)=i[p(t),v(t),s(t),h(t),e(t),r(t),n(t)].iiiiiii
+p∈iR2
+v∈iR2
+s≡iS∈iRdsd∈s{1, 2, 4}
+d=s1 θ(p, t)iθ
+d=s2 (θ,∥∇θ∥)
+d=s4 (θ,∂θ,∂θ,wall
+p
+​
+ rox)xy
+h≡iH∈iH H
+Prediction error . Resource/energy as a normalized budget proxy (strictly needed because emission, motion, and decoding must be throttled under constraints). Neighborhood/topology variables as a compact set of local statistics rather than a full adjacency list:
+The hypervector formalism in your internal documents defines hypervectors as labeled direct-sum objects and transdimensional operators as block maps; for Phase 1 you must freeze labels and dimensions rather than allow dynamic label creation (otherwise you’ve added a meta-optimizer, not a swarm sim). fileciteturn0file4
+Environment dynamics: “fluid” without cheating
+You need an environment definition that is fluid-like yet computationally feasible at . The minimal model is an externally-defined, divergence-free velocity field plus Brownian agitation:
+where: - is node-controlled drift (bounded), - is standard Gaussian white noise (or discrete-time i.i.d. Gaussian vectors), - is noise magnitude.
+If you insist on an explicit scalar anomaly field , the minimal PDE is advection–diffusion with sources:
+where anomalies are localized sources/sinks inside . This gives you a falsifiable ground truth for “anomaly present.” Reaction–diffusion is also acceptable (and often better for pattern formation), but you must then own the parameter regimes that create stable/unstable modes.
+Graph process and global state
+Define the time-varying communication graph:
+with lesion modeled by a sudden reduction in (Section E). An undirected edge exists iff:
+where LOS can be omitted unless you truly simulate obstacles (maze).
+The global swarm state is:
+e≡iE∈iR≥0
+r∈i[0, 1]
+ni
+n(t)≡i(deg (t),(t),(t),local
+c
+​
+ onnectivity
+f
+​
+ lag).i
+s
+ˉ
+ Ni
+E
+ˉ
+ Ni
+N= 104
+u(x,t)adv
+(t)=
+p
+˙
+​
+ iu(p(t),t)+adv iu(t)+iσξ(t),pi
+u(t)iξ(t)i
+σp
+θ(x,t)
++ ∂t∂θ
+u⋅adv∇θ= D∇θ+θ2 q(x,t),
+q(x,t)
+2
+G(t)= (V(t),E(t)),V(t)⊆{1,… $,N}, $
+V
+(i,j)∈E(t)⇔∥p(t)−ip(t)∥≤jR∧commLOS(i,j,t)= 1,
+X(t)= x(t),…,x(t).1∣V(t)∣
+This is a random geometric graph process on moving points; connectivity after lesion will depend strongly on and density, and thus must be treated as a first-class design parameter rather than a tweak. Connectivity thresholds for random geometric graphs provide the right scaling intuition and proof targets.
+HSL manifold meaning in simulation terms
+Your internal HSL document defines HSL as a product of labeled manifolds with a salience kernel weighting label similarities:
+with constrained to the simplex and . fileciteturn0file2
+For Phase 1, the only mathematically defensible interpretation (without “emergent manifold” hand-waving) is:
+The HSL manifold is a fixed, engineered latent representation space used locally by each node as its representational substrate. “Emergence” then refers to population-level statistical structure (clusters, fields, spectral concentration) arising in the distribution of points and in the induced graph — not to a magically appearing manifold.
+If you want an “emergent manifold” claim, you must operationalize it as graph-embedded geometry (e.g., a diffusion-map / Laplacian embedding of node states) and measure it, but that is additional complexity and should be treated as an experiment, not as an assumption.
+Exact sensory prediction and error definition
+You demanded:
+To execute this, define with a Phase-1-minimal predictor that fits node compute limits:
+Discrete time with step :
+where is either: - scalar AR(1): (cheapest), or - diagonal (still cheap).
+Update by a bounded stochastic gradient step:
+and error:
+Rcomm
+3
+M =HSL M , sim (H,Q)= ℓ∈L
+∏ℓ wws(H,Q), ℓ∈L
+∑ℓ ℓ ℓ ℓ
+ww=∑ℓℓ 1
+MHSL
+H(t)∈iMHSL G(t)
+E(t)=i∥(t)−
+S
+^
+ iS(t)∥.i2
+S
+^
+ i
+kΔt
+[k]=
+S
+^
+ iA[k]S[k−ii1],
+AiA=iρ∈i[0, 1] d×sds
+ρi
+ρ[k+i1] = Π(ρ[k]+[0,1] iη⟨S[k−ρi1], S[k]−iρ[k]S[k−ii1]⟩),
+If you cannot write down explicitly, you do not have a prediction-error-driven salience loop—you have a slogan.
+Your internal documents repeatedly frame cognition as predictive processing and reconsolidation, but Phase 1 must collapse that into a minimal executable predictor + error loop like the above. fileciteturn0file6
+Node constraints and tri-compartment architecture
+SECTION B — DCSI NODE CONSTRAINT SPECIFICATION SECTION I–II — TRI-CELLULAR NODE ARCHITECTURE AND INTRA-CELL COUPLING
+Hard limits (make them numeric or bounded)
+Phase 1 must state explicit bounds. A minimum viable constraint set for “ultra-restricted TUCR nodes” is:
+Memory per node : 512 B – 4 KB. Below ~512 B you cannot store a persistent identity HV, a working HV accumulator, and even minimal predictor state simultaneously. State dimension: fixed and small.
+: 4 floats total (16 B if float32) for overdamped; 8 floats (32 B) if second-order. : float32.
+: 2 float32. HV storage: at least one persistent HV and one working HV (details in Section C). Observable neighbors per cycle : 8–24 (upper bound enforced even if more are in range). Communication radius : chosen so that with after lesion the graph remains connected with high probability under assumed point density; random geometric graph thresholds give scaling but do not guarantee connectivity under clustering, so you must validate. Maximum messages per cycle: at most outgoing packets and incoming packets; each packet is exactly 64 bits. Compute budget per cycle: Bit ops: bitwise ops (XOR/AND/shift) per cycle. Float ops: float ops per cycle. No matrix decompositions, no global optimization, no neighbor-of-neighbor queries. If you allow those, you have violated the “nanorobotic realism” constraint. Local clock model: Either synchronous discrete time (simplest) or bounded-asynchrony: each node updates every cycle with jitter steps, but still only reads local inputs. Switching-topology consensus theory gives you conditions for convergence under time-varying graphs and delays, but you must adopt its assumptions explicitly (connectivity over time windows, bounded delays). Failure probability model: Pre-lesion: per-cycle packet bit-flip probability (choose and test; if is zero you’re hiding fragility).
+E[k]=i∥S[k]−i[k]∥.
+S
+^
+ i2
+S
+^
+ i
+Mnode
+p, vii
+Sid∈s{1, 2, 4}
+E, rii
+kmax
+RcommN=′ 0.7N
+3
+kmaxkmax
+≤104
+≤200
+J[k]∈i{−1, 0,+1}
+1
+p∈b[10 , 10 ]−6 −3 pb
+Node death: deterministic lesion event at deleting exactly 30% uniformly at random, plus optional background dropout . Sensor noise:
+Environmental drift: Either time-varying or a time-varying anomaly field . If both are static, the task is too easy.
+Tri-compartment node (forced biological analog)
+You required:
+To make this structural and enforceable, define variables and allowable operations per compartment.
+Nuclear core
+: Identity / Memory core (persistent, slow) Variables:
+identity HV (fixed random seed at initialization), long-term memory “sketch” (small: top-K token counts or exponentially-decayed counts).
+Allowed ops: HV binding/unbinding ops (bitwise or circular convolution), k-WTA / thresholding, exponential decay of counts.
+Forbidden: direct access to raw neighbor packet history beyond current cycle (no unbounded buffers), any global IDs or coordinates not locally sensed.
+Your internal CA/TUCR materials treat “identity stability” and “preservation gates” as core invariants; Phase 1 should interpret that as “ cannot be overwritten; only associated memory traces can be updated.” fileciteturn0file1
+: Prediction engine (fast, minimal) Variables:
+(or diagonal ), last sensory sample .
+Allowed ops:
+AR(1)-style prediction and bounded update.
+: Control / regulation (gating, energy-aware)
+t= tLp≪death1
+S[k]=iS(p[k],k)+⋆iσϵ[k],ϵ∼siiN (0, I).
+u(x,t)advq(x,t)
+$x =i {C ,C ,C $}, N =i(1)
+i(2)
+i(3)
+iN,N,N.i(A)
+i(B)
+i(C)
+N(A)
+Ii
+Mi
+Ii
+N(B)
+ρiAi
+S[k−i1]
+N(C)
+Variables: emission gate , local consensus accumulator , motion bias vector .
+Allowed ops: saturating nonlinearities (sigmoid / clip), gain scheduling based on energy and error.
+The “neuromodulatory” variables defined in your consciousness algorithm are far too heavy for 10,000 ultra-restricted nodes; Phase 1 should compress this into a single scalar gate (or at most a 2–3D control vector) that plays the same mathematical role—resource-modulated salience/communication gating. fileciteturn0file0
+Cytoplasmic processing layer
+Variables: working HV accumulator (superposition of recent bound signals), short-term receive buffer of size packets (current cycle only), short-lived local features derived from . Allowed ops: encode/decode packets, HV superposition and cleanup (k-WTA or majority), local salience update.
+Membrane/interface layer
+Variables: neighbor list truncated to , transmit schedule (at most one 64-bit packet per neighbor per cycle), packet TTL/decay logic. Allowed ops: attenuation (TTL decrement), codec ops and simple CRC, neighbor selection policy.
+The internal bus constraint (mandatory answer)
+You explicitly asked: “What is the bus bandwidth between the Nucleus and the Cytoplasm?”
+If you leave this unbounded, you have silently reintroduced a central computer inside each “nanorobot.”
+Minimum defensible constraint:
+Nucleus↔cytoplasmbus:bitspercycleeachdirection.Consequence: copying a 1024-bit HV across compartments takes 4 cycles, forcing you to decide where HVs live and preventing instantaneous “teleport” of large internal representations.
+g∈i[0, 1]
+c∈i[0, 1]
+b∈iR2
+gi
+C(2)
+Wi
+≤kmax
+ϕ[k]iS[k]i
+C(3)
+N (k)ikmax
+B=int 256
+Practically: keep and in ; keep in cytoplasm; allow only a 256-bit “view” (e.g., one 256-bit block index) to cross per cycle.
+Any Phase-1 implementation that does not enforce this (or an equivalent) is not implementing your required compartmentalization—it is simulating a conventional agent with extra variable names.
+Minimum viable node update rule
+You demanded:
+A concrete discrete-time update (cycle ) that respects constraints:
+Sense
+Predict + error
+Salience
+Hypervector update (local)
+(formal operators specified in the next section).
+Consensus accumulator (scalar, cheap)
+Motion control
+where is derived from decoded HTLA/location signals or from neighbor salience gradients.
+Position
+IiMiN(A)Wi
+x(t+iΔt)= f(x(t),N(t),S(t),u(t),ξ(t)).iiiiii
+k
+1.
+S[k]←iSense(p[k])+iσϵ[k].si
+2.
+[k]=
+S
+^
+ iρ[k]S[k−ii1], E[k]=i∥S[k]−i[k]∥.
+S
+^
+ i2
+3.
+σ[k]=iclip (αE[k]−[0,1] Eiα(1 −rr[k])+iα[k−nσNi1]).
+4.
+H[k]=iUpdateHV(I, W[k−ii1], ϕ[k],E[k])ii
+5.
+c[k+i1] = clip (c[k]+[0,1] iη(c[k]−c
+j∈N(k)i
+∑jc[k])+iκσ[k]).i
+6.
+u[k]=iu+avoid u+align βb[k],∥u[k]∥≤iiu,max
+bi
+7.
+p[k+i1] = p[k]+iΔt(u(p[k],k)+adv iu[k])+iσξ[k].pΔti
+This is executable, bounded, and leaves no “magic.” The remaining work is defining , packet encoding, and the recovery operator.
+HTLA low-bandwidth pheromone communication
+SECTION C — HTLA LOW-BANDWIDTH PHEROMONE COMMUNICATION SECTION III — HTLA PACKET FORMAT UNDER MEMBRANE CONSTRAINTS
+The central feasibility question is brutally simple:
+Under 64 bits per neighbor per cycle, you cannot transmit a full hypervector. Therefore, Phase 1 must either (i) transmit compressed sketches with analyzable collision/error properties, or (ii) transmit indices into a shared codebook. Anything else is fantasy.
+This is a known trade space in sketching and locality-sensitive hashing: compact representations can preserve similarity with bounded error, but only under explicit assumptions.
+Hypervector representation (two viable baselines)
+Your HTLA documents define hypervectors over direct sums of labeled component spaces and operators as block maps. fileciteturn0file4 Your HTNLA blueprint adds nonlinear binding and label-specific nonlinearities; for Phase 1, keep nonlinearity minimal (e.g., k-WTA or tanh-like saturation) because invertibility and decoding must be analyzable. fileciteturn0file5
+Two competing Phase-1 implementations:
+Implementation Elegant: binary VSA / HDC (mathematically clean)
+Dimension: bits (or if you can afford cost). Representation: . Similarity: normalized Hamming similarity:
+Why: binary hyperdimensional computing has concentration properties and robust superposition/ cleanup under noise, with well-studied binding primitives (XOR/permutation) in vector symbolic architectures.
+Implementation Practical: mixed symbolic + hypervector (simulation-first)
+Keep internal HVs as above (useful locally), but transmit compact symbolic packets (codebook IDs + quantized location + salience). Why: it is the only way to guarantee that “location” and “confidence” survive the 64-bit pipe without heroic decoding.
+UpdateHV
+4
+D= 1024 D= 2048
+H∈{0, $1}D $
+sim(H,K)= 1 − Ham(H,K).D
+1
+5
+Binding/unbinding operators (explicit)
+You demanded an explicit choice for:
+Two valid operator families:
+XOR + permutation (binary, fast)
+Let be a fixed permutation matrix on (equivalently a bit permutation). Define:
+Binding:
+Unbinding:
+since XOR is self-inverse and is invertible. The operator matrix is literally (a permutation matrix), fixed globally.
+To avoid accidental correlations, use two independent permutations and bind as:
+This matches common VSA/HDC practice: binding is invertible and cheap; permutation is the operator that enforces role/filler separation.
+Circular convolution (HRR-style, mathematically classical)
+Let (dense real) and define binding via circular convolution:
+and unbinding via correlation / approximate inverse. This is the core mechanism in holographic reduced representations.
+This is “elegant,” but it is heavier computationally and harder to reconcile with strict nanonode compute limits unless you implement convolution via FFT (which is disallowed by your own realism constraints).
+Superposition rule (explicit, with noise tolerance)
+Binary superposition:
+H=signal H⊗anomalyH.location
+P{0, $1}D $
+bind(A,B)= A⊕P(B),
+unbind(C,B)= C⊕P(B),
+PP
+P,Panomloc
+H=signal P(H) ⊕anomanom P(H).loc loc
+5
+H∈RD
+(A⊗B)[k]= A[m]B[(k− m=0
+∑D−1
+m)mod D],
+6
+Maintain an integer accumulator (small counters, saturating) and update with incoming binary vectors :
+where is decay and is the cleaned-up working HV.
+This is executable; it gives you a tunable memory horizon via . The underlying HDC literature explains why high-dimensional random vectors support robust superposition and cleanup, but only when you keep densities and thresholds controlled.
+64-bit compression (you must pick one and own its failure modes)
+You cannot “fit a hypervector” into 64 bits. You can only fit a sketch or an index.
+Two concrete encodings:
+Scheme Practical: 64-bit structured packet (recommended for Phase 1)
+Bit-level schema (exact):
+Bits 0–15: token_id (16-bit) Index into shared anomaly codebook of size . This codebook maps tokens to internal HVs
+and optionally to classifier labels. Bits 16–31: loc_q (16-bit) Quantized location: 8 bits for -bin, 8 bits for -bin. Bits 32–39: sal (8-bit) Salience magnitude . Bits 40–47: conf (8-bit) Confidence / estimated reliability (can be a function of error magnitude and neighbor agreement). Bits 48–55: ttl (8-bit) Time-to-live / decay; decremented each hop. Bits 56–63: crc8 (8-bit) CRC-8 over bits 0–55.
+Encoding function:
+Decoding either discards packets with invalid CRC or treats them as low-confidence (depending on your error model).
+This is “brute force practical” and is the only scheme that cleanly preserves anomaly + location + salience + confidence simultaneously under 64 bits.
+Z∈ZDH(m)
+Z[k]= λZ[k− 1] + (2H− m
+∑(m)1), W[k]= I[Z[k]≥0],
+λ∈(0, 1] W
+λ
+7
+C 216
+Hanom
+xy
+∈[0, 255]
+Packet =iEncode (token_id, loc_q, sal, conf, ttl, crc8).64
+Scheme Elegant: 48-bit SimHash sketch + 16-bit metadata
+Let the bound HV be . Convert to and apply random projection:
+then:
+Allocate remaining 16 bits to sal and ttl (8+8). This is a locality-sensitive hash family tied to random projections; the foundational theory is in similarity estimation / LSH, and the correctness claim is: similarity is preserved in expectation with variance decreasing in sketch length, not that “decoding is perfect.”
+This scheme is “elegant,” but you must accept that: - you will not reliably unbind location vs anomaly from the sketch, - decoding becomes a nearest-neighbor problem over a pre-agreed dictionary, - false positives are unavoidable and must be controlled statistically.
+Operator matrices (explicit families)
+You demanded explicit operator matrices or families. Minimal set:
+Permutation matrices (exactly one 1 per row/column). Projection matrix , or if you sacrifice metadata; random sign matrices satisfy distributional JL-like distance preservation in expectation and are standard in sketching arguments. Cleanup memory: a fixed associative memory mapping codebook indices to corresponding HVs (for the practical scheme), or mapping noisy sketches back to nearest HV class.
+Decoding reliability (collision and false-consensus analysis)
+You demanded explicit collision risks.
+For the 16-bit token_id scheme
+If token_id is a true index into a shared table , semantic collision probability is 0 by construction (unless you reuse IDs). The actual risk is: - packet corruption (mitigated by CRC), - adversarial aliasing due to quantized location (coarse bins), - systematic false consensus if salience diffusion is too aggressive.
+For the SimHash sketch scheme
+Let be sketch bits (e.g., 48). For two unrelated random HVs, sketch match probability is . For many messages per cycle, the expected number of accidental matches is , which becomes non-negligible if is too small and is large.
+With , , total directed transmissions per cycle is on the order of . Then , so you need large enough that . That requires bits before you even
+H∈sig{0, $1}D {−1,+1}D $
+y= Rh,R∈{−1,+1} ,48×D
+sketch[b]= I[y≥b0], b= 1,… , 48.
+8
+P,P∈anomloc {0, $1}D×D $
+R∈−1,+1m×Dm= 48 64
+9
+A
+C
+m≈2−m
+M≈2( 2 M)−m
+mM
+N= 104 k≈10 M∼ 105 ≈(2 105)
+5 × 109 m5 × 10 2 ≪9−m1 m≳33
+start. At , the expected accidental equality per cycle is tiny, but decoding uses nearest-neighbor similarity, not exact equality, so near-collisions still matter.
+This is why Phase 1 should prefer the structured 64-bit packet unless you explicitly want to study sketch-induced hallucinations.
+What cannot fit in one cycle (plain answer)
+Under 64 bits per neighbor per cycle, you cannot reliably transmit all of: - high-resolution location, - rich anomaly descriptor, - confidence, - provenance/history, - multi-hop routing metadata,
+unless you discretize aggressively (codebooks + quantized bins) or accept approximate sketches.
+If you claim otherwise, you are hiding data in assumptions.
+Consensus, resonance, and emergent topology
+SECTION D — CONSENSUS, RESONANCE, AND EMERGENT TOPOLOGY SECTION IV — MULTI-SCALE CONSENSUS FROM CELL TO SWARM
+Minimal swarm-level “collective cognition” dynamics
+Phase 1 requires a local-to-global mechanism turning local errors and HTLA packets into macroscopic behavior (clustering, navigation, consensus).
+A minimum viable decomposition:
+Scalar consensus layer for “anomaly probability / confidence” (cheap, robust). Vector field layer for movement (derived from decoded location bins or gradient-following). Optional phase synchronization layer if you insist on “resonance” beyond a metaphor.
+Consensus on switching graphs has well-defined conditions (connectivity over time windows, bounded delays) and a canonical Lyapunov argument. If you do not meet these conditions, you cannot claim stability after lesion—only empirical luck.
+Neighborhood aggregation (explicit)
+Let be the neighbor set at cycle , truncated to . Define normalized weights:
+Salience propagation (explicit diffusion)
+Let be salience. A graph-diffusion + injection update:
+m= 48
+1
+N (k)ikkmax
+w(k)=ij1[j∈max(1, ∣N(k)∣)i
+1 N (k)].i
+σ∈i[0, 1]
+with or a clipped linear map.
+This is a discrete reaction–diffusion analog on a graph; continuous reaction–diffusion theory is the right conceptual reference, but here your operator is the graph Laplacian (next).
+Consensus accumulation (explicit Laplacian form)
+Let . Define:
+where is the (weighted) graph Laplacian at time . Convergence rate depends on algebraic connectivity (Fiedler value); switching-topology results generalize this under conditions on joint connectivity.
+Movement bias toward anomalies (explicit)
+With the practical packet scheme, nodes receive quantized location bins of suspected anomalies. Each node maintains a local “pull” vector:
+where is the decoded bin center and .
+Then motion control is:
+where prevents collisions and optionally produces flocking-like coherence.
+If you want explicit “flocking” anchoring, the minimal alignment term can be Vicsek-style:
+which is known to exhibit an order–disorder transition under noise and density.
+Continuum flocking theory (Toner–Tu) can be treated as a mean-field sanity check for macroscopic behavior, but Phase 1 should not depend on continuum assumptions for correctness.
+Resonance / synchronization (only if you can measure it)
+If you insist on “resonance,” define a phase and a Kuramoto-like coupling:
+σ[k+i1] = clip ((1 −[0,1] η)σ[k]+σiηw(k)σ[k]+σ
+j∈N(k)i
+∑ijjκg(E[k])),σi
+g(E)= E+E0E
+2
+c[k]∈i[0, 1]
+c[k+ 1] = c[k]− ηL(k)c[k]+cκσ[k],c
+L(k)k
+10
+b[k]=i, m∈msgs(i,k)
+∑salience/conf
+ω(m)∥(m)− p[k]∥+ ϵp i
+(m)− p[k]p i
+(m)p ω(m)∝sal ⋅conf ⋅1[ttl > 0]
+u[k]=iu+sep u+align βb[k],i
+usepualign
+θ[k+i1] = arg ( e)+ j∈N(k)i
+∑iθ[k]jηζ[k],i
+11
+12
+φ∈iS1
+Synchronization level is measurable via the order parameter:
+If you do not compute (or an equivalent), “resonance” is not a model component, it’s marketing.
+When does emergent topology become “real”?
+You asked if a “cognitive bottleneck” can be formalized as compression, entropy reduction, curvature increase, or spectral concentration.
+Phase-1-measurable definitions that are not hand-wavy:
+Spectral concentration: increasing (algebraic connectivity) and/or increasing spectral gap of a normalized Laplacian indicates faster diffusion/consensus and stronger integration. Compression: decreasing entropy of token distribution under continued task success (requires explicit token statistics; can be approximated with a sketch like Count-Min). Information-flow asymmetry: nonzero transfer entropy between subsystems indicates directed influence; estimable in principle but expensive at swarm scale.
+If you cannot define at least one of the above as a computed metric, then claims of emergent topology are ungrounded.
+Lesion recovery and Lyapunov stabilization after 30% deletion
+SECTION E — LYAPUNOV STABILIZATION AFTER 30% MASS-CASUALTY LESION SECTION V — CELL-AWARE LYAPUNOV CONTROL
+Lesion model (exact)
+At lesion time (cycle ):
+and all edges incident to disappear.
+Your UCVM/TUCR experiment protocol specifies lesion–recovery cycles and logging patterns; Phase 1 should align with that operational structure but at the correct scale (30% one-shot is far harsher than “1–3 nodes per step”). fileciteturn0file9 The UCVM design doc frames system health checks and remapping/snapshot concepts; in Phase 1 swarm sim there is no central remapper, so “recovery” must be realized as distributed control laws, not as a centralized API call. fileciteturn0file10
+φ[k+i1] = φ[k]+iΔt(ω+iKsin(φ[k]− j∈N(k)i
+∑jφ[k])).i
+R[k]= e. ∣V(k)∣1
+i∈V(k)
+∑iφ[k]i
+R13
+λ(L)210
+14
+15
+tLkL
+V(k) =L+ V(k) ∖L
+− L, ∣L∣= ⌊0.3N⌋,
+L
+What lesion does to the system (you must model each)
+Connectivity: may fragment. Consensus fields: Laplacian changes discontinuously; convergence rate can collapse if . Hypervector memory distribution: if “critical tokens” are held by too few nodes, they are erased. Salience field: diffusion flux changes; local maxima can disappear. Φproxy:anyintegrationmetricsensitivetoconnectivitywilldrop.
+Random geometric graph theory gives you scalings, but mobility and clustering can violate uniform assumptions; therefore recovery must include motion and/or range adaptation.
+Stability objective (explicit)
+Define a task-dependent target trajectory (e.g., swarm clustered near anomaly sources; or exit found). Recovery requirement:
+where extracts the relevant macroscopic observables (cluster centers, consensus confidence, coverage metrics), because demanding full microstate convergence is nonsensical for mobile stochastic swarms.
+Lyapunov candidate function (swarm + cell + comm)
+You demanded:
+A concrete candidate:
+where: - is the standard quadratic form that vanishes at consensus and decreases under linear consensus dynamics on a fixed undirected graph, - is a HV mismatch metric (e.g., Hamming distance), and is the locally reconstructed HV from decoded packets.
+Canonical Lyapunov structure for consensus underlies this construction; switching-topology extensions require additional conditions (joint connectivity over intervals).
+Your Transdimensional Memory Substrate blueprint explicitly uses quadratic Lyapunov forms and discusses Lyapunov-based correction protocols; Phase 1 can borrow that structural idea, but
+1.G
+2.λ→20 3. 4. 5.
+3
+X[k]∗
+∥Π(X[k])− k→∞lim sup Π(X[k])∥≤∗ϵ,
+Π(⋅)
+V= V+swarm V+cell V.communication
+V[k]swarm
+V[k]cell
+V[k]comm
+= αc[k]L(k)c[k]+ α∥p[k]− p[k]∥,c⊤
+p
+(i,j)∈E(k)
+∑ij2
+= βE[k]+ β(r[k]− r) ,E
+i∈V(k)
+∑i2
+r
+i∈V(k)
+∑i⋆2
+= γ(CRCfail [k])+γd(H[k],[k]),m
+i∈V(k)
+∑ih
+i∈V(k)
+∑i
+H
+^
+ i
+cLc⊤
+d(⋅,⋅)
+H
+^
+ i
+1
+V(x)= xPx⊤
+must translate it into purely local swarm laws (no centralized matrix synthesis unless you do it offline and embed constants). fileciteturn0file7
+Recovery superoperator (distributed, explicit)
+After lesion, allow only the following distributed changes:
+Range expansion (bounded)
+triggered if drops below a threshold.
+Consensus gain scheduling
+preventing instability when degree spikes.
+Salience renormalization
+so the field doesn’t “die” purely because mass was removed.
+Motion-based rewiring Introduce a connectivity potential and move to reduce fragmentation:
+These are implementable and purely local (depend only on neighbors).
+Proof obligations (what you must actually show)
+You demanded conditions such that:
+You will not get a single clean proof for the full hybrid system (mobile switching graph + quantized packets + HV cleanup) in Phase 1. The correct move is exactly what you requested:
+Separate macro- and micro-stability proofs and define their boundary condition.
+P
+Λrecover
+1.
+R[k+comm 1] = min(R, (1 +max δ)R[k]),Rcomm
+degi
+2.
+η[k]=cη,c,0deg [k]+ degi0
+deg [k]i
+3.
+σ[k]←i, max(ϵ,[k])σ
+σ[k]i
+4.Ψ=i∥p−∑j∈Niip∥j2
+u←iu−iη∇Ψ.ppii
+≤
+V
+˙
+ −cV+ η.
+Macro proof (graph consensus / diffusion)
+Assume: - bounded delays, - undirected or balanced digraph interactions, - joint connectivity over windows of length even after lesion and during recovery.
+Then standard consensus results give convergence to a consensus subspace, with rates controlled by connectivity measures; Lyapunov analysis uses quadratic forms involving the Laplacian.
+Boundary condition to micro layer: macro proof assumes that the communicated scalar/state is a bounded disturbance of the true local state; i.e.,
+where is controlled by codec error and packet loss.
+Micro proof (cell internal attractor)
+Assume each node’s internal triple nucleus dynamics is a contractive map under gating:
+where is bounded by packet-induced perturbations.
+Boundary to macro layer: must remain below a threshold so that control outputs stay bounded and do not destabilize motion/consensus gains.
+If you cannot specify or an equivalent contraction condition, “stable internal attractor” is an unverified claim.
+Minimum redundancy before lesion (irreducible)
+If a “cognitive token” (e.g., 16-bit anomaly ID) is stored in independent nodes, and nodes are deleted with probability , then the probability the token is lost is . To keep loss probability :
+Example: implies .
+Therefore Phase 1 must implement distributed replication of critical tokens (gossip-based or diffusion-based) before the lesion—otherwise the lesion requirement is mathematically impossible in the worst case.
+DefiningtheΦproxyatswarmscale
+SECTION F — DEFINING THE PHI PROXY
+T
+1
+∥[k]−c jc[k]∥≤jϵ,c
+ϵc
+∥N[k+i1] −N∥≤i⋆ρ∥N[k]−NiN∥+i
+⋆ϵ, ρ<NN1,
+ϵN
+ϵN
+ρN
+d
+q= 0.3 qd< δ
+d≥. log qlog δ
+δ= 10−3 d≥6
+Your documents variously treat as an integrated information–like scalar and track it in experiments. fileciteturn0file0 fileciteturn0file9 But true IIT- is not remotely computable at without massive approximation. Phase 1 needs a proxy that is:
+computable online or with bounded sampling, sensitive to fragmentation and loss of integration, hard to “game” by trivial synchronization.
+Three candidate metrics (all computable, all falsifiable):
+Candidate metric: normalized algebraic connectivity
+Define (for undirected ):
+where is the Fiedler value (second smallest Laplacian eigenvalue) and is a normalization constant (e.g., empirical max over baseline runs or theoretical upper bound for given degree). Algebraic connectivity is a canonical measure of global integration and controls consensus speed.
+Cost: exact eigenvalue is expensive at , but can be approximated intermittently via iterative methods on sparse graphs (Lanczos / power methods) or by sampling subgraphs. False positives: a tight but useless “ball” cluster can raise while failing the task; thus you must pair
+with task metrics.
+Candidatemetric:time−seriesintegratedinformationsurrogate(Φ
+A
+​
+ R/Φ
+E
+​
+ style)
+Barrett & Seth propose practical measures of integrated information for time-series systems that avoid discrete Markov restrictions.
+Define a Phase-1 tractable variant by choosing a small observable set (e.g., consensus , mean salience , and a few cluster metrics) and estimating an integration score on those aggregated signals.
+Cost: moderate if computed on low-dimensional aggregated time series; impossible if computed on all nodes. False positives: can be inflated by common-input effects; must be controlled by baselines.
+Candidate metric: multi-scale directed information flow (transfer entropy)
+estimated between representative local variables (sampled nodes’ ) and global variables (e.g., ). Transfer entropy explicitly measures directed influence beyond shared history.
+Cost: high if done naively; must be sampled and windowed. False positives: estimation bias if data windows are too short.
+Φ
+ΦN= 104
+G
+Φ[k]=1 clip ,[0,1] ( λ2max
+λ(L(k))2) λ2λ2
+max
+10
+N= 104 λ2
+λ2Φ1
+16
+c
+σ
+ˉ
+
+Φ=3 TE(local →global) + TE(global →local),
+σ,Eii,
+σ
+ˉ
+
+c
+ˉ
+ 17
+RecommendedPhase1Φproxy(practical,hardtofake)
+Use a composite:
+where:
+: normalized algebraic connectivity (integration), (consensus coherence),
+(representational agreement).
+Set the success condition post-lesion for a sustained window cycles (specified in Section H).
+This combination is deliberately chosen so that “everyone just clusters and syncs” does not automatically pass—task metrics still must pass.
+Executable simulation architecture
+SECTION G — SIMULATION ARCHITECTURE SECTION VI — EXECUTABLE SIMULATION SPEC
+Simulation paradigm (minimum viable)
+A phase-1 sandbox must be hybrid agent + graph:
+agent-based particle simulation for motion/sensing, dynamic proximity graph for communication, discrete-time synchronous core loop (asynchronous is a second-order complication; do it only after the synchronous version passes ablations).
+Update schedule (explicit)
+Use two half-steps per cycle to prevent order-of-update cheating:
+Step A (local compute + emit): each node senses, predicts, updates internal compartments, forms packet(s), emits to neighbors. Step B (receive + consensus + motion): each node receives packets, updates accumulators/ consensus, computes motion bias. Step C (physics): environment updates (if simulated), then positions update.
+Data structures (exact)
+Minimum struct definitions (language-agnostic):
+Packet64 : uint16 token_id
+Φ[k]= wΦ[k]+1 1 wΦ[k]+2 cons wΦ[k],3HV
+Φ1
+Φ=cons 1 − Varmax
+Var(c[k])i
+Φ=HV E [sim(H[k],H[k])]iiagg
+Φ> 0.5 W
+u, θadv
+uint16 loc_q
+uint8 sal
+uint8 conf
+uint8 ttl
+uint8 crc8
+Hypervector (Elegant internal): uint64 words[D/64] with . NucleusA : Hypervector I
+uint16 top_tokens[K] and uint16 counts[K] (small , e.g., 8–16) NucleusB : float rho
+float S_prev[d_s]
+NucleusC : float g
+float c
+float2 b
+Cytoplasm : Hypervector W
+Packet64 inbox[k_max] (cleared each cycle) Membrane : uint16 neighbor_ids[k_max] (indices of neighbor nodes) uint8 neighbor_deg
+Node : float2 p
+float2 v (optional) float S[d_s]
+float E
+float r
+{NucleusA, NucleusB, NucleusC, Cytoplasm, Membrane}
+Swarm :
+Node nodes[N]
+SpatialHashGrid grid (cell lists for neighbor search) Random rng
+GlobalMetrics metrics
+Core loop pseudocode (required)
+Initialize nodes with random positions p_i, identity HV I_i, rho_i, r_i=1
+Initializeenvironmentfieldu
+a
+​
+ dv(x,t)andanomalyfieldθ(x,t)
+Initialize shared codebook C[token_id] -> HV/label (if using token scheme)
+for k in 0..K_max:
+D= 1024
+K
+# --- neighbor build (no cheating) ---
+grid.clear()
+for i in alive_nodes:
+grid.insert(i, p_i)
+for i in alive_nodes:
+Membrane.neighbors_i = grid.query_radius(p_i, R_comm, k_max)
+# --- Step A: sense / predict / internal update / emit ---
+for i in alive_nodes parallel:
+S
+i
+​
+ =sense(p
+i
+​
+ ,θ,obstacles)+noise()
+S_hat_i = rho_i * S_prev_i
+E_i = norm(S_i - S_hat_i)
+update_NucleusB(rho_i, S_prev_i, S_i)
+sal_i = update_salience(NucleusC, E_i, r_i, neighbor_stats_estimate)
+update_NucleusA(I_i, M_i, features(S_i), E_i)
+H_sig_i = build_signal_HV(I_i, features(S_i), E_i, p_i)
+pkt_i = encode64(H_sig_i OR token_id/location, sal_i, conf_i, ttl, crc)
+for each j in neighbors_i:
+transmit(pkt_i -> inbox_j) # exactly one 64-bit message per
+neighbor
+# --- Step B: receive / decode / consensus / motion bias ---
+for i in alive_nodes parallel:
+msgs = Cytoplasm.inbox_i
+decode_and_accumulate(Cytoplasm.W_i, msgs)
+c_i = consensus_update(c_i, msgs, neighbors_i)
+b_i = motion_bias_from_msgs(msgs, p_i)
+set_control(NucleusC, c_i, b_i, r_i)
+# --- Step C: physics / motion / energy update ---
+for i in alive_nodes parallel:
+u_i = control_to_velocity(NucleusC, neighbors_i, p_i)
+p_i = p_i + dt*(u_adv(p_i,k) + u_i) + sqrt(dt)*sigma_p*randn()
+r_i = update_energy(r_i, compute_cost, comm_cost, move_cost)
+# --- lesion injection ---
+if k == k_lesion:
+delete 30% of nodes uniformly at random
+mark them dead, remove from grid, clear their buffers
+# --- distributed recovery mode ---
+if k >= k_lesion and k < k_lesion + K_recover:
+apply_local_recovery_rules(i): expand R_comm_i, adjust gains,
+renormalize salience
+# --- logging ---
+computeΦ
+p
+​
+ roxy(k),detectionmetrics,connectivityestimates,messagestats
+write telemetry (seed, params, metrics, sample node traces)
+This loop obeys the local-information rule: nodes only receive what is in their neighbor inbox; the simulator enforces this interface.
+Computational feasibility at
+Feasibility is dominated by neighbor search and message handling.
+Neighbor search with spatial hashing is for bounded . Per-node HV ops at bits are 64-bit word ops per bind/unbind/ superposition—cheap at . Total messages per cycle (e.g., ).
+This is feasible on a modern CPU if implemented with contiguous arrays and parallel loops; but if you implement neighbor search as , you will fail immediately.
+Your TUCR runtime file includes heavy scientific Python dependencies and complex operations; Phase 1 swarm simulation must not rely on those per-node, otherwise you have violated node realism. Treat TUCR as conceptual inspiration at runtime orchestration level, not as something each node executes. fileciteturn0file8
+Success criteria, minimal 3-node organism, failure modes, readiness table, and research priorities
+SECTION H — SUCCESS / FAILURE CRITERIA SECTION VII — MINIMAL VIABLE ORGANISM SECTION VIII — FAILURE MODES
+Falsifiable success criteria (no soft scoring)
+Pick one task as the primary Phase-1 gate (recommended: anomaly detection in a drifting field), and treat maze solving as secondary until the comm/consensus loop is validated.
+Anomaly detection (primary)
+Define ground truth anomaly regions . The swarm “declares” anomaly if a global readout extracted purely from local consensus crosses threshold, e.g.:
+N= 104
+O(N+ kN)≈O(N)k
+D= 1024 ≈1024/64 = 16 N= 104
+∼ Nk105
+O(N)2
+A(t)⊂Ω
+[k]=
+y
+^
+​
+ I[ [k]>cτ], [k]=c
+p
+^
+​
+ anomcentroid of top−q
+Success thresholds:
+Detection accuracy: F1 score over anomaly events. Localization error: (e.g., domain units) for of events. Consensus latency: time-to-threshold cycles (must be specified as absolute cycles, not “fast”). Communications efficiency: mean packets per node per cycle (obvious), and effective bits per correct detection computed and reported. Lesion resilience: after deleting 30% at : detection F1 degrades by (graceful degradation), recoverytimecyclestoreturnΦtotarget.Coherence proxy preservation:
+with (transient ignore window) and (sustain window) fixed in advance.
+Failureisanyviolation.PartialsuccessismeetingtaskmetricsbutfailingΦ,orviceversa—butyoumustlabel it explicitly.
+Ablation tests (mandatory and interpretable)
+Run each with identical seeds and report deltas:
+Remove HTLA binding (send only token IDs without composition). Remove superposition (no accumulation; only last packet counts). Remove Lyapunov recovery (no range expansion/gain scheduling). Increase bandwidth above 64 bits (sanity curve). Reduce swarm size (e.g., 1k, 3k, 10k) to test scaling laws. Remove local salience scoring (uniform emission). Disable motion-based rewiring (no mobility recovery).
+What constitutes “fundamentally invalid”:
+If increasing bandwidth (e.g., 256 bits) makes it work but 64 bits consistently fails even under careful parameter sweeps, then the claim “64 bits suffices” is disproven. If removing Lyapunov recovery causes catastrophic fragmentation while tuned recovery reliably works, then recovery is structurally necessary (not a tuning detail). If removing binding does not change outcomes, then HTLA composition is not contributing; your architecture is over-claimed.
+Minimal 3-node organism (exactly 3 nodes, each tri-compartmental)
+You demanded a 3-node ensemble that is “organism-like,” not a transient aggregate.
+Define the 3-node topology as a triangle with adhesion constraints (spring forces) to maintain proximity:
+≥0.9 M
+∥−
+p
+^
+​
+ anomp∥≤trueϵp≤0.05 ≥90%
+≤500
+≤kmax
+kL
+≤10%
+T≤rec2000
+Φ[k]> k∈[k+W, k+W+W]LLhold
+min 0.5,
+WWhold
+F=ijadh −k(∥p−aip∥−jd) .0 ∥p− p∥ij
+p− pij
+Role allocation (the only plausible 3-node differentiation):
+Node 1: memory-dominant (high replication, high persistence). Node 2: prediction-dominant (high update rate for ). Node 3: control-dominant (high authority for , emits most).
+Intercellular signaling classes (still 64-bit packets, but different TTL/decay):
+“Fast” packets: low TTL, high frequency (control). “Slow” packets: higher TTL, lower frequency (memory reinforcement). “State” packets: periodic consensus heartbeat.
+Whole-system state variables (organism-level):
+where is cluster center, optional resonance order parameter.
+Falsifiable criteria for “alive” at :
+Persistence: triangle remains within a bounded diameter for cycles despite environmental drift. Integration: for cycles (choose consistent with swarm spec). Memory: after presenting a repeated anomaly pattern (same source location/time), the organism reduces detection latency on subsequent presentations by a measurable factor (e.g., 25%). Prediction: average prediction error decreases over time under stationary statistics. Recovery: after deleting one internal subcomponent (e.g., disable in one node) the system compensates (role reassignment) and restores above threshold within .
+Blunt conclusion: a 3-node “organism” can exhibit toy memory/prediction/control, but it will be extremely brittle; if it passes, it mostly validates the internal tri-compartment coupling, not the 10k-node swarm.
+Mandatory failure modes (name them, don’t hide them)
+Compression collapse: 64-bit packets cannot carry enough location resolution; swarm converges on wrong place (false clustering). Consensus hallucination: sketch-based encoding yields spurious similarity; swarm “detects” anomalies that do not exist (false positives). Fragmentationafterlesion:becomesdisconnected;consensusbecomeslocalislands;Φproxydrops. Over-integration pathology: maximizing or salience diffusion causes all nodes to cluster, destroying coverage and missing anomalies. Compartmentcheating:ifnucleus↔cytoplasmbusiseffectivelyunlimited,nodesbehavelikecentralized agents and Phase 1 results are invalid relative to your own realism constraints. HTLA non-invertibility: if you choose non-invertible nonlinear bindings without cleanup guarantees, unbinding becomes meaningless; you can no longer claim compositional encoding (your HTNLA materials warn implicitly by noting nonlinearity can break invertibility). fileciteturn0file5
+N(A)
+N(B)
+N(C)
+X[k]=org ( [k],[k],[k],R[k],Φ[k]),
+p
+ˉ
+​
+
+c
+ˉ
+
+σ
+ˉ
+
+p
+ˉ
+​
+ R
+N= 3
+T
+Φ[k]> ΦminTΦ=min 0.5
+E
+ˉ
+
+N(B)
+ΦTrec
+G
+λ2
+What is immediately simulatable vs conjectural
+Immediately simulatable (no new math required): - structured 64-bit packet scheme, - graph-diffusion salienceandscalarconsensus,−lesioninjectionandlocalrecoveryrules,−Φproxybasedonconsensusvariance + sampled connectivity, - anomaly detection task with known ground truth PDE field.
+Conjectural / proof-hard (must be treated as experimental): - strong Lyapunov guarantees for the full hybrid (mobile + switching + quantized + HV) system, - “emergent manifold” claims beyond measurable spectral/ embedding metrics, - meaningful resonance claims unless you explicitly implement and measure phase coupling.
+Requires genuinely new theory (if you insist on it in Phase 1, you will stall): - a unified proof that coupled macro–micro Lyapunov functions remain negative drift under packet corruption + mobility + lesion without restrictive assumptions.
+Phase 1 readiness table
+Subsystem Current
+formalization quality
+Minimum viable mathematical definition
+Implementation readiness
+Principal unknowns
+Blocking risks
+Particle + drift “fluid”
+Medium High
+Choosing drift statistics that are nontrivial but stable
+Overcomplicating Navier–Stokes too early
+Dynamic neighbor graph
+High
+random geometric graph with radius
+High
+Maintaining connectivity under clustering + lesion
+Fragmentation→impossible consensus
+Node tri-compartment model
+Low– Medium
+explicit
+updates + bus constraint
+Medium
+Choosing minimal internal coupling that is stable
+“Compartments” become cosmetic if unconstrained
+64-bit packet protocol
+Medium exact bit schema + decoder + CRC
+High
+Location resolution vs token payload tradeoffs
+False clustering / high false positives
+=
+p
+˙
+​
+ iu(p, t)+adv i
+u+iσξ
+Rcomm
+N,N,N(A)(B)(C)
+Subsystem Current
+formalization quality
+Minimum viable mathematical definition
+Implementation readiness
+Principal unknowns
+Blocking risks
+HTLA/HV internal algebra
+Medium XOR+permutation or convolution binding + cleanup
+Medium
+Cleanup robustness under noise + superposition load
+HVdrift→garbage consensus
+Salience + consensus dynamics
+High
+Laplacian diffusion + consensus update
+High
+Gain scheduling under varying degree
+Oscillation or slow convergence
+Lesion recovery
+Medium
+: range expansion + gain changes + motion rewiring
+Medium
+Parameter regimes guaranteeing reconnection
+Recovery induces instability or over-integration
+ΦproxyLow–
+Medium
+composite metric ( approx + variance + HV coherence)
+Medium
+Sampling strategy that correlates with “true” integration
+Proxy can be gamed; threshold meaningless
+Telemetry & reproducibility
+Medium fixed seeds, logged params, ablations
+High None (engineering discipline)
+Non-reproducible “success”
+Priority order of research tasks
+Lock the 64-bit packet protocol and decoding rules (you cannot evaluate anything until this is fixed and enforced). Define and enforce node realism constraints (memory, compute, neighbor cap, and nucleus↔cytoplasmbus).Implement the scalar consensus + salience diffusion loop with strict local information access. Choose and validate connectivity regime (select , , and recovery range expansion; verify connectivity post-lesion empirically across seeds). Implement lesion event and distributed recovery operator and measure recovery surfaces (time-to−reconnect,time−to−restoreΦandtaskperformance).DefineΦproxyandproveitisnottriviallygamedbyclustering/synchronizingwithouttasksuccess (pair it with task metrics). Only then test HTLA “elegant” sketch-based communication as an experimental alternative to the structured packet scheme (expect higher hallucination rates; quantify them using information-theoretic measures if needed). Finally implement the 3-node organism micro-test as a unit test for tri-compartment coupling stability before scaling to 10k.
+Λrecover
+λ2
+1.
+2.
+3. 4.Rcommkmax
+3
+5.
+6.
+7.
+18
+8.
+The internal “thought cloud” and broader TUCR/HSTT machinery may be conceptually aligned with these goals, but Phase 1 will fail if you attempt to import that full complexity into 10,000 ultra-restricted nodes. Keep Phase 1 hard, small, and falsifiable. fileciteturn0file3
+Consensus problems in networks of agents with switching topology and time-delays https://authors.library.caltech.edu/records/t2gnt-vd720?utm_source=chatgpt.com
+A Diffusion Reaction Theory of Morphogenesis | Nature https://www.nature.com/articles/170955c0.pdf?utm_source=chatgpt.com
+Random Geometric Graphs | Oxford Academic https://academic.oup.com/book/9064?utm_source=chatgpt.com
+Similarity estimation techniques from rounding algorithms https://www.researchgate.net/publication/221591327_Similarity_estimation_techniques_from_rounding_algorithms? utm_source=chatgpt.com
+Cogn Comput (2009) 1:139–159 https://redwood.berkeley.edu/wp-content/uploads/2020/08/kanerva09-hyperdimensional.pdf?utm_source=chatgpt.com
+Holographic reduced representations - PubMed https://pubmed.ncbi.nlm.nih.gov/18263348/?utm_source=chatgpt.com
+Extensions of Lipschitz mappings into Hilbert space https://ai.updf.com/paper-detail/extensions-of-lipschitz-mappings-into-hilbert-space-johnson-lindenstrauss-1d0635cda34b8af995313848a0c42bac6efe79ec?utm_source=chatgpt.com
+Novel Type of Phase Transition in a System of Self-Driven Particles | Phys. Rev. Lett. https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.75.1226?utm_source=chatgpt.com
+Flocks, herds, and schools: A quantitative theory of flocking | Phys. Rev. E https://journals.aps.org/pre/abstract/10.1103/PhysRevE.58.4828?utm_source=chatgpt.com
+Chemical Oscillations, Waves, and Turbulence | Springer Nature Link https://link.springer.com/book/10.1007/978-3-642-69689-3?utm_source=chatgpt.com
+An improved data stream summary: the count-min sketch and its applications - ScienceDirect https://www.sciencedirect.com/science/article/pii/S0196677403001913?utm_source=chatgpt.com
+Measuring Information Transfer | Phys. Rev. Lett. https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.85.461?utm_source=chatgpt.com
+Practical Measures of Integrated Information for Time-Series Data - PMC https://pmc.ncbi.nlm.nih.gov/articles/PMC3024259/?utm_source=chatgpt.com
+1 10
+2
+3
+4 8 18
+5 7
+6
+9
+11
+12
+13
+14
+15 17
+16

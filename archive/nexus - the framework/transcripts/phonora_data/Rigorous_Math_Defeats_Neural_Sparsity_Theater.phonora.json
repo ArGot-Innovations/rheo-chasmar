@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "5d06c978-a415-4a42-88cc-6966bb4bd9f4",
+  "job_id": "04a8a745-cf06-4f7f-a3b9-c91ae2cdf550",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Rigorous_Math_Defeats_Neural_Sparsity_Theater.m4a",
+    "filename": "Rigorous_Math_Defeats_Neural_Sparsity_Theater.m4a",
+    "duration": 105.9294375
+  },
+  "transcription": {
+    "started_at": "2026-09-01T07:40:31.721376",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 28.56,
+      "text": "This is the brief on the HTNLA recast. So today we're looking at a hype-cutting rewrite of Project Nexus 4's equations, totally redefining how nonlinear neural transformations handle complex data while honestly tracking information loss. First, we're talking about a fundamental redefinition of the math. HTNLA, or Hypervector Nonlinear Transdimensional Algebra, isn't considered a graded algebra that just blends all your data together anymore.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 28.56,
+      "end": 57.78,
+      "text": "Instead, it's this family of labeled nonlinear maps that strictly preserve data boundaries, keeping text separate from vision data. It's kind of like a factory pipeline processing glass and steel, right? They're processed together but kept in strictly distinct containers so their origins never mix. Second, we transition to the epistemic contract, which is basically the rulebook for what happens when these maps inevitably destroy or compress information. It details a strict five-way reconstruction taxonomy, mapping to four explicit outcomes.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 57.78,
+      "end": 87.78,
+      "text": "Exact, ambiguous, unknown, or impossible. Now, you might be wondering, why not just use a clever AI optimizer to guess the missing data? Well, because in this system, turning information loss into false certainty is strictly forbidden. Finally, this recast completely dismantles past exaggerated performance claims. It proves that applying K-Winner take all sparsity, basically turning off inactive parts of the network, doesn't magically change the algorithm's complexity class. Hitting 70% sparsity merely gives you a 3.3x speedup, and that's it.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 87.78,
+      "end": 105.93,
+      "text": "It even strips out unwarranted quantum and biological buzzwords. Honestly, it's incredibly refreshing to see rigorous math defeat flashy, sparsity theater. Ultimately, HTNLA is now a mathematically conservative, transparent framework prioritizing explicit data boundaries and honest uncertainty tracking over inflated theoretical promises.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Rigorous_Math_Defeats_Neural_Sparsity_Theater.m4a",
+  "source_filename": "Rigorous_Math_Defeats_Neural_Sparsity_Theater.m4a",
+  "source_duration": 105.9294375,
+  "transcription_timestamp": "2026-09-01T07:40:31.721376",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

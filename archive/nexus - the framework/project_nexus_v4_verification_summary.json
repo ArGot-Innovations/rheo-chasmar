@@ -1,0 +1,53 @@
+{
+  "implementation": "project_nexus_v4_reference.py",
+  "snapshot": "project_nexus_demo_snapshot.qbin",
+  "seed": 2026,
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "platform": "Linux-4.4.0-x86_64-with-glibc2.41"
+  },
+  "status": "PASS",
+  "syntax_compile": true,
+  "property_tests": true,
+  "nominal": {
+    "target": "TARGET_A",
+    "action": "RENDER",
+    "guard": true,
+    "prediction_error": 0.0425,
+    "rpe": -0.0064,
+    "novelty": 0.7095,
+    "kwta_before": 389,
+    "kwta_after": 224,
+    "pruned": 165,
+    "exact": 763,
+    "ambiguous": 86,
+    "unknown": 175,
+    "impossible": 0,
+    "snap_confidence": 0.822,
+    "distance": 0.101,
+    "margin": 0.134,
+    "cognitive_resource": 0.499
+  },
+  "stress": {
+    "event": "PERIMETER_BREACH",
+    "severity": 1.0,
+    "spectral_alpha": 0.9633,
+    "penalty": 254.61,
+    "k_allow": 1,
+    "fail_safe": true,
+    "action": "ABSTAIN",
+    "guard": true,
+    "candidate_confidence": 0.765,
+    "distance": 0.164,
+    "margin": 0.001,
+    "cognitive_resource": 0.274
+  },
+  "hashes": {
+    "source_sha256": "03f8913c8f1f59b1507723c1cb1dc4039803db27fe39e8d2d4d11c51626aaa98",
+    "snapshot_sha256": "02a6cae04f106ba82847d5a2ed600651e99c56afb2d39a55a2453f94626e7eea",
+    "rerun_snapshot_sha256": "02a6cae04f106ba82847d5a2ed600651e99c56afb2d39a55a2453f94626e7eea",
+    "internal_state_sha256": "68e6682c79edf155c49f74e17466dd08759e84f2d0aeb5eb75b34a7a9829d4f7"
+  },
+  "byte_deterministic_snapshot": true
+}

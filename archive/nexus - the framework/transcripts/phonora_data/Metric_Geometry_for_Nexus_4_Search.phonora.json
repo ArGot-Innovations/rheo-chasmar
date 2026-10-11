@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "f931471f-6be8-4692-9e04-b684262209a5",
+  "job_id": "85494c96-c6d8-4ff0-a38e-b1a95ca4a7f8",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Metric_Geometry_for_Nexus_4_Search.m4a",
+    "filename": "Metric_Geometry_for_Nexus_4_Search.m4a",
+    "duration": 106.4170625
+  },
+  "transcription": {
+    "started_at": "2026-09-01T13:41:02.354334",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 29.86,
+      "text": "This is the brief on retrieval geometry for Nexus 4. When engineering the Nexus 4 search architecture, developers faced a critical choice about indexing data using HNSW, a popular algorithm for fast similarity search. Their findings fundamentally redefine when we should and shouldn't force data to follow rigid geometric rules. Imagine a GPS trying to route you without knowing if the roads are two-way streets or dead ends. First, let's address the core myth.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 29.86,
+      "end": 53.22,
+      "text": "HNSW doesn't formally require the triangle inequality. The geometric rule stating a direct path is always the shortest to execute. It can run on non-metric scores. But just because the code compiles, does that mean it actually works? Without a metric-like structure, HNSW loses its theoretical guarantees and gets trapped in local minimums, literally like a maze with no exit. Second.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 53.22,
+      "end": 79.6,
+      "text": "Because HNSW prefers geometric order, Nexus form was strictly used a true metric like Euclidean or angular distance for aligned label retrieval. This is when we compare similar same-type data. A true metric provides the algorithm with predictable paved roads to guarantee high-speed accurate performance. Finally, we pivot to cross-label or asymmetric data. This is when the relationship is directional, like measuring how well evidence points to a hypothesis.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 79.6,
+      "end": 106.42,
+      "text": "Forcing a directional relationship into a standard symmetric HNSW graph is mathematically reckless. It's like treating a one-way alley as a two-way highway. Instead, Nexus must use specialized methods like MIPS or EXACT scans to preserve the data's true directional meaning. Ultimately, Nexus 4 proves we can't blindly trust a generic search algorithm to organize complex information. The underlying mathematical geometry must explicitly match the retrieval task.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Metric_Geometry_for_Nexus_4_Search.m4a",
+  "source_filename": "Metric_Geometry_for_Nexus_4_Search.m4a",
+  "source_duration": 106.4170625,
+  "transcription_timestamp": "2026-09-01T13:41:02.354334",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

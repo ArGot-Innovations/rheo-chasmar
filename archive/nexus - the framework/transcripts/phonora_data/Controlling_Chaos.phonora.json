@@ -1,0 +1,283 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "7ad21a97-62ae-4ad4-b385-42d7b8e4f97f",
+  "job_id": "6a46f5b0-ca72-4f7a-820d-3d71e863523d",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Controlling_Chaos.mp4",
+    "filename": "Controlling_Chaos.mp4",
+    "duration": 534.500125
+  },
+  "transcription": {
+    "started_at": "2026-08-21T22:56:37.222113",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 26.53,
+      "text": "Welcome to this explainer, where we're going to explore how advanced mathematical models are finally allowing us to simulate and literally control the most unruly physical behaviors in our world. Have you ever wondered how scientists use mathematics to tame sheer physical chaos? Well, whether we're trying to render mind-bending Hollywood-style fluid dynamics or keep an autonomous drone from plummeting to the ground during a crazy windstorm, it all comes down to mastering the math of unpredictable boundaries. Let's get into it.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 26.53,
+      "end": 49.44,
+      "text": "Okay, let's run through our roadmap really quick. Section 1 is Fluids that Break the Rules. 2. The Challenge of Simulation. 3. Giving Fluids a Memory. 4. Visualizing Math and Action. 5. Mathematical Safety for Drones. And finally, 6. Modeling our Complex World. Alright, kicking things off with Section 1. Fluids that Break the Rules. Magic or Reality.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 49.44,
+      "end": 77.06,
+      "text": "We're starting with a physical phenomenon that honestly looks like a magic trick, but I promise you it is 100% real physics. Consider this contrast. On the one hand, you've got a heavy bowling ball slamming into a pool of liquid and literally bouncing off it, almost like it just hit a concrete floor. But then, fast forward a bit, and that exact same ball is sinking straight down into the very same material. So what is going on here? How does a fluid act like a solid trampoline one second and a normal liquid the next?",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 77.06,
+      "end": 105.58,
+      "text": "Well, the secret here is that we're dealing with what are called Shear Thickening Fluids, or STFs for short. You might have actually played with cornstarch and water as a kid, right? Or maybe you've heard of high-tech liquid body armor. These materials are wild because they literally change their physical state based on impact. The harder you hit them, the harder they push back. If you punch this fluid, it punches right back. But if you just press your hand into it slowly and gently, it parts right around your fingers, just like regular water.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 105.58,
+      "end": 135.14,
+      "text": "This really highlights the core difference we're talking about. Newtonian fluids like water have a totally constant viscosity. You smack a puddle of water, it's gonna splash, every single time. But non-Newtonian STFs, totally different beast. Their viscosity actually increases with the shear rate, so if you hit it harder, it gets thicker. You could literally sprint across a pool of this stuff without sinking, kind of like quicksand in reverse, but the absolute second you stand still, down you go. Which brings us to section 2, the challenge of simulation.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 5,
+      "start": 135.14,
+      "end": 163.33,
+      "text": "State change on a whim Now, for years, trying to recreate this crazy, rule-breaking behavior inside a computer simulation was just a massive headache for scientists. To get a sense of why it's so tricky, think about a real-world experiment where actual sheer thickening fluid is placed on top of a vibrating speaker cone. The continuous vibration from the sound actually causes the fluid to clump together and grow these bizarre, alien-looking, finger-like structures reaching up into the air.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 6,
+      "start": 163.33,
+      "end": 184.75,
+      "text": "A normal liquid would just vibrate and lay flat, right? But this fluid uses that kinetic energy to literally build solid structures out of itself. And here's where the math hits a wall. As our source material points out, standard fluid physics models totally fail to recreate this weird structural growth. Why? Because they're missing one absolutely vital ingredient.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 7,
+      "start": 184.75,
+      "end": 213.04,
+      "text": "You see, traditional math assumes the fluid only cares about what's happening to it in this exact present millisecond. But to create those stable, growing fingers, the math needs something called hysteresis. So, let's jump into section 3. OK, so what is hysteresis? Basically, it's effectively a form of memory. Think of it like short-term memory for a liquid. When the fluid gets hit,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 8,
+      "start": 213.04,
+      "end": 239.04,
+      "text": "It remembers that force. It tells the fluid, hey, hold on to this solid, spring mattress-like shape, even after the initial impact is over. It doesn't just instantly snap back into a liquid. Instead, it slowly relaxes over time. The memory gradually fades. But here's the million-dollar question. How do you teach a computer-generated fluid to remember its own past? Well, researchers realized they couldn't just use standard calculus for this.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 9,
+      "start": 239.04,
+      "end": 266.32,
+      "text": "Instead, they had to pull out some incredibly complex fractional calculus to program this history-based stiffness directly into the simulated fluid particles. By using fractional derivatives, they allow the mathematical system to literally look back in time, assigning weights to past velocities. So the digital fluid isn't just calculating how fast it's moving right now, it's calculating exactly how hard it got hit a few moments ago. And when the researchers ran the numbers on this, they found something genuinely incredible.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 10,
+      "start": 266.32,
+      "end": 289.07,
+      "text": "Mathematically applying a half derivative, which is represented as Q equals 0.5, hits the absolute sweet spot for simulating how this fluid's memory fades. This one specific mathematical formula perfectly mimics the timeline of how real-world stuff, like cornstarch and water, solidifies and then eventually melts back down. Moving right along to section 4, Visualizing Math in Action Simulating Memory",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 11,
+      "start": 289.07,
+      "end": 317.14,
+      "text": "Now we actually get to see what happens when we unleash that half-derivative math into a visual simulation. We're gonna watch our digital bowling ball encounter this newly programmed memory-enabled fluid. Okay, boom! At the exact moment of impact, the high velocity instantly triggers that history-based stiffness we just talked about. The math recognizes the high energy strike and immediately forces the fluid particles to lock together, so the surface acts exactly like a solid trampoline, throwing that heavy ball right back up into the air.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 12,
+      "start": 317.14,
+      "end": 344.75,
+      "text": "But then, as the ball lands again, something super cool happens. Because the fluid literally remembers the impact. The surface stays rigid enough for this heavy ball to just rest on top of it and even roll across it without sinking in. The fractional calculus is working behind the scenes, basically telling the fluid, hey, we just took a massive hit, stay solid for just a little while longer. But eventually the ball stops moving. The kinetic energy drops to zero.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 13,
+      "start": 344.75,
+      "end": 371.55,
+      "text": "And that's when that mathematical short-term memory starts to fade. The fractional derivative weights start decreasing, and as a result, the fluid stiffness slowly relaxes. You can actually see the surface just starting to indent and give way around the edges of the ball. Finally, the energy has completely dissipated. The math returns the entire system back to its standard liquid state, and our heavy bowling ball sinks straight to the bottom, exactly like it would if you dropped it in a swimming pool.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 14,
+      "start": 371.55,
+      "end": 399.2,
+      "text": "by giving the math a memory we perfectly recreated physical reality. How cool is that? Alright, section 5, Mathematical Safety for Drones, Robust Control Synthesis. Now, simulating Hollywood-style fluid dynamics is visually stunning, no doubt, but these exact same concepts, defining strict, rigid boundaries, have lifesaving applications in the physical world too. This brings us to our second source, which asks a pretty profound question.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 15,
+      "start": 399.2,
+      "end": 411.9,
+      "text": "How can we use math to protect real-world cyber-physical systems from unpredictable chaos? I mean, it's one thing to control a digital bowling ball on a screen. But what about a physical machine flying through totally unpredictable weather?",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 16,
+      "start": 411.9,
+      "end": 436.43,
+      "text": "Well, just like programming a fluid to strictly respect the boundaries of a solid state upon impact, engineers use something called a viability kernel, sometimes called a discriminating kernel, to program safety boundaries for machines. Think of this as a mathematically calculated, multi-dimensional safe zone. The rule is simple. As long as the machine operates inside the specific subset of states, the controller mathematically guarantees it won't crash no matter what random disturbances hit it.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 17,
+      "start": 436.43,
+      "end": 465.87,
+      "text": "Let's look at how this directly applies to a drone. Specifically, something called quadrotor flight envelope protection. By calculating this mathematical safety net, scientists can synthesize robust controllers that react in real time. Say an autonomous drone gets hit by a sudden violent gust of wind. This math steps in to prevent what's known as 12-dimensional actuation saturation. Now, in simple terms, it just ensures the drone's motors don't get so completely overwhelmed trying to correct themselves that the heavy machine just gives up and falls out of the sky onto whatever or whoever is",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 18,
+      "start": 465.87,
+      "end": 476.38,
+      "text": "and",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 19,
+      "start": 476.38,
+      "end": 504.72,
+      "text": "We've traveled all the way from the microscopic particles of cornstarch to the macro aerodynamics of drone flight. And the main takeaway here is really profound. Whether it's rendering a person running on water for a blockbuster movie using history-based fractional derivatives or keeping a delivery drone safely in the sky by mapping out a viability kernel, math is our ultimate tool for taming physical chaos. We are literally taking the unpredictable, the messy, the dangerous parts of reality and putting a secure digital harness right around them.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 20,
+      "start": 504.72,
+      "end": 532.08,
+      "text": "We are absolutely entering an era where the boundary between physical chaos and digital order is being completely rewritten. So all of you with this final thought to ponder. Now that we can mathematically give fluids and memory and program unbreakable safety envelopes for flying drones, what unpredictable part of our physical world will mathematics allow us to control next? Thank you so much for joining me for this explainer and remember to keep questioning the physics of the world around you.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Controlling_Chaos.mp4",
+  "source_filename": "Controlling_Chaos.mp4",
+  "source_duration": 534.500125,
+  "transcription_timestamp": "2026-08-21T22:56:37.222113",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "abdf3e85-903b-4f40-913f-79bd77b63f6e",
+  "job_id": "e8ea8f37-f7bb-4777-8159-d57bd3225042",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/How_HTLA_enforces_mathematical_honesty.m4a",
+    "filename": "How_HTLA_enforces_mathematical_honesty.m4a",
+    "duration": 111.29325
+  },
+  "transcription": {
+    "started_at": "2026-09-01T07:33:44.681719",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 18.77,
+      "text": "This is the brief on Hypervector Linear Transdimensional Algebra, or HTLA. So, basically, HTLA is this strict mathematical blueprint that Project Nexus 4 uses to transform really complex heterogeneous data without, you know, completely erasing its original meaning. First,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 18.77,
+      "end": 46.86,
+      "text": "HTLA doesn't actually invent new math. It just uses established linear algebra-like direct sum state spaces and pierce block decomposition to uniquely assemble data while keeping all those semantic labels intact. It's kind of like a fruit salad. Instead of just blending everything into this flattened, meaningless smoothie, HTLA keeps the boundaries between your strawberries and bananas totally distinct. Second, keeping that data separate absolutely preserves its real truth. HTLA is big on epistemic honesty.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 46.86,
+      "end": 76.26,
+      "text": "meaning a mathematical zero doesn't just equal missing data like a broken sensor. It runs on a strict five-value coronary system, negative two, negative one, zero, plus one, and plus two, forcing the system into four exact recovery states. Exact, ambiguous, unknown, or impossible. I mean, why let a computer hallucinate an answer when it can literally just mathematically admit it lost the information? Finally, that honesty totally extends to the authors themselves. This document is a ruthless audit of past hype.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 76.26,
+      "end": 103.7,
+      "text": "Fixing concrete bugs, like making sure pseudo-inverse maps actually reverse their source and target roles. It demotes all those wild claims about quantum speedups, space-time analogies, and logarithmic gradient complexity down to mere unproven research hypotheses. Honestly, it's so refreshing to see a technical architecture paper strip away the sci-fi buzzwords for actual verifiable software semantics. Ultimately, HTLA isn't about some exotic new math, but about enforcing a strict, honest contract for how AI interprets",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 103.7,
+      "end": 111.29,
+      "text": "transforms and admits the absolute limits of complex data. So how might adopting these rigid rules completely change the AI tools you're using every single day?",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/How_HTLA_enforces_mathematical_honesty.m4a",
+  "source_filename": "How_HTLA_enforces_mathematical_honesty.m4a",
+  "source_duration": 111.29325,
+  "transcription_timestamp": "2026-09-01T07:33:44.681719",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

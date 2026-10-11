@@ -1,0 +1,19 @@
+================================================================================================
+PROJECT NEXUS v4.0 — CA/TUCR/HTNLA/MAERA REFERENCE DEMONSTRATOR
+================================================================================================
+A active=484 | B active=849 | expected composite active=405
+666D base spectral alpha=-0.141983 residual=2.71e-03
+
+[NOMINAL CYCLE]
+stages=('integrate', 'compete', 'resonate', 'transcend')
+bridge: E=0.0425 RPE=-0.0064 Novelty=0.7095
+k-WTA: before=389 after=224 pruned=165 vacuum=78.1%
+unbind: exact=763 ambiguous=86 unknown=175 impossible=0
+[MAERA] action=RENDER mode=NOMINAL memory=TARGET_A k=224/1024 active=224 snap_conf=0.822 distance=0.101 margin=0.134 E=0.042 RPE=-0.006 N=0.709 Cr=0.499 guard=True
+
+[HYBRID STRESS EVENT]
+event=PERIMETER_BREACH alpha=+0.9633 penalty=254.61 k=1 fail_safe=True
+[MAERA] action=ABSTAIN mode=SAFE_MODE memory=NONE k=1/1024 active=1 snap_conf=0.765 distance=0.164 margin=0.001 E=0.154 RPE=+0.003 N=0.710 Cr=0.274 guard=True
+
+Snapshot written: /mnt/data/project_nexus_v4_rerun_snapshot.qbin
+================================================================================================

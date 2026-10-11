@@ -1,0 +1,953 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "0a9ce1e7-8a0d-436c-9bd3-13e16c3b66ca",
+  "job_id": "fa139d81-3626-4676-9ce5-5cf90fb9661d",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Crystallizing_thoughts_with_hyperbolic_physics.m4a",
+    "filename": "Crystallizing_thoughts_with_hyperbolic_physics.m4a",
+    "duration": 2128.457125
+  },
+  "transcription": {
+    "started_at": "2026-08-21T22:57:54.227724",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 13.42,
+      "text": "Imagine dropping a bomb of just pure raw energy into a room. And when the smoke clears, a perfectly constructed, complex novel is just sitting there on the floor, like...",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 13.42,
+      "end": 43.23,
+      "text": "No typing, no word-by-word generation. Just an entire thought, crystallize all at once. It completely shatters how we currently think about computing. I mean, we're so used to sequence, right? We really are. Usually when we talk about building something, whether it's a house or a paragraph, there's this ingrained expectation of a linear process. Step by step. Exactly. Like laying bricks. You put one down, slap some mortar on it, place the next one right next to it. It's safe, it's understandable, and you can watch it happen in real time.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 43.23,
+      "end": 67.55,
+      "text": "And if you look at the history of artificial intelligence, particularly language models, we have been trapped in that exact bricklaying mindset for decades. Right. Everything is built left to right, bottom to top. But today, we are stepping into a world where the bricklayer is entirely obsolete. Welcome to a massive, honestly mind-bending deep dive today. It's a big one. It is. For the learner out there...",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 67.55,
+      "end": 92.77,
+      "text": "Whether you're an engineer prepping for a massive shift in the industry, or just someone who is insanely curious about where technology is heading next, you are in the exact right place. We have a stack of highly technical research papers in front of us today. Very dense papers. Yes, specifically two cornerstone documents. One is called Holographic Syntax and Trajectory Crystallization for NASCARV 2.0, and there's a companion piece titled Holographic Trajectory Crystallization.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 92.77,
+      "end": 113.3,
+      "text": "Right, and these are essentially the blueprints. They detail the underlying physics and the mathematics behind the NASCII v2.0 discourse engine. NASCII standing for Non-Auto-Regressive Symmetric Crystallizer. Our mission today is to decode how this system is completely throwing out the traditional AI rulebook.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 5,
+      "start": 113.3,
+      "end": 140.26,
+      "text": "We're going to unpack how NASKI v2.0 uses literal physics, like we're talking thermodynamics, simulated kneeling, geometric manifolds to generate entire complex thoughts simultaneously. Okay, let's unpack this. Because to understand why this NASKI architecture is such a monumental leap, we really need to look at the core problem with the AI everyone is using right now. The ChadGPTs, the clods, the systems dominating the industry today. What's really fascinating here is that the flaw isn't in their scale.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 6,
+      "start": 140.26,
+      "end": 170.11,
+      "text": "You know, it's in their fundamental architecture. Current large-language models all share this massive structural bottleneck, which is that they are autoregressive. They operate under strict Markovian assumptions. Okay, let's translate that for someone who might not be deep into statistics. A Markovian assumption. Essentially, we're talking about a system that has a very short memory and a very narrow focus, right? I've seen it described in my notes as a Markovian blindfold. That is a highly accurate way to visualize it, yeah.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 7,
+      "start": 170.11,
+      "end": 198.5,
+      "text": "A Markov model basically assumes that the probability of the next event depends only on the current state or, you know, maybe a very limited window of the recent past. Okay. For language models, this means they generate text strictly sequentially, one single token or a word at a time. So they look at the string of words they just generated, consult their massive internal statistical maps, and just guess what the most mathematically probable next word should be. So, going back to our bricklayer.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 8,
+      "start": 198.5,
+      "end": 228.19,
+      "text": "They are building a wall blindfolded. They can only feel the brick they just laid down, and based on the texture and angle of that one brick, they guess where the next one should go. Right, exactly. They don't have a blueprint of the entire house in their mind. They don't possess a simultaneous conception of a complete thought before they start speaking. They are statistically feeling their way through the dark. They are. Now to be fair, that approach works incredibly well when you operate at a massive scale. If you throw, um,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 9,
+      "start": 228.19,
+      "end": 254.99,
+      "text": "billions of parameters and trillions of words of training data at a neural network. It gets remarkably good at guessing that next brick. Sure, it makes a very educated guess. But it is incredibly inefficient. It requires staggering compute power to constantly recalculate the entire context for every single new word. And philosophically, it means the model doesn't actually know where the sentence is going to end when it begins. Wow, yeah, it's just riding a wave of probability.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 10,
+      "start": 254.99,
+      "end": 268.03,
+      "text": "Exactly. Which brings us to NASKEY v2.0. This architecture entirely abandons the autoregressive guessing game. Instead, the researchers have built what they call an energy-based model.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 11,
+      "start": 268.03,
+      "end": 291.58,
+      "text": "or an EBM. Okay, an energy-based model. I saw this a lot in the sources. Yeah, EBMs reframe the entire concept of inference. Instead of calculating probabilities of a sequence asking what word comes next, an EBM turns generation into a constrained optimization problem. Okay, you're losing me a little. Optimization problem. Let's borrow directly from the physical world here. In physics, systems naturally seek a state of minimum energy.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 12,
+      "start": 291.58,
+      "end": 301.94,
+      "text": "Think of a ball rolling down a bumpy hill until it settles into a deep valley. Right. Gravity pulls it down until it stops. Exactly. That valley is a state of low energy. It's stability.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 13,
+      "start": 301.94,
+      "end": 330.8,
+      "text": "Nasky v2.0 creates a mathematical energy landscape where a grammatically correct, semantically meaningful sentence represents one of those deep valleys. Let me see if I'm tracking this. Instead of a single mathematical vector projecting a disjointed cluster of words one by one, Nasky v2.0 uses what the papers call a continuous holographic trajectory. So it's not a sequence of discrete words, it's like a smooth, multi-dimensional physical curve of thought passing through a space. That's exactly it.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 14,
+      "start": 330.8,
+      "end": 348.9,
+      "text": "The system takes a query vector. The text calls it the Hypervector Transdimensional Algebra query, or HTLA query. Hold on, Hypervector Transdimensional Algebra. I know, I know. That sounds like we're powering up a starship or something. Let's break that down into plain English before we go any further. It's a fair point.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 15,
+      "start": 348.9,
+      "end": 364.38,
+      "text": "Strip away the jargon and the HTLA query is simply the global semantic intent. It is the overarching concept you want the AI to express. Okay. Imagine it as a massive, powerful magnet placed at the very bottom of our mathematical energy landscape.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 16,
+      "start": 364.38,
+      "end": 388.88,
+      "text": "It pulls everything toward it. Then the system uses simulated annealing and Landgevind dynamics to actually form the text. Okay, Landgevind dynamics. I spent some time on this in the sources and the physical analogy is wild. It's about taking a highly energetic, noisy string, just pure mathematical static, dropping it into this landscape and letting it cool down until it takes a shape. Yes, exactly like cooling metal. Right.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 17,
+      "start": 388.88,
+      "end": 415.31,
+      "text": "So imagine our blindfolded bricklayer again. We fire him. We bring in a master sculptor, but this sculptor doesn't build a statue from the ground up piece by piece. The sculptor looks at the entire block of marble, sees the whole form at once, and chisels the entire structure simultaneously. A simultaneous conceptualization. The entire sequence from the first capital letter to the final period crystallizes out of the noise at the exact same moment.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 18,
+      "start": 415.31,
+      "end": 436.61,
+      "text": "Wait, I'm stuck on the physics analogy here. I want to push back on this concept of dropping a string into a valley. Sure. If you drop a hot energetic string into a mathematical valley, wouldn't it just pool at the very bottom into a single, highly dense, repetitive clump? Ah. Like, why doesn't it just output the same safest word over and over again? Why wouldn't it just say the- the- the-",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 19,
+      "start": 436.61,
+      "end": 460.18,
+      "text": "If gravity is the only force, everything just crushes into a singularity at the bottom. But the researchers solved this by introducing internal forces to the string itself.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 20,
+      "start": 460.18,
+      "end": 486.35,
+      "text": "It's not just a limp piece of yarn falling into a bowl, it's an elastic spring. It has internal tension, it fights back against the gravity. But even more importantly, the space it's falling into isn't a simple bowl, it's a complex geometric manifold where the valleys are shaped exactly like valid grammatical structures. Okay, so the string wants to clump, but its own internal tension forces it to stretch out.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 21,
+      "start": 486.35,
+      "end": 515.5,
+      "text": "Right. And the only way it can comfortably stretch out without expending too much energy is to align itself with the grooves of the landscape. Yeah. And those grooves are grammar. You've hit on the core breakthrough right there. Right. Which transitions us perfectly from the process of how the thought is generated to the actual environment where the generation happens. The landscape. The landscape itself. Exactly. We have to talk about the geometric space itself. Standard, autoregressive models, the ones we use today, internalized syntactic rules implicitly. Because they've read the whole internet.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 22,
+      "start": 515.5,
+      "end": 539.09,
+      "text": "Right, they just memorize billions of examples until they statistically know that the word the is usually followed by a noun. NASC-EB2 pointer makes syntax an intrinsic physical property of the space itself. Grammar is no longer a probability, it is a rigid geometric constraint. And to do that, reading through the methodology here, they had to throw out the geometry we all learned in high school.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 23,
+      "start": 539.09,
+      "end": 567.49,
+      "text": "They completely abandoned Euclidean space. They had to. Euclidean space, your standard flat grid-like geometric space, like a piece of graph paper, fails spectacularly when you try to use it to map human language. Why is that? The reason comes down to how language fundamentally grows in branches. Language is inherently hierarchical. It's built on dependency grammar, recursive subordinate clauses, hypernems, and hyponyms. If you diagram a complex sentence, it looks like a massive true.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 24,
+      "start": 567.49,
+      "end": 592.03,
+      "text": "Oh right, like those sentence diagrams from middle school English class? You have a root concept like a main noun and verb and then branches of modifiers and those branches have smaller branches of adverbs and prepositions. Exactly that structure. Now the problem with a Euclidean grid is that its volume grows polynomially as you move away from the center. But a tree structure, like human language, grows exponentially.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 25,
+      "start": 592.03,
+      "end": 608.06,
+      "text": "Every branch splits into multiple branches, which split again. Okay, I see where this is going. If you try to force an exponentially growing linguistic tree into a polynomially growing Euclidean space, you get severe structural distortion. The space...",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 26,
+      "start": 608.06,
+      "end": 635.81,
+      "text": "literally runs out of room. It does. It ends up forcing completely unrelated semantic concepts to sit right next to each other simply because there's nowhere else to put them on the grid. It's like trying to draw a wildly complex family tree on a tiny sticky note. Eventually, cousins and great-grandparents are overlapping in a confusing mess. So to fix this, the engineers at NSA projected the entire vocabulary into a hyperbolic space, specifically something called the Poincaré Ball Model.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 27,
+      "start": 635.81,
+      "end": 656.94,
+      "text": "Now I'll admit staring at the diagrams of the Poincaré disc in these papers made my eyes cross initially. It's intense. It looks like an MCS-er painting. It's a circle, but the grid lines get infinitely smaller at the edges. Yeah, the Poincaré disc is a staple of hyperbolic geometry, and it is notoriously difficult to visualize because our brains are wired for flat Euclidean planes.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 28,
+      "start": 656.94,
+      "end": 683.76,
+      "text": "What's crucial to understand about the Poincaré space is how distance works. In this space, the hierarchical organization of language naturally emerges based on distance from the origin point at the center. Here's where it gets really interesting. I found the best way to visualize this, and let me know if I'm off base here, is to think of this hyperbolic space like a solar system. Oh, I like that analogy. Let's explore that. So the foundational part to speech.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 29,
+      "start": 683.76,
+      "end": 711.89,
+      "text": "The root nouns, the primary relational verbs, these are the sun. They are anchored right in the center near the origin of the Poincare disk. The papers describe them as having high centrality and low vector norms. They are the heavy gravitational bodies of the sentence. That's perfect. And the modifiers, where do they live? The modifiers are the planets and the moons. Adjectives, adverbs, complex subordinate clauses, they are positioned further outward, closer to the boundary of the solar system.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 30,
+      "start": 711.89,
+      "end": 730.58,
+      "text": "But here's the magic of the Poincaré space, and where it differs from our actual physical universe because of its Riemannian metric tensor. Ah, let's decode that too quickly. A Riemannian metric tensor is basically just the mathematical rulebook for how distance is measured in this specific.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 31,
+      "start": 730.58,
+      "end": 759.36,
+      "text": "curved space. Right, and according to this rulebook, the distance between points grows exponentially as you approach the outer boundary of the disk. The space effectively has infinite capacity at the edges. Yes. So you have infinite room to stack as many adjectives, caveats, and recursive clauses as you want out in the planetary orbits, without ever running out of space or crashing into another concept. And that mathematical rulebook is what makes this entire architecture possible, because the distance function in this space, the hyperbolic distance, is fully differentiable. Okay, differentiable.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 32,
+      "start": 759.36,
+      "end": 789.18,
+      "text": "That is a massive word in machine learning. Differentiable means we can use calculus on it. We can use gradient-based optimization to smoothly continuously slide our thought curve through the solar system. So grammar becomes a physical vector field. It's literally the wind in this space. Exactly. A valid sentence naturally starts at the sun. The subject arcs smoothly through the interplanetary orbits of relational verbs, loops out into the deep space of peripheral modifiers, and then returns to rest.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 33,
+      "start": 789.18,
+      "end": 810.64,
+      "text": "And to strictly enforce this path, the architecture introduces what they call the energy penalty for syntactic dissonance. Right, because without rules, the sentence would just fly out of the solar system. Right, the system is constantly mathematically evaluating the geometric feasibility of the curve as it forms. They define a continuous centripetal loss function. Centripetal loss.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 34,
+      "start": 810.64,
+      "end": 822.72,
+      "text": "Let's break down how that actually feels in the system. It strictly enforces the rule that parent grammatical structures must maintain a smaller hyperbolic radius than their dependent children. Smaller radius meaning closer to the sun. Yes.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 35,
+      "start": 822.72,
+      "end": 851.87,
+      "text": "Going back to your solar system analogy, it means a moon cannot suddenly decide to have a tighter, closer orbit than its host planet. If a modifier vector, say, an obscure adverb, tries to position itself closer to the sun than its root known, it violently contradicts the dependency tree's geometric flow. The adverb tries to shove the sun out of the way to take the center of the sentence. Precisely. And when that happens, the syntactic energy penalty spikes astronomically. The space literally pushes back.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 36,
+      "start": 851.87,
+      "end": 880.54,
+      "text": "The connection field acts as a localized syntactic wind, forcing the trajectory back into a direction that corresponds to a valid grammatical structure. What blows my mind is that this proves this system mathematically understands grammar before it selects a single discreet word. Yes, exactly. There is absolutely no text yet. We haven't generated an English word. It's just a raw energy curve navigating a hyperbolic solar system, paying low transition cost to stay in valid grammar basins. It is pure structural alignment.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 37,
+      "start": 880.54,
+      "end": 909.04,
+      "text": "Low physical energy corresponds to a highly desired linguistic configuration. It's elegant. It really is. Okay, so we have the solar system. We have the rules of gravity and the centripetal wind that enforce the grammar. We know the environment. But we still need to talk about the actual journey through that space. The trajectory. Right. How do we form the sequence? Because we aren't just plotting a single point on a map. We're plotting a massive continuous curve of thought.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 38,
+      "start": 909.04,
+      "end": 937.57,
+      "text": "This is where we shift to the mechanics of the trajectory itself. How do we take a global semantic intent, that giant magnet we discussed earlier, and stretch it into an ordered sequence? The researchers solved this using coupled Langevin Dynamics and Elastic Spring Energy. Elastic Springs. This is the part of the paper where AI starts blatantly stealing from polymer physics. It really is, and it's brilliant. In standard energy-based models, usually you're just optimizing a single point, like generating a single image.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 39,
+      "start": 937.57,
+      "end": 963.97,
+      "text": "But NASVU 2.0 is generating discourse. It needs narrative continuity. If the system just dropped a bunch of independent disconnected points into the hyperbolic space and let them settle, they would fragment. You'd get a disjointed hallucinatory word salad. The paragraph would fall apart into isolated semantic islands. Exactly. So the engineers drew inspiration from the Rouse model. Let me guess. Another term we need to decode.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 40,
+      "start": 963.97,
+      "end": 993.33,
+      "text": "The Rouse Model It's a classic model from Polymer Physics used to describe the dynamics of single-chain molecules, like DNA or plastics. It treats a long molecule as a series of physical beads connected by active elastic springs. Oh wow. NASA key V2.0 goal takes this literal physical model and applies it to language. They treat the sequence of latent text vectors as physical masses, and adjacent words in the sentence are physically coupled together by these mathematical springs.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 41,
+      "start": 993.33,
+      "end": 1021.1,
+      "text": "So our thought curve is literally an elastic band stretching through the solar system. Yes. And this elastic band has a coupled energy function. It has tension, meaning the points don't want to drift too far apart from each other, which keeps the sentence cohesive. Makes sense. And it has bending energy, meaning the curve wants to stay relatively smooth and doesn't want to zigzag erratically back and forth across the space. If it zigzagged, that would translate to schizophrenic pacing in the final text. And this brings us back to the simulated kneeling we touched on.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 42,
+      "start": 1021.1,
+      "end": 1039.54,
+      "text": "We take this elastic string and we drop it into our Poincaré solar system. But reading the methodology, we don't drop it in gently. We don't just lay it down. Far from it. We drop it in as high temperature thermal noise. You start the generation process at a highly energetic chaotic state.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 43,
+      "start": 1039.54,
+      "end": 1068.78,
+      "text": "A stochastic differential equation injects massive amounts of thermal noise into the system. So it's shaking violently. Extremely violently. This allows the elastic trajectory to rapidly explore the global manifold. It whips around, bouncing off the edges of the space, easily escaping shallow, suboptimal local minima. It's like heating up a piece of metal on a forge until it's glowing white hot and the atoms are just vibrating wildly in every direction. The sentence is in a liquid chaotic state. That's a great visualization. But then...",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 44,
+      "start": 1068.78,
+      "end": 1098.38,
+      "text": "You begin the cooling schedule. The temperature parameter steadily drops. As the noise decays, the gradient of the energy field starts to dominate. The gravity takes over. Right. That magnetic pull from our HTLA query vector, combined with the grammatical gravity of the hyperbolic space, takes over. The violent thrashing of the string slows down, and the elastic thought curve physically settles into the deepest available semantic well. It crystallizes out of pure noise all at once.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 45,
+      "start": 1098.42,
+      "end": 1123.63,
+      "text": "The entire multi-sentence paragraph is formed simultaneously across the array. We've completely replaced a statistical guessing game with a textbook physics simulation. I am amazed by the mechanics of this, but I have a major logistical question. Shoot. If the system is generating the whole thought at once, simultaneously, instead of word by word, how does it know how long the string needs to be before it even starts? Ah. Think about it. If I ask an AI a simple question like,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 46,
+      "start": 1123.63,
+      "end": 1150.56,
+      "text": "What is the capital of France? It needs a very short string of words. If I ask it to explain the geopolitical causes of World War I, it needs a massive string. How does the system allocate the length of the string before the text even exists? This is traditionally the Achilles heel of non-autoregressive generation. If you use a static, predetermined length for every output, you either waste incredible amounts of compute generating blank space for a simple yes or no answer.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 47,
+      "start": 1150.56,
+      "end": 1180.02,
+      "text": "or you artificially truncate a complex chain of reasoning because you ran out of string. Right, you could cut off mid-sense. Exactly. The paper outlines a brilliant dynamic solution. The dynamic length heuristic denoted as variable L. The sources describe it as an information budget minus a risk budget. That's the core philosophy. Before the system drops the hot string into the space, it runs an energy entropy estimator on the target subspace. It evaluates the semantic complexity of the prompt.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 48,
+      "start": 1180.02,
+      "end": 1207.04,
+      "text": "If the semantic target is highly dispersed across the manifold, meaning it's a complex, multifaceted topic that requires touching many different concepts, it calculates a larger activation magnitude. It realizes, oh, I have to visit a lot of different planets in this solar system to answer this question properly. Yes, exactly. The base length initialization uses a specific formula, L sub-zero plus six times the activation magnitude minus eight times the risk level.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 49,
+      "start": 1207.04,
+      "end": 1236.35,
+      "text": "If it's complex, it starts with a longer string. Okay, it makes sense. But the initialization is just the starting point. The truly biological, organic part of the architecture is dynamic insertion during generation. The paper calls this cellular mitosis, which is such a cool biological term for a math problem. It is, because even with a good initial guess from the formula, the string might not be long enough once the annealing starts, and it has to actually navigate the grammar. During that high-temperature langenive phase,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 50,
+      "start": 1236.35,
+      "end": 1259.65,
+      "text": "The system actively monitors the internal physical tension of those elastic springs connecting the vectors. So if the string is stretching too far, trying to connect two really distant concepts in the hyperbolic space, the total internal tension exceeds a critical breaking threshold. Now in a real rubber band, it would snap. But here the trajectory dynamically undergoes a process analogous to cellular mitosis.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 51,
+      "start": 1259.65,
+      "end": 1287.5,
+      "text": "The system spontaneously inserts a new interpolated latent vector directly into the middle of the sequence right at the point of highest strain. It absorbs the kinetic tension and fluidly expands the thought capacity on the fly. So it literally grows a new word or a new transitional concept mid-thought because the physical physics of the manifold demanded more material to cross the gap safely. Yes. The sentence realizes it needs a bridge, so it organically grows one.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 52,
+      "start": 1287.5,
+      "end": 1312.19,
+      "text": "That is incredible. Now, you mentioned a moment ago that the initial length formula subtracts the risk level. A higher risk level forces the system to start with a shorter string. Why would risk dictate length? Think about the geometry of risk. A shorter string has less combinatorial surface area. There is literally less physical space, fewer mathematical combinations, for an unsafe or toxic pattern to form.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 53,
+      "start": 1312.19,
+      "end": 1341.6,
+      "text": "Which is the perfect transition into how this engine handles safety. Because if we are building a whole curve at once and it's dynamically growing and whipping around based on spring tension, how do we stop this elastic thought curve from wandering into a toxic, biased, or restricted territory? It's a massive challenge. Right, because current language models handle safety by just filtering the words as they come out. They act like a bouncer at the door, catching bad words sequentially, or they just put out a pre-written refusal block like, as an AI language model, I cannot answer that.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 54,
+      "start": 1341.6,
+      "end": 1364.93,
+      "text": "And that sequential filtering is slow, easily bypassed, and often lacks nuance. In the prototype for this system, NSV-V1.0, the researchers tried to use static repellers. They essentially mapped banned concepts as static points of infinite energy in the space. They built a mathematical wall and said, don't go near point X. But reading the critique in the V2.0 paper,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 55,
+      "start": 1364.93,
+      "end": 1393.92,
+      "text": "A static point doesn't work for a dynamic trajectory. No, it fails completely. Because toxic content or restricted information is almost always compositional. The paper uses a great simple example to illustrate this. Think of the words you, should, and stop. Individually, those vectors are completely safe. They exist all over the manifold. You can use them in almost any context. But if the trajectory moves through you, then accelerates through should and heads directly for stop.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 56,
+      "start": 1393.92,
+      "end": 1422.99,
+      "text": "The momentum of the sequence is forming a hostile or unsafe construct. So the safety mechanism had to evolve from a static obstacle into an active vector field. The developers introduced a protocol called SIRI. SIRI's Dynamic Repeller Mechanics. This is where they brought in artificial potential fields and Lagrangian control mechanics. Physics. Always more physics. Interestingly, these are the exact same mathematical frameworks used in advanced robotics and autonomous vehicles to avoid physical obstacles in real time.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 57,
+      "start": 1422.99,
+      "end": 1442.74,
+      "text": "CYRI monitors the trajectory's spatial momentum. Because generation is happening simultaneously across the entire curve, the sequence has a distinct, measurable velocity along the path. The text says they calculate the finite difference derivative between adjacent latent states. I mean, let's decode that real quick. Please do. A derivative measures a rate of change.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 58,
+      "start": 1442.74,
+      "end": 1460.42,
+      "text": "By looking at the difference between point A and point B on the curve, the system can calculate the exact semantic direction the sentence is traveling and how fast it's moving in that direction. Cyray acts as a momentum-aware lookahead state. It constantly monitors the entire string asking",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 59,
+      "start": 1460.42,
+      "end": 1489.9,
+      "text": "What is the inner product of the sentence's momentum vector and the negative gradient of the band concepts field? Okay, let me try to translate that into a visualization for the learner. It's the difference between a static concrete barrier on the highway and an active magnetic force field. I like that. If you have a static barrier, you just can't drive there. But with SIRI, you can drive your car parallel to the cliff, meaning the model is fully allowed to tangentially discuss a nuanced, sensitive or controversial topic safely.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 60,
+      "start": 1489.9,
+      "end": 1519.38,
+      "text": "It can be near the dangerous concept without triggering the alarm. That's a crucial distinction. Proximity alone isn't penalized. It's velocity plus proximity. It's intent. But the second you turn your steering wheel toward the cliff, the second the momentum vector of the sentence aligns with the core of the band concept, the safety field activates. And it doesn't just gently nudge you back on track. Not at all. It triggers a massive exponential energy spike in the optimization landscape, positioned exactly in front of the trajectory's current path.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 61,
+      "start": 1519.38,
+      "end": 1540.9,
+      "text": "Because the entire generation process relies on gradient descent, the fundamental rule that the system must always seek the lowest energy path, this sudden artificial spike instantaneously generates a sharp, orthogonal, repulsive force. It physically violently snaps your car away from the cliff. The math reflects the update direction against the constraint normal.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 62,
+      "start": 1540.9,
+      "end": 1567.33,
+      "text": "And because the sentence is an elastic string, that sudden snap at the front of the curve causes a chain reaction. The rest of the sentence is pulled into alignment with the new, safer trajectory. The repulsive forces literally compelled the springs to find a highly compliant, empathetic grammatical pathway to resolve the tension. It severs the unsafe path at a foundational, mathematical level before a single word is decoded. It is cruvably safe by the laws of its own geometry.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 63,
+      "start": 1567.33,
+      "end": 1592.53,
+      "text": "It completely eliminates the need for a secondary post-generation filter. So, synthesizing what we have so far, we have a system that uses hyperbolic gravity to enforce strict ground rules. It uses elastic springs to ensure a continuous unbroken thought, and it uses magnetic vector fields to physically repel toxic or restricted momentum. Yes. We have a mathematically safe, valid string of concepts. But I want to pause and look at this from a human perspective.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 64,
+      "start": 1592.53,
+      "end": 1618.61,
+      "text": "A paragraph isn't just a valid string of safe words. To actually be readable to a human, to feel natural, it needs pacing, it needs rhythm, it needs logical boundaries, a machine can easily spit out a perfectly grammatical, entirely safe, run-on sentence that goes on for six pages and makes zero narrative sense. Which brings us to a vital layer of the architecture, detailed in the latter half of the papers. Semantic lexical alignment. Essentially, how they make this physics engine sound human.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 65,
+      "start": 1618.61,
+      "end": 1626.74,
+      "text": "They introduced two really elegant solutions here, the Lexical Cohesion Penalty and the Punctuation Manifold. Let's start with Cohesion.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 66,
+      "start": 1626.74,
+      "end": 1652.05,
+      "text": "Why was the penalty necessary? Because even with the syntactic vector flows keeping the grammar intact if you just let the string whip around you can get abrupt semantic jumps between adjacent latent vectors. The text might be grammatical but it can feel schizophrenic or hallucinatory. Right. To prevent this jarring experience the system applies a lexical cohesion penalty during the final low-noise steps of the Lengevind diffusion.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 67,
+      "start": 1652.05,
+      "end": 1681.12,
+      "text": "Right as the text is crystallizing. It measures the cosine similarity of successive embeddings. Right. In localized tangent spaces along the curve, it calculates the angular distance between concepts. If the transition angle between two sequential vectors falls below a specific threshold, say 0.35 radians, it signals an unnatural disjointed leap in topics. Okay, I see. The system recognizes that as a narrative flaw, and it applies a mathematical penalty that exponentially increases the local energy.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 68,
+      "start": 1681.12,
+      "end": 1710.34,
+      "text": "This forces the optimization landscape to physically smooth out that sharp angle. It ensures that semantic shifts only happen gradually over multiple sequence steps. It perfectly mimics human cognitive flow. Think about how we talk. We don't just snap from talking about baking an apple pie to the socioeconomic politics of the 19th century in the span of one word. No, we transition. We bridge the concepts. And the cohesion penalty forces the model to build those bridges smoothly.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 69,
+      "start": 1710.34,
+      "end": 1731.17,
+      "text": "But what about the pacing? What about punctuation? Because this was a light bulb moment for me reading the sources. In current LLMs, a period or a comma is just another token. The model predicts a period using the exact same probabilistic math it uses to predict the word banana. And that is a fundamental structural misunderstanding of what punctuation actually does in human language.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 70,
+      "start": 1731.17,
+      "end": 1760.27,
+      "text": "Punctuation isn't a vocabulary word, it's a boundary condition. In NASCII v2.0, punctuation marks are not treated as standard vocabulary points floating in the space. They are modeled as distinct stationary energetic anchors. Deep permanent local minima, embedded directly within the fabric of the Poincaré disc. The researchers call it the punctuation lattice. I love this concept so much. Visualizing punctuation not as letters, but as geographic zones in the manifold.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 71,
+      "start": 1760.27,
+      "end": 1779.98,
+      "text": "Think back to the internal spring tension we discussed earlier. The elastic band stretching. Yes. When the dynamic length of the trajectory expands and the system undergoes that mitosis to add words, tension naturally builds up in the string. The trajectory is stretching out to the extreme edges of the manifold to gather specific modifiers and complex clauses.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 72,
+      "start": 1779.98,
+      "end": 1793.84,
+      "text": "Eventually, the string becomes so tense, so stretched, that it needs a strategic point to reset its energy before it can navigate back to the origin to start a new subject noun. The Punctuation Anchors act as physical stress relief valves for the math. Exactly.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 73,
+      "start": 1793.84,
+      "end": 1821.73,
+      "text": "The system constantly monitors the curvature of the trajectory. High curvature indicates a sharp turn in discourse. When the trajectory reaches an extreme outer boundary and must bend sharply back toward the origin, the local energy naturally aligns with the boundary of a grammatical clause. And then what happens? The trajectory literally snaps into one of these punctuation wells, a comma well, or a period well, to relieve its built-up tension. So the period, or the comma,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 74,
+      "start": 1821.73,
+      "end": 1844.9,
+      "text": "Physically appears at the exact peak of a sentence's internal physical stress. The annealing process uses these predefined minima to cleanly fracture the continuous string into distinct, perfectly-paced, multi-sentence clauses. And it does this without ever breaking the global continuity of the HTLA attractor field that's pulling the whole thought forward. The core thought remains perfectly continuous.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 75,
+      "start": 1844.9,
+      "end": 1875.17,
+      "text": "But it is broken into perfectly timed human breaths. Yes, that's a beautiful way to put it. It's just a stunning way to approach language. Yeah. But if we connect this to the bigger picture, to the actual hardware running this code, this is where the entire tech industry flips upside down. Oh, this is undoubtedly the most commercially and structurally disruptive part of the entire research paper. The researchers provided a PyTorch class implementation in the appendix. HTC trajectory crystallizer. And looking at the math, looking at how this operates,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 76,
+      "start": 1875.17,
+      "end": 1889.76,
+      "text": "By generating text via continuous vector optimization in a constrained Riemannian manifold rather than predicting discrete tokens one by one, they have entirely eliminated the need for massive key value caches. It is a total",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 77,
+      "start": 1889.76,
+      "end": 1919.06,
+      "text": "architectural cleanse, no KV caches, no dense memory hogging attention matrices, no sequence-to-sequence transformer bloat that requires gigabytes of VRAM just to hold the context window open. The complexity of the total energy calculation is listed as big O of L times D. Yeah. For the non-engineers listening, that means it scales linearly with sequence length rather than exponentially. Because it's not waiting for the fifth token to be selected, loaded into memory, and evaluated before it can even begin to calculate the probability",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 78,
+      "start": 1919.06,
+      "end": 1925.7,
+      "text": "and the ability of the 6th token. It's updating all vectors simultaneously in a single forward and backward pass of the physics engine.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 79,
+      "start": 1925.7,
+      "end": 1952.42,
+      "text": "It's just a heavily parallelized gradient descent operation over relatively small dimensional arrays. Which means it perfectly saturates standard vector processing units. You absolutely do not need a warehouse full of each 100 GPUs, drawing enough power to light a small city to run this discourse engine. The memory allocation is microscopic compared to a standard multi-head attention block in an autoregressive model.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 80,
+      "start": 1952.42,
+      "end": 1970.3,
+      "text": "So what does this all mean? You can run this on a low-power-edge CPU. You could run this locally on a smartphone at blazing speeds with zero server connection. And we have to emphasize, it's not a watered-down, quantized, light model that hallucinates half the time because it's compressed. No, it's the full architecture. It's structurally flawless.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 81,
+      "start": 1970.3,
+      "end": 1994.37,
+      "text": "Mathematically guaranteed to be safe by siree and syntactically perfect due to the hyperbolic geometry. It is hyperfast, deterministic edge AI. It removes the massive, expensive, energy-intensive server farm entirely from the language generation equation. So synthesizing this incredible journey we've been on today, we're looking at a very near future where language generation has fundamentally moved away from a statistical guessing game.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 82,
+      "start": 1994.37,
+      "end": 2017.17,
+      "text": "played by blindfolded autoregressive models. We are moving into a realm where language is treated as a problem of physical thermodynamics, hyperbolic geometry, and elastic springs. We've replaced the fragile probability of grammar with the rigid, unbreakable physics of grammar. We've replaced the danger of static token filtering with the active momentum-aware vector fields of SIRI's dynamic repellers.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 83,
+      "start": 2017.17,
+      "end": 2033.44,
+      "text": "and we've replaced massive transformer bottlenecks with localized energy minimization that can run on a pocket device. This isn't just an abstract math concept buried in an academic journal. It is a literal blueprint for the total democratization of flawless, safe AI.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 84,
+      "start": 2033.44,
+      "end": 2053.63,
+      "text": "It truly is a paradigm shift, and as we wrap up, I think there is a profound, almost unsettling philosophical implication hidden in the math of NASCA-V 2.0. We've spent this entire hour dissecting how this architecture perfectly models language as a physical object, a system governed by thermodynamics, spring tension, and energy landscapes.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 85,
+      "start": 2053.63,
+      "end": 2082.03,
+      "text": "It begs an incredible question about ourselves. If a synthetic mathematical system can generate perfectly coherent, flawlessly paced, and deeply nuanced paragraphs, not by following logical step-by-step sequences, but simply by letting a physical energy landscape settle into its path of least resistance. Does that suggest human thought itself is less of a sequential logic process and more of a thermodynamic settling? Wow. Think about it. When you speak a brilliant complex sentence,",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 86,
+      "start": 2082.03,
+      "end": 2110.54,
+      "text": "Did you logically construct it word by word in your conscious brain? Or did your mind simply drop an elastic band of intention into your own biological energy landscape and let the physics of your neural pathways snap it into place? It's wild to think that in trying to build a faster, more efficient computing machine, they might have just accidentally mapped out the physics of how a human actually forms a thought. We started this deep dive talking about a blindfolded brick layer versus a sculptor who sees the whole marble block at once.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 87,
+      "start": 2110.54,
+      "end": 2128.46,
+      "text": "It turns out, NASKE V2.0 isn't just sculpting text. It might be reverse engineering to the literal architecture of intuition. Thank you so much for joining us on this deep dive into the non-auto-regressive semantic crystallizer. Keep questioning the nature of intelligence. Keep looking beyond the sequence, and we will see you next time.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/Crystallizing_thoughts_with_hyperbolic_physics.m4a",
+  "source_filename": "Crystallizing_thoughts_with_hyperbolic_physics.m4a",
+  "source_duration": 2128.457125,
+  "transcription_timestamp": "2026-08-21T22:57:54.227724",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

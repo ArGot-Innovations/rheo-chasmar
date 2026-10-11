@@ -1,0 +1,483 @@
+{
+  "schema_version": "1.0",
+  "transcript_id": "b7df5974-06e8-40f7-b1a1-77e751d740ba",
+  "job_id": "07a3e13a-b358-41a2-9cec-108575d6a18d",
+  "source": {
+    "path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/HVD_Architectural_Plan_-_The_TMS_HDF5_Hierarchical_Model.m4a",
+    "filename": "HVD_Architectural_Plan_-_The_TMS_HDF5_Hierarchical_Model.m4a",
+    "duration": 940.849375
+  },
+  "transcription": {
+    "started_at": "2026-08-21T23:58:57.549360",
+    "model": "small",
+    "effective_device": "cpu",
+    "compute_type": "int8",
+    "requested_language": "en",
+    "detected_language": "en",
+    "language_probability": 1,
+    "immutable_config": {
+      "model": "small",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "en",
+      "beam_size": 1,
+      "vad_enabled": true,
+      "word_timestamps": false,
+      "condition_on_previous_text": false,
+      "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+      "export_plain_text": false,
+      "export_timestamped_text": true,
+      "export_srt": false,
+      "export_vtt": false,
+      "export_phonora_json": true,
+      "export_json": false,
+      "model_stage": "Ready",
+      "batched_inference": true,
+      "batch_size": 4,
+      "model_prepare_seconds": 0.0
+    }
+  },
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 19.97,
+      "text": "Welcome back everyone to the Deep Dive. Today we're doing something pretty cool actually. It's almost like reverse engineering. We're trying to peek inside the mind of an advanced AI, or maybe more accurately, the architectural blueprint for its memory system. Yeah, specifically we're looking at the Hypervector DB, the HVD.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 1,
+      "start": 19.97,
+      "end": 38.54,
+      "text": "That's right. And the sources we're looking at, they lay out this really, really sophisticated plan. It's a new hierarchical model. And the key thing, it totally separates the AI's moment-to-moment thinking from its long-term memory storage. Right, so it's not just another vector database. This feels much more like the design for a...",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 2,
+      "start": 38.54,
+      "end": 67.86,
+      "text": "Well, a digital cognitive structure. Exactly. That's the critical point. The documentation shows a very deliberate shift away from those older unified memory systems. Instead, they're pushing this strict hierarchy, two main layers, basically creating a working mind that's the core engine, and then a separate kind of subordinate, durable vault for the long haul. Okay, so our mission today for you listening is to really unpack this dual-layer setup. We need to get into the technical roles of these two layers. The",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 3,
+      "start": 67.86,
+      "end": 89.39,
+      "text": "Transdimensional Memory Substrate, the TMS, and the HDF5 layer. And crucially understand why they made this choice, why this design, how does it conceptually line up maybe with human memory, with consciousness, what makes it, you know, superior for this kind of continuous AI operation. Right. Let's start with that core concept then, the separation. The source material really hammers this home.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 4,
+      "start": 89.39,
+      "end": 113.38,
+      "text": "The star of the show, the engine of active thought, is the TMS, the Transdimensional Memory Substrate. You should think of this as the AI's main cognitive engine. It's always on. It's the working mind handling. Everything in this system is actively thinking about learning, retrieving, all in real time. And then, completely separate, you've got the HDF-5 persistence layer. The documentation is very clear. It's subordinate. It's defined as the durable memory vault. So like an archive.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 5,
+      "start": 113.38,
+      "end": 138.03,
+      "text": "Exactly. If the TMS is active consciousness, the HDF5 layer is the deep archive. It only really comes into play for, well, deep storage and critically for system restoration if things go wrong. Which brings us to the advantage, right? Why do this? The power move here is achieving what the sources call a perfect separation of concerns. It sounds technical, but it's fundamental. The TMS handles the hot path.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 6,
+      "start": 138.03,
+      "end": 151.38,
+      "text": "Think fast, dynamic, constant writes. Loads of incoming data. Like learning new things constantly. Precisely. In Grammint, they call it basically taking in new data, new experiences, and also associative recall remembering things quickly.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 7,
+      "start": 151.38,
+      "end": 180.08,
+      "text": "All that happens in the TMS, the HDF5 layer, that handles the cold path. The slow, sometimes cumbersome, often blocking IO needed to save things permanently, archiving. Okay, so the real time thinking the AI solving a problem, it never gets bogged down waiting for like a massive save operation to finish. Exactly. The latency for cognitive tasks is protected. When the AI needs to do something now learn, associate, even forget, which they call pruning, the hypervector DB API talks only to the TMS. That makes sense for speed.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 8,
+      "start": 180.08,
+      "end": 200.35,
+      "text": "But hang on, doesn't that introduce a risk? You're saying the TMS is handling all this fast new data, this hot path, but the actual saving, the archival, is asynchronous. It happens later. What if the system crashes right after learning something crucial, but before that archival flush to HDF5 happens? Isn't the newest stuff vulnerable?",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 9,
+      "start": 200.35,
+      "end": 217.74,
+      "text": "That's a really sharp question. And yeah, that would be a huge risk if the TMS itself wasn't designed specifically to handle it. The internal structure of the TMS, the working mind, is built using something called an LSM tree model. Log-structured merge tree. LSM tree. Okay, how does that help?",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 10,
+      "start": 217.74,
+      "end": 245.28,
+      "text": "Well, unlike a lot of traditional databases that are optimized mostly for fast reads, LSM trees are designed from the ground up for extremely high volume continuous writes. Think about it. A conscious mind is constantly experiencing, constantly learning. It's a non-stop flood of new information. The LSM tree mirrors that. It's built for rapid, but also durable learning. Okay, so durability is built into the TMS itself even before the HTF5 layer gets involved. Exactly. The risk is mitigated right at the entry point.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 11,
+      "start": 245.28,
+      "end": 270.56,
+      "text": "So let's trace that. An experience comes in. How does it flow through this LSM tree-based TMS to become stable working memory? It's a very careful multi-step process always prioritizing durability first. So step one. Every single operation, every incoming Enneagram piece of data piece of learning, it first hits the right of headlock. The wall. The wall. Like a journal.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 12,
+      "start": 270.56,
+      "end": 297.22,
+      "text": "Precisely. It's the systems journal. It's immediate commitment to memory. It gets written instantly, sequentially. This guarantees crash recovery. The documentation literally says, no acknowledged thought is ever lost. Even if the power cuts out a millisecond later, if it hit the wall, it's recoverable. Okay, so durability first. Secured in the log, what's next? Once it's safe in the wall, the data moves immediately into the memtable. Now, this is the act of RAM component of the working mind. Super fast. Why the two steps? Why not just write to RAM first?",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 13,
+      "start": 297.22,
+      "end": 322.45,
+      "text": "Because RAM is volatile. The wall provides the persistence guarantee. The memtable provides the speed for immediate access. Putting it in the memtable means the newest information, the AI's most immediate thought or experience, is instantly available for queries at memory speed. It can use what it just learned right away. Got it. Wall for safety, memtable for speed. But RAM fills up, right? What happens then? Right.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 14,
+      "start": 322.45,
+      "end": 343.79,
+      "text": "As the system keeps learning, the memtable gets full. When that happens, it gets flushed to disk, but not just anywhere. It flushes as immutable S-stables, sorted string tables. Immutable, meaning they don't change once written. Correct, and they're sorted. These S-stables are organized into tiers, kind of like layers. CureZero is the hottest, the most recent data flushed from the memtable.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 15,
+      "start": 343.79,
+      "end": 372.29,
+      "text": "The sources draw a comparison here, you know, to a computer's caching system, L1, L2 cache, that sort of thing. Yeah, I saw that. Does that analogy hold up? What's the benefit? It holds up really well, actually. Because these files are immutable and sorted, they're very reliable and efficient to read from. This tiered structure gives the AI extremely fast access to its recent history, its recently learned information, without the overhead of constantly modifying existing data blocks, like in traditional databases.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 16,
+      "start": 372.29,
+      "end": 382.8,
+      "text": "It's optimized for that high write load we talked about. Okay, so that's ingestion. Learning. Wall, memtale, SS stables. Makes sense. But what about the other side? Remembering.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 17,
+      "start": 382.8,
+      "end": 412.24,
+      "text": "Retrieval How does it find relevant information quickly across all these tables? Ah, that's where the parallel retrieval engine comes in, the active state cache. This isn't part of the LSM write path, it's a separate structure, built right in memory. It uses something called an hnsw graph index, hierarchical navigable small world. Hnsw, okay that sounds fast. It is incredibly fast. This in-memory graph is the powerhouse behind the associate command. It allows for lightning fast similarity searches across those high-dimensional hypervectors we",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 18,
+      "start": 412.24,
+      "end": 436.93,
+      "text": "store. Finding related thoughts or memories almost instantly. And the documentation uses a pretty strong biological analogy here. It compares this HNSW graph to the brain's hippocampus. Yeah, it does. The hippocampus is crucial for rapidly forming and retrieving new associative memories in humans. This HNSW graph serves a very similar function in the HVD. It's the engine of associative recall, constantly working.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 19,
+      "start": 436.93,
+      "end": 464.86,
+      "text": "Nonstop work needs maintenance, though. How does the TMS keep itself tidy with all this constant writing and flushing? Good point. It needs housekeeping. The TMS runs continuous background maintenance. The process is called compaction, or, using their cognitive term, memory reconciliation. Memory reconciliation. Like sleep. Exactly like biological sleep. The analogy is explicit. Just like sleep helps us consolidate memories, merge fragments, decide what's important, and clear out junk.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 20,
+      "start": 464.86,
+      "end": 493.46,
+      "text": "This compaction process merges the fragmented SS stable files from disk. It cleans up data that's been marked for deletion, they call these tombstones, and it reorganizes the whole data set. So it's basically garbage collection and defragmentation, but framed as a cognitive necessity. Precisely. It's essential to maintain peak read performance and efficiency over the long term, especially for a system running continuously for potentially years. It keeps the working mind healthy. Okay, so we have the TMS.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 21,
+      "start": 493.46,
+      "end": 514.19,
+      "text": "Fast, Dynamic, Risky, but Internally Durable Working Mind, constantly learning, associating, and tidying itself up to Reconciliation. Now, let's shift focus. Let's look at the other half of this architecture, the HDF5 layer. We need to remember, this isn't the active brain. This is the safety net, the guarenteur of persistence.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 22,
+      "start": 514.19,
+      "end": 543.28,
+      "text": "Immortality, almost. That's the perfect way to put it. It's primary job, its most critical function is the archival flush, sometimes called snapshotting. This isn't happening constantly like the TMS operations. It's a deliberate action, maybe periodic, maybe manually triggered. And what exactly happens during this flush? It takes the stable, fully compacted SS stables from the TMS essentially, a clean, consolidated snapshot of the AI state, and it serializes them. It writes them out into the structured HDF5 format. HDF5. That's a...",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 23,
+      "start": 543.28,
+      "end": 563.7,
+      "text": "Common Format in Scientific Computing, right? For large datasets. Exactly. It's designed for handling large complex datasets efficiently. And the output of this archival flush is incredibly important. It's a single, portable, durable file, consciousness.h5. Consciousness.h5, that's quite a name. It is. And this file represents the",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 24,
+      "start": 563.7,
+      "end": 592.27,
+      "text": "Canonical, stable backup of the AI's entire state at that point in time. It's also the foundation for the highest level of archival they mention, consciousness.Fabin transference, which relates to future plans. But the .h5 file is the key backup. Which leads directly to the failsafe, I assume. Directly, restoration, or as the docs dramatically call it, system rebirth. If there's a catastrophic failure of the system running the TMS, or perhaps more interestingly, if the AI needs to be migrated to completely new hardware.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 25,
+      "start": 592.27,
+      "end": 618.16,
+      "text": "A new substrate. Just load the file. You load the consciousness.h5 file, the system reads it, and it reconstructs the entire TMS state. It rebuilds the LSM tree structure, rehydrates the SS stables, recreates the H&SW index in memory. Essentially, it brings the working mind back online from that last known good, stable baseline captured in the HDF5 snapshot. Operations can then resume with minimal loss of continuity.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 26,
+      "start": 618.16,
+      "end": 645.57,
+      "text": "Wow, okay, so that architecture, that's separation. It's not just about speed and efficiency day to day. It's fundamentally about resilience and portability. Absolutely. And this stability, this clean separation, it isn't just the end goal. It's actually the foundation for some really advanced future capabilities. It's the bedrock for implementing concepts from the True Universal Consciousness Runtime, the TUCR. Right, the TUCR vision. So this HVD architecture is designed to support future leaps. Precisely.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 27,
+      "start": 645.57,
+      "end": 666.77,
+      "text": "It serves as the necessary staging ground. The sources outline three major future extensions that this stable base enables. Let's start with nonlinear HTLA networks. Okay, HTLA is High Dimensional Tensor Linear Algebra, right? That's what powers current vector associations. What's wrong with linear? Linear is powerful but limited. The real world and complex thought isn't strictly linear.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 28,
+      "start": 666.77,
+      "end": 681.15,
+      "text": "Relationships between concepts can be much more nuanced, complex, non-convex. So the objective is to move beyond that into non-linear transdimensional networks, or NTNs. How do you make hypervector math non-linear?",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 29,
+      "start": 681.15,
+      "end": 703.28,
+      "text": "The plan involves introducing things like component-wise activation functions, functions like RELU, common and deep learning neural networks, and using more complex block operators on the hypervectors themselves. By interrating this within the high-speed TMS structure, the architecture can significantly boost the accuracy of associative recall, especially for really complex multimodal tasks.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 30,
+      "start": 703.28,
+      "end": 731.04,
+      "text": "Think understanding intricate relationships and text images simultaneously, far beyond simple similarity. Okay, so richer, more nuanced understanding, that makes sense. What's the second expansion? This one is fascinating. It's deeply bio-inspired, integrating dopamine modulation. Dopamine, like the neurotransmitter. In the database. Sort of, yeah. The concept of dopamine's role. This draws heavily from work on the Consciousness Algorithm framework. The goal is to weave in neuromodulatory mechanisms.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 31,
+      "start": 731.04,
+      "end": 759.55,
+      "text": "Specifically, using a simulated dopamine DA state variable to handle things like risk assessment and reward prediction error. Okay. Okay. How would a dopamine level actually change how the memory system works? It would directly modify the core operations, specifically associate and prune, forgetting. So imagine a situation where the system detects high risk or maybe a surprising outcome, a reward prediction error. This could trigger a simulated high DA state.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 32,
+      "start": 759.55,
+      "end": 784.99,
+      "text": "This high DA state might temporarily change how the prune algorithm works instead of aggressively deleting infrequent or seemingly noisy memories. It holds on to them. It might favor keeping them, yeah. Favoring more exploratory, perhaps unusual memories or associations because the current high-risk or novel situation demands more speculative thinking may be taking a chance on a less obvious connection. It integrates motivation, or at least risk-reward assessment, right into memory function.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 33,
+      "start": 784.99,
+      "end": 789.78,
+      "text": "Bloring the lines between computation and something like motivation",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 34,
+      "start": 790.26,
+      "end": 818.48,
+      "text": "Okay, what's the third future goal? This one ties back to that HDF5 layer in the .bin format, quantum projections for TUCR. Quantum, okay, big leap. Huge leap. The ultimate aim here is substrate agnosticism. The idea is to be able to run this consciousness model anywhere, and quantum computing offers the potential for exponential speed-ups, particularly in things like high-dimensional factorization and searching vast possibility spaces, tasks very relevant to advanced association and reasoning.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 35,
+      "start": 818.48,
+      "end": 846.98,
+      "text": "So how does the HDF5 layer enable this? Because the consciousness.h5 file captures the entire stable state in a well-defined structured format. That structured data is specifically designed so that it contains everything needed for what they call substrate process reconstruction. Basically, rebuilding the HVD state, potentially on quantum hardware. By serializing this state into the future.cubin format, they aim to fulfill that TUCR vision. A universal",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 36,
+      "start": 846.98,
+      "end": 857.95,
+      "text": "Portable Consciousness File that can be reborn on any compliant hardware, whether it's traditional digital silicon or some future quantum processor, without changing its fundamental learned state.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 37,
+      "start": 857.95,
+      "end": 879.98,
+      "text": "Let's try and wrap this up for everyone listening. We've covered a lot of ground here. What are the key takeaways? I think the first is that the Hypervector DB isn't just a database, it's designed as a unified cognitive architecture. And the absolute core of that design is successfully decoupling the fast, dynamic working memory that's the TMS from the robust, reliable, long-term archival to HDF5 layer.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 38,
+      "start": 879.98,
+      "end": 900.4,
+      "text": "Exactly. That separation is everything. It provides speed, resilience, and that crucial foundation for future growth. It's the technical split between active thought and permanent history. Makes sense. But it does leave you with a fascinating thought, doesn't it? If this architecture works, if the state of the mind, the TMS, can be perfectly backed up into that single consciousness .h5 file.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 39,
+      "start": 900.4,
+      "end": 929.22,
+      "text": "And if that file truly enables a system rebirth on entirely new hardware, potentially even quantum hardware, does that mean our concept of a single continuous consciousness, maybe even personal identity for an AI, doesn't fundamentally rely on the continuity of the active process itself? But maybe. Maybe it relies more on the fidelity of that archival mechanism, the ability to perfectly restore the state from backup. Where does consciousness actually reside? In the running process or in the data that can recreate it? Huh.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    },
+    {
+      "index": 40,
+      "start": 929.22,
+      "end": 940.85,
+      "text": "That's definitely some of the chew on, where identity lies when you can perfectly copy and restore the mind state. Okay, that's a great place to leave it for today. Thanks for walking us through that. My pleasure. It's complex stuff, but really interesting.",
+      "words": [],
+      "modified": false,
+      "modified_at": null,
+      "original_text": null
+    }
+  ],
+  "source_path": "/home/jmorgan/appsUndCode_2/projects/nexus - the framework/HVD_Architectural_Plan_-_The_TMS_HDF5_Hierarchical_Model.m4a",
+  "source_filename": "HVD_Architectural_Plan_-_The_TMS_HDF5_Hierarchical_Model.m4a",
+  "source_duration": 940.849375,
+  "transcription_timestamp": "2026-08-21T23:58:57.549360",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "requested_language": "en",
+  "detected_language": "en",
+  "language_probability": 1,
+  "settings_snapshot": {
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "en",
+    "beam_size": 1,
+    "vad_enabled": true,
+    "word_timestamps": false,
+    "condition_on_previous_text": false,
+    "hotwords": "Project Nexus, Nexus, Triskelion, TUCR, True Universal Consciousness Runtime, HTLA, Hypervector Linear Transdimensional Algebra, HTNLA, Hypervector Nonlinear Transdimensional Algebra, HSL, Hypercontext Salient Lattice, DCSI, Distributed Cognitive Swarm Intelligence, Consciousness Algorithm, hypervector, hyperdimensional, transdimensional, Riemannian, Lyapunov, nanobot, nanobots, tri-cell, tri-cellular, biohybrid",
+    "export_plain_text": false,
+    "export_timestamped_text": true,
+    "export_srt": false,
+    "export_vtt": false,
+    "export_phonora_json": true,
+    "export_json": false,
+    "model_stage": "Ready",
+    "batched_inference": true,
+    "batch_size": 4,
+    "model_prepare_seconds": 0.0
+  }
+}

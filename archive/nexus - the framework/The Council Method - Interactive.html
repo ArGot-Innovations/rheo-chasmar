@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Council Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#16140F;
+    --bg-raised:#1F1C15;
+    --bg-raised-2:#272319;
+    --paper:#EDE9DD;
+    --muted:#A79E8C;
+    --rule:#38341F;
+    --seat-a:#E8AC5C;
+    --seat-b:#7CA8CE;
+    --seat-c:#D9603F;
+    --seat-d:#AE8AC9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--paper);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:44px 22px 80px;
+  }
+  header.hero{margin-bottom:36px;}
+  .eyebrow-top{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:clamp(34px,8vw,46px);
+    line-height:1.04;
+    margin:0 0 16px;
+    letter-spacing:-0.01em;
+  }
+  .thesis{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:18px;
+    color:var(--paper);
+    max-width:46ch;
+    margin:0 0 6px;
+  }
+  .thesis-sub{
+    color:var(--muted);
+    font-size:14.5px;
+    max-width:50ch;
+    margin:10px 0 0;
+  }
+
+  /* seat grid */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-top:34px;
+  }
+  @media (min-width:560px){
+    .grid{grid-template-columns:1fr 1fr;}
+  }
+  .card{
+    text-align:left;
+    background:var(--bg-raised);
+    border:1px solid var(--rule);
+    border-left:4px solid var(--seat-color);
+    border-radius:3px;
+    padding:18px 18px 20px;
+    cursor:pointer;
+    color:var(--paper);
+    font-family:inherit;
+    display:block;
+    width:100%;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .card:hover, .card:focus-visible{
+    background:var(--bg-raised-2);
+    transform:translateY(-1px);
+  }
+  .card:focus-visible{outline:2px solid var(--seat-color); outline-offset:2px;}
+  .seat-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--seat-color);
+    margin:0 0 8px;
+    font-weight:600;
+  }
+  .card h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:20px;
+    margin:0 0 6px;
+    line-height:1.15;
+  }
+  .card p{
+    margin:0;
+    font-size:13.5px;
+    color:var(--muted);
+  }
+
+  /* detail panel */
+  .panel{display:none;}
+  .panel.visible{display:block;}
+  #grid-view.hidden{display:none;}
+
+  .back-link{
+    background:none;
+    border:none;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.05em;
+    color:var(--muted);
+    cursor:pointer;
+    padding:0;
+    margin-bottom:26px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .back-link:hover{color:var(--paper);}
+
+  .panel .seat-tag{font-size:12px;}
+  .panel h2{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:30px;
+    line-height:1.08;
+    margin:6px 0 18px;
+    color:var(--paper);
+    border-bottom:2px solid var(--seat-color);
+    padding-bottom:16px;
+  }
+  .technique{
+    font-size:15px;
+    margin:0 0 16px;
+  }
+  .tell{
+    font-size:14px;
+    color:var(--muted);
+    background:var(--bg-raised);
+    border-left:3px solid var(--seat-color);
+    padding:12px 14px;
+    border-radius:2px;
+    margin:0 0 30px;
+  }
+  .tell b{color:var(--paper); font-weight:600;}
+
+  .script-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--seat-color);
+    margin:0 0 10px;
+    font-weight:600;
+  }
+  .script-box{
+    background:var(--bg-raised);
+    border:1px solid var(--rule);
+    border-radius:4px;
+    padding:18px 16px;
+    position:relative;
+  }
+  .script-text{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    line-height:1.65;
+    color:var(--paper);
+    white-space:pre-wrap;
+    margin:0 0 16px;
+  }
+  .copy-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.03em;
+    background:var(--seat-color);
+    color:var(--bg);
+    border:none;
+    border-radius:3px;
+    padding:11px 18px;
+    cursor:pointer;
+    width:100%;
+  }
+  .copy-btn:focus-visible{outline:2px solid var(--paper); outline-offset:2px;}
+  .copy-btn.copied{background:var(--paper);}
+
+  footer{
+    margin-top:56px;
+    padding-top:20px;
+    border-top:1px solid var(--rule);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--muted);
+    letter-spacing:0.04em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow-top">The Council Method</p>
+    <h1>Four seats.<br>One conversation.</h1>
+    <p class="thesis">Most people ask one AI response to do four different jobs at once. That's why it comes back generic.</p>
+    <p class="thesis-sub">Pick what you're actually doing right now. Get the exact thing to paste into whatever chat window you already have open.</p>
+  </header>
+
+  <div id="grid-view">
+    <div class="grid">
+      <button class="card" data-seat="a" style="--seat-color:var(--seat-a)">
+        <p class="seat-tag">Seat A · The Messy Start</p>
+        <h2>I've got an idea, not a pitch</h2>
+        <p>Shape something unformed without flattening it too soon.</p>
+      </button>
+      <button class="card" data-seat="b" style="--seat-color:var(--seat-b)">
+        <p class="seat-tag">Seat B · The Constraint Check</p>
+        <h2>I need it right, first try</h2>
+        <p>Get real constraints on the table before any solution.</p>
+      </button>
+      <button class="card" data-seat="c" style="--seat-color:var(--seat-c)">
+        <p class="seat-tag">Seat C · The Pressure Test</p>
+        <h2>I need this actually broken</h2>
+        <p>Find the crack in something you've already built.</p>
+      </button>
+      <button class="card" data-seat="d" style="--seat-color:var(--seat-d)">
+        <p class="seat-tag">Seat D · The Loose Take</p>
+        <h2>I just need to think out loud</h2>
+        <p>Say the unfiltered version and get the signal handed back.</p>
+      </button>
+    </div>
+  </div>
+
+  <!-- PANEL A -->
+  <div class="panel" id="panel-a" style="--seat-color:var(--seat-a)">
+    <button class="back-link" data-back>&#8249; Back to the table</button>
+    <p class="seat-tag">Seat A · The Messy Start</p>
+    <h2>Shaping a messy idea</h2>
+    <p class="technique">Don't clean the idea up before you say it. A clarifying question coming back isn't friction &mdash; that's the actual process starting.</p>
+    <p class="tell"><b>The tell:</b> if the answer feels like it could've been written before you said anything specific, you haven't given it enough yet.</p>
+    <p class="script-label">Paste this, then dump your actual mess underneath it</p>
+    <div class="script-box">
+      <p class="script-text" id="script-a">I've got a messy, half-formed idea — not a clean pitch. Don't organize or polish it yet. Ask me sharp clarifying questions about the parts that are actually unclear, instead of summarizing what I say. If I answer "I don't know," treat that as real information about where I'm stuck, not a dead end.
+
+Here's the messy version:
+[paste your rambling here]</p>
+      <button class="copy-btn" data-copy="script-a">Copy the script</button>
+    </div>
+  </div>
+
+  <!-- PANEL B -->
+  <div class="panel" id="panel-b" style="--seat-color:var(--seat-b)">
+    <button class="back-link" data-back>&#8249; Back to the table</button>
+    <p class="seat-tag">Seat B · The Constraint Check</p>
+    <h2>Getting it right the first time</h2>
+    <p class="technique">Ban solutions until the constraints exist. Spend the first stretch of the conversation only naming what's true, before anything gets proposed.</p>
+    <p class="tell"><b>The tell:</b> you're saying "not yet, tell me X first" more often than "no, try again."</p>
+    <p class="script-label">Paste this, then name the actual task</p>
+    <div class="script-box">
+      <p class="script-text" id="script-b">I want help with [describe the task]. Don't propose solutions yet. First, ask me about the constraints that actually matter — budget, audience, format, timeline, what "good" looks like, anything else you'd need to know to avoid guessing. Keep asking until you actually have enough. Only then give me a real answer.</p>
+      <button class="copy-btn" data-copy="script-b">Copy the script</button>
+    </div>
+  </div>
+
+  <!-- PANEL C -->
+  <div class="panel" id="panel-c" style="--seat-color:var(--seat-c)">
+    <button class="back-link" data-back>&#8249; Back to the table</button>
+    <p class="seat-tag">Seat C · The Pressure Test</p>
+    <h2>Stress-testing something real</h2>
+    <p class="technique">Assign it an explicit adversarial job, not a validating one. Force a split between what's a fact and what's just a convention you chose.</p>
+    <p class="tell"><b>The tell:</b> if it agrees fast, that's a reason to push harder, not a reason to relax.</p>
+    <p class="script-label">Paste this, then drop in the thing you're testing</p>
+    <div class="script-box">
+      <p class="script-text" id="script-c">I'm sharing something I've already built or decided on. Don't be encouraging — find where this actually breaks. Tell me which parts are verified facts and which are just conventions or assumptions I've made. Give me the specific failure point, not a general opinion, and say how confident you are that it's a real problem versus just a preference.
+
+Here it is:
+[paste your thing here]</p>
+      <button class="copy-btn" data-copy="script-c">Copy the script</button>
+    </div>
+  </div>
+
+  <!-- PANEL D -->
+  <div class="panel" id="panel-d" style="--seat-color:var(--seat-d)">
+    <button class="back-link" data-back>&#8249; Back to the table</button>
+    <p class="seat-tag">Seat D · The Loose Take</p>
+    <h2>Thinking out loud, on purpose</h2>
+    <p class="technique">Say the dumb version first, before you've decided if it's worth saying. Most good material dies in the half-second before you type it.</p>
+    <p class="tell"><b>The tell:</b> if you're slightly embarrassed by what you just said, you probably just said something real.</p>
+    <p class="script-label">Paste this, then just start talking</p>
+    <div class="script-box">
+      <p class="script-text" id="script-d">I'm going to think out loud — unfiltered, maybe rambling, maybe contradicting myself. Don't try to organize or answer yet. Just listen, and when I stop, tell me the one or two things in what I said that are actually worth keeping.
+
+Here goes:
+[start rambling]</p>
+      <button class="copy-btn" data-copy="script-d">Copy the script</button>
+    </div>
+  </div>
+
+  <footer>The Council Method &mdash; four seats, one conversation.</footer>
+</div>
+
+<script>
+  var gridView = document.getElementById('grid-view');
+  var panels = document.querySelectorAll('.panel');
+  var cards = document.querySelectorAll('.card');
+  var backLinks = document.querySelectorAll('[data-back]');
+  var copyBtns = document.querySelectorAll('[data-copy]');
+
+  function showSeat(seat){
+    gridView.classList.add('hidden');
+    panels.forEach(function(p){ p.classList.remove('visible'); });
+    var target = document.getElementById('panel-' + seat);
+    if(target){ target.classList.add('visible'); window.scrollTo(0,0); }
+  }
+
+  function showGrid(){
+    panels.forEach(function(p){ p.classList.remove('visible'); });
+    gridView.classList.remove('hidden');
+    window.scrollTo(0,0);
+  }
+
+  cards.forEach(function(c){
+    c.addEventListener('click', function(){ showSeat(c.getAttribute('data-seat')); });
+  });
+
+  backLinks.forEach(function(b){
+    b.addEventListener('click', showGrid);
+  });
+
+  copyBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-copy');
+      var text = document.getElementById(id).innerText;
+      var done = function(){
+        var original = btn.textContent;
+        btn.textContent = 'Copied — go paste it';
+        btn.classList.add('copied');
+        setTimeout(function(){
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text, done); });
+      } else {
+        fallbackCopy(text, done);
+      }
+    });
+  });
+
+  function fallbackCopy(text, cb){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+    cb();
+  }
+</script>
+</body>
+</html>
