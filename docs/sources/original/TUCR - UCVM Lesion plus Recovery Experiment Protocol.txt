@@ -1,0 +1,134 @@
+---
+
+# TUCR/UCVM Lesion + Recovery Experiment Protocol
+
+## 1. Objective
+
+The goal of this experiment is to systematically test the resilience and recovery capabilities of the **TUCR runtime** running on the **UCVM emulator**. We aim to measure:
+
+* **Φ (Phi) dynamics** before and after lesions
+* **Active node counts** and recovery rates
+* **Emergent behavior patterns** after repeated lesions and remappings
+
+---
+
+## 2. Experimental Setup
+
+### 2.1 Software Components
+
+* **TUCRRuntime**: Simplified implementation of the consciousness runtime
+* **UCVM Emulator**: Provides virtualization, node remapping, and health checks
+* **Lesion + Recovery Script**: `lesion_recovery_sim.py`
+
+### 2.2 Hardware / Environment
+
+* Runs on any standard Python 3.10+ environment
+* Optional: `matplotlib` for plotting
+* CPU-bound simulation; no GPU required
+
+### 2.3 Initialization
+
+1. Register a new TUCR runtime in the UCVM:
+
+   ```python
+   ucvm.register(runtime_id="TUCR1", node_list=["node0", "node1", ..., "nodeN"])
+   ```
+2. Initialize node states:
+
+   * All nodes active (`active=True`)
+   * Φ initialized to `1.0`
+
+---
+
+## 3. Experimental Procedure
+
+### 3.1 Lesion Cycle
+
+1. Randomly select **1–3 nodes** for lesion per step
+2. Lesion nodes:
+
+   ```python
+   ucvm.runtimes[runtime_id].lesion_nodes(lesion_nodes)
+   ```
+3. Snapshot the system state before recovery:
+
+   ```python
+   snapshot_before = ucvm.snapshot(runtime_id)
+   health_before = ucvm.health_check(runtime_id)
+   ```
+
+### 3.2 Recovery / Remap Cycle
+
+1. Remap or recover lesioned nodes:
+
+   ```python
+   ucvm.remap(runtime_id, lesion_nodes, candidate_region=node_list)
+   ```
+2. Measure post-recovery metrics:
+
+   ```python
+   health_after = ucvm.health_check(runtime_id)
+   ```
+
+### 3.3 Iteration
+
+* Repeat lesion and recovery cycles for **5 steps** or more
+* Optionally, increase lesion severity or frequency in subsequent experiments
+
+---
+
+## 4. Metrics and Measurements
+
+| Metric         | Description                         | Measurement Frequency              |
+| -------------- | ----------------------------------- | ---------------------------------- |
+| Active Nodes   | Count of nodes with `active=True`   | Every step, pre- and post-recovery |
+| Avg Φ          | Average Φ across all nodes          | Every step, pre- and post-recovery |
+| Lesioned Nodes | Node IDs selected for lesion        | Every step                         |
+| Recovery Time  | Time taken for remap/recovery       | Optional; measured per step        |
+| Snapshot       | Node-level states (`active`, `phi`) | Pre-recovery                       |
+
+### 4.1 CSV Logging Schema
+
+```csv
+step,lesioned_nodes,active_nodes_before,avg_phi_before,active_nodes_after,avg_phi_after
+0,"['node3', 'node7']",8,0.9,10,1.0
+1,"['node1']",9,0.95,10,1.0
+...
+```
+
+---
+
+## 5. Visualization
+
+* Optional plots:
+
+  * **Avg Φ over steps**
+  * **Active nodes over steps**
+* Use `matplotlib.pyplot` to visualize system recovery dynamics
+
+---
+
+## 6. Notes / Best Practices
+
+* Ensure **deterministic random seeds** for reproducibility when comparing runs:
+
+  ```python
+  random.seed(42)
+  ```
+* For larger simulations, increase node count and track performance overhead
+* Log all snapshots for post-experiment analysis of emergent behavior
+
+---
+
+## 7. Optional Extensions
+
+1. **Targeted Lesions**: Lesion nodes based on network centrality or Φ value
+2. **Recovery Strategies**: Compare random remap vs. heuristic remap
+3. **Longitudinal Studies**: Run hundreds of cycles to test long-term stability
+4. **Dynamic Node Addition**: Test system plasticity with added nodes mid-run
+
+---
+
+This protocol provides a full blueprint for systematic lesion + recovery experiments. All outputs are reproducible, measurable, and suitable for analysis of TUCR/UCVM emergent behaviors.
+
+---

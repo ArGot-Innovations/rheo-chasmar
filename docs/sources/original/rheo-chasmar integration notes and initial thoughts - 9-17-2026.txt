@@ -1,0 +1,317 @@
+That actually makes the product direction **considerably stronger**, because the AI layer does not have to become a collection of OpenAI/Claude/Gemini API calls bolted onto the GUI. The application can use **Project Nexus / Rheo** as its native cognitive backend and keep the diagram application itself deterministic.
+
+I would draw a hard architectural boundary like this:
+
+```text
+                 Mermaid Viewer & Editor
+                          │
+                          │ user actions / documents
+                          ▼
+                 Canonical Diagram Model
+                nodes / edges / groups /
+              geometry / styles / metadata
+                          │
+          ┌───────────────┼─────────────────┐
+          │               │                 │
+          ▼               ▼                 ▼
+      Mermaid          Renderer         File I/O
+   parser/serializer   PDF/PNG/SVG    PDF/PNG/MMD/SVG
+          │
+          │ tasks requiring inference
+          ▼
+                Project Nexus / Rheo
+                          │
+       ┌──────────────────┼──────────────────┐
+       ▼                  ▼                  ▼
+ Reconstruction       Generation         Analysis
+ PNG/PDF → graph    text → diagram    diagram → explanation
+       │                  │                  │
+       └──────────────────┼──────────────────┘
+                          ▼
+              Structured AI Result
+             + confidence/provenance
+                          │
+                          ▼
+                Canonical Diagram Model
+```
+
+The important point is that **Rheo should not directly write Mermaid files**.
+
+It should produce a structured intermediate result such as:
+
+```python
+DiagramInferenceResult(
+    nodes=[...],
+    edges=[...],
+    groups=[...],
+    labels=[...],
+    geometry=[...],
+    diagram_type="architecture",
+    confidence=0.91,
+    uncertain_regions=[...],
+    provenance=[...],
+)
+```
+
+Then the deterministic application layer validates that result, places it into the canonical Diagram Document model, and serializes that model into Mermaid.
+
+That gives us a very clean division:
+
+> **Rheo reasons. The diagram engine determines document truth.**
+
+That distinction will matter enormously once users start editing important architecture diagrams.
+
+### PNG/PDF reconstruction fits Nexus particularly well
+
+For a foreign diagram, I would make reconstruction a multi-stage cognitive task rather than one giant `"look at this and write Mermaid"` prompt.
+
+Something like:
+
+```text
+foreign diagram
+      │
+      ▼
+1. Document decomposition
+   pages / image regions / vector objects
+      │
+      ▼
+2. Perceptual extraction
+   text
+   shapes
+   symbols
+   lines
+   arrowheads
+   containers
+      │
+      ▼
+3. Candidate graph construction
+   possible nodes
+   possible relationships
+      │
+      ▼
+4. Nexus/Rheo hypothesis analysis
+   "Does this arrow connect A → B or A → C?"
+   "Is this a database symbol?"
+   "Are these objects one cluster?"
+      │
+      ▼
+5. Competing reconstructions
+      │
+      ▼
+6. Confidence/admissibility evaluation
+      │
+      ▼
+7. Canonical Diagram Model
+      │
+      ▼
+8. Human reconstruction review
+      │
+      ▼
+9. Mermaid
+```
+
+And I would absolutely preserve **alternative hypotheses**, not just one answer.
+
+For example:
+
+```text
+Connection E17
+
+Candidate 1:
+    API Gateway → Authentication
+    confidence: 0.93
+
+Candidate 2:
+    API Gateway → User Service
+    confidence: 0.31
+```
+
+The UI can display the first one but mark the relationship as uncertain.
+
+That is much more useful than an LLM silently hallucinating an edge.
+
+Project Nexus's existing architecture—separating orchestration, active cognitive state, persistent memory, admissibility/guarding, and outward rendering—is actually well aligned with that type of problem. Ephemeral cognitive workspaces are particularly useful here because each reconstruction or competing graph interpretation can be evaluated without automatically becoming canonical application state.
+
+### HVD also becomes genuinely useful
+
+A diagram reconstruction can have its own temporary cognitive database:
+
+```text
+Reconstruction HVD
+├── source image/page
+├── OCR observations
+├── detected shapes
+├── candidate nodes
+├── candidate edges
+├── topology hypotheses
+├── confidence history
+├── rejected hypotheses
+├── accepted corrections
+└── final graph
+```
+
+Once the reconstruction is accepted, only the validated Diagram Document gets promoted into the actual saved document.
+
+For a 40-page infrastructure PDF, you could even have:
+
+```text
+Document HVD
+│
+├── Page 1 HVD
+├── Page 2 HVD
+├── Page 3 HVD
+│   ├── Region A hypothesis
+│   ├── Region B hypothesis
+│   └── Connector analysis
+...
+└── Cross-page system model
+```
+
+That is a much more natural use of Nexus than using it as a glorified chatbot.
+
+### Rheo should also power the other intelligence features
+
+Once we establish this interface, the same backend can handle:
+
+```text
+PNG/PDF/SVG → structured diagram
+natural language → diagram
+source repository → architecture diagram
+Terraform → infrastructure diagram
+Kubernetes YAML → deployment diagram
+OpenAPI → service interaction diagram
+SQL schema → ER diagram
+
+diagram → explanation
+diagram → architecture critique
+diagram → documentation
+diagram → dependency inventory
+diagram → security analysis
+diagram → change summary
+
+diagram A + diagram B → visual/semantic diff
+```
+
+That means we only need **one AI substrate interface**.
+
+Something along these lines:
+
+```python
+class DiagramIntelligenceBackend:
+    def reconstruct(self, artifact) -> ReconstructionResult:
+        ...
+
+    def generate(self, request) -> DiagramProposal:
+        ...
+
+    def analyze(self, document) -> DiagramAnalysis:
+        ...
+
+    def explain(self, document) -> DiagramExplanation:
+        ...
+
+    def compare(self, before, after) -> DiagramDiff:
+        ...
+```
+
+And our implementation is:
+
+```python
+class NexusRheoBackend(DiagramIntelligenceBackend):
+    ...
+```
+
+Everything north of that interface remains independent of how Nexus evolves internally.
+
+---
+
+## It changes the commercial proposition too
+
+This actually makes the earlier pricing argument stronger.
+
+You aren't selling:
+
+> "A desktop wrapper around somebody else's AI API."
+
+You're selling:
+
+> **A native diagram workstation with its own integrated reasoning system.**
+
+Especially if Nexus/Rheo runs locally.
+
+Then one of the headline features can eventually be:
+
+> **Local diagram intelligence. Your infrastructure diagrams never have to leave your machine.**
+
+For companies working with:
+
+* internal network diagrams
+* security architecture
+* cloud topology
+* production infrastructure
+* database relationships
+* proprietary application architecture
+
+that is a significantly better proposition than:
+
+> "Upload your architecture diagram to our SaaS."
+
+It also means I would **not** make AI reconstruction a metered credit system unless there is some external compute cost we actually need to recover.
+
+A strong eventual offering becomes:
+
+**Professional — ~$129**
+
+* viewer
+* Mermaid editor
+* visual editor
+* reversible exports
+* Git/document features
+
+**Professional Intelligence — ~$179–249**
+
+* Project Nexus/Rheo
+* foreign diagram reconstruction
+* diagram generation
+* code → architecture
+* explanation
+* semantic comparison
+* assisted repair
+
+**Enterprise**
+
+* entirely local/air-gapped Nexus/Rheo deployment
+* organization-specific architecture knowledge
+* custom diagram vocabulary
+* private repositories
+* policy/validation rules
+* batch legacy-document reconstruction
+
+And enterprise becomes particularly interesting because Nexus can potentially learn/use organization-specific architectural context without turning that context into some third-party SaaS provider's data.
+
+---
+
+There is also a deeper implication I think is important:
+
+### Mermaid should ultimately cease being the internal truth representation.
+
+It should be:
+
+> **one human-readable serialization of the Diagram Document.**
+
+So eventually:
+
+```text
+                    Diagram Document
+                    /      |       \
+                   /       |        \
+              Mermaid     SVG      JSON
+                |          |         |
+               PDF        PNG       AI
+```
+
+Rheo reasons over the **Diagram Document / graph semantics**, not over Mermaid syntax unless the task specifically requires source manipulation.
+
+That gives us room later to support Graphviz, PlantUML, Dia, draw.io, Visio imports, architecture-specific formats, and whatever comes next without rebuilding the intelligence system.
+
+That is the architecture I would lock down before we start implementing the 30-feature roadmap. It turns **Project Nexus/Rheo into the cognitive engine**, Mermaid into the primary diagram-as-code language, and the **Diagram Document into the actual product substrate**.

@@ -1,0 +1,116 @@
+Framework 1: Divergent Hypothesis Dynamics — DHD
+
+I like Divergent Hypothesis Dynamics because it says exactly what it is without requiring any claim that psychosis itself has predictive power.
+
+Its job is:
+
+Deliberately create an overcomplete, contradictory, unstable population of possible explanations of the market.
+
+DHD should not choose trades. It should not produce the final forecast. It should not even be required to be internally consistent.
+
+Its output is a structured hypothesis population:
+
+$$ \mathcal H_t = \left\{ h_t^{(1)}, h_t^{(2)}, \ldots, h_t^{(N_t)} \right\}. $$
+
+Each \(h_t^{(i)}\) can contain something like
+
+$$ h_t^{(i)} = (z_i,\theta_i,c_i,\tau_i,q_i,p_i) $$
+
+where:
+
+\(z_i\): proposed latent regime,
+\(\theta_i\): model parameters,
+\(c_i\): causal structure,
+\(\tau_i\): temporal assumptions,
+\(q_i\): predicted observable distribution,
+\(p_i\): provenance/generation history.
+
+The important part is that DHD is explicitly rewarded for useful diversity rather than immediate correctness.
+
+A conventional model often implicitly tries to minimize:
+
+$$ \mathcal L_{\text{prediction}}. $$
+
+DHD instead needs something closer to:
+
+$$ \mathcal J_{\mathrm{DHD}} = \alpha N_t + \beta D_t + \gamma U_t + \delta C_t - \eta R_t, $$
+
+where:
+
+$$ D_t = \frac{2}{N_t(N_t-1)} \sum_{i<j} d(h_i,h_j) $$
+
+measures hypothesis diversity,
+
+\(U_t\) measures novelty,
+
+\(C_t\) measures coverage of plausible explanatory space,
+
+and \(R_t\) penalizes pure redundancy.
+
+Notice what is not in the objective: raw forecast accuracy as the dominant term.
+
+That comes later.
+
+DHD should intentionally contain several generators
+
+I would not make it one monolithic neural generator. Give it a collection of mathematically distinct operators:
+
+$$ G= \{ G_{\text{counterfactual}}, G_{\text{causal}}, G_{\text{regime}}, G_{\text{adversarial}}, G_{\text{analogy}}, G_{\text{recursive}}, G_{\text{rare-event}}, G_{\text{inversion}} \}. $$
+
+For example, causal inversion could deliberately ask:
+
+$$ X\rightarrow Y \quad\Longrightarrow\quad Y\rightarrow X? $$
+
+Not because that alternative is presumed true, but because the system should actually test it.
+
+Counterfactual generation might construct:
+
+$$ h^{cf} = \text{“What market state would explain the evidence if the dominant interpretation were false?”} $$
+
+Rare-event expansion could deliberately overweight hypotheses having small prior probability:
+
+$$ P(h_i)\ll1, $$
+
+provided the hypothesis is not logically impossible.
+
+And recursive self-reference could generate hypotheses of the form:
+
+$$ \text{market state} \rightarrow \text{agents' beliefs} \rightarrow \text{market action} \rightarrow \text{new market state}. $$
+
+That's particularly important for DogeOracle because reflexivity is one of the areas where conventional predictive assumptions become fragile.
+
+DHD needs controlled instability
+
+The goal shouldn't be maximal chaos.
+
+There should be a divergence-control variable—call it
+
+$$ \rho_t^{D} $$
+
+for now—governing cognitive expansion.
+
+Low:
+
+$$ \rho_t^D\approx0 $$
+
+means hypotheses cluster tightly around conventional inference.
+
+High:
+
+$$ \rho_t^D\approx1 $$
+
+allows large departures.
+
+But unlike old \(\lambda\), \(\rho^D\) is an actuator, not a description of rationality.
+
+That distinction is important.
+
+PDC can say:
+
+$$ \rho_{t+1}^{D} = \pi_{\mathrm{PDC}}(S_t), $$
+
+meaning:
+
+given the current cognitive state, how radically should we expand the hypothesis space?
+
+Now we've preserved one of the coolest things the original PDC was trying to do without giving a mystical causal role to \(\lambda\).
