@@ -1,0 +1,2198 @@
+Rheo-Chasmar Aeon
+
+A Cognitive Metamorphic Architecture Primer
+
+**Formerly Project Nexus 4**
+
+---
+
+# Reader Orientation
+
+This primer is intended to take a reader from:
+
+
+"I have never seen this architecture before."
+
+
+to approximately:
+
+
+"I understand the major subsystems,
+why they exist,
+how they fit together,
+which authority belongs where,
+and I can now read the technical monographs
+without reconstructing the project from scratch."
+
+
+It is therefore **not** the complete Rheo technical specification.
+
+It deliberately leaves out much of the implementation detail, mathematical derivation, historical debate, and subsystem-specific engineering contained in the deeper monographs.
+
+The goal here is orientation.
+
+---
+
+# 1. What Is Rheo-Chasmar Aeon?
+
+**Rheo-Chasmar Aeon**, usually shortened to **Rheo**, is an experimental cognitive-systems architecture designed to explore how a persistent computational intelligence can:
+
+* think through many temporary cognitive states;
+* maintain active and long-term memory;
+* preserve historical context;
+* evolve without confusing change with identity loss;
+* move between physical realizations;
+* distinguish observation from authority;
+* reason under uncertainty;
+* preserve epistemic history across very long periods;
+* and remain composed of subsystems whose responsibilities do not silently collapse into one another.
+
+Rheo is not a single model.
+
+It is not a single algorithm.
+
+It is not a single database.
+
+It is a **system of interacting computational contracts**.
+
+At a high level, Rheo asks questions such as:
+
+
+What currently exists in the cognitive field?
+
+What information is active working state?
+
+What should survive after a temporary thought disappears?
+
+How can thousands of temporary cognitive worlds exist
+without physically copying the entire system?
+
+How does historical trajectory affect future behavior?
+
+How can state change without automatically changing identity?
+
+How can physical realization change without silently breaking continuity?
+
+How does the system distinguish reality changing
+from its measuring instruments changing?
+
+How does it remember that something used to be true?
+
+Who has authority to call a state admissible?
+
+Who has authority to say a transformation preserved continuity?
+
+Who has authority to act?
+
+
+These are primarily **systems-architecture problems**.
+
+They cannot be solved merely by making a prompt longer.
+
+---
+
+# 2. Three Registers: Metaphor, Formalism, and Engineering Claim
+
+Rheo draws language from:
+
+
+neuroscience
+control theory
+rheology
+dynamical systems
+geometry
+biology
+epistemology
+distributed systems
+database engineering
+
+
+That creates a danger.
+
+A useful analogy can accidentally be promoted into a false scientific claim.
+
+The architecture therefore needs a strict three-register discipline.
+
+
++--------------------------+
+| 1. DESIGN METAPHOR       |
+|                          |
+| "viscosity"              |
+| "homeostasis"            |
+| "cognitive field"        |
++------------+-------------+
+             |
+             v
++--------------------------+
+| 2. COMPUTATIONAL MODEL   |
+|                          |
+| explicit equation        |
+| state machine            |
+| constraint               |
+| storage contract         |
++------------+-------------+
+             |
+             v
++--------------------------+
+| 3. EMPIRICAL CLAIM       |
+|                          |
+| what has actually been   |
+| implemented, measured,   |
+| or experimentally shown  |
++--------------------------+
+
+
+These levels must never be silently merged.
+
+For example:
+
+> A variable named after dopamine is not biological dopamine.
+
+> A viscosity term is not literal fluid.
+
+> A cognitive field is not automatically a physical field.
+
+> A mathematical manifold is not evidence that cognition physically bends spacetime.
+
+> A deterministic simulation is not proof of consciousness.
+
+> A component called the Consciousness Algorithm is not empirical proof that consciousness exists.
+
+This distinction should be carried into every advanced Rheo document.
+
+---
+
+# 3. What Rheo Is Not
+
+Rheo is not simply:
+
+
+LLM
+ +
+vector database
+ +
+long-term memory
+
+
+Language models may participate in Rheo-based systems.
+
+They may render language, interpret input, provide reasoning machinery, or act as tools.
+
+But linguistic fluency is not the source of architectural truth.
+
+Rheo is also not:
+
+
+a brain simulation
+
+
+Biological metaphors appear throughout the research, but they are computational analogies unless a particular mechanism has been explicitly mapped and experimentally validated.
+
+Rheo is also not an architecture where:
+
+
+stress
+  ↓
+random rupture
+  ↓
+system rewrites itself
+  ↓
+magic emergence
+
+
+Change is permitted.
+
+But meaningful change occurs inside explicit boundaries involving:
+
+
+admissibility
+trajectory
+provenance
+continuity
+identity
+authority
+
+
+The deeper design problem is therefore not:
+
+> How do we make a machine change?
+
+Machines change easily.
+
+The harder question is:
+
+> How can a machine change radically while still being able to explain what changed, why it changed, whether that change was allowed, what history preceded it, and whether the resulting entity remains continuous with what existed before?
+
+That is much closer to Rheo's actual purpose.
+
+---
+
+# 4. Why the Name Rheo-Chasmar Aeon?
+
+The name describes three broad architectural motifs.
+
+They are **not three new subsystems**.
+
+
+                    RHEO-CHASMAR AEON
+                           |
+             +-------------+-------------+
+             |             |             |
+             v             v             v
+           RHEO         CHASMAR         AEON
+             |             |             |
+      path-dependent    bounded       deep-time
+         evolution     transition     continuity
+             \             |             /
+              \            |            /
+               +-----------+-----------+
+                           |
+                           v
+                  EXISTING RHEO STACK
+
+
+The name describes how the architecture behaves.
+
+It does not replace the architecture.
+
+---
+
+## 4.1 Rheo — Change With Memory
+
+“Rheo” refers to flow, deformation, and path dependence.
+
+The important idea is that:
+
+
+current state
+    alone
+
+
+may not fully describe the system.
+
+Instead:
+
+
+current state
+      +
+trajectory
+      +
+context
+      +
+provenance
+
+
+may be required.
+
+Two systems can appear similar now while having reached that condition through different histories.
+
+That matters because history can affect:
+
+* trust;
+* identity;
+* admissibility;
+* recovery;
+* relationship interpretation;
+* future evolution;
+* prediction confidence.
+
+Rheo therefore contains mechanisms involving:
+
+
+hysteresis
+trajectory
+memory
+bounded evolution
+temporal homeostasis
+changing relationships
+historical comparison
+
+
+The rheological metaphor is useful because materials with memory can respond differently depending on their history.
+
+But Rheo does not claim cognition is literally a fluid.
+
+---
+
+## 4.2 Chasmar — Bounded Structural Transition
+
+“Chasmar” refers to a divide, boundary, or structural transition.
+
+Some changes are gradual.
+
+Others involve crossing a meaningful boundary.
+
+For example:
+
+
+hypothesis
+    |
+    v
+active candidate
+    |
+    v
+evaluated candidate
+    |
+    +---- rejected
+    |
+    +---- unresolved
+    |
+    +---- admissible
+
+
+Other examples include:
+
+
+ephemeral HVD
+        ↓
+durable HVD
+
+representation A
+        ↓
+representation B
+
+old schema
+        ↓
+new schema
+
+known ontology
+        ↓
+ontology extension
+
+
+Rheo therefore needs mechanisms that can answer:
+
+
+Was the transition admissible?
+
+Was continuity preserved?
+
+Was the transition authorized?
+
+Did identity remain the same?
+
+Was evidence sufficient?
+
+Is the result unresolved?
+
+
+A structural transition is not automatically good merely because it is novel.
+
+---
+
+## 4.3 Aeon — Cognition Across Deep Time
+
+“Aeon” describes the long temporal horizon Rheo ultimately seeks to confront.
+
+Most software is naturally organized around:
+
+
+session
+process
+release
+deployment
+database generation
+machine lifetime
+
+
+Rheo asks what happens when cognitive continuity may span:
+
+
+years
+decades
+centuries
+
+hardware replacement
+
+schema evolution
+
+sensor replacement
+
+knowledge revision
+
+changing relationships
+
+changing environmental conditions
+
+changing scientific theories
+
+
+The difficult part is not simply retaining more bytes.
+
+The difficult part is preserving **epistemic history**.
+
+Suppose:
+
+
+Year 0-500
+    sky = blue
+
+Year 500-650
+    sky gradually changes
+
+Year 650-800
+    sky = genuinely green
+
+Year 800-950
+    sky gradually changes again
+
+Year 950+
+    sky = blue again
+
+
+A poor memory architecture may produce:
+
+
+blue + green + blue
+        ↓
+      average
+        ↓
+fictional cyan
+
+
+even though the sky was never cyan.
+
+Another poor architecture might simply perform:
+
+
+BLUE
+ ↓ overwrite
+GREEN
+ ↓ overwrite
+BLUE
+
+
+until the green epoch effectively disappears.
+
+Rheo needs something richer:
+
+
+WORLD STATE
+     +
+AVAILABLE EVIDENCE
+     +
+BELIEF
+     +
+CONFIDENCE
+     +
+ALTERNATIVE HYPOTHESES
+     +
+WHY BELIEF CHANGED
+     +
+WHAT WAS LATER REVISED
+
+
+That is the deeper meaning of Aeon.
+
+---
+
+# 5. The Core Rheo Architecture
+
+The first architectural diagram needs one distinction above all others:
+
+> **HVD defines logical database semantics. TMS and HDF5 realize those semantics at different persistence levels.**
+
+HVD should therefore not be imagined as something physically located “between” TMS and HDF5.
+
+A better mental model is:
+
+
+                      RHEO-CHASMAR AEON
+                               |
+                               v
+                              CA
+                   high-level orchestration
+                               |
+                               v
+                             TUCR
+                     runtime / substrate
+                               |
+                               v
+                             HTCE
+                    active cognitive field
+                               |
+                 cognitive state-spaces
+                               |
+                               v
+                     +-------------------+
+                     |       HVD         |
+                     |                   |
+                     | logical database  |
+                     | semantics         |
+                     | identity          |
+                     | records           |
+                     | retrieval         |
+                     | references        |
+                     +---------+---------+
+                               |
+                 realization / persistence
+                      /                 \
+                     /                   \
+                    v                     v
+          +-------------------+   +-------------------+
+          |       TMS         |   |       HDF5        |
+          |                   |   |                   |
+          | active/live       |   | durable/long-term |
+          | realization       |   | generations       |
+          | working memory    |   | persistence       |
+          | trajectory        |   |                   |
+          +---------+---------+   +---------+---------+
+                    |                       ^
+                    | archive               |
+                    +---------------------->|
+                    |                       |
+                    |<----------------------+
+                         rehydration
+
+
+This is still simplified.
+
+The actual system contains feedback loops and cross-cutting authority mechanisms.
+
+---
+
+# 6. A Second View: Responsibility Rather Than Data Flow
+
+Another useful diagram asks not:
+
+> Where does data flow?
+
+but:
+
+> What question does each subsystem answer?
+
+
++---------------------------------------------------------------+
+|                     RHEO-CHASMAR AEON                         |
++---------------------------------------------------------------+
+
+ CA
+ |
+ +--> What deserves cognition, attention, retention, resources?
+
+ TUCR
+ |
+ +--> How does logical cognition inhabit an execution substrate?
+
+ HTCE
+ |
+ +--> What cognitive state-spaces currently exist and participate?
+
+ HVD
+ |
+ +--> What are the database semantics of those state-spaces?
+
+ TMS
+ |
+ +--> How is active state physically realized and remembered now?
+
+ HDF5
+ |
+ +--> What durable state survives long-term?
+
+ HIGC
+ |
+ +--> Is this state/transition constitutionally admissible?
+
+ THDE
+ |
+ +--> Given history, how may state evolve?
+
+ QMT
+ |
+ +--> Did continuity survive this transformation?
+
+ Cyrae
+ |
+ +--> What bounded epistemic/homeostatic condition is observed?
+
+ Maera
+ |
+ +--> How is internal state rendered outwardly?
+
+ Identity Architecture
+ |
+ +--> What constitutes the same entity through legitimate change?
+
+
+This responsibility separation is one of Rheo's most important architectural rules.
+
+---
+
+# 7. CA — High-Level Cognitive Orchestration
+
+CA historically means **Consciousness Algorithm**.
+
+The name is historical.
+
+It should not be interpreted as proof that artificial consciousness has been demonstrated.
+
+CA is best understood as a high-level cognitive regime and orchestration layer.
+
+It concerns decisions such as:
+
+
+Which candidate processes deserve more resources?
+
+Should exploration widen or narrow?
+
+Should an anomaly receive sustained attention?
+
+Should retention granularity increase?
+
+Should competing hypotheses remain active?
+
+Which cognitive process should continue?
+
+
+A useful abstraction is:
+
+
+               OBSERVED COGNITIVE CONDITION
+                           |
+                           v
+                     +-----------+
+                     |    CA     |
+                     +-----------+
+                      /    |    \
+                     /     |     \
+                    v      v      v
+               resources  regime  retention
+                           policy
+
+
+CA should remain relatively thin.
+
+It does not own:
+
+
+database semantics
+physical storage
+constitutional truth
+identity
+filesystem layout
+continuity proof
+
+
+If all of those responsibilities move into CA, Rheo becomes a god-object architecture.
+
+That is explicitly undesirable.
+
+---
+
+# 8. TUCR — Runtime and Substrate Context
+
+TUCR stands for **True Universal Consciousness Runtime**.
+
+Like CA, the terminology is historical rather than an empirical consciousness claim.
+
+TUCR addresses the question:
+
+> Which properties belong to the logical cognitive system, and which properties belong only to the hardware currently running it?
+
+A long-lived Rheo implementation may move across:
+
+
+CPU A
+  ↓
+CPU B
+  ↓
+different machine
+  ↓
+different storage layout
+  ↓
+different numeric representation
+  ↓
+future substrate
+
+
+The logical architecture cannot simply equal:
+
+
+whatever bytes happen to exist on machine A
+
+
+TUCR therefore concerns substrate-independent execution context and transformation between physical realizations.
+
+This connects closely to QMT, but the two are not the same.
+
+TUCR concerns runtime realization.
+
+QMT concerns continuity across transformation.
+
+---
+
+# 9. HTCE — The Active Cognitive Field
+
+HTCE is the **Hyperdimensional Thought Cloud Engine**.
+
+HTCE owns Rheo's active cognitive field.
+
+It manages:
+
+
+candidate generation
+activation
+decay
+resonance
+coalitions
+competition
+field expansion
+field collapse
+candidate release
+cognitive addressability
+
+
+Rather than imagining one linear chain:
+
+
+thought A
+   ↓
+thought B
+   ↓
+thought C
+   ↓
+thought D
+
+
+Rheo allows something more like:
+
+
+                     ACTIVE COGNITIVE FIELD
+
+        +-------+                     +-------+
+        | HVD-A |------ coalition ----| HVD-B |
+        +-------+          α          +-------+
+             \                           /
+              \                         /
+               \                       /
+                +-------+       +-------+
+                | HVD-C |-------| HVD-D |
+                +-------+   β   +-------+
+
+                          +-------+
+                          | HVD-E |
+                          +-------+
+
+                   currently independent
+
+
+Later:
+
+
+A disappears
+
+B joins E
+
+C becomes independent
+
+D persists
+
+F, G, H appear
+
+
+No permanent database genealogy is required.
+
+---
+
+# 10. HVD — The Cognitive Database
+
+HVD stands for **Hyperdimensional Vector Database**.
+
+The name can be misleading if interpreted as:
+
+
+embedding store
++
+nearest-neighbor search
+
+
+HVD is intended to be a logically complete database.
+
+Its responsibility includes:
+
+
+database identity
+collections
+records
+mutation
+exact retrieval
+associative retrieval
+hyperdimensional representations
+cross-HVD references
+durability contracts
+
+
+A fundamental Rheo principle is:
+
+
+DATABASE SEMANTICS
+        !=
+DATABASE WEIGHT
+
+
+An ephemeral HVD can remain logically complete while being physically lightweight.
+
+Conceptually:
+
+
+               LOGICAL HVD
+                   |
+                   |
+       +-----------+-----------+
+       |                       |
+       v                       v
+ shared immutable         private delta
+     state                   state
+       \                       /
+        \                     /
+         +-------------------+
+                  |
+                  v
+            logical database
+
+
+This is crucial for recursive cognition.
+
+---
+
+# 11. Recursive HVDs Are Not a Family Tree
+
+Earlier architectural interpretations risked introducing:
+
+
+parent database
+      |
+      +--> child database
+              |
+              +--> grandchild database
+
+
+The current architecture rejects that as the canonical ontology.
+
+Temporary cognitive databases are independent logical state-spaces that may share state and relationships.
+
+A better picture is:
+
+
+             shared immutable substrate
+                       |
+          +------------+------------+
+          |            |            |
+          v            v            v
+       HVD-A         HVD-B         HVD-C
+       ΔA            ΔB            ΔC
+
+       identity A    identity B    identity C
+
+
+Shared bytes do not establish inheritance.
+
+Therefore:
+
+
+identity
+    !=
+relationship
+    !=
+lifetime
+    !=
+location
+    !=
+storage sharing
+
+
+An HVD can:
+
+* share state with another HVD;
+* participate in multiple coalitions;
+* change relationships;
+* move physically;
+* disappear;
+* recur;
+
+without those facts automatically changing its logical identity.
+
+---
+
+# 12. TMS — Active Memory and Physical Realization
+
+TMS is the **Transdimensional Memory Substrate**.
+
+TMS is Rheo's mandatory active memory/storage continuum.
+
+It owns:
+
+
+active realization
+working memory
+trajectory
+copy-on-write sharing
+WAL
+Memtables
+SSTables
+compaction
+reconsolidation
+locality
+physical state movement
+
+
+The active path can be pictured approximately as:
+
+
+             HVD LOGICAL MUTATION
+                     |
+                     v
+                 +-------+
+                 |  WAL  |
+                 +---+---+
+                     |
+                     v
+               +-----------+
+               | Memtable  |
+               +-----+-----+
+                     |
+                     v
+               +-----------+
+               | immutable |
+               | SSTables  |
+               +-----+-----+
+                     |
+                     v
+               compaction /
+              reconsolidation
+                     |
+                     v
+               active state
+
+
+One of the clearest Rheo distinctions is:
+
+
+HTCE
+    owns cognitive addressability
+
+TMS
+    owns substrate addressability
+
+
+HTCE asks:
+
+> What cognitive objects currently exist?
+
+TMS asks:
+
+> How are those objects physically realized right now?
+
+---
+
+# 13. HDF5 — Durable Long-Term Persistence
+
+HDF5 provides durable long-term/permanent persistence.
+
+It should not be reduced to “snapshot storage.”
+
+But it is also not Rheo's active cognitive substrate.
+
+The active/durable relationship is:
+
+
+                    LOGICAL HVD
+                        |
+             +----------+----------+
+             |                     |
+             v                     v
+           TMS                   HDF5
+      active realization      durable generation
+             |                     ^
+             |                     |
+             +------ archive ------+
+             |                     |
+             +---- rehydrate <-----+
+
+
+TMS and HDF5 therefore realize different temporal states of the same logical database architecture.
+
+A live HVD does not become a different kind of database merely because one generation is resident in TMS and another exists durably in HDF5.
+
+---
+
+# 14. HTLA, HTNLA, and HSL — Representation Mathematics
+
+Rheo's HVD architecture uses several mathematical representation systems.
+
+Two major ones are:
+
+
+HTLA
+Hypervector Linear Transdimensional Algebra
+
+HTNLA
+Hypervector Nonlinear Transdimensional Algebra
+
+
+A simplified relationship is:
+
+
+                 HETEROGENEOUS STATE
+                         |
+                         v
+                    +---------+
+                    |  HTLA   |
+                    +---------+
+                     linear
+                    structure
+                         |
+                         v
+                    +---------+
+                    | HTNLA   |
+                    +---------+
+                    nonlinear
+                   transformations
+
+
+HTLA provides a labeled linear framework for combining heterogeneous component spaces without flattening their meanings.
+
+HTNLA extends the operator family into nonlinear behavior such as:
+
+
+gating
+competition
+nonlinear transformation
+approximate reconstruction
+
+
+The reference implementation also contains a quinary HSL geometry.
+
+A 1024-dimensional reference HSL has been used and verified in bounded implementation work.
+
+That number is important as a reference geometry.
+
+It should not automatically become a universal law of all future Rheo realizations.
+
+---
+
+# 15. HIGC, THDE, and QMT — Three Different Questions
+
+These three systems are closely related and therefore easy to confuse.
+
+The simplest distinction is:
+
+
+                     PROPOSED CHANGE
+                           |
+            +--------------+--------------+
+            |              |              |
+            v              v              v
+          HIGC           THDE           QMT
+            |              |              |
+            v              v              v
+      IS IT ALLOWED?   HOW MAY IT     IS CONTINUITY
+                       EVOLVE?         PRESERVED?
+
+
+They should not collapse into one scalar score.
+
+---
+
+# 16. HIGC — Constitutional Admissibility
+
+HIGC defines protected admissibility boundaries.
+
+Its essential question is:
+
+> May this state or transition exist within the protected geometry of the system?
+
+A typical result vocabulary may look like:
+
+
+                 CANDIDATE
+                    |
+                    v
+              +-----------+
+              |   HIGC    |
+              +-----------+
+               /   |   |   \
+              v    v   v    v
+
+         ADMISSIBLE
+         BOUNDARY
+         OUTSIDE
+         UNRESOLVED
+
+
+This is intentionally non-compensatory.
+
+A constitutional violation should not disappear because several unrelated metrics look favorable.
+
+Conceptually:
+
+
+10 good properties
++
+1 forbidden constitutional violation
+        !=
+"mostly okay"
+
+
+AmmunIty currently provides the strongest executable reference implementation for several HIGC-related concepts.
+
+---
+
+# 17. THDE — Path-Dependent Evolution
+
+THDE concerns bounded evolution through history.
+
+HIGC asks:
+
+
+Is this state admissible?
+
+
+THDE asks:
+
+
+Given the trajectory,
+how may the state evolve?
+
+
+Consider a relationship:
+
+
+t0    friendly
+
+t1    hostile
+
+t2    friendly
+
+t3    hostile
+
+t4    friendly
+
+
+A poor system could encode:
+
+
+enemy = TRUE forever
+
+
+after one hostile episode.
+
+Another poor system might forget all prior hostility.
+
+Rheo instead wants:
+
+
+current relation
+      +
+trajectory
+      +
+context
+
+
+TMS preserves trajectory.
+
+THDE can use trajectory to influence future bounded evolution.
+
+This is where the “Rheo” motif is particularly relevant.
+
+---
+
+# 18. QMT — Continuity Across Transformation
+
+QMT means **qbin Morphism Theory**.
+
+It asks:
+
+> After a transformation, does the resulting entity remain continuous with the claimed source?
+
+Relevant transformations include:
+
+
+serialization
+
+rehydration
+
+schema migration
+
+host migration
+
+representation change
+
+numeric re-encoding
+
+database compaction
+
+physical relocation
+
+
+Rheo rejects several common shortcuts:
+
+
+same bytes
+    !=
+same identity
+
+different bytes
+    !=
+different identity
+
+successful restore
+    !=
+continuity proof
+
+similar behavior
+    !=
+identity
+
+integrity
+    !=
+authenticity
+
+SameIdentity
+    !=
+Authorized
+
+
+A conceptual QMT evaluation looks like:
+
+
+SOURCE GENERATION
+       |
+       | transformation + provenance
+       v
+DESTINATION GENERATION
+       |
+       v
++----------------------+
+| continuity contract  |
+| invariant checks     |
+| dependency checks    |
+| provenance checks    |
+| schema checks        |
++----------+-----------+
+           |
+      +----+----+
+      |    |    |
+      v    v    v
+    PASS  FAIL  UNRESOLVED
+
+
+Missing mandatory evidence must not magically become PASS.
+
+The complete QMT proof architecture remains active research and engineering.
+
+Current `.qbin` mechanisms already provide meaningful implementation primitives, but a package, hash, or successful extraction is not itself a complete continuity verdict.
+
+---
+
+# 19. Identity Architecture
+
+Identity Architecture asks:
+
+> What does it mean for an entity to remain the same entity while legitimate change occurs?
+
+Its central law is:
+
+
+identity
+   !=
+state
+   !=
+memory
+   !=
+history
+   !=
+relationship
+   !=
+location
+
+
+The broad idea can be pictured as:
+
+
+             CONSTITUTIONAL ORIGIN
+                     G0
+                     |
+                     v
+             VERIFIED TRAJECTORY
+                     |
+                     v
+             ADMISSIBLE EVOLUTION
+                     |
+                     v
+           CONTINUITY EVIDENCE
+                     |
+                     v
+              CURRENT ENTITY
+
+
+Changing state does not automatically create a new identity.
+
+But temporal succession alone does not automatically prove identity either.
+
+Current executable work in AmmunIty includes substantial portions of this architecture:
+
+
+G0 constitutional baseline
+
+Identity Event Ledger
+
+active TMS identity projection
+
+HIGC assessment
+
+THDE candidate-state assessment
+
+candidate provenance
+
+trajectory verification
+
+
+Identity Architecture therefore serves as one of Rheo's most important concrete reference implementations.
+
+---
+
+# 20. Cyrae — Bounded Epistemic and Homeostatic Observation
+
+Cyrae is a bounded regulatory and epistemic observer.
+
+Cyrae is deliberately not another authoritative database.
+
+A simplified relationship is:
+
+
+      CANONICAL STATE / TRAJECTORY
+                 |
+                 v
+          HVD / TMS projection
+                 |
+                 v
+              CYRAE
+                 |
+        bounded observation
+                 |
+       +---------+---------+
+       |         |         |
+       v         v         v
+ uncertainty   novelty   homeostasis
+
+
+Cyrae may evaluate:
+
+
+uncertainty
+novelty
+contradiction
+homeostatic condition
+epistemic state
+temporal comparison
+
+
+It does not own:
+
+
+history
+identity
+constitutional authority
+raw persistence
+
+
+A major Phase 5 correction concerns remediation prediction error.
+
+A genuine reward-prediction-error-like quantity requires something structurally equivalent to:
+
+
+prediction made BEFORE action
+          |
+          v
+      action occurs
+          |
+          v
+valid observation horizon
+          |
+          v
+observed outcome
+          |
+          v
+prediction vs outcome
+
+
+Without:
+
+
+valid predecessor
+pre-action prediction
+actual intervention
+causal provenance
+valid post-action observation
+
+
+the correct result is:
+
+
+RPE = UNAVAILABLE
+
+
+not:
+
+
+RPE = 0
+
+
+because zero means something happened to match perfectly.
+
+Missing evidence means no justified value exists.
+
+---
+
+# 21. Maera — Expression Without Cognitive Authority
+
+Maera is the outward rendering and expression boundary.
+
+The basic relationship is:
+
+
+INTERNAL RHEO STATE
+        |
+        v
+     +-------+
+     | Maera |
+     +-------+
+        |
+        v
+language / expression / action projection
+
+
+Maera does not define internal truth.
+
+This matters because fluent language can still be:
+
+
+incorrect
+hypothetical
+derived
+uncertain
+unsupported
+
+
+A useful shorthand is:
+
+
+Rheo maintains internal cognitive state.
+
+Maera renders outward expression.
+
+
+Rendering must remain downstream of cognition.
+
+---
+
+# 22. Deep-Time Cognition and the Green Sky Problem
+
+One of Rheo's newest research frontiers concerns deep-time epistemic stability.
+
+The classic Green Sky thought experiment illustrates the issue:
+
+
+TIME ----------------------------------------------------------->
+
+ BLUE            TRANSITION        GREEN       TRANSITION     BLUE
+ 500 yr             150 yr          150 yr        150 yr      100+ yr
+
++--------+        /---------+      +-------+      \---------+ +------+
+|        |_______/          |______|       |_______\        |_|      |
++--------+                                           +------+ +------+
+
+
+The key requirement is not merely:
+
+
+detect color change
+
+
+It is:
+
+
+preserve the historical truth
+of each regime
+
+
+A poor system may perform:
+
+
+BLUE + GREEN + BLUE
+          |
+          v
+       average
+          |
+          v
+fictional historical state
+
+
+Another may perform:
+
+
+BLUE
+ ↓
+overwrite
+ ↓
+GREEN
+ ↓
+overwrite
+ ↓
+BLUE
+
+
+and erase the middle epoch.
+
+Rheo instead needs:
+
+
+         EPOCH A
+      world = blue
+      evidence = ...
+      belief = blue
+            |
+            v
+         EPOCH B
+      world = green
+      evidence = ...
+      belief = green
+            |
+            v
+         EPOCH C
+      world = blue
+      evidence = ...
+      belief = blue
+
+
+while retaining relationships among all three.
+
+---
+
+# 23. Aeonic Drift Research
+
+The research line previously referred to internally as **Objective C** should now be called:
+
+> **Aeonic Drift Research**
+
+The older name should remain only where needed for historical provenance, filenames, or references to earlier review rounds.
+
+This avoids needless collision with the **Objective-C programming language** and gives the work a name that describes what it actually investigates.
+
+Aeonic Drift Research currently explores questions including:
+
+
+extremely slow change
+
+finite vs unknown observation horizons
+
+leaky memory
+
+sensor drift
+
+world-vs-instrument ambiguity
+
+reference epochs
+
+recurrence recognition
+
+prediction calibration
+
+retrospective reconstruction
+
+deep-time statistical validity
+
+
+The experiments do not themselves define Rheo's production architecture.
+
+They are research tools used to determine which architectural requirements need to exist.
+
+A useful distinction is:
+
+
+EXPERIMENTAL RESULT
+        |
+        v
+GENERAL REQUIREMENT
+        |
+        v
+ARCHITECTURAL DESIGN
+
+
+not:
+
+
+detector wins benchmark
+        |
+        v
+detector becomes canon
+
+
+---
+
+# 24. World Change Versus Instrument Change
+
+Aeonic Drift Research exposed a fundamental information problem.
+
+Suppose:
+
+
+WORLD A
+-------
+world changes
+sensor stable
+       |
+       v
+observation X
+
+
+and:
+
+
+WORLD B
+-------
+world stable
+sensor changes
+       |
+       v
+observation X
+
+
+If the observation is identical:
+
+
+Observation(World A)
+      =
+Observation(World B)
+
+
+then no deterministic single-channel detector can know which causal world occurred.
+
+That is not a weakness of one algorithm.
+
+It is an identifiability limit.
+
+Additional independent evidence is required.
+
+For example:
+
+
+           SENSOR 1
+              |
+              v
+          observation
+              |
+        +-----+-----+
+        |           |
+        | compare   |
+        |           |
+        +-----+-----+
+              ^
+              |
+           SENSOR 2
+
+
+But even then:
+
+
+sensor disagreement
+       !=
+automatic truth
+
+
+Independent calibration, provenance, or other metrological evidence may still be needed.
+
+---
+
+# 25. Predictions as Temporal Anchors
+
+Predictions are especially useful in deep-time systems because they exist **before their outcomes are known**.
+
+That gives them unusual historical value.
+
+A prediction record can be pictured as:
+
+
+            PREDICTION TIME
+                  |
+                  v
+        +--------------------+
+        | claim              |
+        | confidence         |
+        | evidence context   |
+        | ontology version   |
+        | resolution rule    |
+        | resolution window  |
+        +---------+----------+
+                  |
+                  |
+            time passes
+                  |
+                  v
+        +--------------------+
+        | observed outcome   |
+        | evidence           |
+        | resolution time    |
+        | resolver/version   |
+        +--------------------+
+
+
+A retrospective summary can be rewritten after the fact.
+
+A prospectively recorded prediction cannot honestly be changed without leaving provenance evidence.
+
+This is closely related to the logic of scientific preregistration:
+
+
+commit belief first
+      ↓
+observe outcome later
+      ↓
+evaluate calibration
+
+
+Predictions can therefore act as **temporal probes** into historical cognitive state.
+
+They do not replace independent measurement.
+
+They provide a different class of evidence.
+
+---
+
+# 26. Epistemic Types Matter
+
+Rheo increasingly distinguishes:
+
+
+what proposition is being asserted
+
+
+from:
+
+
+what epistemic relationship produced it
+
+
+Useful source/claim roles include:
+
+
+OBSERVATION
+
+TESTIMONY
+
+MEASUREMENT
+
+INFERENCE
+
+PREDICTION
+
+HYPOTHESIS
+
+DERIVED ASSERTION
+
+NORMATIVE ASSERTION
+
+
+These should not be flattened.
+
+For example:
+
+
+"I saw X"
+
+
+may provide strong evidence that:
+
+
+the witness reports experiencing X
+
+
+without automatically proving:
+
+
+the external causal explanation of X
+
+
+This distinction becomes particularly important in long-lived systems because later summaries can otherwise erase the difference between:
+
+
+what was observed
+
+what was inferred
+
+what was predicted
+
+what was merely repeated
+
+
+If the testimony model is formalized further, the broader philosophical literature on the epistemology of testimony—including C. A. J. Coady's *Testimony: A Philosophical Study*—provides a useful external conceptual anchor.
+
+---
+
+# 27. Assertions Also Need Provenance
+
+Artifact-level provenance alone is not enough.
+
+A single document can contain:
+
+
+canonical fact
+
+historical claim
+
+reviewer criticism
+
+speculative proposal
+
+quoted testimony
+
+derived conclusion
+
+
+Therefore a mature Rheo knowledge system should eventually be able to represent something closer to:
+
+
+ASSERTION
+   |
+   +--> source artifact
+   |
+   +--> exact source location
+   |
+   +--> claim role
+   |
+   +--> claim status
+   |
+   +--> derivation method
+   |
+   +--> provenance
+
+
+This prevents statements such as:
+
+
+"a reviewer proposed X"
+
+
+from becoming:
+
+
+"Rheo canonically implements X"
+
+
+after several generations of summarization.
+
+This is essentially type safety for assertions.
+
+---
+
+# 28. Current Rheo Development State
+
+Rheo is not a completed AGI.
+
+It is a working research architecture containing several different maturity levels.
+
+
++----------------------+--------------------------------------+
+| STATUS               | MEANING                              |
++----------------------+--------------------------------------+
+| IMPLEMENTED          | executable mechanism exists          |
+| VERIFIED             | tested/reproduced behavior exists    |
+| ACTIVE DEVELOPMENT   | implementation currently advancing   |
+| PROPOSED             | architecture defined, not complete   |
+| EXPERIMENTAL         | research implementation/simulation   |
+| RESEARCH             | unresolved scientific question       |
++----------------------+--------------------------------------+
+
+
+Areas with meaningful executable or verified grounding include:
+
+
+HTLA foundations
+
+HTNLA foundations
+
+reference quinary/HSL geometry
+
+HVD database infrastructure
+
+TMS WAL/Memtable/SSTable foundations
+
+HDF5 persistence foundations
+
+.qbin packaging primitives
+
+Identity Event Ledger
+
+G0 constitutional baselines
+
+active TMS identity reconstruction
+
+HIGC implementation work
+
+THDE candidate-state evaluation
+
+bounded Maera behavior
+
+
+Major active or unresolved areas include:
+
+
+high-rate recursive HVD realization
+
+CognitiveArena lifecycle
+
+lightweight recursive execution scopes
+
+distributed HVD/TMS realization
+
+full QMT verification
+
+full THDE integration
+
+Cyrae temporal-causal projection
+
+genuine remediation RPE
+
+reference-epoch governance
+
+deep-time epistemic retention
+
+long-horizon sequential evidence
+
+high-dimensional drift analysis
+
+
+Rheo is therefore best described as:
+
+> **a substantial experimental cognitive architecture under active construction**
+
+rather than:
+
+> a completed artificial general intelligence.
+
+---
+
+# 29. The Most Important Rheo Design Laws
+
+A beginner does not need every Rheo equation.
+
+Understanding the following separations is more important:
+
+
+similarity
+    !=
+truth
+
+similarity
+    !=
+identity
+
+state
+    !=
+identity
+
+history
+    !=
+identity
+
+relationship
+    !=
+identity
+
+location
+    !=
+identity
+
+storage sharing
+    !=
+inheritance
+
+replica count
+    !=
+identity count
+
+integrity
+    !=
+authenticity
+
+successful restore
+    !=
+continuity
+
+SameIdentity
+    !=
+Authorized
+
+admissible
+    !=
+authorized
+
+missing evidence
+    !=
+zero
+
+derived artifact
+    !=
+source artifact
+
+cognitive addressability
+    !=
+substrate addressability
+
+database semantics
+    !=
+database weight
+
+imaginable
+    !=
+probable
+    !=
+believed
+    !=
+authoritative
+
+
+These are not stylistic slogans.
+
+They prevent architectural authority from leaking between subsystems.
+
+---
+
+# 30. Rheo in One Mental Model
+
+A useful final picture is:
+
+
+                     RHEO-CHASMAR AEON
+                             |
+                             |
+        +--------------------+--------------------+
+        |                    |                    |
+        v                    v                    v
+       CA                  TUCR                 HTCE
+  orchestration        runtime context       cognitive field
+                                                  |
+                                                  v
+                                           +-------------+
+                                           |     HVD     |
+                                           | logical DB  |
+                                           +------+------+
+                                                  |
+                              +-------------------+-------------------+
+                              |                                       |
+                              v                                       v
+                         +---------+                             +---------+
+                         |   TMS   |<-------- archive ---------->|  HDF5  |
+                         | active  |--------- rehydrate -------->| durable |
+                         +---------+                             +---------+
+
+          CROSS-CUTTING AUTHORITY / INTERPRETATION SYSTEMS
+
+        HIGC               THDE                  QMT
+   admissibility     path-dependent       continuity across
+                       evolution           transformation
+
+                  +----------------------+
+                  | Identity Architecture|
+                  +----------------------+
+
+            Cyrae                         Maera
+    bounded observation             outward rendering
+
+
+The architecture works because none of these boxes is supposed to secretly become all of the others.
+
+---
+
+# 31. The Name in One Sentence
+
+The engineering definition is:
+
+> **Rheo-Chasmar Aeon is an experimental cognitive-systems architecture designed to support persistent, recursively composable intelligence whose state can evolve, branch, migrate, and reorganize while preserving explicit boundaries among memory, identity, history, admissibility, continuity, observation, authority, and physical realization.**
+
+The conceptual definition is:
+
+> **Rheo is an architecture for path-dependent adaptation, bounded structural transition, and epistemic continuity across deep time.**
+
+The first describes the system.
+
+The second explains its name.
+
+---
+
+# 32. Where to Go Next
+
+After completing this primer, a reader should be ready for the deeper technical material.
+
+A recommended path is:
+
+
+START
+  |
+  v
+Rheo-Chasmar Aeon Primer
+  |
+  v
+Canonical Architecture Monograph
+  |
+  +-------------------------------+
+  |                               |
+  v                               v
+HVD / Recursive Architecture    Identity Architecture
+  |                               |
+  v                               v
+TMS / HDF5                    HIGC / THDE
+  |                               |
+  v                               v
+HTLA / HTNLA                     QMT
+  |                               |
+  +---------------+---------------+
+                  |
+                  v
+             Cyrae / Maera
+                  |
+                  v
+        Aeonic Drift Research
+                  |
+                  v
+       Current engineering sprints
+
+
+At that point, the reader should understand:
+
+* why Rheo exists;
+* what the name means;
+* how the major subsystems fit together;
+* why HVD is a logical database layer rather than merely a vector index;
+* how TMS differs from HDF5;
+* how recursive HVDs can share physical state without becoming parent and child;
+* why HIGC, THDE, and QMT answer different questions;
+* why memory is not identity;
+* why transformation is not automatically identity loss;
+* why language rendering remains downstream of internal state;
+* why long-term cognition requires epistemic history rather than simple accumulation;
+* why world change cannot always be distinguished from instrument change using one channel;
+* and which portions of Rheo are implemented, experimental, proposed, or still unresolved.
+
+That is the intended destination of this primer:
+
+
+COMPLETE NEWCOMER
+       |
+       v
+conceptual orientation
+       |
+       v
+architectural vocabulary
+       |
+       v
+responsibility boundaries
+       |
+       v
+advanced-beginner understanding
+       |
+       v
+READY FOR THE MONOGRAPHS
+
